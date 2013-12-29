@@ -10,8 +10,8 @@ TEST(Cws, InitSavings)
 {
     Savings s;
     LONGS_EQUAL(0, s.getValue());
-    LONGS_EQUAL(Savings::UNKNOWN, s.getFirst());
-    LONGS_EQUAL(Savings::UNKNOWN, s.getSecond());
+    LONGS_EQUAL(Savings::UNKNOWN, s.getEdge().first);
+    LONGS_EQUAL(Savings::UNKNOWN, s.getEdge().second);
 }
 
 TEST(Cws, InitSavingsList)

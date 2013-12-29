@@ -3,7 +3,7 @@
 Savings::Savings(void)
 {
     value = 0;
-    first = second = UNKNOWN;
+    edge = EDGE(UNKNOWN, UNKNOWN);
 }
 
 Savings::~Savings(void)
@@ -15,15 +15,15 @@ int Savings::getValue(void)
     return value;
 }
 
-int Savings::getFirst(void)
+EDGE Savings::getEdge(void)
 {
-    return first;
+    return edge;
 }
 
-int Savings::getSecond(void)
-{
-    return second;
-}
+
+/***************************************************/
+/***************************************************/
+
 
 SavingsList::SavingsList(vrp_problem *vrp)
 {

@@ -6,6 +6,8 @@ extern "C"
 #include "vrp_types.h"
 }
 
+typedef std::pair<int, int> EDGE;
+
 class Savings
 {
 public:
@@ -15,16 +17,14 @@ public:
     };
 private:
     int value;
-    int first;
-    int second;
+    EDGE edge;
 
 public:
     Savings(void);
     ~Savings(void);
 
     int getValue(void);
-    int getFirst(void);
-    int getSecond(void);
+    EDGE getEdge(void);
 };
 
 class SavingsList
