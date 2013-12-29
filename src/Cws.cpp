@@ -27,7 +27,7 @@ EDGE Savings::getEdge(void)
 
 SavingsList::SavingsList(vrp_problem *vrp)
 {
-    size = 0;
+    size = (vrp != NULL) ? vrp->edgenum : 0;
 }
 
 SavingsList::~SavingsList(void)
