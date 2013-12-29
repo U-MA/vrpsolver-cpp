@@ -23,6 +23,7 @@ public:
     Savings(void);
     ~Savings(void);
 
+    void set(vrp_problem *vrp, int first, int second);
     int getValue(void);
     EDGE getEdge(void);
 };
@@ -31,12 +32,14 @@ class SavingsList
 {
 private:
     int size;
+    Savings savings;
 
 public:
     SavingsList(vrp_problem *vrp);
     ~SavingsList(void);
 
     int getSize(void);
+    EDGE getEdge(void);
 };
 
 #endif /* VRPSOLVER_CPP_CWS_H */
