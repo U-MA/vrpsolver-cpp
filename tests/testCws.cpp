@@ -107,10 +107,10 @@ TEST(Cws, InitSavingsList)
 
 TEST(Cws, SetSizeFromVrpData)
 {
-    vrp->edgenum = 30;
+    vrp->vertnum = 100;
 
     SavingsList sl(vrp);
-    LONGS_EQUAL(30, sl.getSize());
+    LONGS_EQUAL(4851, sl.getSize());
 }
 
 TEST(Cws, getEdgeFromSavingsList)

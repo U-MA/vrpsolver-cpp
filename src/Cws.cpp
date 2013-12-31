@@ -11,6 +11,13 @@ Savings::Savings(void)
     edge  = EDGE(UNKNOWN, UNKNOWN);
 }
 
+Savings::Savings(const Savings& savings)
+{
+    value = savings.value;
+    edge.first  = savings.edge.first;
+    edge.second = savings.edge.second;
+}
+
 Savings::~Savings(void)
 {
 }
@@ -32,27 +39,27 @@ int Savings::getValue(void)
     return value;
 }
 
-EDGE Savings::getEdge(void)
+EDGE Savings::getEdge(void) const
 {
     return edge;
 }
 
-bool Savings::operator<(const Savings& s)
+bool Savings::operator<(const Savings& s) const
 {
     return value < s.value;
 }
 
-bool Savings::operator>(const Savings& s)
+bool Savings::operator>(const Savings& s) const
 {
     return value > s.value;
 }
 
-bool Savings::operator<=(const Savings& s)
+bool Savings::operator<=(const Savings& s) const
 {
     return value <= s.value;
 }
 
-bool Savings::operator>=(const Savings& s)
+bool Savings::operator>=(const Savings& s) const
 {
     return value >= s.value;
 }
@@ -69,8 +76,16 @@ SavingsList::SavingsList(vrp_problem *vrp)
         return;
     }
 
-    size = vrp->edgenum;
-    savings.set(vrp, 1, 2);
+    for (int i=1; i < vrp->vertnum; i++)
+    {
+        for (int j=1; j < i; j++)
+        {
+            Savings s;
+            s.set(vrp, j, i);
+            savings.push(s);
+        }
+    }
+    size = savings.size();
 }
 
 SavingsList::~SavingsList(void)
@@ -82,7 +97,7 @@ int SavingsList::getSize(void)
     return size;
 }
 
-EDGE SavingsList::getEdge(void)
+EDGE SavingsList::getEdge(void) const
 {
-    return savings.getEdge();
+    return savings.top().getEdge();
 }
