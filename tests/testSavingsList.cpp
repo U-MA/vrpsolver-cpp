@@ -8,7 +8,7 @@ extern "C"
 
 #include "SavingsList.h"
 
-TEST_GROUP(Cws)
+TEST_GROUP(SavingsList)
 {
     vrp_problem *vrp;
 
@@ -63,7 +63,7 @@ TEST_GROUP(Cws)
     }
 };
 
-TEST(Cws, InitSavings)
+TEST(SavingsList, InitSavings)
 {
     Savings s;
     LONGS_EQUAL(0, s.getValue());
@@ -71,7 +71,7 @@ TEST(Cws, InitSavings)
     LONGS_EQUAL(Savings::UNKNOWN, s.getEdge().second);
 }
 
-TEST(Cws, setSavingsValue)
+TEST(SavingsList, setSavingsValue)
 {
     Vrp_SetProblem();
 
@@ -82,7 +82,7 @@ TEST(Cws, setSavingsValue)
     LONGS_EQUAL(5, s.getEdge().second);
 }
 
-TEST(Cws, savingsCompare)
+TEST(SavingsList, savingsCompare)
 {
     vrp->vertnum = 4;
     vrp->edgenum = 6;
@@ -102,7 +102,7 @@ TEST(Cws, savingsCompare)
     CHECK_FALSE(s1 > s2);
 }
 
-TEST(Cws, savingsCompareEqual)
+TEST(SavingsList, savingsCompareEqual)
 {
     vrp->vertnum = 3;
     vrp->edgenum = 3;
@@ -127,7 +127,7 @@ TEST(Cws, savingsCompareEqual)
 }
 
 
-TEST(Cws, SetSizeFromVrpData)
+TEST(SavingsList, SetSizeFromVrpData)
 {
     vrp->vertnum = 100;
 
@@ -135,7 +135,7 @@ TEST(Cws, SetSizeFromVrpData)
     LONGS_EQUAL(4851, sl.getSize());
 }
 
-TEST(Cws, getEdgeFromSavingsList)
+TEST(SavingsList, getEdgeFromSavingsList)
 {
     Vrp_SetProblem();
 
