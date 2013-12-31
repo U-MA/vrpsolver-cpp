@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Cws.h"
 
 extern "C"
@@ -72,7 +74,7 @@ SavingsList::SavingsList(vrp_problem *vrp)
 {
     if (vrp == NULL)
     {
-        size = 0;
+        std::cerr << "In SavingsList::SavingsList(vrp_problem *): NULLが渡されました" << std::endl;
         return;
     }
 
@@ -85,7 +87,6 @@ SavingsList::SavingsList(vrp_problem *vrp)
             savings.push(s);
         }
     }
-    size = savings.size();
 }
 
 SavingsList::~SavingsList(void)
@@ -94,7 +95,7 @@ SavingsList::~SavingsList(void)
 
 int SavingsList::getSize(void)
 {
-    return size;
+    return savings.size();
 }
 
 EDGE SavingsList::getEdge(void) const

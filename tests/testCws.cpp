@@ -99,12 +99,6 @@ TEST(Cws, savingsCompareEqual)
 }
 
 
-TEST(Cws, InitSavingsList)
-{
-    SavingsList sl(NULL);
-    LONGS_EQUAL(0, sl.getSize());
-}
-
 TEST(Cws, SetSizeFromVrpData)
 {
     vrp->vertnum = 100;

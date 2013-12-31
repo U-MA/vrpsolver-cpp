@@ -39,7 +39,6 @@ public:
 class SavingsList
 {
 private:
-    int size;
     std::priority_queue<Savings> savings;
 
 public:
