@@ -26,7 +26,7 @@ public:
     Savings(const Savings& savings);
     ~Savings(void);
 
-    void set(vrp_problem *vrp, int first, int second);
+    void set(const vrp_problem *vrp, int first, int second);
     int getValue(void) const;
     EDGE getEdge(void) const;
 
@@ -42,7 +42,7 @@ private:
     std::priority_queue<Savings> savings;
 
 public:
-    SavingsList(vrp_problem *vrp);
+    SavingsList(const vrp_problem *vrp);
     ~SavingsList(void);
 
     int getSize(void) const;

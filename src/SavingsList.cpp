@@ -24,13 +24,13 @@ Savings::~Savings(void)
 {
 }
 
-static int computeValue(vrp_problem *vrp, int first, int second)
+static int computeValue(const vrp_problem *vrp, int first, int second)
 {
     return vrp->dist.cost[INDEX(0, first)] + vrp->dist.cost[INDEX(0, second)] -
            vrp->dist.cost[INDEX(first, second)];
 }
 
-void Savings::set(vrp_problem *vrp, int first, int second)
+void Savings::set(const vrp_problem *vrp, int first, int second)
 {
     value = computeValue(vrp, first, second);
     edge  = EDGE(first, second);
@@ -70,7 +70,7 @@ bool Savings::operator>=(const Savings& s) const
 /***************************************************/
 
 
-SavingsList::SavingsList(vrp_problem *vrp)
+SavingsList::SavingsList(const vrp_problem *vrp)
 {
     if (vrp == NULL)
     {
