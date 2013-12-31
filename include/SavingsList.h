@@ -1,5 +1,5 @@
-#ifndef VRPSOLVER_CPP_CWS_H
-#define VRPSOLVER_CPP_CWS_H
+#ifndef VRPSOLVER_CPP_SAVINGSLIST_H
+#define VRPSOLVER_CPP_SAVINGSLIST_H
 
 #include <queue>
 
@@ -49,4 +49,4 @@ public:
     EDGE getEdge(void);
 };
 
-#endif /* VRPSOLVER_CPP_CWS_H */
+#endif /* VRPSOLVER_CPP_SAVINGSLIST_H */

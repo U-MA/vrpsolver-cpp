@@ -6,7 +6,7 @@ extern "C"
 #include "vrp_macros.h"
 }
 
-#include "Cws.h"
+#include "SavingsList.h"
 
 TEST_GROUP(Cws)
 {

@@ -16,7 +16,7 @@ objs/tests/testCws.o: tests/testCws.cpp \
   cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
   symphony/vrp_types.h symphony/sym_proto.h symphony/vrp_common_types.h \
   symphony/vrp_cg_params.h symphony/vrp_lp_params.h symphony/vrp_macros.h \
-  include/Cws.h symphony/vrp_types.h
+  include/SavingsList.h symphony/vrp_types.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
@@ -60,6 +60,6 @@ symphony/vrp_lp_params.h:
 
 symphony/vrp_macros.h:
 
-include/Cws.h:
+include/SavingsList.h:
 
 symphony/vrp_types.h:

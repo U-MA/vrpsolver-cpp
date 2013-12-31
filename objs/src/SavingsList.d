@@ -1,9 +1,9 @@
-objs/./src/Cws.o: src/Cws.cpp \
+objs/./src/SavingsList.o: src/SavingsList.cpp \
   cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
   cpputest-3.5/include/CppUTest/CppUTestConfig.h \
   cpputest-3.5/include/CppUTest/StandardCLibrary.h \
   cpputest-3.5/include/CppUTest/MemoryLeakDetectorMallocMacros.h \
-  include/Cws.h symphony/vrp_types.h symphony/sym_proto.h \
+  include/SavingsList.h symphony/vrp_types.h symphony/sym_proto.h \
   symphony/vrp_common_types.h symphony/vrp_cg_params.h \
   symphony/vrp_lp_params.h symphony/vrp_macros.h
 
@@ -15,7 +15,7 @@ cpputest-3.5/include/CppUTest/StandardCLibrary.h:
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorMallocMacros.h:
 
-include/Cws.h:
+include/SavingsList.h:
 
 symphony/vrp_types.h:
 
