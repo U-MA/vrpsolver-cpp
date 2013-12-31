@@ -75,3 +75,9 @@ TEST(Cws, CwsMethod)
     LONGS_EQUAL(187, VrpSimulation::SequentialCws(vm));
 }
 */
+
+/* Applying Monte Carlo Techniques to Capacitated Vehicle
+ * Routing Problem Algorithm 2より */
+IGNORE_TEST(Cws, Cws3a)
+{
+}
