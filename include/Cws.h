@@ -26,6 +26,8 @@ public:
     void set(vrp_problem *vrp, int first, int second);
     int getValue(void);
     EDGE getEdge(void);
+
+    bool operator<(const Savings& s);
 };
 
 class SavingsList

@@ -37,6 +37,11 @@ EDGE Savings::getEdge(void)
     return edge;
 }
 
+bool Savings::operator<(const Savings& s)
+{
+    return value < s.value;
+}
+
 
 /***************************************************/
 /***************************************************/
