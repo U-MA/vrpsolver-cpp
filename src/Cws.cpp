@@ -93,12 +93,14 @@ SavingsList::~SavingsList(void)
 {
 }
 
-int SavingsList::getSize(void)
+int SavingsList::getSize(void) const
 {
     return savings.size();
 }
 
-EDGE SavingsList::getEdge(void) const
+EDGE SavingsList::getEdge(void)
 {
-    return savings.top().getEdge();
+    EDGE edge = savings.top().getEdge();
+    savings.pop();
+    return edge;
 }

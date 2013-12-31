@@ -45,8 +45,8 @@ public:
     SavingsList(vrp_problem *vrp);
     ~SavingsList(void);
 
-    int getSize(void);
-    EDGE getEdge(void) const;
+    int getSize(void) const;
+    EDGE getEdge(void);
 };
 
 #endif /* VRPSOLVER_CPP_CWS_H */

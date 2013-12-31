@@ -140,6 +140,10 @@ TEST(Cws, getEdgeFromSavingsList)
     Vrp_SetProblem();
 
     SavingsList sl(vrp);
-    LONGS_EQUAL(1, sl.getEdge().first);
-    LONGS_EQUAL(5, sl.getEdge().second);
+    EDGE edge = sl.getEdge();
+    LONGS_EQUAL(1, edge.first);
+    LONGS_EQUAL(5, edge.second);
+    edge = sl.getEdge();
+    LONGS_EQUAL(1, edge.first);
+    LONGS_EQUAL(2, edge.second);
 }
