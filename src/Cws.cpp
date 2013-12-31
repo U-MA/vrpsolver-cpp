@@ -36,7 +36,7 @@ void Savings::set(vrp_problem *vrp, int first, int second)
     edge  = EDGE(first, second);
 }
 
-int Savings::getValue(void)
+int Savings::getValue(void) const
 {
     return value;
 }

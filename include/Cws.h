@@ -27,7 +27,7 @@ public:
     ~Savings(void);
 
     void set(vrp_problem *vrp, int first, int second);
-    int getValue(void);
+    int getValue(void) const;
     EDGE getEdge(void) const;
 
     bool operator<(const Savings& s) const;
