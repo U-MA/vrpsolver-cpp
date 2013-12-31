@@ -114,3 +114,10 @@ TEST(VehicleManager, visitAllCustomer)
     vm.update(vrp, 2);
     CHECK_TRUE(vm.isVisitAll(vrp));
 }
+
+TEST(VehicleManager, isVisit)
+{
+    vm.update(vrp, 1);
+    CHECK_TRUE(vm.isVisitOne(1));
+    CHECK_FALSE(vm.isVisitOne(2));
+}

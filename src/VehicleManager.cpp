@@ -18,18 +18,23 @@ VehicleManager::~VehicleManager(void)
 {
 }
 
-int VehicleManager::getRunningVehicleNumber(void)
+int VehicleManager::getRunningVehicleNumber(void) const
 {
     return runVehicle;
 }
 
-bool VehicleManager::isVisitAll(vrp_problem *vrp)
+bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     int customerSize = vrp->vertnum-1;
     for (int i=0; i < customerSize; i++)
         if (!isVisit[i]) return false;
 
     return true;
+}
+
+bool VehicleManager::isVisitOne(int customer) const
+{
+    return isVisit[customer-1];
 }
 
 bool VehicleManager::changeVehicle(void)
@@ -40,7 +45,7 @@ bool VehicleManager::changeVehicle(void)
     return true;
 }
 
-bool VehicleManager::update(vrp_problem *vrp, int customer)
+bool VehicleManager::update(const vrp_problem *vrp, int customer)
 {
     if (vehicle[runVehicle].visit(vrp, customer))
         return (isVisit[customer-1] = true);
@@ -48,7 +53,7 @@ bool VehicleManager::update(vrp_problem *vrp, int customer)
     return false;
 }
 
-int VehicleManager::computeTotalCost(vrp_problem *vrp)
+int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
     for (int i=0; i < vehicleSize; i++)
@@ -57,7 +62,7 @@ int VehicleManager::computeTotalCost(vrp_problem *vrp)
     return totalCost;
 }
 
-void VehicleManager::print(void)
+void VehicleManager::print(void) const
 {
     for (int i=0; i < vehicleSize; i++)
     {
@@ -66,7 +71,7 @@ void VehicleManager::print(void)
     }
 }
 
-int VehicleManager::randomSimulation(vrp_problem *vrp)
+int VehicleManager::randomSimulation(const vrp_problem *vrp)
 {
     int candidates[CUSTOMER_MAX], candidatesSize;
 

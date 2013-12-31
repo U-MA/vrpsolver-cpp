@@ -24,18 +24,19 @@ public:
     VehicleManager(int vehicleSize);
     ~VehicleManager(void);
 
-    int getRunningVehicleNumber(void);
+    int getRunningVehicleNumber(void) const;
 
     bool changeVehicle(void);
-    bool update(vrp_problem *vrp, int customer);
+    bool update(const vrp_problem *vrp, int customer);
 
-    bool isVisitAll(vrp_problem *vrp);
+    bool isVisitAll(const vrp_problem *vrp) const;
+    bool isVisitOne(int customer) const;
 
-    int computeTotalCost(vrp_problem *vrp);
+    int computeTotalCost(const vrp_problem *vrp) const;
 
-    int randomSimulation(vrp_problem *vrp);
+    int randomSimulation(const vrp_problem *vrp);
 
-    void print(void);
+    void print(void) const;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */

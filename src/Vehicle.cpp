@@ -25,7 +25,7 @@ Vehicle::~Vehicle(void)
 }
 
 /* customerは０以上顧客数未満 */
-bool Vehicle::visit(vrp_problem *vrp, int customer)
+bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {
     if (!(0 < customer && customer < vrp->vertnum))
         return false;
@@ -36,18 +36,18 @@ bool Vehicle::visit(vrp_problem *vrp, int customer)
     return true;
 }
 
-int Vehicle::getQuantity(void)
+int Vehicle::getQuantity(void) const
 {
     return quantity;
 }
 
-int Vehicle::getRoute(int idx)
+int Vehicle::getRoute(int idx) const
 {
     if (routeSize == 0 || routeSize < idx) return OUT_OF_BOUND;
     return route[idx];
 }
 
-int Vehicle::computeCost(vrp_problem *vrp)
+int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (routeSize == 0) return 0;
 
@@ -62,7 +62,7 @@ int Vehicle::computeCost(vrp_problem *vrp)
     return cost;
 }
 
-void Vehicle::print(void)
+void Vehicle::print(void) const
 {
     printf("[%6d] ", quantity);
     for (int i=0; i < routeSize; i++)
