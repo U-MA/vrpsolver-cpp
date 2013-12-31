@@ -48,7 +48,7 @@ TEST(Cws, setSavingsValue)
     LONGS_EQUAL(2, s.getEdge().second);
 }
 
-TEST(Cws, savingsLessThan)
+TEST(Cws, savingsCompare)
 {
     vrp->vertnum = 4;
     vrp->edgenum = 6;
@@ -65,6 +65,31 @@ TEST(Cws, savingsLessThan)
     s2.set(vrp, 2, 3); /* 40 */
 
     CHECK_TRUE(s1 < s2);
+    CHECK_FALSE(s1 > s2);
+}
+
+TEST(Cws, savingsCompareEqual)
+{
+    vrp->vertnum = 3;
+    vrp->edgenum = 3;
+
+    vrp->dist.cost[0] = 20; /* 0-1 */
+    vrp->dist.cost[1] = 30; /* 0-2 */
+    vrp->dist.cost[2] = 15; /* 1-2 */
+    vrp->dist.cost[3] = 40; /* 0-3 */
+    vrp->dist.cost[4] = 10; /* 1-3 */
+    vrp->dist.cost[5] = 30; /* 2-3 */
+
+    Savings s1, s2, s3;
+    s1.set(vrp, 1, 2);
+    s2.set(vrp, 1, 2);
+    s3.set(vrp, 2, 3);
+
+    CHECK_TRUE(s1 <= s2);
+    CHECK_TRUE(s1 <= s3);
+
+    CHECK_TRUE(s1 >= s2);
+    CHECK_FALSE(s1 >= s3);
 }
 
 

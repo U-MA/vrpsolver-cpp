@@ -28,6 +28,9 @@ public:
     EDGE getEdge(void);
 
     bool operator<(const Savings& s);
+    bool operator>(const Savings& s);
+    bool operator<=(const Savings& s);
+    bool operator>=(const Savings& s);
 };
 
 class SavingsList

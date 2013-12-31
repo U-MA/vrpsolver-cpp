@@ -42,6 +42,20 @@ bool Savings::operator<(const Savings& s)
     return value < s.value;
 }
 
+bool Savings::operator>(const Savings& s)
+{
+    return value > s.value;
+}
+
+bool Savings::operator<=(const Savings& s)
+{
+    return value <= s.value;
+}
+
+bool Savings::operator>=(const Savings& s)
+{
+    return value >= s.value;
+}
 
 /***************************************************/
 /***************************************************/
