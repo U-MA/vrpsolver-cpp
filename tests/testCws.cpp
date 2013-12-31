@@ -3,6 +3,7 @@
 extern "C"
 {
 #include "vrp_types.h"
+#include "vrp_macros.h"
 }
 
 #include "Cws.h"
@@ -22,6 +23,11 @@ TEST_GROUP(Cws)
         free(vrp->dist.cost);
         free(vrp);
     }
+
+    void Vrp_SetCost(int first, int second, int value)
+    {
+        vrp->dist.cost[INDEX(first, second)] = value;
+    }
 };
 
 TEST(Cws, InitSavings)
@@ -37,9 +43,9 @@ TEST(Cws, setSavingsValue)
     vrp->edgenum = 3;
     vrp->vertnum = 3;
 
-    vrp->dist.cost[0] = 20; /* 0-1 */
-    vrp->dist.cost[1] = 30; /* 0-2 */
-    vrp->dist.cost[2] = 15; /* 1-2 */
+    Vrp_SetCost(0, 1, 20);
+    Vrp_SetCost(0, 2, 30);
+    Vrp_SetCost(1, 2, 15);
 
     Savings s;
     s.set(vrp, 1, 2);
@@ -53,12 +59,12 @@ TEST(Cws, savingsCompare)
     vrp->vertnum = 4;
     vrp->edgenum = 6;
 
-    vrp->dist.cost[0] = 20; /* 0-1 */
-    vrp->dist.cost[1] = 30; /* 0-2 */
-    vrp->dist.cost[2] = 15; /* 1-2 */
-    vrp->dist.cost[3] = 40; /* 0-3 */
-    vrp->dist.cost[4] = 10; /* 1-3 */
-    vrp->dist.cost[5] = 30; /* 2-3 */
+    Vrp_SetCost(0, 1, 20);
+    Vrp_SetCost(0, 2, 30);
+    Vrp_SetCost(1, 2, 15);
+    Vrp_SetCost(0, 3, 40);
+    Vrp_SetCost(1, 3, 10);
+    Vrp_SetCost(2, 3, 30);
 
     Savings s1, s2;
     s1.set(vrp, 1, 2); /* 35 */
@@ -73,12 +79,12 @@ TEST(Cws, savingsCompareEqual)
     vrp->vertnum = 3;
     vrp->edgenum = 3;
 
-    vrp->dist.cost[0] = 20; /* 0-1 */
-    vrp->dist.cost[1] = 30; /* 0-2 */
-    vrp->dist.cost[2] = 15; /* 1-2 */
-    vrp->dist.cost[3] = 40; /* 0-3 */
-    vrp->dist.cost[4] = 10; /* 1-3 */
-    vrp->dist.cost[5] = 30; /* 2-3 */
+    Vrp_SetCost(0, 1, 20);
+    Vrp_SetCost(0, 2, 30);
+    Vrp_SetCost(1, 2, 15);
+    Vrp_SetCost(0, 3, 40);
+    Vrp_SetCost(1, 3, 10);
+    Vrp_SetCost(2, 3, 30);
 
     Savings s1, s2, s3;
     s1.set(vrp, 1, 2);
@@ -112,9 +118,9 @@ TEST(Cws, getEdgeFromSavingsList)
     vrp->edgenum = 3;
     vrp->vertnum = 3;
 
-    vrp->dist.cost[0] = 20;
-    vrp->dist.cost[1] = 30;
-    vrp->dist.cost[2] = 15;
+    Vrp_SetCost(0, 1, 20);
+    Vrp_SetCost(0, 2, 30);
+    Vrp_SetCost(1, 2, 15);
 
     SavingsList sl(vrp);
     LONGS_EQUAL(1, sl.getEdge().first);
