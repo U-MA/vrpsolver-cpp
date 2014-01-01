@@ -27,8 +27,6 @@ TEST_GROUP(Vehicle)
         vrp->demand[1] = 1900;
         vrp->demand[2] = 1100;
         vrp->demand[9] = 900;
-
-        v = Vehicle(vrp->vertnum);
    }
 
     void teardown()

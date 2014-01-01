@@ -35,7 +35,6 @@ private:
     bool    isVisit[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */
     int     size;
-    Vehicle vehicle[VEHICLE_MAX];
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */

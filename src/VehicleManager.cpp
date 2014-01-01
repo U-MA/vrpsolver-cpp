@@ -8,7 +8,6 @@ VehicleManager::VehicleManager(void)
         isVisit[i] = false;
 }
 
-
 VehicleManager::~VehicleManager(void)
 {
 }
@@ -90,6 +89,6 @@ void VehicleManager::print(void) const
     for (int i=0; i < size; i++)
     {
         printf("vehicle %2d", i);
-        vehicle[i].print();
+        vehicle_vec[i].print();
     }
 }

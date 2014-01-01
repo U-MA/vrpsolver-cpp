@@ -9,12 +9,14 @@ extern "C"
 Vehicle::Vehicle(void)
 {
     routeSize = 0;
+    quantity  = 0;
     for (int i=0; i < MAXSIZE; i++)
     {
         isVisit[i] = false;
     }
 }
 
+/*
 Vehicle::Vehicle(int customerSize)
 {
     routeSize = 0;
@@ -24,6 +26,7 @@ Vehicle::Vehicle(int customerSize)
         isVisit[i] = false;
     }
 }
+*/
 
 Vehicle::Vehicle(const Vehicle& v)
 {
