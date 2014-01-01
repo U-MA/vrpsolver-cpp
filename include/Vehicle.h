@@ -16,7 +16,6 @@ class Vehicle
 {
 public:
     Vehicle(void);
-    //Vehicle(int customerSize);
     Vehicle(const Vehicle& v);
     ~Vehicle(void);
 

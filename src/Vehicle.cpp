@@ -16,18 +16,6 @@ Vehicle::Vehicle(void)
     }
 }
 
-/*
-Vehicle::Vehicle(int customerSize)
-{
-    routeSize = 0;
-    quantity  = 0;
-    for (int i=0; i < MAXSIZE; i++)
-    {
-        isVisit[i] = false;
-    }
-}
-*/
-
 Vehicle::Vehicle(const Vehicle& v)
 {
     routeSize = v.routeSize;
