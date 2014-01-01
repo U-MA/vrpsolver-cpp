@@ -139,3 +139,8 @@ TEST(VehicleManager, DoNotgetEmptyVehicle)
     vm.update(vrp, 1);
     LONGS_EQUAL(-1, vm.getEmptyVehicle());
 }
+
+TEST(VehicleManager, VehicleEmpty)
+{
+    LONGS_EQUAL(0, vm.empty());
+}

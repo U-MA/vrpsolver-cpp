@@ -6,9 +6,9 @@ VehicleManager::VehicleManager(void)
     runVehicle = 0;
 }
 
-VehicleManager::VehicleManager(int vehicleSize)
+VehicleManager::VehicleManager(int size)
 {
-    this->vehicleSize = vehicleSize;
+    this->size = size;
     runVehicle = 0;
     for (int i=0; i < CUSTOMER_MAX; i++)
         isVisit[i] = false;
@@ -25,7 +25,7 @@ int VehicleManager::getRunningVehicleNumber(void) const
 
 int VehicleManager::getEmptyVehicle(void) const
 {
-    for (int i=0; i < vehicleSize; i++)
+    for (int i=0; i < size; i++)
     {
         if (vehicle[i].empty())
             return i;
@@ -36,6 +36,11 @@ int VehicleManager::getEmptyVehicle(void) const
 Vehicle VehicleManager::getVehicle(int id)
 {
     return vehicle[id];
+}
+
+bool VehicleManager::empty(void)
+{
+    return size == 0;
 }
 
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
@@ -54,7 +59,7 @@ bool VehicleManager::isVisitOne(int customer) const
 
 bool VehicleManager::changeVehicle(void)
 {
-    if (vehicleSize <= runVehicle+1) return false;
+    if (size <= runVehicle+1) return false;
 
     runVehicle++;
     return true;
@@ -71,7 +76,7 @@ bool VehicleManager::update(const vrp_problem *vrp, int customer)
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
-    for (int i=0; i < vehicleSize; i++)
+    for (int i=0; i < size; i++)
         totalCost += vehicle[i].computeCost(vrp);
 
     return totalCost;
@@ -79,7 +84,7 @@ int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 
 void VehicleManager::print(void) const
 {
-    for (int i=0; i < vehicleSize; i++)
+    for (int i=0; i < size; i++)
     {
         printf("vehicle %2d", i);
         vehicle[i].print();
@@ -91,7 +96,7 @@ int VehicleManager::randomSimulation(const vrp_problem *vrp)
     int candidates[CUSTOMER_MAX], candidatesSize;
 
     /* 全ての顧客を訪問するか、全ての車体を使いきるまで繰り返す */
-    while (!isVisitAll(vrp) && vehicleSize > runVehicle)
+    while (!isVisitAll(vrp) && size > runVehicle)
     {
         candidatesSize = 0;
         /* 次に訪れる顧客の候補を調べる */

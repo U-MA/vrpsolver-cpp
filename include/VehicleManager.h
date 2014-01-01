@@ -14,7 +14,7 @@ private:
     static const int VEHICLE_MAX = 20;
     static const int CUSTOMER_MAX = 200;
     int runVehicle; /* 現在走行している車体 */
-    int vehicleSize;
+    int size;
     Vehicle vehicle[VEHICLE_MAX];
     bool isVisit[CUSTOMER_MAX];
 
@@ -28,6 +28,7 @@ public:
     int getEmptyVehicle(void) const;
     Vehicle getVehicle(int id);
 
+    bool empty(void);
     bool changeVehicle(void);
     bool update(const vrp_problem *vrp, int customer);
 
