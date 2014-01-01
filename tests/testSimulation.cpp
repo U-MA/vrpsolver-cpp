@@ -10,7 +10,7 @@ extern "C"
 #include "VrpSimulation.h"
 #include "VehicleManager.h"
 
-TEST_GROUP(Cws)
+TEST_GROUP(Simulation)
 {
     vrp_problem *vrp;
     void setup()
@@ -78,6 +78,18 @@ TEST(Cws, CwsMethod)
 
 /* Applying Monte Carlo Techniques to Capacitated Vehicle
  * Routing Problem Algorithm 2より */
-IGNORE_TEST(Cws, Cws3a)
+IGNORE_TEST(Simulation, Cws3a)
 {
+}
+
+/* 受け入れテスト的な側面を持つテスト
+ * これが通れば第一関門突破 */
+IGNORE_TEST(Simulation, sequenatialRandomSimulation)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm);
+    printf("cost %d\n", cost);
+    CHECK(cost > 0);
 }

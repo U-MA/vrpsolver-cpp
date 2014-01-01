@@ -31,6 +31,15 @@ Vehicle::~Vehicle(void)
 {
 }
 
+void Vehicle::init(void)
+{
+    routeSize = 0;
+    quantity  = 0;
+
+    for (int i=0; i < MAXSIZE; i++)
+        isVisit[i] = false;
+}
+
 bool Vehicle::empty(void) const
 {
     return (routeSize == 0);
@@ -83,7 +92,6 @@ int Vehicle::computeCost(const vrp_problem *vrp) const
 
 void Vehicle::print(void) const
 {
-    printf("routeSize = %d\n", routeSize);
     printf("[%6d] ", quantity);
     for (int i=0; i < routeSize; i++)
         printf("%3d", route[i]);

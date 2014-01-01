@@ -19,6 +19,7 @@ public:
     Vehicle(const Vehicle& v);
     ~Vehicle(void);
 
+    void init(void);
     bool empty(void) const;
     bool isVisitOne(int customer) const;
     bool visit(const vrp_problem *vrp, int customer);

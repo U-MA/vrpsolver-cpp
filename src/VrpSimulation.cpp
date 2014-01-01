@@ -1,3 +1,6 @@
+#include <vector>
+
+
 extern "C"
 {
 #include "vrp_types.h"
@@ -6,7 +9,7 @@ extern "C"
 #include "SavingsList.h"
 #include "VrpSimulation.h"
 
-//int VrpSimulation::SequentialCws(VehicleManager& vm, const vrp_problem *vrp)
+//int VrpSimulation::sequentialCws(VehicleManager& vm, const vrp_problem *vrp)
 //{
 //    SavingsList savingsList(vrp);
 
@@ -34,3 +37,52 @@ extern "C"
 
 //    return vm.computeTotalCost(vrp);
 //}
+
+int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
+{
+    vector<int> candidates;
+    Vehicle runVehicle; /* 現在作業している車体 */
+    runVehicle.init();
+
+    int vehicleCount = 0;
+    /* 全ての顧客を訪れるか,使える車体が無くなるまで繰り返す */
+    while (!vm.isVisitAll(vrp) && vehicleCount < vrp->numroutes)
+    {
+        /* 次に訪れる顧客の候補を調べる */
+        for (int i=1; i < vrp->vertnum; i++)
+        {
+            if (!runVehicle.isVisitOne(i) && !vm.isVisitOne(i) &&
+                runVehicle.getQuantity() + vrp->demand[i] <= vrp->capacity)
+            {
+                candidates.push_back(i);
+            }
+        }
+
+        if (candidates.empty())
+        {
+            /* 候補がいなければ次の車体へ移る */
+            vm.add(runVehicle);
+            runVehicle.init();
+            vehicleCount++;
+        }
+        else
+        {
+            /* 候補の中から一人無作為に選び,選ばれた候補を訪問 */
+            int nextCustomer = candidates[rand() % candidates.size()];
+            runVehicle.visit(vrp, nextCustomer);
+        }
+
+        /* 候補者のリセット */
+        candidates.clear();
+    }
+
+    int cost = 1000000;
+    if (vm.isVisitAll(vrp))
+    {
+        cost = vm.computeTotalCost(vrp);
+    }
+
+    vm.print();
+
+    return cost;
+}
