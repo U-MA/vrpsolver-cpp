@@ -23,11 +23,12 @@ VehicleManager::~VehicleManager(void)
 
 int VehicleManager::getSize(void) const
 {
-    return size;
+    return vehicle_vec.size();
 }
 
 void VehicleManager::add(Vehicle& v)
 {
+    vehicle_vec.push_back(v);
     size++;
 }
 
@@ -49,6 +50,11 @@ int VehicleManager::getEmptyVehicle(void) const
 Vehicle VehicleManager::getVehicle(int id)
 {
     return vehicle[id];
+}
+
+Vehicle VehicleManager::getVehicle(void)
+{
+    return vehicle_vec[0];
 }
 
 bool VehicleManager::empty(void)

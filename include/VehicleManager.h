@@ -1,6 +1,8 @@
 #ifndef VRPSOLVER_CPP_VEHICLE_MANAGER_H
 #define VRPSOLVER_CPP_VEHICLE_MANAGER_H
 
+#include <vector>
+
 extern "C"
 {
 #include "vrp_types.h"
@@ -16,6 +18,7 @@ private:
     int runVehicle; /* 現在走行している車体 */
     int size;
     Vehicle vehicle[VEHICLE_MAX];
+    vector<Vehicle> vehicle_vec;
     bool isVisit[CUSTOMER_MAX];
 
 public:
@@ -27,6 +30,7 @@ public:
     int getRunningVehicleNumber(void) const;
     int getEmptyVehicle(void) const;
     Vehicle getVehicle(int id);
+    Vehicle getVehicle(void);
     int getSize(void) const;
 
     void add(Vehicle& v);
