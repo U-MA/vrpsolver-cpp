@@ -19,6 +19,7 @@ private:
     int route[MAXSIZE];
     int routeSize;
     int quantity;
+    bool isVisit[MAXSIZE];
 
 public:
     Vehicle(void);
@@ -27,6 +28,7 @@ public:
     ~Vehicle(void);
 
     bool empty(void) const;
+    bool isVisitOne(int customer) const;
 
     bool visit(const vrp_problem *vrp, int customer);
 

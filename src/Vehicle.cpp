@@ -8,12 +8,20 @@ extern "C"
 
 Vehicle::Vehicle(void)
 {
+    for (int i=0; i < MAXSIZE; i++)
+    {
+        isVisit[i] = false;
+    }
 }
 
 Vehicle::Vehicle(int customerSize)
 {
     routeSize = 0;
     quantity  = 0;
+    for (int i=0; i < MAXSIZE; i++)
+    {
+        isVisit[i] = false;
+    }
 }
 
 Vehicle::Vehicle(const Vehicle& v)
@@ -29,6 +37,11 @@ bool Vehicle::empty(void) const
     return (routeSize == 0);
 }
 
+bool Vehicle::isVisitOne(int customer) const
+{
+    return isVisit[customer-1];
+}
+
 
 /* customerは０以上顧客数未満 */
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
@@ -37,6 +50,7 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
         return false;
 
     route[routeSize] = customer;
+    isVisit[customer-1] = true;
     routeSize++;
     quantity += vrp->demand[customer];
     return true;

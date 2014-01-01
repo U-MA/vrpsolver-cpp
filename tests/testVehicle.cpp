@@ -93,6 +93,13 @@ TEST(Vehicle, notEmpty)
     CHECK_FALSE(v.empty());
 }
 
+TEST(Vehicle, isVisit)
+{
+    CHECK_FALSE(v.isVisitOne(1));
+    v.visit(vrp, 1);
+    CHECK_TRUE(v.isVisitOne(1));
+}
+
 /* テスト方法がわからないので保留 */
 /*
 TEST(Vehicle, visitOverMaxSize)
