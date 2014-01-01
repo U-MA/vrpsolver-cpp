@@ -27,6 +27,9 @@ public:
     int getRunningVehicleNumber(void) const;
     int getEmptyVehicle(void) const;
     Vehicle getVehicle(int id);
+    int getSize(void) const;
+
+    void add(Vehicle& v);
 
     bool empty(void);
     bool changeVehicle(void);

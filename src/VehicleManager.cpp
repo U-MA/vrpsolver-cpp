@@ -21,6 +21,16 @@ VehicleManager::~VehicleManager(void)
 {
 }
 
+int VehicleManager::getSize(void) const
+{
+    return size;
+}
+
+void VehicleManager::add(Vehicle& v)
+{
+    size++;
+}
+
 int VehicleManager::getRunningVehicleNumber(void) const
 {
     return runVehicle;
