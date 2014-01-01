@@ -14,8 +14,6 @@ TEST_GROUP(VehicleManager)
 
     void setup()
     {
-        vm = VehicleManager(1);
-
         vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
         vrp->vertnum = 10;
         vrp->dist.cost = (int *)calloc(10, sizeof(int));
@@ -39,18 +37,6 @@ TEST_GROUP(VehicleManager)
     }
 };
 
-TEST(VehicleManager, Init)
-{
-    LONGS_EQUAL(0, vm.getRunningVehicleNumber());
-}
-
-TEST(VehicleManager, ChangeVehicle)
-{
-    vm = VehicleManager(2);
-
-    vm.changeVehicle();
-    LONGS_EQUAL(1, vm.getRunningVehicleNumber());
-}
 
 TEST(VehicleManager, ChangeNextLastVehicle)
 {
@@ -64,40 +50,20 @@ TEST(VehicleManager, computeTotalCostAtFirst)
 
 TEST(VehicleManager, computeTotalCostAfterOneVehicleVisit)
 {
-    vm.update(vrp, 1);
+    Vehicle v;
+    v.visit(vrp, 1);
+    vm.add(v);
     LONGS_EQUAL(60, vm.computeTotalCost(vrp));
 }
 
 TEST(VehicleManager, computeTotalCostAfterSomeVehicleVisit)
 {
-    vm = VehicleManager(2);
-
-    vm.update(vrp, 1);
-    vm.changeVehicle();
-    vm.update(vrp, 2);
+    Vehicle v1, v2;
+    v1.visit(vrp, 1);
+    v2.visit(vrp, 2);
+    vm.add(v1);
+    vm.add(v2);
     LONGS_EQUAL(100, vm.computeTotalCost(vrp));
-}
-
-TEST(VehicleManager, updateOutOfCustomer)
-{
-    CHECK_FALSE(vm.update(vrp, 0));
-    CHECK_FALSE(vm.update(vrp, -1));
-    CHECK_FALSE(vm.update(vrp, 10));
-}
-
-TEST(VehicleManager, updateInCustomer)
-{
-    CHECK_TRUE(vm.update(vrp, 1));
-    CHECK_TRUE(vm.update(vrp, 9));
-}
-
-TEST(VehicleManager, randomSimulation)
-{
-    vrp->vertnum = 3;
-    vm = VehicleManager(2);
-
-    srand(2013);
-    LONGS_EQUAL(100, vm.randomSimulation(vrp));
 }
 
 TEST(VehicleManager, notVisitAllCustomer)
@@ -108,34 +74,20 @@ TEST(VehicleManager, notVisitAllCustomer)
 TEST(VehicleManager, visitAllCustomer)
 {
     vrp->vertnum = 3;
-    
-    vm.update(vrp, 1);
-    vm.changeVehicle();
-    vm.update(vrp, 2);
+
+    Vehicle v1, v2;
+    v1.visit(vrp, 1);
+    v2.visit(vrp, 2);
+    vm.add(v1);
+    vm.add(v2);
     CHECK_TRUE(vm.isVisitAll(vrp));
 }
 
 TEST(VehicleManager, isVisit)
 {
-    vm.update(vrp, 1);
+    Vehicle v;
+    v.visit(vrp, 1);
+    vm.add(v);
     CHECK_TRUE(vm.isVisitOne(1));
     CHECK_FALSE(vm.isVisitOne(2));
-}
-
-TEST(VehicleManager, getEmptyVehicle)
-{
-    LONGS_EQUAL(0, vm.getEmptyVehicle());
-}
-
-TEST(VehicleManager, getEmptyVehicle2)
-{
-    vm = VehicleManager(2);
-    vm.update(vrp, 1);
-    LONGS_EQUAL(1, vm.getEmptyVehicle());
-}
-
-TEST(VehicleManager, DoNotgetEmptyVehicle)
-{
-    vm.update(vrp, 1);
-    LONGS_EQUAL(-1, vm.getEmptyVehicle());
 }

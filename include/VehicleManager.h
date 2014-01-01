@@ -12,41 +12,30 @@ extern "C"
 
 class VehicleManager
 {
-private:
-    static const int VEHICLE_MAX = 20;
-    static const int CUSTOMER_MAX = 200;
-    int runVehicle; /* 現在走行している車体 */
-    int size;
-    Vehicle vehicle[VEHICLE_MAX];
-    vector<Vehicle> vehicle_vec;
-    bool isVisit[CUSTOMER_MAX];
-
 public:
-
     VehicleManager(void);
-    VehicleManager(int vehicleSize);
     ~VehicleManager(void);
 
-    int getRunningVehicleNumber(void) const;
-    int getEmptyVehicle(void) const;
+    bool    empty(void);
+    bool    changeVehicle(void);
+    bool    update(const vrp_problem *vrp, int customer);
+    bool    isVisitAll(const vrp_problem *vrp) const;
+    bool    isVisitOne(int customer) const;
     Vehicle getVehicle(int id);
     Vehicle getVehicle(void);
-    int getSize(void) const;
-
-    void add(Vehicle& v);
-
-    bool empty(void);
-    bool changeVehicle(void);
-    bool update(const vrp_problem *vrp, int customer);
-
-    bool isVisitAll(const vrp_problem *vrp) const;
-    bool isVisitOne(int customer) const;
-
-    int computeTotalCost(const vrp_problem *vrp) const;
-
-    int randomSimulation(const vrp_problem *vrp);
-
-    void print(void) const;
+    int     getSize(void) const;
+    int     computeTotalCost(const vrp_problem *vrp) const;
+    void    add(Vehicle& v);
+    void    print(void) const;
+   
+private:
+    static const int VEHICLE_MAX  = 20;
+    static const int CUSTOMER_MAX = 200;
+    vector<Vehicle> vehicle_vec;
+    bool    isVisit[CUSTOMER_MAX];
+    int     runVehicle; /* 現在走行している車体 */
+    int     size;
+    Vehicle vehicle[VEHICLE_MAX];
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
