@@ -23,6 +23,21 @@ int VehicleManager::getRunningVehicleNumber(void) const
     return runVehicle;
 }
 
+int VehicleManager::getEmptyVehicle(void) const
+{
+    for (int i=0; i < vehicleSize; i++)
+    {
+        if (vehicle[i].empty())
+            return i;
+    }
+    return -1;
+}
+
+Vehicle VehicleManager::getVehicle(int id)
+{
+    return vehicle[id];
+}
+
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     int customerSize = vrp->vertnum-1;

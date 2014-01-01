@@ -24,6 +24,12 @@ Vehicle::~Vehicle(void)
 {
 }
 
+bool Vehicle::empty(void) const
+{
+    return (routeSize == 0);
+}
+
+
 /* customerは０以上顧客数未満 */
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {

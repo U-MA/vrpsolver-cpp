@@ -26,6 +26,8 @@ public:
     Vehicle(const Vehicle& v);
     ~Vehicle(void);
 
+    bool empty(void) const;
+
     bool visit(const vrp_problem *vrp, int customer);
 
     int getQuantity(void) const;

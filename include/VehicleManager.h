@@ -25,6 +25,8 @@ public:
     ~VehicleManager(void);
 
     int getRunningVehicleNumber(void) const;
+    int getEmptyVehicle(void) const;
+    Vehicle getVehicle(int id);
 
     bool changeVehicle(void);
     bool update(const vrp_problem *vrp, int customer);

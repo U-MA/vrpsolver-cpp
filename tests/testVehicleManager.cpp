@@ -121,3 +121,21 @@ TEST(VehicleManager, isVisit)
     CHECK_TRUE(vm.isVisitOne(1));
     CHECK_FALSE(vm.isVisitOne(2));
 }
+
+TEST(VehicleManager, getEmptyVehicle)
+{
+    LONGS_EQUAL(0, vm.getEmptyVehicle());
+}
+
+TEST(VehicleManager, getEmptyVehicle2)
+{
+    vm = VehicleManager(2);
+    vm.update(vrp, 1);
+    LONGS_EQUAL(1, vm.getEmptyVehicle());
+}
+
+TEST(VehicleManager, DoNotgetEmptyVehicle)
+{
+    vm.update(vrp, 1);
+    LONGS_EQUAL(-1, vm.getEmptyVehicle());
+}

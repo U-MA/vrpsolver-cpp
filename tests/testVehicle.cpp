@@ -82,6 +82,17 @@ TEST(Vehicle, computeCost)
     LONGS_EQUAL(65, v.computeCost(vrp));
 }
 
+TEST(Vehicle, empty)
+{
+    CHECK_TRUE(v.empty());
+}
+
+TEST(Vehicle, notEmpty)
+{
+    v.visit(vrp, 1);
+    CHECK_FALSE(v.empty());
+}
+
 /* テスト方法がわからないので保留 */
 /*
 TEST(Vehicle, visitOverMaxSize)
