@@ -35,7 +35,7 @@ int VrpSimulation::sequentialCws(const vrp_problem *vrp, VehicleManager& vm)
 
 static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_problem *vrp, int customer)
 {
-    return (!v->isVisit(customer) && !vm->isVisit(customer) &&
+    return (!(v->isVisit(customer) || vm->isVisit(customer)) &&
             v->quantity() + vrp->demand[customer] <= vrp->capacity);
 }
 

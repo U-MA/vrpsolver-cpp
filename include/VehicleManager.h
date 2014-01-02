@@ -17,13 +17,17 @@ public:
     bool    empty(void);
     bool    changeVehicle(void);
     bool    update(const vrp_problem *vrp, int customer);
-    bool    isVisitAll(const vrp_problem *vrp) const;
     bool    isVisit(int customer) const;
+    bool    isVisitAll(const vrp_problem *vrp) const;
+
+    /* getter */
     Vehicle getVehicle(int id);
     Vehicle getVehicle(void);
     int     size(void) const;
-    int     computeTotalCost(const vrp_problem *vrp) const;
+
     void    add(Vehicle& v);
+    int     computeTotalCost(const vrp_problem *vrp) const;
+
     void    print(void) const;
    
 private:
