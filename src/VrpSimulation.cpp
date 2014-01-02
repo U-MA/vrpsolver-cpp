@@ -1,6 +1,3 @@
-#include <vector>
-
-
 extern "C"
 {
 #include "vrp_types.h"
@@ -46,19 +43,22 @@ static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_pr
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
-    vector<int> candidates;
     Vehicle runVehicle; /* 現在作業している車体 */
     runVehicle.init();
 
     /* 全ての顧客を訪れるか,使える車体が無くなるまで繰り返す */
     while (!vm.isVisitAll(vrp) && vm.size() < vrp->numroutes)
     {
+        int candidates[200], candidatesSize = 0;
         /* 次に訪れる顧客の候補を調べる */
         for (int i=1; i < vrp->vertnum; i++)
             if (isVisitable(&vm, &runVehicle, vrp, i))
-                candidates.push_back(i);
+            {
+                candidates[candidatesSize] = i;
+                candidatesSize++;
+            }
 
-        if (candidates.empty())
+        if (candidatesSize == 0)
         {
             /* 候補がいなければ次の車体へ移る */
             vm.add(runVehicle);
@@ -67,12 +67,9 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         else
         {
             /* 候補の中から一人無作為に選び,選ばれた候補を訪問 */
-            int nextCustomer = candidates[rand() % candidates.size()];
+            int nextCustomer = candidates[rand() % candidatesSize];
             runVehicle.visit(vrp, nextCustomer);
         }
-
-        /* 候補者のリセット */
-        candidates.clear();
     }
 
     int cost = INF;
