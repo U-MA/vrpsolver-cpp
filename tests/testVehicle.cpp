@@ -87,9 +87,9 @@ TEST(Vehicle, notEmpty)
 
 TEST(Vehicle, isVisit)
 {
-    CHECK_FALSE(v.isVisitOne(1));
+    CHECK_FALSE(v.isVisit(1));
     v.visit(vrp, 1);
-    CHECK_TRUE(v.isVisitOne(1));
+    CHECK_TRUE(v.isVisit(1));
 }
 
 /* テスト方法がわからないので保留 */

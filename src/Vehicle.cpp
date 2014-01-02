@@ -12,7 +12,7 @@ Vehicle::Vehicle(void)
     quantity_  = 0;
     for (int i=0; i < MAXSIZE; i++)
     {
-        isVisit[i] = false;
+        isVisit_[i] = false;
     }
 }
 
@@ -21,7 +21,7 @@ Vehicle::Vehicle(const Vehicle& v)
     routeSize  = v.routeSize;
     quantity_  = v.quantity_;
     for (int i=0; i < MAXSIZE; i++)
-        isVisit[i] = v.isVisit[i];
+        isVisit_[i] = v.isVisit_[i];
 
     for (int i=0; i < routeSize; i++)
         route[i] = v.route[i];
@@ -37,7 +37,7 @@ void Vehicle::init(void)
     quantity_  = 0;
 
     for (int i=0; i < MAXSIZE; i++)
-        isVisit[i] = false;
+        isVisit_[i] = false;
 }
 
 bool Vehicle::empty(void) const
@@ -45,9 +45,9 @@ bool Vehicle::empty(void) const
     return (routeSize == 0);
 }
 
-bool Vehicle::isVisitOne(int customer) const
+bool Vehicle::isVisit(int customer) const
 {
-    return isVisit[customer-1];
+    return isVisit_[customer-1];
 }
 
 
@@ -58,7 +58,7 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
         return false;
 
     route[routeSize] = customer;
-    isVisit[customer-1] = true;
+    isVisit_[customer-1] = true;
     routeSize++;
     quantity_ += vrp->demand[customer];
     return true;

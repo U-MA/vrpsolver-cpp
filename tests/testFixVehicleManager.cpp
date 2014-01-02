@@ -90,8 +90,8 @@ TEST(FixVehicleManager, getVehicle)
     Vrp_SetProblem();
 
     v.visit(vrp, 1);
-    CHECK_TRUE(v.isVisitOne(1));
+    CHECK_TRUE(v.isVisit(1));
     vm.add(v);
     Vehicle v2 = vm.getVehicle();
-    CHECK_TRUE(v2.isVisitOne(1));
+    CHECK_TRUE(v2.isVisit(1));
 }

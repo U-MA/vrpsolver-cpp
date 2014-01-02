@@ -21,7 +21,7 @@ public:
 
     void init(void);
     bool empty(void) const;
-    bool isVisitOne(int customer) const;
+    bool isVisit(int customer) const;
     bool visit(const vrp_problem *vrp, int customer);
     int  quantity(void) const;
     int  computeCost(const vrp_problem *vrp) const;
@@ -29,7 +29,7 @@ public:
 
 private:
     static const int MAXSIZE = 130;
-    bool isVisit[MAXSIZE];
+    bool isVisit_[MAXSIZE];
     int  route[MAXSIZE];
     int  routeSize;
     int  quantity_;

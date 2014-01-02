@@ -52,7 +52,7 @@ bool VehicleManager::isVisitOne(int customer) const
 {
     for (int i=0; i < size_; i++)
     {
-        if (vehicle[i].isVisitOne(customer))
+        if (vehicle[i].isVisit(customer))
             return true;
     }
     return false;
