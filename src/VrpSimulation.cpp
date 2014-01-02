@@ -38,6 +38,12 @@ extern "C"
 //    return vm.computeTotalCost(vrp);
 //}
 
+static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_problem *vrp, int customer)
+{
+    return (!v->isVisitOne(customer) && !vm->isVisitOne(customer) &&
+            v->getQuantity() + vrp->demand[customer] <= vrp->capacity);
+}
+
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
     vector<int> candidates;
@@ -49,13 +55,8 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
     {
         /* 次に訪れる顧客の候補を調べる */
         for (int i=1; i < vrp->vertnum; i++)
-        {
-            if (!runVehicle.isVisitOne(i) && !vm.isVisitOne(i) &&
-                runVehicle.getQuantity() + vrp->demand[i] <= vrp->capacity)
-            {
+            if (isVisitable(&vm, &runVehicle, vrp, i))
                 candidates.push_back(i);
-            }
-        }
 
         if (candidates.empty())
         {
@@ -74,11 +75,9 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         candidates.clear();
     }
 
-    int cost = 1000000;
+    int cost = INF;
     if (vm.isVisitAll(vrp))
-    {
         cost = vm.computeTotalCost(vrp);
-    }
 
     return cost;
 }

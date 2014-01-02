@@ -8,6 +8,9 @@ extern "C"
 
 #include "VehicleManager.h"
 
+
+#define INF 1e6
+
 namespace VrpSimulation
 {
     int sequentialCws(VehicleManager& vm);
