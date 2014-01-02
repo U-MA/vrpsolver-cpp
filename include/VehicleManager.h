@@ -32,9 +32,10 @@ private:
     static const int VEHICLE_MAX  = 20;
     static const int CUSTOMER_MAX = 200;
     vector<Vehicle> vehicle_vec;
+    Vehicle vehicle[VEHICLE_MAX];
     bool    isVisit[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */
-    //int     size;
+    int     size_;      /* vehicleに含まれてるVehicleの数 */
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
