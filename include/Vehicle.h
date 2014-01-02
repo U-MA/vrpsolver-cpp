@@ -23,7 +23,7 @@ public:
     bool empty(void) const;
     bool isVisitOne(int customer) const;
     bool visit(const vrp_problem *vrp, int customer);
-    int  getQuantity(void) const;
+    int  quantity(void) const;
     int  getRoute(int idx) const; /* 早期に実装しすぎた */
     int  computeCost(const vrp_problem *vrp) const;
     void print(void) const;
@@ -33,7 +33,7 @@ private:
     bool isVisit[MAXSIZE];
     int  route[MAXSIZE];
     int  routeSize;
-    int  quantity;
+    int  quantity_;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_H */

@@ -8,8 +8,8 @@ extern "C"
 
 Vehicle::Vehicle(void)
 {
-    routeSize = 0;
-    quantity  = 0;
+    routeSize  = 0;
+    quantity_  = 0;
     for (int i=0; i < MAXSIZE; i++)
     {
         isVisit[i] = false;
@@ -18,8 +18,8 @@ Vehicle::Vehicle(void)
 
 Vehicle::Vehicle(const Vehicle& v)
 {
-    routeSize = v.routeSize;
-    quantity  = v.quantity;
+    routeSize  = v.routeSize;
+    quantity_  = v.quantity_;
     for (int i=0; i < MAXSIZE; i++)
         isVisit[i] = v.isVisit[i];
 
@@ -33,8 +33,8 @@ Vehicle::~Vehicle(void)
 
 void Vehicle::init(void)
 {
-    routeSize = 0;
-    quantity  = 0;
+    routeSize  = 0;
+    quantity_  = 0;
 
     for (int i=0; i < MAXSIZE; i++)
         isVisit[i] = false;
@@ -60,13 +60,13 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
     route[routeSize] = customer;
     isVisit[customer-1] = true;
     routeSize++;
-    quantity += vrp->demand[customer];
+    quantity_ += vrp->demand[customer];
     return true;
 }
 
-int Vehicle::getQuantity(void) const
+int Vehicle::quantity(void) const
 {
-    return quantity;
+    return quantity_;
 }
 
 int Vehicle::getRoute(int idx) const
@@ -92,7 +92,7 @@ int Vehicle::computeCost(const vrp_problem *vrp) const
 
 void Vehicle::print(void) const
 {
-    printf("[%6d] ", quantity);
+    printf("[%6d] ", quantity_);
     for (int i=0; i < routeSize; i++)
         printf("%3d", route[i]);
     printf("\n");

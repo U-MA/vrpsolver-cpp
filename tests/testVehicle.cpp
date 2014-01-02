@@ -51,17 +51,17 @@ TEST(Vehicle, visitInCustomer)
 
 TEST(Vehicle, isNotVisit)
 {
-    CHECK_EQUAL(0, v.getQuantity());
+    CHECK_EQUAL(0, v.quantity());
 }
 
 TEST(Vehicle, visit)
 {
     v.visit(vrp, 1);
     LONGS_EQUAL(1, v.getRoute(0));
-    LONGS_EQUAL(1900, v.getQuantity());
+    LONGS_EQUAL(1900, v.quantity());
 
     v.visit(vrp, 2);
-    LONGS_EQUAL(3000, v.getQuantity());
+    LONGS_EQUAL(3000, v.quantity());
 }
 
 TEST(Vehicle, getRouteFromOutOfCustomer)

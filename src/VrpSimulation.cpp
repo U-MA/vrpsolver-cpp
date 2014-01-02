@@ -41,7 +41,7 @@ extern "C"
 static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_problem *vrp, int customer)
 {
     return (!v->isVisitOne(customer) && !vm->isVisitOne(customer) &&
-            v->getQuantity() + vrp->demand[customer] <= vrp->capacity);
+            v->quantity() + vrp->demand[customer] <= vrp->capacity);
 }
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
