@@ -1,8 +1,6 @@
 #ifndef VRPSOLVER_CPP_VEHICLE_MANAGER_H
 #define VRPSOLVER_CPP_VEHICLE_MANAGER_H
 
-#include <vector>
-
 extern "C"
 {
 #include "vrp_types.h"
@@ -31,7 +29,6 @@ public:
 private:
     static const int VEHICLE_MAX  = 20;
     static const int CUSTOMER_MAX = 200;
-    vector<Vehicle> vehicle_vec;
     Vehicle vehicle[VEHICLE_MAX];
     bool    isVisit[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */

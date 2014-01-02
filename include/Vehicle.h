@@ -1,16 +1,12 @@
 #ifndef VRPSOLVER_CPP_VEHICLE_H
 #define VRPSOLVER_CPP_VEHICLE_H
 
-#include <vector>
-
 extern "C"
 {
 #include "vrp_types.h"
 }
 
 #define OUT_OF_BOUND -1
-
-using namespace std;
 
 class Vehicle
 {
@@ -19,12 +15,18 @@ public:
     Vehicle(const Vehicle& v);
     ~Vehicle(void);
 
+    /* メンバ変数を初期化する */
     void init(void);
+
+    /* routeの中身が空かどうか */
     bool empty(void) const;
+
     bool isVisit(int customer) const;
-    bool visit(const vrp_problem *vrp, int customer);
     int  quantity(void) const;
+
+    bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
+
     void print(void) const;
 
 private:
