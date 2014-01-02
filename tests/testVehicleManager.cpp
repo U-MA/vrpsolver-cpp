@@ -88,8 +88,8 @@ TEST(VehicleManager, isVisit)
     Vehicle v;
     v.visit(vrp, 1);
     vm.add(v);
-    CHECK_TRUE(vm.isVisitOne(1));
-    CHECK_FALSE(vm.isVisitOne(2));
+    CHECK_TRUE(vm.isVisit(1));
+    CHECK_FALSE(vm.isVisit(2));
 }
 
 TEST(VehicleManager, size)

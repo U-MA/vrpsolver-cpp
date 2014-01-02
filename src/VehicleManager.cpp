@@ -6,7 +6,7 @@ VehicleManager::VehicleManager(void)
     runVehicle = 0;
     size_ = 0;
     for (int i=0; i < CUSTOMER_MAX; i++)
-        isVisit[i] = false;
+        isVisit_[i] = false;
 }
 
 VehicleManager::~VehicleManager(void)
@@ -43,12 +43,12 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     int customerSize = vrp->vertnum-1;
     for (int i=1; i < customerSize; i++)
-        if (!isVisitOne(i)) return false;
+        if (!isVisit(i)) return false;
 
     return true;
 }
 
-bool VehicleManager::isVisitOne(int customer) const
+bool VehicleManager::isVisit(int customer) const
 {
     for (int i=0; i < size_; i++)
     {
@@ -69,7 +69,7 @@ bool VehicleManager::changeVehicle(void)
 bool VehicleManager::update(const vrp_problem *vrp, int customer)
 {
     if (vehicle[runVehicle].visit(vrp, customer))
-        return (isVisit[customer-1] = true);
+        return (isVisit_[customer-1] = true);
 
     return false;
 }
