@@ -69,12 +69,6 @@ int Vehicle::quantity(void) const
     return quantity_;
 }
 
-int Vehicle::getRoute(int idx) const
-{
-    if (routeSize == 0 || routeSize < idx) return OUT_OF_BOUND;
-    return route[idx];
-}
-
 int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (routeSize == 0) return 0;

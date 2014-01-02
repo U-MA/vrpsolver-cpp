@@ -13,7 +13,7 @@ extern "C"
 
 namespace VrpSimulation
 {
-    int sequentialCws(VehicleManager& vm);
+    int sequentialCws(const vrp_problem *vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm);
 }
 

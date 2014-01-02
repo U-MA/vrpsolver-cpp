@@ -57,16 +57,10 @@ TEST(Vehicle, isNotVisit)
 TEST(Vehicle, visit)
 {
     v.visit(vrp, 1);
-    LONGS_EQUAL(1, v.getRoute(0));
     LONGS_EQUAL(1900, v.quantity());
 
     v.visit(vrp, 2);
     LONGS_EQUAL(3000, v.quantity());
-}
-
-TEST(Vehicle, getRouteFromOutOfCustomer)
-{
-    CHECK_EQUAL(OUT_OF_BOUND, v.getRoute(-1));
 }
 
 TEST(Vehicle, computeCost)

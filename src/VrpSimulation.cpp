@@ -6,34 +6,32 @@ extern "C"
 #include "SavingsList.h"
 #include "VrpSimulation.h"
 
-//int VrpSimulation::sequentialCws(VehicleManager& vm, const vrp_problem *vrp)
-//{
-//    SavingsList savingsList(vrp);
+int VrpSimulation::sequentialCws(const vrp_problem *vrp, VehicleManager& vm)
+{
+    SavingsList savingsList(vrp);
 
-//    while (savingsList.getSize() != 0)
-//    {
-//        EDGE edge = savingsList.getEdge();
-
-//        if (!vm.isVisit(edge.first) && !vm.isVisit(edge.second))
-//        {
+    while (savingsList.getSize() != 0)
+    {
+        if (true)
+        {
             /* どちらの顧客も訪問していない */
-//        }
-//        else if (vm.isVisit(edge.first) && !vm.isVisit(edge.second))
-//        {
+        }
+        else if (false)
+        {
             /* firstのみがいずれかの車体のルートに含まれている */
-//        }
-//        else if (!vm.isVisit(edge.first) && vm.isVisit(edge.second))
-//        {
+        }
+        else if (false)
+        {
             /* secondのみがいずれかの車体のルートに含まれている */
-//        }
-//        else
-//        {
+        }
+        else
+        {
             /* どちらの顧客も異なる車体のルートに含まれている */
-//        }
-//    }
+        }
+    }
 
-//    return vm.computeTotalCost(vrp);
-//}
+    return vm.computeTotalCost(vrp);
+}
 
 static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_problem *vrp, int customer)
 {

@@ -24,7 +24,6 @@ public:
     bool isVisitOne(int customer) const;
     bool visit(const vrp_problem *vrp, int customer);
     int  quantity(void) const;
-    int  getRoute(int idx) const; /* 早期に実装しすぎた */
     int  computeCost(const vrp_problem *vrp) const;
     void print(void) const;
 
