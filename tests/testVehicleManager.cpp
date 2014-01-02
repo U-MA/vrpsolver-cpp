@@ -91,3 +91,8 @@ TEST(VehicleManager, isVisit)
     CHECK_TRUE(vm.isVisitOne(1));
     CHECK_FALSE(vm.isVisitOne(2));
 }
+
+TEST(VehicleManager, size)
+{
+    LONGS_EQUAL(0, vm.size());
+}

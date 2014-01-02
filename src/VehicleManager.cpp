@@ -12,7 +12,7 @@ VehicleManager::~VehicleManager(void)
 {
 }
 
-int VehicleManager::getSize(void) const
+int VehicleManager::size(void) const
 {
     return vehicle_vec.size();
 }

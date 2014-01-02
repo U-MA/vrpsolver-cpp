@@ -44,9 +44,8 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
     Vehicle runVehicle; /* 現在作業している車体 */
     runVehicle.init();
 
-    int vehicleCount = 0;
     /* 全ての顧客を訪れるか,使える車体が無くなるまで繰り返す */
-    while (!vm.isVisitAll(vrp) && vehicleCount < vrp->numroutes)
+    while (!vm.isVisitAll(vrp) && vm.size() < vrp->numroutes)
     {
         /* 次に訪れる顧客の候補を調べる */
         for (int i=1; i < vrp->vertnum; i++)
@@ -63,7 +62,6 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
             /* 候補がいなければ次の車体へ移る */
             vm.add(runVehicle);
             runVehicle.init();
-            vehicleCount++;
         }
         else
         {
@@ -81,8 +79,6 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
     {
         cost = vm.computeTotalCost(vrp);
     }
-
-    vm.print();
 
     return cost;
 }

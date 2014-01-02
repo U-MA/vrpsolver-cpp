@@ -23,7 +23,7 @@ public:
     bool    isVisitOne(int customer) const;
     Vehicle getVehicle(int id);
     Vehicle getVehicle(void);
-    int     getSize(void) const;
+    int     size(void) const;
     int     computeTotalCost(const vrp_problem *vrp) const;
     void    add(Vehicle& v);
     void    print(void) const;
@@ -34,7 +34,7 @@ private:
     vector<Vehicle> vehicle_vec;
     bool    isVisit[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */
-    int     size;
+    //int     size;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */

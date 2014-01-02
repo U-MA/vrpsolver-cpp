@@ -78,11 +78,11 @@ TEST(FixVehicleManager, addVehicle)
 
 TEST(FixVehicleManager, getSize)
 {
-    LONGS_EQUAL(0, vm.getSize());
+    LONGS_EQUAL(0, vm.size());
     vm.add(v);
-    LONGS_EQUAL(1, vm.getSize());
+    LONGS_EQUAL(1, vm.size());
     vm.add(v);
-    LONGS_EQUAL(2, vm.getSize());
+    LONGS_EQUAL(2, vm.size());
 }
 
 TEST(FixVehicleManager, getVehicle)
