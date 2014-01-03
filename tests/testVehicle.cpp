@@ -41,13 +41,6 @@ TEST(Vehicle, init)
 {
     LONGS_EQUAL(0, v.quantity());
     CHECK_FALSE(v.isVisit(100));
-    CHECK_TRUE(v.empty());
-}
-
-TEST(Vehicle, notEmpty)
-{
-    v.visit(vrp, 1);
-    CHECK_FALSE(v.empty());
 }
 
 TEST(Vehicle, isVisit)

@@ -55,11 +55,6 @@ Vehicle Vehicle::copy(void) const
     return v_copy;
 }
 
-bool Vehicle::empty(void) const
-{
-    return (routeSize == 0);
-}
-
 bool Vehicle::isVisit(int customer) const
 {
     return isVisit_[customer-1];

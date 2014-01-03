@@ -18,9 +18,6 @@ public:
     /* メンバ変数を初期化する */
     void init(void);
 
-    /* routeの中身が空かどうか */
-    bool empty(void) const;
-
     /* accessor */
     bool isVisit(int customer) const;
     int  quantity(void) const;
