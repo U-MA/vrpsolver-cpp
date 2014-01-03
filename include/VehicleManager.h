@@ -15,14 +15,13 @@ public:
     ~VehicleManager(void);
 
     bool    empty(void);
-    bool    changeVehicle(void);
     bool    update(const vrp_problem *vrp, int customer);
     bool    isVisit(int customer) const;
     bool    isVisitAll(const vrp_problem *vrp) const;
 
-    VehicleManager    copy() const;
+    VehicleManager    copy(void) const;
 
-    /* getter */
+    /* accessor */
     Vehicle getVehicle(int id);
     Vehicle getVehicle(void);
     int     size(void) const;

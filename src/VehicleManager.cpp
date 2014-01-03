@@ -71,14 +71,6 @@ bool VehicleManager::isVisit(int customer) const
     return false;
 }
 
-bool VehicleManager::changeVehicle(void)
-{
-    if (size_ <= runVehicle+1) return false;
-
-    runVehicle++;
-    return true;
-}
-
 bool VehicleManager::update(const vrp_problem *vrp, int customer)
 {
     if (vehicle[runVehicle].visit(vrp, customer))

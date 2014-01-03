@@ -67,11 +67,6 @@ TEST_GROUP(VehicleManager)
 };
 
 
-TEST(VehicleManager, ChangeNextLastVehicle)
-{
-    CHECK_FALSE(vm.changeVehicle());
-}
-
 TEST(VehicleManager, computeTotalCostAtFirst)
 {
     LONGS_EQUAL(0, vm.computeTotalCost(NULL));

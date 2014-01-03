@@ -29,7 +29,7 @@ public:
     int  computeCost(const vrp_problem *vrp) const;
 
     void print(void) const;
-    Vehicle copy() const;
+    Vehicle copy(void) const;
 
 private:
     static const int MAXSIZE = 130;
