@@ -16,6 +16,7 @@ public:
     int childSize(void) const;
     void expand(int childSize);
     Node *select(void);
+    bool isLeaf(void) const;
 };
 
 #endif /* VRPSOLVER_CPP_NODE_H */

@@ -32,3 +32,11 @@ TEST(Node, selectChild)
     Node *selected = node.select();
     CHECK(selected != NULL);
 }
+
+TEST(Node, isLeaf)
+{
+    CHECK_TRUE(node.isLeaf());
+
+    node.expand(1);
+    CHECK_FALSE(node.isLeaf());
+}

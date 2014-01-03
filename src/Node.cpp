@@ -35,3 +35,8 @@ Node *Node::select(void)
     else
         return child;
 }
+
+bool Node::isLeaf(void) const
+{
+    return (childSize_ == 0);
+}
