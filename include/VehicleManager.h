@@ -14,10 +14,8 @@ public:
     VehicleManager(void);
     ~VehicleManager(void);
 
-    bool update(const vrp_problem *vrp, int customer);
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
-
 
     /* accessor */
     int  size(void) const;

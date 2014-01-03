@@ -56,14 +56,6 @@ bool VehicleManager::isVisit(int customer) const
     return false;
 }
 
-bool VehicleManager::update(const vrp_problem *vrp, int customer)
-{
-    if (vehicle[runVehicle].visit(vrp, customer))
-        return (isVisit_[customer-1] = true);
-
-    return false;
-}
-
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
