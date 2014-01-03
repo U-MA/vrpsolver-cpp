@@ -71,7 +71,6 @@ IGNORE_TEST(MonteCarloTreeSearch, sketch)
     /* 問題の設定 */
     Vrp_SetProblem();
 
-    Node mct;
     VehicleManager vm;
     Vehicle v;
 
@@ -81,15 +80,20 @@ IGNORE_TEST(MonteCarloTreeSearch, sketch)
     /* 全ての顧客を訪問するまで続ける */
     while (!vm.isVisitAll(vrp))
     {
-        /* モンテカルロ木の初期化 */
-        mct.init();
+        Node mct;
 
+        printf("mcts\n");
         /* モンテカルロ木を成長させる
          * 好きなだけイテレーションさせる
          * それは回数かもしれないし、時間かもしれない
          * 今は回数にしている */
         for (int i=0; i < 1000; i++)
+        {
+            printf("i = %d\n", i);
             mct.search(vrp, vm, v);
+        }
+
+        printf("mcts\n");
 
         /* モンテカルロ木を成長させた結果
          * 一番有望な手を返す */

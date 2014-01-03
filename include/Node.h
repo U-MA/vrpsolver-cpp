@@ -37,7 +37,6 @@ public:
     Node *select(void);
 
     /* for MonteCarloTreeSearch */
-    void init(void);
     void search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicle& v);
     int  next(void) const;
 };

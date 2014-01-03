@@ -17,11 +17,13 @@ public:
 
     /* メンバ変数を初期化する */
     void init(void);
+
     Vehicle copy() const;
 
     /* routeの中身が空かどうか */
     bool empty(void) const;
 
+    /* accessor */
     bool isVisit(int customer) const;
     int  quantity(void) const;
 

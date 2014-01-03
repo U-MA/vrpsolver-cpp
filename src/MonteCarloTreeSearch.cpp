@@ -40,6 +40,7 @@ void MonteCarloTree::search(const vrp_problem *vrp,
                             const VehicleManager& vm,
                             const Vehicle& v)
 {
+    printf("in search\n");
     /* 引数として渡されるvm, vは変更しない
      * そのため変更させるための変数を作成 */
     VehicleManager vm_copy = vm.copy();

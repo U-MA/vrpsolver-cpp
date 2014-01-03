@@ -60,9 +60,3 @@ TEST(Node, update)
     LONGS_EQUAL(1, selected->count());
     LONGS_EQUAL(100, selected->value());
 }
-
-TEST(Node, init)
-{
-    node.expand(1);
-    node.init();
-}
