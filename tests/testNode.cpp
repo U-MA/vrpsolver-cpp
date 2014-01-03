@@ -7,7 +7,8 @@ TEST_GROUP(Node)
 {
 };
 
-IGNORE_TEST(Node, start)
+TEST(Node, start)
 {
-    FAIL("fail");
+    Node node;
+    LONGS_EQUAL(0, node.count());
 }
