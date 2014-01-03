@@ -1,4 +1,4 @@
-objs/tests/testNode.o: tests/testNode.cpp \
+objs/tests/testMonteCarloTree.o: tests/testMonteCarloTree.cpp \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
  cpputest-3.5/include/CppUTest/CppUTestConfig.h \
  cpputest-3.5/include/CppUTest/StandardCLibrary.h \
@@ -14,9 +14,10 @@ objs/tests/testNode.o: tests/testNode.cpp \
  cpputest-3.5/include/CppUTest/TestPlugin.h \
  cpputest-3.5/include/CppUTest/MemoryLeakWarningPlugin.h \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
- include/Node.h symphony/vrp_types.h symphony/sym_proto.h \
+ include/MonteCarloTreeSearch.h symphony/vrp_types.h symphony/sym_proto.h \
  symphony/vrp_common_types.h symphony/vrp_cg_params.h \
- symphony/vrp_lp_params.h include/VehicleManager.h include/Vehicle.h
+ symphony/vrp_lp_params.h include/Node.h include/VehicleManager.h \
+ include/Vehicle.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
@@ -48,7 +49,7 @@ cpputest-3.5/include/CppUTest/MemoryLeakWarningPlugin.h:
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
-include/Node.h:
+include/MonteCarloTreeSearch.h:
 
 symphony/vrp_types.h:
 
@@ -59,6 +60,8 @@ symphony/vrp_common_types.h:
 symphony/vrp_cg_params.h:
 
 symphony/vrp_lp_params.h:
+
+include/Node.h:
 
 include/VehicleManager.h:
 

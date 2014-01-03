@@ -80,13 +80,14 @@ IGNORE_TEST(MonteCarloTreeSearch, sketch)
     /* 問題の設定 */
     Vrp_SetProblem();
 
-    MonteCarloTree mct;
+    Node mct;
     VehicleManager vm;
     Vehicle v;
 
     /* 車体の初期化 */
     v.init();
 
+    /* 全ての顧客を訪問するまで続ける */
     while (!vm.isVisitAll(vrp))
     {
         /* モンテカルロ木の初期化 */
