@@ -5,6 +5,7 @@ Node::Node(void)
     customer_  = 0;
     count_     = 0;
     childSize_ = 0;
+    value_     = 0;
     child      = NULL;
 }
 
@@ -29,6 +30,11 @@ int Node::childSize(void) const
     return childSize_;
 }
 
+int Node::value(void) const
+{
+    return value_;
+}
+
 void Node::expand(int childSize)
 {
     childSize_ = childSize;
@@ -46,4 +52,10 @@ Node *Node::select(void)
 bool Node::isLeaf(void) const
 {
     return (childSize_ == 0);
+}
+
+void Node::update(int value)
+{
+    count_++;
+    value_ += value;
 }

@@ -12,6 +12,15 @@ TEST(Node, init)
 {
     LONGS_EQUAL(0, node.count());
     LONGS_EQUAL(0, node.childSize());
+    LONGS_EQUAL(0, node.value());
+}
+
+TEST(Node, isLeaf)
+{
+    CHECK_TRUE(node.isLeaf());
+
+    node.expand(1);
+    CHECK_FALSE(node.isLeaf());
 }
 
 TEST(Node, createChild)
@@ -33,10 +42,11 @@ TEST(Node, selectChild)
     LONGS_EQUAL(0, selected->customer());
 }
 
-TEST(Node, isLeaf)
+TEST(Node, update)
 {
-    CHECK_TRUE(node.isLeaf());
-
     node.expand(1);
-    CHECK_FALSE(node.isLeaf());
+    Node *selected = node.select();
+    selected->update(100);
+    LONGS_EQUAL(1, selected->count());
+    LONGS_EQUAL(100, selected->value());
 }

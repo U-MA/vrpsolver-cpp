@@ -7,6 +7,7 @@ private:
     int  customer_;
     int  count_;
     int  childSize_;
+    int  value_;
     Node *child;
 
 public:
@@ -16,8 +17,10 @@ public:
     int customer(void) const;
     int count(void) const;
     int childSize(void) const;
+    int value(void) const;
     void expand(int childSize);
     Node *select(void);
+    void update(int value);
     bool isLeaf(void) const;
 };
 
