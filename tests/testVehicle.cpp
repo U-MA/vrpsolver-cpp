@@ -41,6 +41,7 @@ TEST(Vehicle, init)
 {
     LONGS_EQUAL(0, v.quantity());
     CHECK_FALSE(v.isVisit(100));
+    CHECK_TRUE(v.empty());
 }
 
 TEST(Vehicle, visitOutOfCustomer)
