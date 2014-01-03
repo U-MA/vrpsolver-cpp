@@ -4,6 +4,7 @@ Node::Node(void)
 {
     count_     = 0;
     childSize_ = 0;
+    child      = NULL;
 }
 
 Node::~Node(void)
