@@ -20,8 +20,15 @@ TEST(Node, createChild)
     LONGS_EQUAL(5, node.childSize());
 }
 
-TEST(Node, selectChild)
+TEST(Node, selectChildWhenNodeDontHaveChild)
 {
     Node *selected = node.select();
     POINTERS_EQUAL(NULL, selected);
+}
+
+TEST(Node, selectChild)
+{
+    node.expand(1);
+    Node *selected = node.select();
+    CHECK(selected != NULL);
 }

@@ -8,6 +8,8 @@ Node::Node(void)
 
 Node::~Node(void)
 {
+    if (childSize_ != 0)
+        delete[] child;
 }
 
 int Node::count(void) const
@@ -23,9 +25,13 @@ int Node::childSize(void) const
 void Node::expand(int childSize)
 {
     childSize_ = childSize;
+    child = new Node[childSize];
 }
 
 Node *Node::select(void)
 {
-    return NULL;
+    if (childSize_ == 0)
+        return NULL;
+    else
+        return child;
 }

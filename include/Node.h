@@ -4,8 +4,9 @@
 class Node
 {
 private:
-    int count_;
-    int childSize_;
+    int  count_;
+    int  childSize_;
+    Node *child;
 
 public:
     Node(void);
