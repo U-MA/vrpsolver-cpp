@@ -2,6 +2,7 @@
 
 Node::Node(void)
 {
+    customer_  = 0;
     count_     = 0;
     childSize_ = 0;
     child      = NULL;
@@ -11,6 +12,11 @@ Node::~Node(void)
 {
     if (childSize_ != 0)
         delete[] child;
+}
+
+int Node::customer(void) const
+{
+    return customer_;
 }
 
 int Node::count(void) const

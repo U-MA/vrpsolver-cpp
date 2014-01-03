@@ -4,6 +4,7 @@
 class Node
 {
 private:
+    int  customer_;
     int  count_;
     int  childSize_;
     Node *child;
@@ -12,6 +13,7 @@ public:
     Node(void);
     ~Node(void);
 
+    int customer(void) const;
     int count(void) const;
     int childSize(void) const;
     void expand(int childSize);

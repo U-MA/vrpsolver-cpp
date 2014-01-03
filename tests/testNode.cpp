@@ -33,6 +33,13 @@ TEST(Node, selectChild)
     CHECK(selected != NULL);
 }
 
+TEST(Node, selectedChild)
+{
+    node.expand(1);
+    Node *selected = node.select();
+    LONGS_EQUAL(0, selected->customer());
+}
+
 TEST(Node, isLeaf)
 {
     CHECK_TRUE(node.isLeaf());
