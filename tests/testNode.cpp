@@ -30,13 +30,6 @@ TEST(Node, selectChild)
 {
     node.expand(1);
     Node *selected = node.select();
-    CHECK(selected != NULL);
-}
-
-TEST(Node, selectedChild)
-{
-    node.expand(1);
-    Node *selected = node.select();
     LONGS_EQUAL(0, selected->customer());
 }
 
