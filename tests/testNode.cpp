@@ -19,3 +19,9 @@ TEST(Node, createChild)
     node.expand(5);
     LONGS_EQUAL(5, node.childSize());
 }
+
+TEST(Node, selectChild)
+{
+    Node *selected = node.select();
+    POINTERS_EQUAL(NULL, selected);
+}

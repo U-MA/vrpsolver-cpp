@@ -24,3 +24,8 @@ void Node::expand(int childSize)
 {
     childSize_ = childSize;
 }
+
+Node *Node::select(void)
+{
+    return NULL;
+}
