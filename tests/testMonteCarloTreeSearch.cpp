@@ -117,9 +117,9 @@ IGNORE_TEST(MonteCarloTreeSearch, sketch)
             v.visit(vrp, move);
     }
 
-    int cost = INF;
+    int cost = 100000;
     if (vm.isVisitAll(vrp))
-        cost = vm.coputeTotalCost(vrp);
+        cost = vm.computeTotalCost(vrp);
 
     CHECK(cost > 0);
 }

@@ -17,6 +17,7 @@ public:
 
     /* メンバ変数を初期化する */
     void init(void);
+    Vehicle copy() const;
 
     /* routeの中身が空かどうか */
     bool empty(void) const;

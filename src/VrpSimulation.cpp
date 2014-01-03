@@ -39,7 +39,7 @@ static bool isVisitable(const VehicleManager *vm, const Vehicle *v, const vrp_pr
             v->quantity() + vrp->demand[customer] <= vrp->capacity);
 }
 
-int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
+int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, Vehicle& v)
 {
     Vehicle runVehicle; /* 現在作業している車体 */
     runVehicle.init();

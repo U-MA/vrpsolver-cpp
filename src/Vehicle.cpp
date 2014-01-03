@@ -40,6 +40,12 @@ void Vehicle::init(void)
         isVisit_[i] = false;
 }
 
+Vehicle Vehicle::copy(void) const
+{
+    Vehicle v_copy;
+    return v_copy;
+}
+
 bool Vehicle::empty(void) const
 {
     return (routeSize == 0);

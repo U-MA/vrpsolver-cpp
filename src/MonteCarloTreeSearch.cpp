@@ -6,36 +6,75 @@ extern "C"
 #include "MonteCarloTreeSearch.h"
 #include "Node.h"
 #include "VehicleManager.h"
+#include "VrpSimulation.h"
 
-void MCTS::MonteCarloTreeSearch(const vrp_problem *vrp, const VehicleManager& vm)
+MonteCarloTree::MonteCarloTree(void)
 {
-    int visitedSize = 0;
-    Node *visited = new Node[200]; /* 訪問したノードを記憶 */
+    size_ = 0;
+    node  = NULL;
+}
 
-    VehicleManager vm_copy;
-    vm_copy.copy(vm); /* 引数vmのコピーを作成 */
-    Vehilce v = vm_copy.runVehicle(); /* 現在走行しているVehicleを取得
-                                       * (暗黙にシーケンシャルverを想定している */
-    /* SELECTION */
-    while (!node.isLeaf())
+MonteCarloTree::~MonteCarloTree(void)
+{
+}
+
+void MonteCarloTree::init(void)
+{
+    size_ = 0;
+}
+
+static void vehicleUpdate(const vrp_problem *vrp,
+                          VehicleManager *vm,
+                          Vehicle *v, int move)
+{
+    if (move == 0)
     {
-        visited[visitedSize++] = node;
-        v.visit(vrp, node.customer());
-        node = node.select();
+        vm->add(*v);
+        v->init();
+    }
+    else
+        v->visit(vrp, move);
+}
+
+void MonteCarloTree::search(const vrp_problem *vrp,
+                            const VehicleManager& vm,
+                            const Vehicle& v)
+{
+    /* 引数として渡されるvm, vは変更しない
+     * そのため変更させるための変数を作成 */
+    VehicleManager vm_copy = vm.copy();
+    Vehicle        v_copy  = v.copy();
+
+    Node *visited[300];
+    int  visitedSize = 0;
+
+    Node *root = &node[0];
+
+    /* SELECTION */
+    while (!root->isLeaf())
+    {
+        visited[visitedSize++] = root;
+        vehicleUpdate(vrp, &vm_copy, &v_copy, root->customer());
+        root = root->select();
     }
 
     /* EXPANSION */
-    node.expand(vrp->vertnum);
-    node = node.select();
-    visited[visitedSize++] = node;
-    v.visit(vrp, node.customer());
+    /* 顧客の数+1の子を作成. +1は車体の変更 */
+    root->expand(vrp->vertnum);
+    Node *newNode = root->select();
+    visited[visitedSize++] = newNode;
+    vehicleUpdate(vrp, &vm_copy, &v_copy, newNode->customer());
 
     /* SIMULATION */
-    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm);
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, v_copy);
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)
         visited[i]->update(cost);
+}
 
-    delete[] visited;
+
+int MonteCarloTree::next(void)
+{
+    return 0;
 }

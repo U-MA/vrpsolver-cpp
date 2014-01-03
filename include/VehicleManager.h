@@ -20,6 +20,8 @@ public:
     bool    isVisit(int customer) const;
     bool    isVisitAll(const vrp_problem *vrp) const;
 
+    VehicleManager    copy() const;
+
     /* getter */
     Vehicle getVehicle(int id);
     Vehicle getVehicle(void);

@@ -1,5 +1,4 @@
-#include "VehicleManager.h"
-
+#include "VehicleManager.h" 
 
 VehicleManager::VehicleManager(void)
 {
@@ -32,6 +31,20 @@ Vehicle VehicleManager::getVehicle(int id)
 Vehicle VehicleManager::getVehicle(void)
 {
     return vehicle[0];
+}
+
+VehicleManager VehicleManager::copy(void) const
+{
+    VehicleManager vm_copy;
+    vm_copy.size_ = size_;
+    vm_copy.runVehicle = runVehicle;
+    for (int i=0; i < CUSTOMER_MAX; i++)
+        vm_copy.isVisit_[i] = isVisit_[i];
+
+    for (int i=0; i < VEHICLE_MAX; i++)
+        vm_copy.vehicle[i] = vehicle[i];
+
+    return vm_copy;
 }
 
 bool VehicleManager::empty(void)
