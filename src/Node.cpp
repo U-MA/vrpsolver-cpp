@@ -10,12 +10,17 @@ Node::~Node(void)
 {
 }
 
-int Node::count(void)
+int Node::count(void) const
 {
     return count_;
 }
 
-int Node::childSize(void)
+int Node::childSize(void) const
 {
     return childSize_;
+}
+
+void Node::expand(int childSize)
+{
+    childSize_ = childSize;
 }

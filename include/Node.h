@@ -11,8 +11,9 @@ public:
     Node(void);
     ~Node(void);
 
-    int count(void);
-    int childSize(void);
+    int count(void) const;
+    int childSize(void) const;
+    void expand(int childSize);
 };
 
 #endif /* VRPSOLVER_CPP_NODE_H */
