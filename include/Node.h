@@ -4,6 +4,8 @@
 class Node
 {
 private:
+    double computeUcb(void);
+
     int  customer_;
     int  count_;
     int  childSize_;

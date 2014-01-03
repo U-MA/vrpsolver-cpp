@@ -39,14 +39,32 @@ void Node::expand(int childSize)
 {
     childSize_ = childSize;
     child = new Node[childSize];
+    for (int i=0; i < childSize_; i++)
+    {
+        child[i].customer_ = i;
+    }
+}
+
+double Node::computeUcb(void)
+{
+    double ucb = 1e6;
+    if (count_ != 0)
+        ucb = value_ / count_;
+
+    return ucb;
 }
 
 Node *Node::select(void)
 {
-    if (childSize_ == 0)
-        return NULL;
-    else
-        return child;
+    Node *selected = NULL;
+    double maxUcb = -1.0;
+    for (int i=0; i < childSize_; i++)
+    {
+        if (child[i].computeUcb() > maxUcb)
+            selected = &child[i];
+    }
+
+    return selected;
 }
 
 bool Node::isLeaf(void) const
