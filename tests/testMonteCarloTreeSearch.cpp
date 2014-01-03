@@ -70,9 +70,56 @@ TEST_GROUP(MonteCarloTreeSearch)
  * 返すことを望む */
 IGNORE_TEST(MonteCarloTreeSearch, customerTest)
 {
+}
+
+/* MonteCarloTreeSearchをこう使いたいなぁという簡単な記述
+ * 故にテストではないのでこれは残しておくのであれば
+ * 常にIGNOREにする */
+IGNORE_TEST(MonteCarloTreeSearch, sketch)
+{
+    /* 問題の設定 */
     Vrp_SetProblem();
 
+    MonteCarloTree mct;
     VehicleManager vm;
+    Vehicle v;
 
-    CHECK(MCTS::MonteCarloTreeSearch(vrp, vm, 1) > 0);
+    /* 車体の初期化 */
+    v.init();
+
+    while (!vm.isVisitAll(vrp))
+    {
+        /* モンテカルロ木の初期化 */
+        mct.init();
+
+        /* モンテカルロ木を成長させる
+         * 好きなだけイテレーションさせる
+         * それは回数かもしれないし、時間かもしれない
+         * 今は回数にしている */
+        for (int i=0; i < 1000; i++)
+            mct.search(vrp, vm, v);
+
+        /* モンテカルロ木を成長させた結果
+         * 一番有望な手を返す */
+        int move = mct.next();
+
+        if (move == 0)
+        {
+            /* 次の車体に移る */
+            vm.add(v);
+            v.init();
+
+            /* 用意されてる車体の数を使い切った */
+            if (vm.size() == vrp->numroutes)
+                break;
+        }
+        else
+            v.visit(vrp, move);
+    }
+
+    int cost = INF;
+    if (vm.isVisitAll(vrp))
+        cost = vm.coputeTotalCost(vrp);
+
+    CHECK(cost > 0);
 }

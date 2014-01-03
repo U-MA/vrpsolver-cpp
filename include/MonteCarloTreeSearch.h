@@ -10,7 +10,7 @@ extern "C"
 
 namespace MCTS
 {
-    int MonteCarloTreeSearch(const vrp_problem *vrp, const VehicleManager& vm, int loopCount);
+    void MonteCarloTreeSearch(const vrp_problem *vrp, const VehicleManager& vm);
 }
 
 #endif /* VRPSOLVER_CPP_MONTECARLOTREESEARCH_H */

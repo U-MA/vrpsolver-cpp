@@ -60,8 +60,12 @@ Node *Node::select(void)
     double maxUcb = -1.0;
     for (int i=0; i < childSize_; i++)
     {
-        if (child[i].computeUcb() > maxUcb)
+        double ucb = child[i].computeUcb();
+        if (ucb > maxUcb)
+        {
+            maxUcb = ucb;
             selected = &child[i];
+        }
     }
 
     return selected;
