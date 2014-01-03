@@ -18,8 +18,6 @@ public:
     /* メンバ変数を初期化する */
     void init(void);
 
-    Vehicle copy() const;
-
     /* routeの中身が空かどうか */
     bool empty(void) const;
 
@@ -31,6 +29,7 @@ public:
     int  computeCost(const vrp_problem *vrp) const;
 
     void print(void) const;
+    Vehicle copy() const;
 
 private:
     static const int MAXSIZE = 130;

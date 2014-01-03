@@ -44,6 +44,18 @@ TEST(Vehicle, init)
     CHECK_TRUE(v.empty());
 }
 
+TEST(Vehicle, notEmpty)
+{
+    v.visit(vrp, 1);
+    CHECK_FALSE(v.empty());
+}
+
+TEST(Vehicle, isVisit)
+{
+    v.visit(vrp, 1);
+    CHECK_TRUE(v.isVisit(1));
+}
+
 TEST(Vehicle, visitOutOfCustomer)
 {
     CHECK_FALSE(v.visit(vrp, 0));
@@ -54,11 +66,6 @@ TEST(Vehicle, visitInCustomer)
 {
     CHECK_TRUE(v.visit(vrp, 1));
     CHECK_TRUE(v.visit(vrp, 9));
-}
-
-TEST(Vehicle, isNotVisit)
-{
-    CHECK_EQUAL(0, v.quantity());
 }
 
 TEST(Vehicle, visit)
@@ -81,22 +88,12 @@ TEST(Vehicle, computeCost)
     LONGS_EQUAL(65, v.computeCost(vrp));
 }
 
-TEST(Vehicle, empty)
-{
-    CHECK_TRUE(v.empty());
-}
-
-TEST(Vehicle, notEmpty)
+TEST(Vehicle, copy)
 {
     v.visit(vrp, 1);
-    CHECK_FALSE(v.empty());
-}
-
-TEST(Vehicle, isVisit)
-{
-    CHECK_FALSE(v.isVisit(1));
-    v.visit(vrp, 1);
-    CHECK_TRUE(v.isVisit(1));
+    Vehicle copy = v.copy();
+    CHECK_TRUE(copy.isVisit(1));
+    LONGS_EQUAL(v.quantity(), copy.quantity());
 }
 
 /* テスト方法がわからないので保留 */

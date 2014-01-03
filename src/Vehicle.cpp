@@ -43,6 +43,15 @@ void Vehicle::init(void)
 Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;
+
+    for (int i=0; i < MAXSIZE; i++)
+        v_copy.isVisit_[i] = isVisit_[i];
+
+    for (int i=0; i < routeSize; i++)
+        v_copy.route[i] = route[i];
+
+    v_copy.routeSize = routeSize;
+    v_copy.quantity_ = quantity_;
     return v_copy;
 }
 
