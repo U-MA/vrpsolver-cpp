@@ -10,15 +10,6 @@ extern "C"
 
 class Node
 {
-private:
-    double computeUcb(void);
-
-    int  customer_;
-    int  count_;
-    int  childSize_;
-    int  value_;
-    Node *child;
-
 public:
     Node(void);
     ~Node(void);
@@ -39,6 +30,15 @@ public:
     /* for MonteCarloTreeSearch */
     void search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicle& v);
     int  next(void) const;
+
+private:
+    double computeUcb(void);
+
+    int  customer_;
+    int  count_;
+    int  childSize_;
+    int  value_;
+    Node *child;
 };
 
 #endif /* VRPSOLVER_CPP_NODE_H */

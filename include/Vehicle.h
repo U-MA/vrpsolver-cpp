@@ -17,7 +17,6 @@ public:
     /* メンバ変数を初期化する */
     void init(void);
 
-    /* accessor */
     bool isVisit(int customer) const;
     int  quantity(void) const;
 
