@@ -5,10 +5,11 @@
 
 TEST_GROUP(Node)
 {
+    Node node;
 };
 
-TEST(Node, start)
+TEST(Node, init)
 {
-    Node node;
     LONGS_EQUAL(0, node.count());
+    LONGS_EQUAL(0, node.childSize());
 }
