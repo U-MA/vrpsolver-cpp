@@ -31,8 +31,10 @@ public:
 
     bool isLeaf(void) const;
     void expand(int childSize);
-    Node *select(void);
     void update(int value);
+
+    /* privateにしたいがテストのためpublicにしている */
+    Node *select(void);
 
     /* for MonteCarloTreeSearch */
     void init(void);

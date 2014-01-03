@@ -24,6 +24,8 @@ void Node::init(void)
     }
     if (childSize_ != 0)
         delete[] child;
+
+    childSize_ = 0;
 }
 
 int Node::customer(void) const

@@ -65,16 +65,7 @@ TEST_GROUP(MonteCarloTreeSearch)
     }
 };
 
-/* モンテカルロ木探索の受け入れテスト的側面のあるテスト
- * モンテカルロ木探索を１回行い、その中で最も有望だと思われる顧客を
- * 返すことを望む */
-IGNORE_TEST(MonteCarloTreeSearch, customerTest)
-{
-}
-
-/* MonteCarloTreeSearchをこう使いたいなぁという簡単な記述
- * 故にテストではないのでこれは残しておくのであれば
- * 常にIGNOREにする */
+/* MonteCarloTreeSearchの受け入れテスト */
 IGNORE_TEST(MonteCarloTreeSearch, sketch)
 {
     /* 問題の設定 */

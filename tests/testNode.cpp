@@ -8,8 +8,9 @@ TEST_GROUP(Node)
     Node node;
 };
 
-TEST(Node, init)
+TEST(Node, create)
 {
+    LONGS_EQUAL(0, node.customer());
     LONGS_EQUAL(0, node.count());
     LONGS_EQUAL(0, node.childSize());
     LONGS_EQUAL(0, node.value());
@@ -58,4 +59,10 @@ TEST(Node, update)
     selected->update(100);
     LONGS_EQUAL(1, selected->count());
     LONGS_EQUAL(100, selected->value());
+}
+
+TEST(Node, init)
+{
+    node.expand(1);
+    node.init();
 }
