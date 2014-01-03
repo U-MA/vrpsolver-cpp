@@ -2,7 +2,6 @@
 
 VehicleManager::VehicleManager(void)
 {
-    runVehicle = 0;
     size_ = 0;
 }
 
@@ -25,7 +24,6 @@ VehicleManager VehicleManager::copy(void) const
 {
     VehicleManager vm_copy;
     vm_copy.size_ = size_;
-    vm_copy.runVehicle = runVehicle;
 
     for (int i=0; i < VEHICLE_MAX; i++)
         vm_copy.vehicle[i] = vehicle[i];
