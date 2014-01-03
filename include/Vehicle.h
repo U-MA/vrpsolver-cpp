@@ -12,7 +12,6 @@ class Vehicle
 {
 public:
     Vehicle(void);
-    Vehicle(const Vehicle& v);
     ~Vehicle(void);
 
     /* メンバ変数を初期化する */
@@ -25,8 +24,9 @@ public:
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
 
-    void print(void) const;
     Vehicle copy(void) const;
+
+    void print(void) const;
 
 private:
     static const int MAXSIZE = 130;

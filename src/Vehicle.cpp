@@ -16,17 +16,6 @@ Vehicle::Vehicle(void)
     }
 }
 
-Vehicle::Vehicle(const Vehicle& v)
-{
-    routeSize  = v.routeSize;
-    quantity_  = v.quantity_;
-    for (int i=0; i < MAXSIZE; i++)
-        isVisit_[i] = v.isVisit_[i];
-
-    for (int i=0; i < routeSize; i++)
-        route[i] = v.route[i];
-}
-
 Vehicle::~Vehicle(void)
 {
 }
