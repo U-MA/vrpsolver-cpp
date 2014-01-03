@@ -37,11 +37,6 @@ VehicleManager VehicleManager::copy(void) const
     return vm_copy;
 }
 
-bool VehicleManager::empty(void)
-{
-    return size_ == 0;
-}
-
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     int customerSize = vrp->vertnum-1;

@@ -132,17 +132,6 @@ TEST(VehicleManager, size)
     LONGS_EQUAL(0, vm.size());
 }
 
-TEST(VehicleManager, empty)
-{
-    CHECK_TRUE(vm.empty());
-}
-
-TEST(VehicleManager, addVehicle)
-{
-    vm.add(v);
-    CHECK_FALSE(vm.empty());
-}
-
 TEST(VehicleManager, getSize)
 {
     LONGS_EQUAL(0, vm.size());

@@ -14,20 +14,20 @@ public:
     VehicleManager(void);
     ~VehicleManager(void);
 
-    bool    empty(void);
-    bool    update(const vrp_problem *vrp, int customer);
-    bool    isVisit(int customer) const;
-    bool    isVisitAll(const vrp_problem *vrp) const;
+    bool update(const vrp_problem *vrp, int customer);
+    bool isVisit(int customer) const;
+    bool isVisitAll(const vrp_problem *vrp) const;
 
-    VehicleManager    copy(void) const;
 
     /* accessor */
-    int     size(void) const;
+    int  size(void) const;
 
-    void    add(Vehicle& v);
-    int     computeTotalCost(const vrp_problem *vrp) const;
+    void add(Vehicle& v);
+    int  computeTotalCost(const vrp_problem *vrp) const;
 
-    void    print(void) const;
+    void print(void) const;
+
+    VehicleManager copy(void) const;
    
 private:
     static const int VEHICLE_MAX  = 20;
