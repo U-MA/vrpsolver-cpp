@@ -151,14 +151,3 @@ TEST(VehicleManager, getSize)
     vm.add(v);
     LONGS_EQUAL(2, vm.size());
 }
-
-TEST(VehicleManager, getVehicle)
-{
-    Vrp_SetProblem();
-
-    v.visit(vrp, 1);
-    CHECK_TRUE(v.isVisit(1));
-    vm.add(v);
-    Vehicle v2 = vm.getVehicle();
-    CHECK_TRUE(v2.isVisit(1));
-}

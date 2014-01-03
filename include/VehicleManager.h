@@ -22,8 +22,6 @@ public:
     VehicleManager    copy(void) const;
 
     /* accessor */
-    Vehicle getVehicle(int id);
-    Vehicle getVehicle(void);
     int     size(void) const;
 
     void    add(Vehicle& v);
@@ -37,7 +35,7 @@ private:
     Vehicle vehicle[VEHICLE_MAX];
     bool    isVisit_[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */
-    int     size_;      /* vehicleに含まれてるVehicleの数 */
+    int     size_;      /* Vehicleの数 */
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */

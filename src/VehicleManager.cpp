@@ -23,16 +23,6 @@ void VehicleManager::add(Vehicle& v)
     size_++;
 }
 
-Vehicle VehicleManager::getVehicle(int id)
-{
-    return vehicle[id];
-}
-
-Vehicle VehicleManager::getVehicle(void)
-{
-    return vehicle[0];
-}
-
 VehicleManager VehicleManager::copy(void) const
 {
     VehicleManager vm_copy;
