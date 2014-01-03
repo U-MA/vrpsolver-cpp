@@ -31,7 +31,6 @@ private:
     static const int VEHICLE_MAX  = 20;
     static const int CUSTOMER_MAX = 200;
     Vehicle vehicle[VEHICLE_MAX];
-    bool    isVisit_[CUSTOMER_MAX];
     int     runVehicle; /* 現在走行している車体 */
     int     size_;      /* Vehicleの数 */
 };
