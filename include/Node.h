@@ -1,0 +1,4 @@
+#ifndef VRPSOLVER_CPP_NODE_H
+#define VRPSOLVER_CPP_NODE_H
+
+#endif /* VRPSOLVER_CPP_NODE_H */
