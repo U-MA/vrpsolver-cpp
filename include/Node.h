@@ -32,7 +32,7 @@ public:
     int  next(void) const;
 
 private:
-    double computeUcb(void);
+    double computeUcb(int parentCount);
 
     int  customer_;
     int  count_;

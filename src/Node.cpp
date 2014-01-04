@@ -1,3 +1,6 @@
+#include <math.h>
+
+
 #include "Node.h"
 #include "VrpSimulation.h"
 
@@ -46,11 +49,11 @@ void Node::expand(int childSize)
     }
 }
 
-double Node::computeUcb(void)
+double Node::computeUcb(int parentCount)
 {
     double ucb = 1e6;
     if (count_ != 0)
-        ucb = value_ / count_;
+        ucb = value_ / count_ + 1.0 * sqrt(log((double)parentCount+1)) / count_;
 
     return ucb;
 }
@@ -61,7 +64,7 @@ Node *Node::select(void)
     double maxUcb = -1.0;
     for (int i=0; i < childSize_; i++)
     {
-        double ucb = child[i].computeUcb();
+        double ucb = child[i].computeUcb(count_);
         if (ucb > maxUcb)
         {
             maxUcb = ucb;
