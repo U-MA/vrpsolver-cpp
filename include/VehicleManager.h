@@ -20,6 +20,7 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
 
+    bool move(int move);
     void add(Vehicle& v);
     int  computeTotalCost(const vrp_problem *vrp) const;
 

@@ -1,7 +1,12 @@
 #include <math.h>
 
+extern "C"
+{
+#include "vrp_types.h"
+}
 
 #include "Node.h"
+#include "VehicleManager.h"
 #include "VrpSimulation.h"
 
 Node::Node(void)
@@ -137,6 +142,10 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicl
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)
         visited[i]->update(cost);
+}
+
+void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
+{
 }
 
 int Node::next(void) const

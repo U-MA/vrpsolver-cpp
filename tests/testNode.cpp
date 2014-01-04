@@ -1,6 +1,13 @@
 #include "CppUTest/TestHarness.h"
 
+extern "C"
+{
+#include "vrp_types.h"
+#include "vrp_macros.h"
+}
+
 #include "Node.h"
+#include "VehicleManager.h"
 
 
 TEST_GROUP(Node)

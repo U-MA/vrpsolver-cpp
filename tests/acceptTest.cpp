@@ -68,9 +68,6 @@ TEST_GROUP(acceptTest)
 IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
 {
     VehicleManager vm;
-    Vehicle        v;
-
-    v.init();
 
     while (!vm.isVisitAll(vrp))
     {
@@ -79,30 +76,14 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
         /* 好きなだけイテレーションさせる
          * 回数や時間を用いて上限を決める */
         for(int i=0; i < 1000; i++)
-            mct.search(vrp, vm, v);
+            mct.search(vrp, vm);
 
         /* イテレーションした結果, 一番有望な手を選択 */
         int move = mct.next();
 
-        if (move == 0)
-        {
-            /* 次の車体に変更 */
-            vm.add(v);
-            v.init();
-
-            /* 用意されている車体を使いきったか確認 */
-            if (vm.size()+1 >= vrp->numroutes)
-                break;
-        }
-        else
-        {
-            /* 顧客を訪問する */
-            if (!v.visit(vrp, move))
-            {
-                printf("visit error\n");
-                exit(1);
-            }
-        }
+        /* 用意した車体を使い切ったらfalseを返す */
+        if(!vm.move(move))
+            break;
     }
 
     int cost = 1e6;

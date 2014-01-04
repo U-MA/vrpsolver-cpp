@@ -29,6 +29,7 @@ public:
 
     /* for MonteCarloTreeSearch */
     void search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicle& v);
+    void search(const vrp_problem *vrp, const VehicleManager& vm);
     int  next(void) const;
 
 private:

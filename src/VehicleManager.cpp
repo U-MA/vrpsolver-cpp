@@ -50,6 +50,11 @@ bool VehicleManager::isVisit(int customer) const
     return false;
 }
 
+bool VehicleManager::move(int move)
+{
+    return false;
+}
+
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
