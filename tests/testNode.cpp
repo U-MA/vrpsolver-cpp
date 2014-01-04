@@ -56,9 +56,11 @@ TEST(Node, update)
 {
     node.expand(1);
     Node *selected = node.select();
+
     selected->update(100);
     LONGS_EQUAL(1, selected->count());
     LONGS_EQUAL(100, selected->value());
+
     selected->update(30);
     LONGS_EQUAL(2, selected->count());
     LONGS_EQUAL(130, selected->value());
