@@ -56,6 +56,7 @@ TEST_GROUP(VehicleManager)
         Vrp_SetCost(3, 5, 27);
         Vrp_SetCost(4, 5, 25);
 
+        vrp->numroutes = 2;
         vrp->capacity  = 100;
         vrp->demand[1] = 37;
         vrp->demand[2] = 35;
@@ -63,7 +64,6 @@ TEST_GROUP(VehicleManager)
         vrp->demand[4] = 25;
         vrp->demand[5] = 32;
     }
-
 };
 
 
@@ -139,4 +139,29 @@ TEST(VehicleManager, getSize)
     LONGS_EQUAL(1, vm.size());
     vm.add(v);
     LONGS_EQUAL(2, vm.size());
+}
+
+TEST(VehicleManager, move)
+{
+    Vrp_SetProblem();
+
+    CHECK_TRUE(vm.move(vrp, 1));
+}
+
+TEST(VehicleManager, moveFailWhenSameCustomerVisit)
+{
+    Vrp_SetProblem();
+
+    vm.move(vrp, 1);
+    CHECK_FALSE(vm.move(vrp, 1));
+}
+
+TEST(VehicleManager, moveFailWhenThereIsNoVehicle)
+{
+    Vrp_SetProblem();
+    vrp->numroutes = 3;
+
+    CHECK_TRUE(vm.move(vrp, VehicleManager::CHANGE));
+    CHECK_TRUE(vm.move(vrp, VehicleManager::CHANGE));
+    CHECK_FALSE(vm.move(vrp, VehicleManager::CHANGE));
 }

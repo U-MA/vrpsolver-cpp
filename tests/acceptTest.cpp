@@ -82,7 +82,7 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
         int move = mct.next();
 
         /* 用意した車体を使い切ったらfalseを返す */
-        if(!vm.move(move))
+        if(!vm.move(vrp, move))
             break;
     }
 

@@ -11,6 +11,11 @@ extern "C"
 class VehicleManager
 {
 public:
+    enum
+    {
+        CHANGE = 0
+    };
+
     VehicleManager(void);
     ~VehicleManager(void);
 
@@ -20,7 +25,7 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
 
-    bool move(int move);
+    bool move(const vrp_problem *vrp, int move);
     void add(Vehicle& v);
     int  computeTotalCost(const vrp_problem *vrp) const;
 
@@ -32,7 +37,9 @@ private:
     static const int VEHICLE_MAX  = 20;
     static const int CUSTOMER_MAX = 200;
     Vehicle vehicle[VEHICLE_MAX];
+    bool isVisit_[CUSTOMER_MAX];
     int size_;      /* Vehicleの数 */
+    int ranSize;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */

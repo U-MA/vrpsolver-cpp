@@ -3,6 +3,7 @@
 VehicleManager::VehicleManager(void)
 {
     size_ = 0;
+    ranSize = 1;
 }
 
 VehicleManager::~VehicleManager(void)
@@ -50,9 +51,28 @@ bool VehicleManager::isVisit(int customer) const
     return false;
 }
 
-bool VehicleManager::move(int move)
+bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
-    return false;
+    /* 車体の変更 */
+    if (move == CHANGE)
+    {
+        if (ranSize == vrp->numroutes)
+        {
+            /* 次の車体が無い */
+            return false;
+        }
+        else
+        {
+            ranSize++;
+            return true;
+        }
+    }
+
+    /* 同じ顧客を再び訪問している */
+    if (isVisit_[move] == true) return false;
+
+    isVisit_[move] = true;
+    return true;
 }
 
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
