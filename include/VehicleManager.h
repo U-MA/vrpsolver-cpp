@@ -36,7 +36,7 @@ private:
     static const int CUSTOMER_MAX = 200;
     Vehicle vehicle[VEHICLE_MAX];
     bool isVisit_[CUSTOMER_MAX];
-    int size_; /* 車体の数 */
+    int  size_; /* 車体の数 */
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
