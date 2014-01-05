@@ -3,6 +3,8 @@
 VehicleManager::VehicleManager(void)
 {
     size_ = 1;
+    for (int i=0; i < CUSTOMER_MAX; i++)
+        isVisit_[i] = false;
 }
 
 VehicleManager::~VehicleManager(void)
