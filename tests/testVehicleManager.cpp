@@ -165,3 +165,25 @@ TEST(VehicleManager, moveFailWhenThereIsNoVehicle)
     CHECK_TRUE(vm.move(vrp, VehicleManager::CHANGE));
     CHECK_FALSE(vm.move(vrp, VehicleManager::CHANGE));
 }
+
+TEST(VehicleManager, moveFailWhenVehicleVisitOverCapacity)
+{
+    Vrp_SetProblem();
+
+    vm.move(vrp, 1);
+    vm.move(vrp, 2);
+    CHECK_FALSE(vm.move(vrp, 3));
+}
+
+TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
+{
+    Vrp_SetProblem();
+
+    vm.move(vrp, 1);
+    vm.move(vrp, VehicleManager::CHANGE);
+
+    CHECK_TRUE(vm.move(vrp, 2));
+    CHECK_TRUE(vm.move(vrp, 3));
+    CHECK_TRUE(vm.move(vrp, 4));
+    CHECK_FALSE(vm.move(vrp, 5));
+}

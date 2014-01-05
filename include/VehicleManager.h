@@ -40,6 +40,7 @@ private:
     bool isVisit_[CUSTOMER_MAX];
     int size_;      /* Vehicleの数 */
     int ranSize;
+    int capacity;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
