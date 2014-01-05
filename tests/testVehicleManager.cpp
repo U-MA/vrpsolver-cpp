@@ -141,7 +141,7 @@ TEST(VehicleManager, getSize)
     LONGS_EQUAL(2, vm.size());
 }
 
-TEST(VehicleManager, move)
+TEST(VehicleManager, moveTrue)
 {
     Vrp_SetProblem();
 
@@ -186,4 +186,13 @@ TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
     CHECK_TRUE(vm.move(vrp, 3));
     CHECK_TRUE(vm.move(vrp, 4));
     CHECK_FALSE(vm.move(vrp, 5));
+}
+
+TEST(VehicleManager, computeTotalCostAfterMove)
+{
+    Vrp_SetProblem();
+
+    CHECK_TRUE(vm.move(vrp, 1));
+
+    LONGS_EQUAL(56, vm.computeTotalCost(vrp));
 }

@@ -76,6 +76,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     /* capacity制限を超過 */
     if ((capacity + vrp->demand[move]) > vrp->capacity) return false;
 
+    vehicle[ranSize-1].visit(vrp, move);
     capacity += vrp->demand[move];
     isVisit_[move] = true;
     return true;
@@ -84,8 +85,16 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
-    for (int i=0; i < size_; i++)
-        totalCost += vehicle[i].computeCost(vrp);
+    if (size_ != 0)
+    {
+        for (int i=0; i < size_; i++)
+            totalCost += vehicle[i].computeCost(vrp);
+    }
+    else
+    {
+        for (int i=0; i < ranSize; i++)
+            totalCost += vehicle[i].computeCost(vrp);
+    }
 
     return totalCost;
 }
