@@ -105,19 +105,6 @@ TEST(VehicleManager, notVisitAllWhenOneCustomerVisited)
     CHECK_FALSE(vm.isVisitAll(vrp));
 }
 
-TEST(VehicleManager, visitAllCustomer)
-{
-    Vrp_SetProblem();
-
-    vm.move(vrp, 1);
-    vm.move(vrp, 2);
-    vm.move(vrp, VehicleManager::CHANGE);
-    vm.move(vrp, 3);
-    vm.move(vrp, 4);
-    vm.move(vrp, 5);
-    CHECK_TRUE(vm.isVisitAll(vrp));
-}
-
 TEST(VehicleManager, isVisitAllCustomer)
 {
     Vrp_SetProblem();
@@ -155,7 +142,12 @@ TEST(VehicleManager, sizeWhenInit)
 
 TEST(VehicleManager, sizeIncrement)
 {
+    Vrp_SetProblem();
+
     vm.move(vrp, VehicleManager::CHANGE);
+    LONGS_EQUAL(2, vm.size());
+
+    CHECK_FALSE(vm.move(vrp, VehicleManager::CHANGE));
     LONGS_EQUAL(2, vm.size());
 }
 
