@@ -4,7 +4,6 @@ VehicleManager::VehicleManager(void)
 {
     size_ = 0;
     ranSize = 1;
-    capacity = 0;
 }
 
 VehicleManager::~VehicleManager(void)
@@ -65,7 +64,6 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         else
         {
             ranSize++;
-            capacity = 0;
             return true;
         }
     }
@@ -74,10 +72,9 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     if (isVisit_[move] == true) return false;
 
     /* capacity制限を超過 */
-    if ((capacity + vrp->demand[move]) > vrp->capacity) return false;
+    if ((vehicle[ranSize-1].quantity() + vrp->demand[move]) > vrp->capacity) return false;
 
     vehicle[ranSize-1].visit(vrp, move);
-    capacity += vrp->demand[move];
     isVisit_[move] = true;
     return true;
 }
