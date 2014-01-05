@@ -17,7 +17,6 @@ public:
     };
 
     VehicleManager(void);
-    ~VehicleManager(void);
 
     /* accessor */
     int  size(void) const;

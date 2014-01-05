@@ -11,9 +11,7 @@ Vehicle::Vehicle(void)
     routeSize  = 0;
     quantity_  = 0;
     for (int i=0; i < MAXSIZE; i++)
-    {
         isVisit_[i] = false;
-    }
 }
 
 Vehicle::~Vehicle(void)

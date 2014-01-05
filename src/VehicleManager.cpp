@@ -7,10 +7,6 @@ VehicleManager::VehicleManager(void)
         isVisit_[i] = false;
 }
 
-VehicleManager::~VehicleManager(void)
-{
-}
-
 int VehicleManager::size(void) const
 {
     return size_;
@@ -22,9 +18,17 @@ VehicleManager VehicleManager::copy(void) const
     vm_copy.size_ = size_;
 
     for (int i=0; i < VEHICLE_MAX; i++)
-        vm_copy.vehicle[i] = vehicle[i];
+        vm_copy.vehicle[i] = vehicle[i].copy();
+
+    for (int i=0; i < CUSTOMER_MAX; i++)
+        vm_copy.isVisit_[i] = isVisit_[i];
 
     return vm_copy;
+}
+
+bool VehicleManager::isVisit(int customer) const
+{
+    return isVisit_[customer-1];
 }
 
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
@@ -34,11 +38,6 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
         if (!isVisit(i)) return false;
 
     return true;
-}
-
-bool VehicleManager::isVisit(int customer) const
-{
-    return isVisit_[customer-1];
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
@@ -65,8 +64,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     if ((vehicle[size_-1].quantity() + vrp->demand[move]) > vrp->capacity) return false;
 
     vehicle[size_-1].visit(vrp, move);
-    isVisit_[move-1] = true;
-    return true;
+    return (isVisit_[move-1] = true);
 }
 
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
