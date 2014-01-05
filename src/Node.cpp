@@ -54,6 +54,24 @@ void Node::expand(int childSize)
     }
 }
 
+void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
+{
+    int childSize = 0;
+    child = new Node[vrp->vertnum];
+
+    /* 次の車体が存在 */
+    if (vm.size() < vrp->numroutes)
+        child[childSize++].customer_ = VehicleManager::CHANGE;
+
+    /* 各顧客が訪問可能か調べる */
+    for (int i=1; i < vrp->vertnum; i++)
+    {
+        if (!vm.isVisit(i))
+            child[childSize++].customer_ = i;
+    }
+    childSize_ = childSize;
+}
+
 double Node::computeUcb(int parentCount)
 {
     double ucb = 1e6;

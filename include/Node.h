@@ -22,6 +22,7 @@ public:
 
     bool isLeaf(void) const;
     void expand(int childSize);
+    void expand(const vrp_problem *vrp, VehicleManager& vm);
     void update(int value);
 
     /* privateにしたいがテストのためpublicにしている */
