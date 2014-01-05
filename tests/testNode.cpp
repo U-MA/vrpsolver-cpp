@@ -133,3 +133,14 @@ TEST(Node, expandWithVehicleManager)
     node.expand(vrp, vm);
     LONGS_EQUAL(6, node.childSize());
 }
+
+TEST(Node, expandAfterVehicleVisitOneCustomer)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+    vm.move(vrp, 1);
+
+    node.expand(vrp, vm);
+    LONGS_EQUAL(5, node.childSize());
+}
