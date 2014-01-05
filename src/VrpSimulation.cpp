@@ -59,7 +59,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         if (candidatesSize == 0)
         {
             /* 候補がいなければ次の車体へ移る */
-            vm.add(runVehicle);
+            vm.move(vrp, VehicleManager::CHANGE);
             runVehicle.init();
         }
         else

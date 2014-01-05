@@ -12,13 +12,7 @@ VehicleManager::~VehicleManager(void)
 
 int VehicleManager::size(void) const
 {
-    return size_;
-}
-
-void VehicleManager::add(Vehicle& v)
-{
-    vehicle[size_] = v;
-    size_++;
+    return ranSize;
 }
 
 VehicleManager VehicleManager::copy(void) const
@@ -43,12 +37,19 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 
 bool VehicleManager::isVisit(int customer) const
 {
-    for (int i=0; i < size_; i++)
+    if (size_ != 0)
     {
-        if (vehicle[i].isVisit(customer))
-            return true;
+        for (int i=0; i < size_; i++)
+        {
+            if (vehicle[i].isVisit(customer))
+                return true;
+        }
+        return false;
     }
-    return false;
+    else
+    {
+        return isVisit_[customer-1];
+    }
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
@@ -69,13 +70,13 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     }
 
     /* 同じ顧客を再び訪問済 */
-    if (isVisit_[move] == true) return false;
+    if (isVisit_[move-1] == true) return false;
 
     /* capacity制限を超過 */
     if ((vehicle[ranSize-1].quantity() + vrp->demand[move]) > vrp->capacity) return false;
 
     vehicle[ranSize-1].visit(vrp, move);
-    isVisit_[move] = true;
+    isVisit_[move-1] = true;
     return true;
 }
 

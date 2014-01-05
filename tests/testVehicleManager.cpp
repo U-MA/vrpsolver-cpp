@@ -76,9 +76,7 @@ TEST(VehicleManager, computeTotalCostAfterOneVehicleVisit)
 {
     Vrp_SetProblem();
 
-    Vehicle v;
-    v.visit(vrp, 1);
-    vm.add(v);
+    vm.move(vrp, 1);
     LONGS_EQUAL(56, vm.computeTotalCost(vrp));
 }
 
@@ -86,11 +84,9 @@ TEST(VehicleManager, computeTotalCostAfterSomeVehicleVisit)
 {
     Vrp_SetProblem();
 
-    Vehicle v1, v2;
-    v1.visit(vrp, 1);
-    v2.visit(vrp, 2);
-    vm.add(v1);
-    vm.add(v2);
+    vm.move(vrp, 1);
+    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, 2);
     LONGS_EQUAL(118, vm.computeTotalCost(vrp));
 }
 
@@ -101,18 +97,24 @@ TEST(VehicleManager, notVisitAllCustomer)
     CHECK_FALSE(vm.isVisitAll(vrp));
 }
 
+TEST(VehicleManager, notVisitAllWhenOneCustomerVisited)
+{
+    Vrp_SetProblem();
+
+    vm.move(vrp, 1);
+    CHECK_FALSE(vm.isVisitAll(vrp));
+}
+
 TEST(VehicleManager, visitAllCustomer)
 {
     Vrp_SetProblem();
 
-    Vehicle v1, v2;
-    v1.visit(vrp, 1);
-    v1.visit(vrp, 2);
-    v2.visit(vrp, 3);
-    v2.visit(vrp, 4);
-    v2.visit(vrp, 5);
-    vm.add(v1);
-    vm.add(v2);
+    vm.move(vrp, 1);
+    vm.move(vrp, 2);
+    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, 3);
+    vm.move(vrp, 4);
+    vm.move(vrp, 5);
     CHECK_TRUE(vm.isVisitAll(vrp));
 }
 
@@ -120,24 +122,23 @@ TEST(VehicleManager, isVisit)
 {
     Vrp_SetProblem();
 
-    Vehicle v;
-    v.visit(vrp, 1);
-    vm.add(v);
+    vm.move(vrp, 1);
     CHECK_TRUE(vm.isVisit(1));
-    CHECK_FALSE(vm.isVisit(2));
 }
 
-TEST(VehicleManager, size)
+TEST(VehicleManager, isNotVisit)
 {
-    LONGS_EQUAL(0, vm.size());
+    CHECK_FALSE(vm.isVisit(1));
 }
 
-TEST(VehicleManager, getSize)
+TEST(VehicleManager, sizeWhenInit)
 {
-    LONGS_EQUAL(0, vm.size());
-    vm.add(v);
     LONGS_EQUAL(1, vm.size());
-    vm.add(v);
+}
+
+TEST(VehicleManager, sizeIncrement)
+{
+    vm.move(vrp, VehicleManager::CHANGE);
     LONGS_EQUAL(2, vm.size());
 }
 
@@ -186,13 +187,4 @@ TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
     CHECK_TRUE(vm.move(vrp, 3));
     CHECK_TRUE(vm.move(vrp, 4));
     CHECK_FALSE(vm.move(vrp, 5));
-}
-
-TEST(VehicleManager, computeTotalCostAfterMove)
-{
-    Vrp_SetProblem();
-
-    CHECK_TRUE(vm.move(vrp, 1));
-
-    LONGS_EQUAL(56, vm.computeTotalCost(vrp));
 }

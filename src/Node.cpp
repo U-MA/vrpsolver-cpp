@@ -91,20 +91,6 @@ void Node::update(int value)
     value_ += value;
 }
 
-static void processVehicle(const vrp_problem *vrp,
-                           VehicleManager *vm,
-                           Vehicle *v, int move)
-{
-    printf("move %d\n", move);
-    if (move == 0)
-    {
-        vm->add(*v);
-        v->init();
-    }
-    else
-        v->visit(vrp, move);
-}
-
 void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicle& v)
 {
     printf("in search\n");
@@ -126,7 +112,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicl
     {
         node = node->select();
         visited[visitedSize++] = node;
-        processVehicle(vrp, &vm_copy, &v_copy, node->customer());
+        vm_copy.move(vrp, node->customer());
     }
 
     /* EXPANSION */
@@ -134,7 +120,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicl
     node->expand(vrp->vertnum);
     Node *newNode = node->select();
     visited[visitedSize++] = newNode;
-    processVehicle(vrp, &vm_copy, &v_copy, newNode->customer());
+    vm_copy.move(vrp, newNode->customer());
 
     /* SIMULATION */
     int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, v_copy);
