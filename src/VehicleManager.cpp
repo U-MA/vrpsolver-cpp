@@ -2,7 +2,7 @@
 
 VehicleManager::VehicleManager(void)
 {
-    size_ = 0;
+    //size_ = 0;
     ranSize = 1;
 }
 
@@ -18,7 +18,8 @@ int VehicleManager::size(void) const
 VehicleManager VehicleManager::copy(void) const
 {
     VehicleManager vm_copy;
-    vm_copy.size_ = size_;
+    //vm_copy.size_ = size_;
+    vm_copy.ranSize = ranSize;
 
     for (int i=0; i < VEHICLE_MAX; i++)
         vm_copy.vehicle[i] = vehicle[i];
@@ -37,19 +38,7 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 
 bool VehicleManager::isVisit(int customer) const
 {
-    if (size_ != 0)
-    {
-        for (int i=0; i < size_; i++)
-        {
-            if (vehicle[i].isVisit(customer))
-                return true;
-        }
-        return false;
-    }
-    else
-    {
-        return isVisit_[customer-1];
-    }
+    return isVisit_[customer-1];
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
@@ -83,23 +72,15 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
-    if (size_ != 0)
-    {
-        for (int i=0; i < size_; i++)
-            totalCost += vehicle[i].computeCost(vrp);
-    }
-    else
-    {
-        for (int i=0; i < ranSize; i++)
-            totalCost += vehicle[i].computeCost(vrp);
-    }
+    for (int i=0; i < ranSize; i++)
+        totalCost += vehicle[i].computeCost(vrp);
 
     return totalCost;
 }
 
 void VehicleManager::print(void) const
 {
-    for (int i=0; i < size_; i++)
+    for (int i=0; i < ranSize; i++)
     {
         printf("vehicle %2d", i);
         vehicle[i].print();
