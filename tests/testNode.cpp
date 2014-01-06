@@ -195,3 +195,15 @@ TEST(Node, searchOnce)
 
     LONGS_EQUAL(1, node.count());
 }
+
+TEST(Node, searchTwice)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    node.search(vrp, vm);
+    node.search(vrp, vm);
+
+    LONGS_EQUAL(2, node.count());
+}
