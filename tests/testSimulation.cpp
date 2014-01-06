@@ -66,29 +66,12 @@ TEST_GROUP(Simulation)
     }
 };
 
-/*
-TEST(Cws, CwsMethod)
-{
-    Vrp_SetProblem();
-    VehicleManager vm(vrp->vertnum);
-
-    LONGS_EQUAL(187, VrpSimulation::SequentialCws(vm));
-}
-*/
-
-/* Applying Monte Carlo Techniques to Capacitated Vehicle
- * Routing Problem Algorithm 2より */
-IGNORE_TEST(Simulation, Cws3a)
-{
-}
-
 /* 受け入れテスト的な側面を持つテスト
  * これが通れば第一関門突破 */
-IGNORE_TEST(Simulation, sequenatialRandomSimulation)
+TEST(Simulation, sequenatialRandomSimulation)
 {
     Vrp_SetProblem();
 
     VehicleManager vm;
-    Vehicle v;
-    LONGS_EQUAL(203, VrpSimulation::sequentialRandomSimulation(vrp, vm, v));
+    LONGS_EQUAL(203, VrpSimulation::sequentialRandomSimulation(vrp, vm));
 }

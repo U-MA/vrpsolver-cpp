@@ -108,13 +108,12 @@ void Node::update(int value)
     value_ += value;
 }
 
-void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicle& v)
+void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
 {
     printf("in search\n");
-    /* 引数として渡されるvm, vは変更しない
+    /* 引数として渡されるvmは変更しない
      * そのため変更させるための変数を作成 */
     VehicleManager vm_copy = vm.copy();
-    Vehicle         v_copy =  v.copy();
 
     Node *visited[300];
     int  visitedSize = 0;
@@ -140,15 +139,11 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, const Vehicl
     vm_copy.move(vrp, newNode->customer());
 
     /* SIMULATION */
-    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, v_copy);
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy);
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)
         visited[i]->update(cost);
-}
-
-void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
-{
 }
 
 int Node::next(void) const
