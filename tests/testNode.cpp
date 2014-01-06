@@ -170,3 +170,19 @@ TEST(Node, expandWhenRunningVehicleCapacityFull)
     LONGS_EQUAL(1, node.childSize());
 }
 
+TEST(Node, doNotExpand)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, 1);
+    vm.move(vrp, 2);
+    vm.move(vrp, 4);
+
+    node.expand(vrp, vm);
+    LONGS_EQUAL(0, node.childSize());
+}
+
+

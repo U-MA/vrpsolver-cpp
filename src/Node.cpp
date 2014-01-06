@@ -20,8 +20,7 @@ Node::Node(void)
 
 Node::~Node(void)
 {
-    if (childSize_ != 0)
-        delete[] child;
+    delete[] child;
 }
 
 int Node::customer(void) const
