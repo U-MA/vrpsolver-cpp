@@ -56,6 +56,7 @@ TEST_GROUP(acceptTest)
         Vrp_SetCost(3, 5, 27);
         Vrp_SetCost(4, 5, 25);
 
+        vrp->numroutes = 2;
         vrp->capacity  = 100;
         vrp->demand[1] = 37;
         vrp->demand[2] = 35;
@@ -67,6 +68,8 @@ TEST_GROUP(acceptTest)
 
 IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
 {
+    Vrp_SetProblem();
+
     VehicleManager vm;
 
     while (!vm.isVisitAll(vrp))
@@ -80,6 +83,7 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
 
         /* イテレーションした結果, 一番有望な手を選択 */
         int move = mct.next();
+        printf("move %d is selected\n", move);
 
         /* 用意した車体を使い切ったらfalseを返す */
         if(!vm.move(vrp, move))

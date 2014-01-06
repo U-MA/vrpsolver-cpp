@@ -110,7 +110,6 @@ void Node::update(int value)
 
 void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
 {
-    printf("in search\n");
     /* 引数として渡されるvmは変更しない
      * そのため変更させるための変数を作成 */
     VehicleManager vm_copy = vm.copy();
