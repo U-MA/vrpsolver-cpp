@@ -185,6 +185,17 @@ TEST(Node, doNotExpand)
     LONGS_EQUAL(0, node.childSize());
 }
 
+TEST(Node, nodeExpandWhenNodeSearch)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    node.search(vrp, vm);
+
+    LONGS_EQUAL(6, node.childSize());
+}
+
 TEST(Node, searchOnce)
 {
     Vrp_SetProblem();
