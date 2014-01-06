@@ -40,6 +40,19 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
+bool VehicleManager::isFinish(const vrp_problem *vrp)
+{
+    for (int i=1; i < vrp->vertnum; i++)
+        if (!isVisit(i) && visitable(vrp, i))
+            return false;
+
+    /* 次の車体があればfalse */
+    if (size_ < vrp->numroutes)
+        return false;
+
+    return true;
+}
+
 bool VehicleManager::visitable(const vrp_problem *vrp, int customer)
 {
     return (vehicle[size_-1].quantity() + vrp->demand[customer] <= vrp->capacity);

@@ -236,3 +236,17 @@ TEST(Node, searchTwice)
 
     LONGS_EQUAL(2, node.count());
 }
+
+TEST(Node, finishCheck)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    vm.move(vrp, VehicleManager::CHANGE);
+
+    Node mct;
+    /* 21というマジックナンバーは実験によって得たもの */
+    for (int i=0; i < 21; i++)
+        mct.search(vrp, vm);
+}

@@ -133,7 +133,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     }
 
     /* nodeが全探索木の葉でなければexpandする*/
-    if (!vm_copy.isVisitAll(vrp))
+    if (!vm_copy.isFinish(vrp))
     {
         /* EXPANSION */
         node->expand(vrp, vm_copy);

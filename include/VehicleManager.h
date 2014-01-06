@@ -23,6 +23,7 @@ public:
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
+    bool isFinish(const vrp_problem *vrp);
     bool visitable(const vrp_problem *vrp, int customer);
 
     bool move(const vrp_problem *vrp, int move);

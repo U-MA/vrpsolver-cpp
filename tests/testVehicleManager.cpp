@@ -215,3 +215,22 @@ TEST(VehicleManager, isNotvisitable)
 
     CHECK_FALSE(vm.visitable(vrp, 3));
 }
+
+TEST(VehicleManager, isFinishFail)
+{
+    Vrp_SetProblem();
+
+    CHECK_FALSE(vm.isFinish(vrp));
+}
+
+TEST(VehicleManager, isFinishSuccess)
+{
+    Vrp_SetProblem();
+
+    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, 1);
+    vm.move(vrp, 2);
+    vm.move(vrp, 4);
+
+    CHECK_TRUE(vm.isFinish(vrp));
+}

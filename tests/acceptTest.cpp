@@ -66,7 +66,7 @@ TEST_GROUP(acceptTest)
     }
 };
 
-IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
+TEST(acceptTest, MonteCarloTreeSearch)
 {
     Vrp_SetProblem();
 
@@ -83,7 +83,7 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
 
         /* イテレーションした結果, 一番有望な手を選択 */
         int move = mct.next();
-        printf("move %d is selected\n", move);
+        //printf("move %d is selected\n", move);
 
         /* 用意した車体を使い切ったらfalseを返す */
         if(!vm.move(vrp, move))
@@ -95,16 +95,4 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
         cost = vm.computeTotalCost(vrp);
 
     CHECK(cost > 0);
-}
-
-TEST(acceptTest, error)
-{
-    Vrp_SetProblem();
-
-    VehicleManager vm;
-
-    Node mct;
-
-    for (int i=0; i < 31; i++)
-        mct.search(vrp, vm);
 }
