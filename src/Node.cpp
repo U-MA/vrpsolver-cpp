@@ -66,7 +66,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     /* 各顧客が訪問可能か調べる */
     for (int i=1; i < vrp->vertnum; i++)
     {
-        if (!vm.isVisit(i))
+        if (!vm.isVisit(i) && vm.visitable(vrp, i))
             child[childSize++].customer_ = i;
     }
     childSize_ = childSize;

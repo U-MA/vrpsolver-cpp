@@ -156,7 +156,7 @@ TEST(Node, expandWhenLastVehicleRun)
     LONGS_EQUAL(5, node.childSize());
 }
 
-IGNORE_TEST(Node, expandWhenRunningVehicleCapacityFull)
+TEST(Node, expandWhenRunningVehicleCapacityFull)
 {
     Vrp_SetProblem();
 
