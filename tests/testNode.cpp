@@ -108,7 +108,7 @@ TEST(Node, selectChildWithMaxUcb)
     Node *selected = node.select();
     selected->update(100);
     selected = node.select();
-    LONGS_EQUAL(1, selected->customer());
+    LONGS_EQUAL(0, selected->customer());
 }
 
 TEST(Node, update)
@@ -207,7 +207,11 @@ TEST(Node, valueIsAddedWhenNodeSearch)
     node.search(vrp, vm);
 
     /* searchにより次の手を車体の変更としているためINF */
-    LONGS_EQUAL(INF, node.value());
+    LONGS_EQUAL(202, node.value());
+
+    node.search(vrp, vm);
+
+    LONGS_EQUAL(INF+202, node.value());
 }
 
 TEST(Node, searchOnce)

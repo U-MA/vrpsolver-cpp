@@ -73,9 +73,9 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 
 double Node::computeUcb(int parentCount)
 {
-    double ucb = 1e6;
+    double ucb = 1e6 + (rand() % (int)1e6);
     if (count_ != 0)
-        ucb = value_ / count_ + 1.0 * sqrt(log((double)parentCount+1)) / count_;
+        ucb = - value_ / count_ + 1.0 * sqrt(log((double)parentCount+1)) / count_;
 
     return ucb;
 }
@@ -87,6 +87,7 @@ Node *Node::select(void)
     for (int i=0; i < childSize_; i++)
     {
         double ucb = child[i].computeUcb(count_);
+        //printf("child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
         if (ucb > maxUcb)
         {
             maxUcb = ucb;
@@ -127,6 +128,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     {
         node = node->select();
         visited[visitedSize++] = node;
+        //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
     }
 
@@ -134,6 +136,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     node->expand(vrp, vm_copy);
     Node *newNode = node->select();
     visited[visitedSize++] = newNode;
+    //printf("newNode->customer() is %d\n", newNode->customer());
     vm_copy.move(vrp, newNode->customer());
 
     /* SIMULATION */
