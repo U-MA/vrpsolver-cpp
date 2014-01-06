@@ -155,3 +155,18 @@ TEST(Node, expandWhenLastVehicleRun)
     node.expand(vrp, vm);
     LONGS_EQUAL(5, node.childSize());
 }
+
+IGNORE_TEST(Node, expandWhenRunningVehicleCapacityFull)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    vm.move(vrp, 1);
+    vm.move(vrp, 2);
+    vm.move(vrp, 4);
+
+    node.expand(vrp, vm);
+    LONGS_EQUAL(1, node.childSize());
+}
+
