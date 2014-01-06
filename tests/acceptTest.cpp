@@ -96,3 +96,15 @@ IGNORE_TEST(acceptTest, MonteCarloTreeSearch)
 
     CHECK(cost > 0);
 }
+
+TEST(acceptTest, error)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    Node mct;
+
+    for (int i=0; i < 31; i++)
+        mct.search(vrp, vm);
+}

@@ -83,7 +83,7 @@ double Node::computeUcb(int parentCount)
 Node *Node::select(void)
 {
     Node *selected = NULL;
-    double maxUcb = -1.0;
+    double maxUcb = -INF;
     for (int i=0; i < childSize_; i++)
     {
         double ucb = child[i].computeUcb(count_);
@@ -132,12 +132,16 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
         vm_copy.move(vrp, node->customer());
     }
 
-    /* EXPANSION */
-    node->expand(vrp, vm_copy);
-    Node *newNode = node->select();
-    visited[visitedSize++] = newNode;
-    //printf("newNode->customer() is %d\n", newNode->customer());
-    vm_copy.move(vrp, newNode->customer());
+    /* nodeが全探索木の葉でなければexpandする*/
+    if (!vm_copy.isVisitAll(vrp))
+    {
+        /* EXPANSION */
+        node->expand(vrp, vm_copy);
+        Node *newNode = node->select();
+        visited[visitedSize++] = newNode;
+        //printf("newNode->customer() is %d\n", newNode->customer());
+        vm_copy.move(vrp, newNode->customer());
+    }
 
     /* SIMULATION */
     int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy);
