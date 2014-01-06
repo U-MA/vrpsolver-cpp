@@ -131,8 +131,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     }
 
     /* EXPANSION */
-    /* 顧客の数+1の子を作成. +1は車体の変更 */
-    node->expand(vrp->vertnum);
+    node->expand(vrp, vm_copy);
     Node *newNode = node->select();
     visited[visitedSize++] = newNode;
     vm_copy.move(vrp, newNode->customer());

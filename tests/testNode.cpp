@@ -8,6 +8,7 @@ extern "C"
 
 #include "Node.h"
 #include "VehicleManager.h"
+#include "VrpSimulation.h"
 
 
 TEST_GROUP(Node)
@@ -194,6 +195,19 @@ TEST(Node, nodeExpandWhenNodeSearch)
     node.search(vrp, vm);
 
     LONGS_EQUAL(6, node.childSize());
+}
+
+TEST(Node, valueIsAddedWhenNodeSearch)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    srand(2013);
+    node.search(vrp, vm);
+
+    /* searchにより次の手を車体の変更としているためINF */
+    LONGS_EQUAL(INF, node.value());
 }
 
 TEST(Node, searchOnce)

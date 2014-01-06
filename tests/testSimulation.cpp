@@ -73,5 +73,7 @@ TEST(Simulation, sequenatialRandomSimulation)
     Vrp_SetProblem();
 
     VehicleManager vm;
-    LONGS_EQUAL(203, VrpSimulation::sequentialRandomSimulation(vrp, vm));
+
+    srand(2013);
+    LONGS_EQUAL(206, VrpSimulation::sequentialRandomSimulation(vrp, vm));
 }
