@@ -54,7 +54,7 @@
  * This first function reads in the data instance.
  \*===========================================================================*/
 
-void vrp_io(vrp_problem *vrp, const char *infile) // const char *infileにした
+void vrp_io(vrp_problem *vrp, char *infile)
 {
 	static char keywords[KEY_NUM][22] = {
 		"NAME", 

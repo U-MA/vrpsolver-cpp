@@ -74,7 +74,6 @@ SavingsList::SavingsList(const vrp_problem *vrp)
 {
     if (vrp == NULL)
     {
-        std::cerr << "In SavingsList::SavingsList(vrp_problem *): NULLが渡されました" << std::endl;
         return;
     }
 

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 extern "C"
 {
 #include "vrp_types.h"

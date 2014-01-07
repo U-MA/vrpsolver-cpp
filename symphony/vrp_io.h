@@ -24,7 +24,7 @@
 
 void vrp_readparams PROTO((vrp_problem *vrp, char *filename, int argc,
 						   char **argv));
-void vrp_io PROTO((vrp_problem *vrp, const char *infile)); // const char *infileにした。元はconst無し
+void vrp_io PROTO((vrp_problem *vrp, char *infile));
 void vrp_set_defaults PROTO((vrp_problem *vrp));
 void vrp_create_instance PROTO((void *user, int vertnum, int numroutes,
 								int capacity, int *demand, int *cost,
