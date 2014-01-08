@@ -20,8 +20,6 @@ public:
     /* getter */
     int  quantity(void) const;
 
-    bool isVisit(int customer) const;
-
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
 
@@ -31,7 +29,6 @@ public:
 
 private:
     static const int MAXSIZE = 130;
-    bool isVisit_[MAXSIZE];
     int  route[MAXSIZE];
     int  routeSize;
     int  quantity_;

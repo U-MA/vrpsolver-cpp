@@ -13,8 +13,6 @@ Vehicle::Vehicle(void)
 {
     routeSize  = 0;
     quantity_  = 0;
-    for (int i=0; i < MAXSIZE; i++)
-        isVisit_[i] = false;
 }
 
 Vehicle::~Vehicle(void)
@@ -25,17 +23,11 @@ void Vehicle::init(void)
 {
     routeSize  = 0;
     quantity_  = 0;
-
-    for (int i=0; i < MAXSIZE; i++)
-        isVisit_[i] = false;
 }
 
 Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;
-
-    for (int i=0; i < MAXSIZE; i++)
-        v_copy.isVisit_[i] = isVisit_[i];
 
     for (int i=0; i < routeSize; i++)
         v_copy.route[i] = route[i];
@@ -45,12 +37,6 @@ Vehicle Vehicle::copy(void) const
     return v_copy;
 }
 
-bool Vehicle::isVisit(int customer) const
-{
-    return isVisit_[customer-1];
-}
-
-
 /* customerは０以上顧客数未満 */
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {
@@ -58,7 +44,6 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
         return false;
 
     route[routeSize] = customer;
-    isVisit_[customer-1] = true;
     routeSize++;
     quantity_ += vrp->demand[customer];
     return true;

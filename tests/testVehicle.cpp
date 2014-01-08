@@ -40,25 +40,6 @@ TEST_GROUP(Vehicle)
 TEST(Vehicle, init)
 {
     LONGS_EQUAL(0, v.quantity());
-    CHECK_FALSE(v.isVisit(100));
-}
-
-TEST(Vehicle, isVisit)
-{
-    v.visit(vrp, 1);
-    CHECK_TRUE(v.isVisit(1));
-}
-
-TEST(Vehicle, visitOutOfCustomer)
-{
-    CHECK_FALSE(v.visit(vrp, 0));
-    CHECK_FALSE(v.visit(vrp, 10));
-}
-
-TEST(Vehicle, visitInCustomer)
-{
-    CHECK_TRUE(v.visit(vrp, 1));
-    CHECK_TRUE(v.visit(vrp, 9));
 }
 
 TEST(Vehicle, visit)
@@ -85,7 +66,7 @@ TEST(Vehicle, copy)
 {
     v.visit(vrp, 1);
     Vehicle copy = v.copy();
-    CHECK_TRUE(copy.isVisit(1));
+    //CHECK_TRUE(copy.isVisit(1));
     LONGS_EQUAL(v.quantity(), copy.quantity());
 }
 
