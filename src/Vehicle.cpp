@@ -73,6 +73,6 @@ void Vehicle::print(void) const
 {
     printf("[%6d] ", quantity_);
     for (int i=0; i < routeSize; i++)
-        printf("%3d", route[i]);
+        printf("%4d", route[i]);
     printf("\n");
 }
