@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 extern "C"
@@ -20,6 +22,7 @@ void Solver::setProblem(char *filename)
 {
     vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
     vrp_io(vrp, filename);
+    printf("file name       : %s\n", filename);
 
     /* numroutesの設定 */
     char *k   = strrchr(filename, 'k');
@@ -56,6 +59,10 @@ static void checkGlobalVariable(void)
 
     if (gSimulationCount == 0)
         gSimulationCount = 1;
+
+    printf("seed            : %ld\n"  , gSeed);
+    printf("search count    : %d\n"   , gCount);
+    printf("simulation count: %d\n\n" , gSimulationCount);
 }
 
 void Solver::run(void)
@@ -63,7 +70,6 @@ void Solver::run(void)
     checkGlobalVariable();
 
     VehicleManager vm;
-
     while (!vm.isVisitAll(vrp))
     {
         Node mct;
