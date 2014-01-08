@@ -4,6 +4,7 @@
 namespace Solver
 {
     void setSeed(long seed);
+    void run(void);
 }
 
 #endif /* VRPSOLVER_CPP_SOLVER_H */
