@@ -11,8 +11,6 @@ extern "C"
 #include "VrpSimulation.h"
 
 
-extern int gSimulationCount;
-
 Node::Node(void)
 {
     customer_  = 0;
@@ -148,14 +146,55 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     }
 
     /* SIMULATION */
-    if (gSimulationCount == 0)
-        gSimulationCount = 1;
-    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, gSimulationCount);
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy);
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)
         visited[i]->update(cost);
 }
+
+void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
+{
+    /* 引数として渡されるvmは変更しない
+     * そのため変更させるための変数を作成 */
+    VehicleManager vm_copy = vm.copy();
+
+    Node *visited[300];
+    int  visitedSize = 0;
+
+    Node *node = this;
+
+    /* nodeは訪問済み */
+    visited[visitedSize++] = this;
+
+    /* SELECTION */
+    while (!node->isLeaf())
+    {
+        node = node->select();
+        visited[visitedSize++] = node;
+        //printf("node->customer() is %d\n", node->customer());
+        vm_copy.move(vrp, node->customer());
+    }
+
+    /* nodeが全探索木の葉でなければexpandする*/
+    if (!vm_copy.isFinish(vrp))
+    {
+        /* EXPANSION */
+        node->expand(vrp, vm_copy);
+        Node *newNode = node->select();
+        visited[visitedSize++] = newNode;
+        //printf("newNode->customer() is %d\n", newNode->customer());
+        vm_copy.move(vrp, newNode->customer());
+    }
+
+    /* SIMULATION */
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count);
+
+    /* BACKPROPAGATION */
+    for (int i=0; i < visitedSize; i++)
+        visited[i]->update(cost);
+}
+
 
 int Node::next(void) const
 {

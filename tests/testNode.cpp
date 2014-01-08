@@ -216,6 +216,22 @@ TEST(Node, valueIsAddedWhenNodeSearch)
     LONGS_EQUAL(INF+202, node.value());
 }
 
+TEST(Node, valueIsAddedWhenNodeSearch2)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    srand(2013);
+    node.search(vrp, vm, 1);
+
+    LONGS_EQUAL(202, node.value());
+
+    node.search(vrp, vm, 1);
+
+    LONGS_EQUAL(INF+202, node.value());
+}
+
 TEST(Node, searchOnce)
 {
     Vrp_SetProblem();
