@@ -1,13 +1,16 @@
 #include "CppUTest/TestHarness.h"
 
+#include <string.h>
+
 #include "Solver.h"
 
 TEST_GROUP(Solver)
 {
 };
 
-TEST(Solver, setSeed)
+IGNORE_TEST(Solver, init)
 {
-    Solver::setSeed(2013);
-    LONGS_EQUAL(33832491, rand());
+    char filename[200];
+    strcpy(filename, "../vrpsolver-cpp_sample/Vrp-All/E/E-n13-k4.vrp");
+    Solver::setProblem(filename);
 }

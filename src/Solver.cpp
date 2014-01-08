@@ -1,5 +1,8 @@
+#include <string.h>
+
 extern "C"
 {
+#include "vrp_io.h"
 #include "vrp_types.h"
 }
 
@@ -8,10 +11,39 @@ extern "C"
 #include "VehicleManager.h"
 
 vrp_problem *vrp;
+long gSeed;
+int  gCount;
+int  gSimulationCount;
+
+
+void Solver::setProblem(char *filename)
+{
+    vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
+    vrp_io(vrp, filename);
+
+    /* numroutesの設定 */
+    char *k   = strrchr(filename, 'k');
+    char *dot = strrchr(filename, '.');
+    char numVehicle[3];
+    int n = (dot-k)/sizeof(char);
+    strncpy(numVehicle, k+1, n);
+    numVehicle[n+1] = '\0';
+    vrp->numroutes = atoi(numVehicle);
+}
 
 void Solver::setSeed(long seed)
 {
-    srand(seed);
+    gSeed = seed;
+}
+
+void Solver::setIteration(int count)
+{
+    gCount = count;
+}
+
+void Solver::setSimulationLoop(int count)
+{
+    gSimulationCount = count;
 }
 
 void Solver::run(void)
