@@ -199,7 +199,7 @@ TEST(Node, nodeExpandWhenNodeSearch)
     LONGS_EQUAL(6, node.childSize());
 }
 
-IGNORE_TEST(Node, valueIsAddedWhenNodeSearch)
+TEST(Node, valueIsAddedWhenNodeSearch)
 {
     Vrp_SetProblem();
 
