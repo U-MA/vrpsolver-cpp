@@ -10,6 +10,9 @@ extern "C"
 #include "VehicleManager.h"
 #include "VrpSimulation.h"
 
+
+extern int gSimulationCount;
+
 Node::Node(void)
 {
     customer_  = 0;
@@ -145,7 +148,9 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm)
     }
 
     /* SIMULATION */
-    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy);
+    if (gSimulationCount == 0)
+        gSimulationCount = 1;
+    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, gSimulationCount);
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)

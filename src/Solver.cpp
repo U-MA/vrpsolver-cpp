@@ -54,7 +54,7 @@ void Solver::run(void)
     {
         Node mct;
 
-        for (int i=0; i < 1000; i++)
+        for (int i=0; i < gCount; i++)
             mct.search(vrp, vm);
 
         int move = mct.next();
