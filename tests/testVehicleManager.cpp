@@ -202,7 +202,7 @@ TEST(VehicleManager, visitable)
 {
     Vrp_SetProblem();
 
-    CHECK_TRUE(vm.visitable(vrp, 1));
+    CHECK_TRUE(vm.canVisit(vrp, 1));
 }
 
 TEST(VehicleManager, isNotvisitable)
@@ -213,7 +213,7 @@ TEST(VehicleManager, isNotvisitable)
     vm.move(vrp, 2);
     vm.move(vrp, 4);
 
-    CHECK_FALSE(vm.visitable(vrp, 3));
+    CHECK_FALSE(vm.canVisit(vrp, 3));
 }
 
 TEST(VehicleManager, isFinishFail)

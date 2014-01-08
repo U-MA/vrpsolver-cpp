@@ -88,7 +88,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         /* 次に選ばれる顧客の候補を調べる */
         for (int i=1; i < vrp->vertnum; i++)
         {
-            if (!vm.isVisit(i) && vm.visitable(vrp, i))
+            if (!vm.isVisit(i) && vm.canVisit(vrp, i))
                 candidates[candidatesSize++] = i;
         }
 
