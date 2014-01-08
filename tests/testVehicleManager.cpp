@@ -198,14 +198,14 @@ TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
     CHECK_FALSE(vm.move(vrp, 5));
 }
 
-TEST(VehicleManager, visitable)
+TEST(VehicleManager, canVisit)
 {
     Vrp_SetProblem();
 
     CHECK_TRUE(vm.canVisit(vrp, 1));
 }
 
-TEST(VehicleManager, isNotvisitable)
+TEST(VehicleManager, CanNotVisit)
 {
     Vrp_SetProblem();
 
