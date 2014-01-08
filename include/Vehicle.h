@@ -17,8 +17,10 @@ public:
     /* メンバ変数を初期化する */
     void init(void);
 
-    bool isVisit(int customer) const;
+    /* getter */
     int  quantity(void) const;
+
+    bool isVisit(int customer) const;
 
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;

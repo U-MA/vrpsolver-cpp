@@ -15,7 +15,7 @@ namespace VrpSimulation
 {
     int sequentialCws(const vrp_problem *vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm);
-    int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, Vehicle& v);
+    int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount);
 }
 
 #endif /* VRPSOLVER_CPP_SIMULATION_H */

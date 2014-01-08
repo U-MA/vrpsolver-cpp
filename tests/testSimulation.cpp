@@ -66,8 +66,9 @@ TEST_GROUP(Simulation)
     }
 };
 
-/* 受け入れテスト的な側面を持つテスト
- * これが通れば第一関門突破 */
+/* 乱数を使用するため,適切なテスト方法がわからない.
+ * なので関数の見た目等を考えるための記述を行う */
+
 TEST(Simulation, sequenatialRandomSimulation)
 {
     Vrp_SetProblem();
@@ -76,4 +77,14 @@ TEST(Simulation, sequenatialRandomSimulation)
 
     srand(2013);
     LONGS_EQUAL(206, VrpSimulation::sequentialRandomSimulation(vrp, vm));
+}
+
+TEST(Simulation, sequentialRandomSimulationWithLoop)
+{
+    Vrp_SetProblem();
+
+    VehicleManager vm;
+
+    srand(2013);
+    LONGS_EQUAL(171, VrpSimulation::sequentialRandomSimulation(vrp, vm, 1000));
 }

@@ -18,7 +18,7 @@ public:
 
     VehicleManager(void);
 
-    /* accessor */
+    /* getter */
     int  size(void) const;
 
     bool isVisit(int customer) const;
