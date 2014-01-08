@@ -46,8 +46,22 @@ void Solver::setSimulationLoop(int count)
     gSimulationCount = count;
 }
 
+static void checkGlobalVariable(void)
+{
+    if (gSeed == 0)
+        gSeed = 2013;
+
+    if (gCount == 0)
+        gCount = 1000;
+
+    if (gSimulationCount == 0)
+        gSimulationCount = 1;
+}
+
 void Solver::run(void)
 {
+    checkGlobalVariable();
+
     VehicleManager vm;
 
     while (!vm.isVisitAll(vrp))
@@ -55,7 +69,7 @@ void Solver::run(void)
         Node mct;
 
         for (int i=0; i < gCount; i++)
-            mct.search(vrp, vm);
+            mct.search(vrp, vm, gSimulationCount);
 
         int move = mct.next();
 
