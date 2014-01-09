@@ -5,8 +5,8 @@ namespace Solver
 {
     void setProblem(char *filename);
     void setSeed(long seed);
-    void setIteration(int count);
-    void setSimulationLoop(int count);
+    void setMctsIterationCount(int count);
+    void setSimulationCount(int count);
     void run(void);
 }
 

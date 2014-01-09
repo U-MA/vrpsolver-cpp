@@ -39,12 +39,12 @@ void Solver::setSeed(long seed)
     gSeed = seed;
 }
 
-void Solver::setIteration(int count)
+void Solver::setMctsIterationCount(int count)
 {
     gCount = count;
 }
 
-void Solver::setSimulationLoop(int count)
+void Solver::setSimulationCount(int count)
 {
     gSimulationCount = count;
 }
