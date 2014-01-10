@@ -66,7 +66,6 @@ TEST(Vehicle, copy)
 {
     v.visit(vrp, 1);
     Vehicle copy = v.copy();
-    //CHECK_TRUE(copy.isVisit(1));
     LONGS_EQUAL(v.quantity(), copy.quantity());
 }
 

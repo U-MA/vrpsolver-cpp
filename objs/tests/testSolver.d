@@ -14,6 +14,9 @@ objs/tests/testSolver.o: tests/testSolver.cpp \
  cpputest-3.5/include/CppUTest/TestPlugin.h \
  cpputest-3.5/include/CppUTest/MemoryLeakWarningPlugin.h \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
+ tests/VrpProblems.h symphony/vrp_io.h symphony/sym_proto.h \
+ symphony/vrp_types.h symphony/vrp_common_types.h \
+ symphony/vrp_cg_params.h symphony/vrp_lp_params.h symphony/vrp_types.h \
  include/Solver.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
@@ -45,5 +48,21 @@ cpputest-3.5/include/CppUTest/TestPlugin.h:
 cpputest-3.5/include/CppUTest/MemoryLeakWarningPlugin.h:
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
+
+tests/VrpProblems.h:
+
+symphony/vrp_io.h:
+
+symphony/sym_proto.h:
+
+symphony/vrp_types.h:
+
+symphony/vrp_common_types.h:
+
+symphony/vrp_cg_params.h:
+
+symphony/vrp_lp_params.h:
+
+symphony/vrp_types.h:
 
 include/Solver.h:

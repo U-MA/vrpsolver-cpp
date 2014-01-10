@@ -16,7 +16,8 @@ objs/tests/testVehicleManager.o: tests/testVehicleManager.cpp \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
  symphony/vrp_macros.h symphony/sym_proto.h symphony/vrp_types.h \
  symphony/vrp_common_types.h symphony/vrp_cg_params.h \
- symphony/vrp_lp_params.h include/VehicleManager.h include/Vehicle.h
+ symphony/vrp_lp_params.h tests/VrpProblems.h symphony/vrp_io.h \
+ symphony/vrp_types.h include/VehicleManager.h include/Vehicle.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
@@ -59,6 +60,12 @@ symphony/vrp_common_types.h:
 symphony/vrp_cg_params.h:
 
 symphony/vrp_lp_params.h:
+
+tests/VrpProblems.h:
+
+symphony/vrp_io.h:
+
+symphony/vrp_types.h:
 
 include/VehicleManager.h:
 

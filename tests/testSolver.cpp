@@ -2,15 +2,28 @@
 
 #include <string.h>
 
+#include "VrpProblems.h"
+
 #include "Solver.h"
 
 TEST_GROUP(Solver)
 {
 };
 
-IGNORE_TEST(Solver, init)
+TEST(Solver, init)
 {
-    char filename[200];
-    strcpy(filename, "../vrpsolver-cpp_sample/Vrp-All/E/E-n13-k4.vrp");
-    Solver::setProblem(filename);
+    vrp_problem *vrp = VrpProblem::E_n13_k4();
+    VrpProblem::teardown(vrp);
+}
+
+TEST(Solver, init2)
+{
+    vrp_problem *vrp = VrpProblem::E_n51_k5();
+    VrpProblem::teardown(vrp);
+}
+
+TEST(Solver, init3)
+{
+    vrp_problem *vrp = VrpProblem::E_n101_k14();
+    VrpProblem::teardown(vrp);
 }

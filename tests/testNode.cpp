@@ -6,6 +6,8 @@ extern "C"
 #include "vrp_macros.h"
 }
 
+#include "VrpProblems.h"
+
 #include "Node.h"
 #include "VehicleManager.h"
 #include "VrpSimulation.h"
@@ -17,11 +19,8 @@ TEST_GROUP(Node)
     Node node;
     void setup()
     {
-        vrp            = (vrp_problem *)malloc(sizeof(vrp_problem));
-        vrp->dist.cost = (int *)calloc(100, sizeof(int));
-        vrp->demand    = (int *)calloc(100, sizeof(int));
-
         srand(2013);
+        vrp = VrpProblem::AMCT2CVRP();
     }
 
     void teardown()
@@ -29,43 +28,6 @@ TEST_GROUP(Node)
         free(vrp->demand);
         free(vrp->dist.cost);
         free(vrp);
-    }
-
-    void Vrp_SetCost(int first, int second, int value)
-    {
-        vrp->dist.cost[INDEX(first, second)] = value;
-    }
-
-    /* Applying to Monte Carlo Techniques to the Capacitated Vehicle
-     * Routing Problem Table 2.1, 2.2より */
-    void Vrp_SetProblem(void)
-    {
-        vrp->vertnum = 6;
-        vrp->edgenum = vrp->vertnum * (vrp->vertnum-1) / 2;
-
-        Vrp_SetCost(0, 1, 28);
-        Vrp_SetCost(0, 2, 31);
-        Vrp_SetCost(0, 3, 20);
-        Vrp_SetCost(0, 4, 25);
-        Vrp_SetCost(0, 5, 34);
-        Vrp_SetCost(1, 2, 21);
-        Vrp_SetCost(1, 3, 29);
-        Vrp_SetCost(1, 4, 26);
-        Vrp_SetCost(1, 5, 20);
-        Vrp_SetCost(2, 3, 38);
-        Vrp_SetCost(2, 4, 20);
-        Vrp_SetCost(2, 5, 32);
-        Vrp_SetCost(3, 4, 30);
-        Vrp_SetCost(3, 5, 27);
-        Vrp_SetCost(4, 5, 25);
-
-        vrp->numroutes = 2;
-        vrp->capacity  = 100;
-        vrp->demand[1] = 37;
-        vrp->demand[2] = 35;
-        vrp->demand[3] = 30;
-        vrp->demand[4] = 25;
-        vrp->demand[5] = 32;
     }
 };
 
@@ -129,7 +91,6 @@ TEST(Node, update)
 
 TEST(Node, expandWithVehicleManager)
 {
-    Vrp_SetProblem();
 
     VehicleManager vm;
 
@@ -139,8 +100,6 @@ TEST(Node, expandWithVehicleManager)
 
 TEST(Node, expandAfterVehicleVisitOneCustomer)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
     vm.move(vrp, 1);
 
@@ -150,8 +109,6 @@ TEST(Node, expandAfterVehicleVisitOneCustomer)
 
 TEST(Node, expandWhenLastVehicleRun)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
     vm.move(vrp, VehicleManager::CHANGE);
 
@@ -161,8 +118,6 @@ TEST(Node, expandWhenLastVehicleRun)
 
 TEST(Node, expandWhenRunningVehicleCapacityFull)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     vm.move(vrp, 1);
@@ -175,8 +130,6 @@ TEST(Node, expandWhenRunningVehicleCapacityFull)
 
 TEST(Node, doNotExpand)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     vm.move(vrp, VehicleManager::CHANGE);
@@ -190,8 +143,6 @@ TEST(Node, doNotExpand)
 
 TEST(Node, nodeExpandWhenNodeSearch)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     node.search(vrp, vm);
@@ -201,11 +152,8 @@ TEST(Node, nodeExpandWhenNodeSearch)
 
 TEST(Node, valueIsAddedWhenNodeSearch)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
-    srand(2013);
     node.search(vrp, vm);
 
     /* searchにより次の手を車体の変更としているためINF */
@@ -218,11 +166,8 @@ TEST(Node, valueIsAddedWhenNodeSearch)
 
 TEST(Node, valueIsAddedWhenNodeSearch2)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
-    srand(2013);
     node.search(vrp, vm, 1);
 
     LONGS_EQUAL(202, node.value());
@@ -230,7 +175,6 @@ TEST(Node, valueIsAddedWhenNodeSearch2)
 
 TEST(Node, searchOnce)
 {
-    Vrp_SetProblem();
 
     VehicleManager vm;
 
@@ -241,8 +185,6 @@ TEST(Node, searchOnce)
 
 TEST(Node, searchTwice)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     node.search(vrp, vm);
@@ -253,8 +195,6 @@ TEST(Node, searchTwice)
 
 TEST(Node, finishCheck)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     vm.move(vrp, VehicleManager::CHANGE);
@@ -269,8 +209,6 @@ TEST(Node, finishCheck)
 
 TEST(Node, DoPrunning)
 {
-    Vrp_SetProblem();
-
     VehicleManager vm;
 
     Node mct;
@@ -282,7 +220,6 @@ TEST(Node, DoPrunning)
 
 TEST(Node, setTabu)
 {
-    Vrp_SetProblem();
     VehicleManager vm;
 
     Node node;
@@ -295,7 +232,6 @@ TEST(Node, setTabu)
 
 TEST(Node, isTabu)
 {
-    Vrp_SetProblem();
     VehicleManager vm;
 
     Node node;
@@ -307,7 +243,6 @@ TEST(Node, isTabu)
 
 TEST(Node, isNotTabu)
 {
-    Vrp_SetProblem();
     VehicleManager vm;
 
     Node node;
@@ -317,7 +252,6 @@ TEST(Node, isNotTabu)
 
 TEST(Node, isTabuInMiddle)
 {
-    Vrp_SetProblem();
     VehicleManager vm;
     vm.move(vrp, 2);
     vm.move(vrp, 4);
