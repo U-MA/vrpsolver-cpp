@@ -45,7 +45,7 @@ private:
     int  childSize_;
     int  value_;
     Node *child;
-    bool tabu_[100];
+    bool *tabu_;
 };
 
 #endif /* VRPSOLVER_CPP_NODE_H */

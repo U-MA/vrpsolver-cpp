@@ -282,8 +282,12 @@ TEST(Node, DoPrunning)
 
 TEST(Node, setTabu)
 {
+    Vrp_SetProblem();
+    VehicleManager vm;
+
     Node node;
 
+    node.expand(vrp, vm);
     node.setTabu(3);
     CHECK_TRUE(node.tabu(3));
     CHECK_FALSE(node.tabu(1));

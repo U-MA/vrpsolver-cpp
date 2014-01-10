@@ -18,11 +18,13 @@ Node::Node(void)
     childSize_ = 0;
     value_     = 0;
     child      = NULL;
+    tabu_      = NULL;
 }
 
 Node::~Node(void)
 {
     delete[] child;
+    delete[] tabu_;
 }
 
 int Node::customer(void) const
@@ -60,24 +62,31 @@ void Node::expand(int childSize)
     childSize_ = childSize;
     child = new Node[childSize];
     for (int i=0; i < childSize_; i++)
-    {
         child[i].customer_ = i;
-        tabu_[i]            = false;
-    }
 }
 
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 {
     int childSize = 0;
     child = new Node[vrp->vertnum];
+    tabu_ = new bool[vrp->vertnum];
+    for (int i=0; i < vrp->vertnum; i++)
+        tabu_[i] = true;
 
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
+    {
         child[childSize++].customer_ = VehicleManager::CHANGE; /* 各顧客が訪問可能か調べる */
+        tabu_[VehicleManager::CHANGE] = false;
+    }
+
     for (int i=1; i < vrp->vertnum; i++)
     {
         if (!vm.isVisit(i) && vm.canVisit(vrp, i))
+        {
             child[childSize++].customer_ = i;
+            tabu_[i] = false;
+        }
     }
     childSize_ = childSize;
 }
