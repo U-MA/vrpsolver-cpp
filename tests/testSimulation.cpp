@@ -12,12 +12,17 @@ extern "C"
 
 TEST_GROUP(Simulation)
 {
-    vrp_problem *vrp;
+    vrp_problem    *vrp;
+    VehicleManager vm;
     void setup()
     {
         vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
         vrp->dist.cost = (int *)calloc(100, sizeof(int));
         vrp->demand = (int *)calloc(100, sizeof(int));
+
+        srand(2013);
+
+        Vrp_SetProblem();
     }
 
     void teardown()
@@ -71,20 +76,16 @@ TEST_GROUP(Simulation)
 
 TEST(Simulation, sequenatialRandomSimulation)
 {
-    Vrp_SetProblem();
-
-    VehicleManager vm;
-
-    srand(2013);
     LONGS_EQUAL(206, VrpSimulation::sequentialRandomSimulation(vrp, vm));
 }
 
 TEST(Simulation, sequentialRandomSimulationWithLoop)
 {
-    Vrp_SetProblem();
-
-    VehicleManager vm;
-
-    srand(2013);
     LONGS_EQUAL(171, VrpSimulation::sequentialRandomSimulation(vrp, vm, 1000));
+}
+
+TEST(Simulation, sequentialRandomSimulationIsMiss)
+{
+    vm.move(vrp, VehicleManager::CHANGE);
+    LONGS_EQUAL(MISS, VrpSimulation::sequentialRandomSimulation(vrp, vm, 20));
 }

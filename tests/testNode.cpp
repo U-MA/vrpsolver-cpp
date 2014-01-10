@@ -213,7 +213,7 @@ TEST(Node, valueIsAddedWhenNodeSearch)
 
     node.search(vrp, vm);
 
-    LONGS_EQUAL(INF+202, node.value());
+    LONGS_EQUAL(MISS+202, node.value());
 }
 
 TEST(Node, valueIsAddedWhenNodeSearch2)
@@ -229,7 +229,7 @@ TEST(Node, valueIsAddedWhenNodeSearch2)
 
     node.search(vrp, vm, 1);
 
-    LONGS_EQUAL(INF+202, node.value());
+    LONGS_EQUAL(MISS+202, node.value());
 }
 
 TEST(Node, searchOnce)

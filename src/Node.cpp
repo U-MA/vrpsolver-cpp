@@ -62,9 +62,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
-        child[childSize++].customer_ = VehicleManager::CHANGE;
-
-    /* 各顧客が訪問可能か調べる */
+        child[childSize++].customer_ = VehicleManager::CHANGE; /* 各顧客が訪問可能か調べる */
     for (int i=1; i < vrp->vertnum; i++)
     {
         if (!vm.isVisit(i) && vm.canVisit(vrp, i))
@@ -85,7 +83,7 @@ double Node::computeUcb(int parentCount)
 Node *Node::select(void)
 {
     Node *selected = NULL;
-    double maxUcb = -INF;
+    double maxUcb = -MISS;
     for (int i=0; i < childSize_; i++)
     {
         double ucb = child[i].computeUcb(count_);
