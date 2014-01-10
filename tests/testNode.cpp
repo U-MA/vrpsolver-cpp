@@ -314,3 +314,20 @@ TEST(Node, isNotTabu)
     node.expand(vrp, vm);
     CHECK_FALSE(node.isTabu());
 }
+
+TEST(Node, isTabuInMiddle)
+{
+    Vrp_SetProblem();
+    VehicleManager vm;
+    vm.move(vrp, 2);
+    vm.move(vrp, 4);
+
+    Node node;
+    node.expand(vrp, vm);
+    CHECK_FALSE(node.isTabu());
+    node.setTabu(0);
+    node.setTabu(1);
+    node.setTabu(3);
+    node.setTabu(5);
+    CHECK_TRUE(node.isTabu());
+}
