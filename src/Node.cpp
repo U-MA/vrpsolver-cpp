@@ -62,6 +62,7 @@ void Node::expand(int childSize)
     for (int i=0; i < childSize_; i++)
     {
         child[i].customer_ = i;
+        tabu_[i]            = false;
     }
 }
 
@@ -111,6 +112,16 @@ Node *Node::select(void)
 bool Node::isLeaf(void) const
 {
     return (childSize_ == 0);
+}
+
+bool Node::isTabu(void) const
+{
+    for (int i=0; i < childSize_; i++)
+    {
+        if (!tabu_[i])
+            return false;
+    }
+    return true;
 }
 
 void Node::update(int value)
@@ -170,7 +181,8 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     Node *visited[300];
     int  visitedSize = 0;
 
-    Node *node = this;
+    Node *node   = this;
+    Node *parent = NULL;
 
     /* nodeは訪問済み */
     visited[visitedSize++] = this;
@@ -178,7 +190,13 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* SELECTION */
     while (!node->isLeaf())
     {
+        parent = node;
         node = node->select();
+        if (node->isTabu())
+        {
+            parent->setTabu(node->customer());
+            return ; /* 探索を破棄 */
+        }
         visited[visitedSize++] = node;
         //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
@@ -197,13 +215,11 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 
     /* SIMULATION */
     int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count);
-    /*
     if (cost == MISS)
     {
-        node.tabu[node->customer()] = true;
-        return ;
+        node->setTabu(node->customer());
+        return ; /* 探索を破棄 */
     }
-    */
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)

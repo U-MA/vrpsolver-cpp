@@ -24,6 +24,7 @@ public:
     void setTabu(int customer);
 
     bool isLeaf(void) const;
+    bool isTabu(void) const;
     void expand(int childSize);
     void expand(const vrp_problem *vrp, VehicleManager& vm);
     void update(int value);

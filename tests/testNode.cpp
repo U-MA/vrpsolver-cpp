@@ -226,10 +226,6 @@ TEST(Node, valueIsAddedWhenNodeSearch2)
     node.search(vrp, vm, 1);
 
     LONGS_EQUAL(202, node.value());
-
-    node.search(vrp, vm, 1);
-
-    LONGS_EQUAL(MISS+202, node.value());
 }
 
 TEST(Node, searchOnce)
@@ -271,7 +267,7 @@ TEST(Node, finishCheck)
     /* このテストでクラッシュしなければテストはパス */
 }
 
-IGNORE_TEST(Node, DoPrunning)
+TEST(Node, DoPrunning)
 {
     Vrp_SetProblem();
 
