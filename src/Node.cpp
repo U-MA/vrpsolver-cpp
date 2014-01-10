@@ -187,7 +187,6 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 
     /* SIMULATION */
     int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count);
-    if (cost == MISS) childSize_--;
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)

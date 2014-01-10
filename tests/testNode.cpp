@@ -271,23 +271,15 @@ TEST(Node, finishCheck)
     /* このテストでクラッシュしなければテストはパス */
 }
 
-TEST(Node, prunning)
+IGNORE_TEST(Node, DoPrunning)
 {
-    vrp->vertnum      = 3;
-    vrp->numroutes    = 2;
-    vrp->capacity     = 20;
-    vrp->demand[1]    = 20;
-    vrp->demand[2]    = 20;
-    vrp->dist.cost[0] = 10;
-    vrp->dist.cost[1] = 10;
-    vrp->dist.cost[2] = 10;
+    Vrp_SetProblem();
 
     VehicleManager vm;
 
     Node mct;
-
-    for (int i=0; i < 3; i++)
+    for (int i=0; i < 100; i++)
         mct.search(vrp, vm, 1);
 
-    LONGS_EQUAL(2, mct.childSize());
+    CHECK(mct.value() < MISS);
 }
