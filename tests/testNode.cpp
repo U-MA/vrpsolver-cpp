@@ -267,4 +267,27 @@ TEST(Node, finishCheck)
     /* 21というマジックナンバーは実験によって得たもの */
     for (int i=0; i < 21; i++)
         mct.search(vrp, vm);
+
+    /* このテストでクラッシュしなければテストはパス */
+}
+
+TEST(Node, prunning)
+{
+    vrp->vertnum      = 3;
+    vrp->numroutes    = 2;
+    vrp->capacity     = 20;
+    vrp->demand[1]    = 20;
+    vrp->demand[2]    = 20;
+    vrp->dist.cost[0] = 10;
+    vrp->dist.cost[1] = 10;
+    vrp->dist.cost[2] = 10;
+
+    VehicleManager vm;
+
+    Node mct;
+
+    for (int i=0; i < 3; i++)
+        mct.search(vrp, vm, 1);
+
+    LONGS_EQUAL(2, mct.childSize());
 }
