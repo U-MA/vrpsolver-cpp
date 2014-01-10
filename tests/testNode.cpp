@@ -283,3 +283,12 @@ IGNORE_TEST(Node, DoPrunning)
 
     CHECK(mct.value() < MISS);
 }
+
+TEST(Node, setTabu)
+{
+    Node node;
+
+    node.setTabu(3);
+    CHECK_TRUE(node.tabu(3));
+    CHECK_FALSE(node.tabu(1));
+}

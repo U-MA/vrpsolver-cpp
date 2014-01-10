@@ -45,6 +45,16 @@ int Node::value(void) const
     return value_;
 }
 
+bool Node::tabu(int customer) const
+{
+    return tabu_[customer];
+}
+
+void Node::setTabu(int customer)
+{
+    tabu_[customer] = true;
+}
+
 void Node::expand(int childSize)
 {
     childSize_ = childSize;
@@ -179,14 +189,21 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     {
         /* EXPANSION */
         node->expand(vrp, vm_copy);
-        Node *newNode = node->select();
-        visited[visitedSize++] = newNode;
+        node = node->select();
+        visited[visitedSize++] = node;
         //printf("newNode->customer() is %d\n", newNode->customer());
-        vm_copy.move(vrp, newNode->customer());
+        vm_copy.move(vrp, node->customer());
     }
 
     /* SIMULATION */
     int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count);
+    /*
+    if (cost == MISS)
+    {
+        node.tabu[node->customer()] = true;
+        return ;
+    }
+    */
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)

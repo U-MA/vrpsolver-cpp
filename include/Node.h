@@ -19,6 +19,9 @@ public:
     int count(void) const;
     int childSize(void) const;
     int value(void) const;
+    bool tabu(int customer) const;
+
+    void setTabu(int customer);
 
     bool isLeaf(void) const;
     void expand(int childSize);
@@ -41,6 +44,7 @@ private:
     int  childSize_;
     int  value_;
     Node *child;
+    bool tabu_[100];
 };
 
 #endif /* VRPSOLVER_CPP_NODE_H */
