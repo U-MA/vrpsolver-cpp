@@ -292,3 +292,25 @@ TEST(Node, setTabu)
     CHECK_TRUE(node.tabu(3));
     CHECK_FALSE(node.tabu(1));
 }
+
+TEST(Node, isTabu)
+{
+    Vrp_SetProblem();
+    VehicleManager vm;
+
+    Node node;
+    node.expand(vrp, vm);
+    for (int i=0; i < vrp->vertnum; i++)
+        node.setTabu(i);
+    CHECK_TRUE(node.isTabu());
+}
+
+TEST(Node, isNotTabu)
+{
+    Vrp_SetProblem();
+    VehicleManager vm;
+
+    Node node;
+    node.expand(vrp, vm);
+    CHECK_FALSE(node.isTabu());
+}
