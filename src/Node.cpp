@@ -211,6 +211,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         if (!node->isLeaf() && node->isTabu(vrp))
         {
+            fprintf(stderr, "TABU\n");
             parent->setTabu(node->customer());
             return ; /* 探索を破棄 */
         }
@@ -248,6 +249,11 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
         parent->setTabu(node->customer());
         vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
+        if (parent->isTabu(vrp))
+        {
+            fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
+            return ; /* 探索を破棄 */
+        }
         node = parent->select();
         vm_copy.move(vrp, node->customer());
     }
