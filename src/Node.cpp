@@ -226,7 +226,6 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
      * あるかもしれないので、ここで記憶しておく
      * 囲碁将棋の「待った」から来ている */
     VehicleManager matta = vm_copy.copy();
-    Node *grandParent    = parent;
 
     /* nodeが全探索木の葉でなければexpandする*/
     if (!vm_copy.isFinish(vrp))
