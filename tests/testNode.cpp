@@ -25,9 +25,7 @@ TEST_GROUP(Node)
 
     void teardown()
     {
-        free(vrp->demand);
-        free(vrp->dist.cost);
-        free(vrp);
+        VrpProblem::teardown(vrp);
     }
 };
 
@@ -238,7 +236,7 @@ TEST(Node, isTabu)
     node.expand(vrp, vm);
     for (int i=0; i < vrp->vertnum; i++)
         node.setTabu(i);
-    CHECK_TRUE(node.isTabu());
+    CHECK_TRUE(node.isTabu(vrp));
 }
 
 TEST(Node, isNotTabu)
@@ -247,7 +245,7 @@ TEST(Node, isNotTabu)
 
     Node node;
     node.expand(vrp, vm);
-    CHECK_FALSE(node.isTabu());
+    CHECK_FALSE(node.isTabu(vrp));
 }
 
 TEST(Node, isTabuInMiddle)
@@ -258,10 +256,22 @@ TEST(Node, isTabuInMiddle)
 
     Node node;
     node.expand(vrp, vm);
-    CHECK_FALSE(node.isTabu());
+    CHECK_FALSE(node.isTabu(vrp));
     node.setTabu(0);
     node.setTabu(1);
     node.setTabu(3);
     node.setTabu(5);
-    CHECK_TRUE(node.isTabu());
+    CHECK_TRUE(node.isTabu(vrp));
+}
+
+TEST(Node, error)
+{
+    VrpProblem::teardown(vrp);
+    vrp = VrpProblem::E_n13_k4();
+
+    VehicleManager vm;
+
+    Node mct;
+    for (int i=0; i < 40; i++)
+        mct.search(vrp, vm);
 }

@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 extern "C"
@@ -106,8 +107,11 @@ Node *Node::select(void)
     double maxUcb = -MISS;
     for (int i=0; i < childSize_; i++)
     {
+        /* tabu_に含まれていれば飛ばす */
+        if (tabu_[child[i].customer()]) continue;
+
         double ucb = child[i].computeUcb(count_);
-        //printf("child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
+        //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
         if (ucb > maxUcb)
         {
             maxUcb = ucb;
@@ -123,9 +127,9 @@ bool Node::isLeaf(void) const
     return (childSize_ == 0);
 }
 
-bool Node::isTabu(void) const
+bool Node::isTabu(const vrp_problem *vrp) const
 {
-    for (int i=0; i < childSize_; i++)
+    for (int i=0; i < vrp->vertnum; i++)
     {
         if (!tabu_[i])
             return false;
@@ -196,12 +200,16 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* nodeは訪問済み */
     visited[visitedSize++] = this;
 
+    fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
+
     /* SELECTION */
     while (!node->isLeaf())
     {
+        fprintf(stderr, "NODE\n");
         parent = node;
         node = node->select();
-        if (node->isTabu())
+        fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
+        if (!node->isLeaf() && node->isTabu(vrp))
         {
             parent->setTabu(node->customer());
             return ; /* 探索を破棄 */
@@ -211,24 +219,40 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         vm_copy.move(vrp, node->customer());
     }
 
+    fprintf(stderr, "LEAF\n");
+
+    /* 後の操作で現在のVehiceManaagerの状態を使う必要が
+     * あるかもしれないので、ここで記憶しておく
+     * 囲碁将棋の「待った」から来ている */
+    VehicleManager matta = vm_copy.copy();
+    Node *grandParent    = parent;
+
     /* nodeが全探索木の葉でなければexpandする*/
     if (!vm_copy.isFinish(vrp))
     {
         /* EXPANSION */
+        fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
+        parent = node;
         node = node->select();
-        visited[visitedSize++] = node;
-        //printf("newNode->customer() is %d\n", newNode->customer());
+        fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
+        //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
     }
 
     /* SIMULATION */
-    int cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count);
-    if (cost == MISS)
+    int cost = MISS;
+    while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == MISS)
     {
-        node->setTabu(node->customer());
-        return ; /* 探索を破棄 */
+        fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
+        fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
+        parent->setTabu(node->customer());
+        vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
+        node = parent->select();
+        vm_copy.move(vrp, node->customer());
     }
+    fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
+    visited[visitedSize++] = node;
 
     /* BACKPROPAGATION */
     for (int i=0; i < visitedSize; i++)

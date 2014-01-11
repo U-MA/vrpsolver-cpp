@@ -78,6 +78,7 @@ void Solver::run(void)
             mct.search(vrp, vm, gSimulationCount);
 
         int move = mct.next();
+        printf("move %d\n", move);
 
         if (!vm.move(vrp, move))
             break;
