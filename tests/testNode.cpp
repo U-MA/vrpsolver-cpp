@@ -50,13 +50,13 @@ TEST(Node, isNotLeaf)
     CHECK_FALSE(node.isLeaf());
 }
 
-/*
 TEST(Node, createChild)
 {
-    node.expand(5);
-    LONGS_EQUAL(5, node.childSize());
+    VehicleManager vm;
+
+    node.expand(vrp, vm);
+    LONGS_EQUAL(6, node.childSize()); /* 顧客数5 + depotの数1 */
 }
-*/
 
 TEST(Node, selectChildWhenNodeDontHaveChild)
 {
