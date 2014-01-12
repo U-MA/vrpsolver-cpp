@@ -55,7 +55,7 @@ TEST(Node, createChild)
     LONGS_EQUAL(6, node.childSize()); /* 顧客数5 + depotの数1 */
 }
 
-TEST(Node, selectChildWhenNodeDontHaveChild)
+TEST(Node, returnNullWhenNodeSelectBeforeExpand)
 {
     Node *selected = node.select();
     POINTERS_EQUAL(NULL, selected);
