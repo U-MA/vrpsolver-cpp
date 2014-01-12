@@ -58,16 +58,6 @@ void Node::setTabu(int customer)
     tabu_[customer] = true;
 }
 
-/*
-void Node::expand(int childSize)
-{
-    childSize_ = childSize;
-    child = new Node[childSize];
-    for (int i=0; i < childSize_; i++)
-        child[i].customer_ = i;
-}
-*/
-
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 {
     int childSize = 0;

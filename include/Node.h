@@ -25,7 +25,6 @@ public:
 
     bool isLeaf(void) const;
     bool isTabu(const vrp_problem *vrp) const;
-    //void expand(int childSize);
     void expand(const vrp_problem *vrp, VehicleManager& vm);
     void update(int value);
 
