@@ -61,14 +61,14 @@ TEST(Node, returnNullWhenNodeSelectBeforeExpand)
     POINTERS_EQUAL(NULL, selected);
 }
 
-/*
 TEST(Node, selectChild)
 {
-    node.expand(1);
+    node.expand(vrp, vm);
     Node *selected = node.select();
-    LONGS_EQUAL(0, selected->customer());
+    LONGS_EQUAL(1, selected->customer());
 }
 
+/*
 TEST(Node, selectChildWithMaxUcb)
 {
     node.expand(2);
