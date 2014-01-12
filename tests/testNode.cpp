@@ -77,21 +77,15 @@ TEST(Node, selectChildWithMaxUcb)
     LONGS_EQUAL(0, selected->customer());
 }
 
-/*
 TEST(Node, update)
 {
-    node.expand(1);
+    node.expand(vrp, vm);
     Node *selected = node.select();
 
     selected->update(100);
     LONGS_EQUAL(1, selected->count());
     LONGS_EQUAL(100, selected->value());
-
-    selected->update(30);
-    LONGS_EQUAL(2, selected->count());
-    LONGS_EQUAL(130, selected->value());
 }
-*/
 
 TEST(Node, expandWithVehicleManager)
 {
