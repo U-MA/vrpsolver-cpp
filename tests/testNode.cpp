@@ -68,16 +68,16 @@ TEST(Node, selectChild)
     LONGS_EQUAL(1, selected->customer());
 }
 
-/*
 TEST(Node, selectChildWithMaxUcb)
 {
-    node.expand(2);
+    node.expand(vrp, vm);
     Node *selected = node.select();
     selected->update(100);
     selected = node.select();
     LONGS_EQUAL(0, selected->customer());
 }
 
+/*
 TEST(Node, update)
 {
     node.expand(1);
