@@ -40,16 +40,23 @@ TEST(Node, create)
 TEST(Node, isLeaf)
 {
     CHECK_TRUE(node.isLeaf());
+}
 
-    node.expand(1);
+TEST(Node, isNotLeaf)
+{
+    VehicleManager vm;
+
+    node.expand(vrp, vm);
     CHECK_FALSE(node.isLeaf());
 }
 
+/*
 TEST(Node, createChild)
 {
     node.expand(5);
     LONGS_EQUAL(5, node.childSize());
 }
+*/
 
 TEST(Node, selectChildWhenNodeDontHaveChild)
 {
@@ -57,6 +64,7 @@ TEST(Node, selectChildWhenNodeDontHaveChild)
     POINTERS_EQUAL(NULL, selected);
 }
 
+/*
 TEST(Node, selectChild)
 {
     node.expand(1);
@@ -86,6 +94,7 @@ TEST(Node, update)
     LONGS_EQUAL(2, selected->count());
     LONGS_EQUAL(130, selected->value());
 }
+*/
 
 TEST(Node, expandWithVehicleManager)
 {
