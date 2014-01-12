@@ -16,6 +16,7 @@ extern "C"
 TEST_GROUP(Node)
 {
     vrp_problem *vrp;
+    VehicleManager vm;
     Node node;
     void setup()
     {
@@ -44,16 +45,12 @@ TEST(Node, isLeaf)
 
 TEST(Node, isNotLeaf)
 {
-    VehicleManager vm;
-
     node.expand(vrp, vm);
     CHECK_FALSE(node.isLeaf());
 }
 
 TEST(Node, createChild)
 {
-    VehicleManager vm;
-
     node.expand(vrp, vm);
     LONGS_EQUAL(6, node.childSize()); /* 顧客数5 + depotの数1 */
 }
