@@ -27,8 +27,14 @@ Vehicle Vehicle::copy(void) const
         v_copy.route_[i] = route_[i];
 
     v_copy.route_length_ = route_length_;
-    v_copy.capacity_ = capacity_;
+    v_copy.capacity_     = capacity_;
+
     return v_copy;
+}
+
+int Vehicle::capacity(void) const
+{
+    return capacity_;
 }
 
 /* customerは０以上顧客数未満 */
@@ -41,11 +47,6 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
     route_length_++;
     capacity_ += vrp->demand[customer];
     return true;
-}
-
-int Vehicle::capacity(void) const
-{
-    return capacity_;
 }
 
 int Vehicle::computeCost(const vrp_problem *vrp) const

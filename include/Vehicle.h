@@ -27,9 +27,9 @@ public:
 private:
     static const int MAXSIZE = 130;
 
-    int  route_[MAXSIZE];
-    int  route_length_;
-    int  capacity_;
+    int route_[MAXSIZE];
+    int route_length_;
+    int capacity_;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_H */
