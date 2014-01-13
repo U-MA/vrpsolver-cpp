@@ -15,10 +15,6 @@ Vehicle::Vehicle(void)
     capacity_      = 0;
 }
 
-Vehicle::~Vehicle(void)
-{
-}
-
 Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;

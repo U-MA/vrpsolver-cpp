@@ -12,7 +12,6 @@ class Vehicle
 {
 public:
     Vehicle(void);
-    ~Vehicle(void);
 
     Vehicle copy(void) const;
 
