@@ -20,7 +20,7 @@ VehicleManager VehicleManager::copy(void) const
     vm_copy.size_ = size_;
 
     for (int i=0; i < VEHICLE_MAX; i++)
-        vm_copy.vehicle[i] = vehicle[i].copy();
+        vm_copy.vehicle_[i] = vehicle_[i].copy();
 
     for (int i=0; i < CUSTOMER_MAX; i++)
         vm_copy.isVisit_[i] = isVisit_[i];
@@ -57,7 +57,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp)
 
 bool VehicleManager::canVisit(const vrp_problem *vrp, int customer)
 {
-    return (vehicle[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
+    return (vehicle_[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
@@ -81,9 +81,9 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     if (isVisit_[move-1] == true) return false;
 
     /* capacity制限を超過 */
-    if ((vehicle[size_-1].capacity() + vrp->demand[move]) > vrp->capacity) return false;
+    if ((vehicle_[size_-1].capacity() + vrp->demand[move]) > vrp->capacity) return false;
 
-    vehicle[size_-1].visit(vrp, move);
+    vehicle_[size_-1].visit(vrp, move);
     return (isVisit_[move-1] = true);
 }
 
@@ -91,7 +91,7 @@ int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int totalCost = 0;
     for (int i=0; i < size_; i++)
-        totalCost += vehicle[i].computeCost(vrp);
+        totalCost += vehicle_[i].computeCost(vrp);
 
     return totalCost;
 }
@@ -101,6 +101,6 @@ void VehicleManager::print(void) const
     for (int i=0; i < size_; i++)
     {
         printf("vehicle %2d", i);
-        vehicle[i].print();
+        vehicle_[i].print();
     }
 }
