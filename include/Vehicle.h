@@ -29,8 +29,9 @@ public:
 
 private:
     static const int MAXSIZE = 130;
+
     int  route[MAXSIZE];
-    int  routeSize;
+    int  route_length_;
     int  quantity_;
 };
 
