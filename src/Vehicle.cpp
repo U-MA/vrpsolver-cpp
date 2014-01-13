@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <string.h>
 
 #include "Vehicle.h"
 
@@ -19,8 +19,8 @@ Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;
 
-    for (int i=0; i < route_length_; i++)
-        v_copy.route_[i] = route_[i];
+    size_t route_byte = route_length_ * sizeof(int);
+    memcpy(v_copy.route_, route_, route_byte);
 
     v_copy.route_length_ = route_length_;
     v_copy.capacity_     = capacity_;
