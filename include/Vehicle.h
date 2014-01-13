@@ -14,9 +14,6 @@ public:
     Vehicle(void);
     ~Vehicle(void);
 
-    /* メンバ変数を初期化する */
-    void init(void);
-
     /* getter */
     int  quantity(void) const;
 

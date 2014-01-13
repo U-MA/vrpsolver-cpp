@@ -15,12 +15,6 @@ Vehicle::Vehicle(void)
     quantity_      = 0;
 }
 
-void Vehicle::init(void)
-{
-    route_length_ = 0;
-    quantity_     = 0;
-}
-
 Vehicle::~Vehicle(void)
 {
 }
