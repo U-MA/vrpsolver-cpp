@@ -12,12 +12,6 @@ extern "C"
 #include "Solver.h"
 #include "VehicleManager.h"
 
-vrp_problem *vrp;
-long gSeed;
-int  gCount;
-int  gSimulationCount;
-
-
 void Solver::setProblem(char *filename)
 {
     vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
@@ -36,49 +30,48 @@ void Solver::setProblem(char *filename)
 
 void Solver::setSeed(long seed)
 {
-    gSeed = seed;
+    this->seed = seed;
 }
 
 void Solver::setMctsIterationCount(int count)
 {
-    gCount = count;
+    this->count = count;
 }
 
 void Solver::setSimulationCount(int count)
 {
-    gSimulationCount = count;
+    this->simulationCount = count;
 }
 
-static void checkGlobalVariable(void)
+void Solver::cookMember(void)
 {
-    if (gSeed == 0)
-        gSeed = 2013;
+    if (seed == 0)
+        seed = 2013;
 
-    if (gCount == 0)
-        gCount = 1000;
+    if (count == 0)
+        count = 1000;
 
-    if (gSimulationCount == 0)
-        gSimulationCount = 1;
+    if (simulationCount == 0)
+        simulationCount = 1;
 
-    printf("seed            : %ld\n"  , gSeed);
-    printf("search count    : %d\n"   , gCount);
-    printf("simulation count: %d\n\n" , gSimulationCount);
+    printf("seed            : %ld\n"  , seed);
+    printf("search count    : %d\n"   , count);
+    printf("simulation count: %d\n\n" , simulationCount);
 }
 
 void Solver::run(void)
 {
-    checkGlobalVariable();
+    cookMember();
 
     VehicleManager vm;
     while (!vm.isVisitAll(vrp))
     {
         Node mct;
 
-        for (int i=0; i < gCount; i++)
-            mct.search(vrp, vm, gSimulationCount);
+        for (int i=0; i < count; i++)
+            mct.search(vrp, vm, simulationCount);
 
         int move = mct.next();
-        printf("move %d\n", move);
 
         if (!vm.move(vrp, move))
             break;
