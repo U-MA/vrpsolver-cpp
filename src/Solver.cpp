@@ -14,7 +14,7 @@ extern "C"
 
 void Solver::setProblem(char *filename)
 {
-    vrp = (vrp_problem *)malloc(sizeof(vrp_problem));
+    vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(vrp, filename);
     printf("file name       : %s\n", filename);
 
@@ -83,4 +83,16 @@ void Solver::run(void)
 
     vm.print();
     printf("[COST] %6d\n", cost);
+}
+
+void Solver::freeProblem(void)
+{
+    if (vrp->demand != 0)      free(vrp->demand);
+    if (vrp->posx != 0)        free(vrp->posx);
+    if (vrp->posy != 0)        free(vrp->posy);
+    if (vrp->dist.cost != 0)   free(vrp->dist.cost);
+    if (vrp->dist.coordx != 0) free(vrp->dist.coordx);
+    if (vrp->dist.coordy != 0) free(vrp->dist.coordy);
+    
+    free(vrp);
 }

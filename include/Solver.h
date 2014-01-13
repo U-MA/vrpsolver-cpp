@@ -9,6 +9,7 @@ public:
     void setMctsIterationCount(int count);
     void setSimulationCount(int count);
     void run(void);
+    void freeProblem(void);
 
 private:
     void cookMember(void);
