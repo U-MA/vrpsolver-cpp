@@ -17,7 +17,7 @@ public:
     Vehicle copy(void) const;
 
     /* getter */
-    int  quantity(void) const;
+    int  capacity(void) const;
 
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
@@ -29,7 +29,7 @@ private:
 
     int  route_[MAXSIZE];
     int  route_length_;
-    int  quantity_;
+    int  capacity_;
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_H */

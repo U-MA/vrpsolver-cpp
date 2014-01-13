@@ -39,16 +39,16 @@ TEST_GROUP(Vehicle)
 
 TEST(Vehicle, init)
 {
-    LONGS_EQUAL(0, v.quantity());
+    LONGS_EQUAL(0, v.capacity());
 }
 
 TEST(Vehicle, visit)
 {
     v.visit(vrp, 1);
-    LONGS_EQUAL(1900, v.quantity());
+    LONGS_EQUAL(1900, v.capacity());
 
     v.visit(vrp, 2);
-    LONGS_EQUAL(3000, v.quantity());
+    LONGS_EQUAL(3000, v.capacity());
 }
 
 TEST(Vehicle, computeCost)
@@ -66,7 +66,7 @@ TEST(Vehicle, copy)
 {
     v.visit(vrp, 1);
     Vehicle copy = v.copy();
-    LONGS_EQUAL(v.quantity(), copy.quantity());
+    LONGS_EQUAL(v.capacity(), copy.capacity());
 }
 
 /* テスト方法がわからないので保留 */

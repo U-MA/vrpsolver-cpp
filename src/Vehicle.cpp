@@ -12,7 +12,7 @@ extern "C"
 Vehicle::Vehicle(void)
 {
     route_length_  = 0;
-    quantity_      = 0;
+    capacity_      = 0;
 }
 
 Vehicle::~Vehicle(void)
@@ -27,7 +27,7 @@ Vehicle Vehicle::copy(void) const
         v_copy.route_[i] = route_[i];
 
     v_copy.route_length_ = route_length_;
-    v_copy.quantity_ = quantity_;
+    v_copy.capacity_ = capacity_;
     return v_copy;
 }
 
@@ -39,13 +39,13 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
 
     route_[route_length_] = customer;
     route_length_++;
-    quantity_ += vrp->demand[customer];
+    capacity_ += vrp->demand[customer];
     return true;
 }
 
-int Vehicle::quantity(void) const
+int Vehicle::capacity(void) const
 {
-    return quantity_;
+    return capacity_;
 }
 
 int Vehicle::computeCost(const vrp_problem *vrp) const
@@ -65,7 +65,7 @@ int Vehicle::computeCost(const vrp_problem *vrp) const
 
 void Vehicle::print(void) const
 {
-    printf("[%6d] ", quantity_);
+    printf("[%6d] ", capacity_);
     for (int i=0; i < route_length_; i++)
         printf("%4d", route_[i]);
     printf("\n");
