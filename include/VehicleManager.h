@@ -18,6 +18,8 @@ public:
 
     VehicleManager(void);
 
+    VehicleManager copy(void) const;
+
     /* getter */
     int  size(void) const;
 
@@ -29,16 +31,15 @@ public:
     bool move(const vrp_problem *vrp, int move);
     int  computeTotalCost(const vrp_problem *vrp) const;
 
-    VehicleManager copy(void) const;
-
     void print(void) const;
    
 private:
     static const int VEHICLE_MAX  = 20;
     static const int CUSTOMER_MAX = 200;
+
     Vehicle vehicle_[VEHICLE_MAX];
-    bool isVisit_[CUSTOMER_MAX];
-    int  size_; /* 車体の数 */
+    bool    isVisit_[CUSTOMER_MAX];
+    int     size_; /* 車体の数 */
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
