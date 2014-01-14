@@ -24,9 +24,9 @@ public:
     void print(void) const;
 
 private:
-    static const int MAXSIZE = 130;
+    static const int kMaxSize = 130;
 
-    int route_[MAXSIZE];
+    int route_[kMaxSize];
     int route_length_;
     int capacity_;
 };
