@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdio.h>
 
 #include "VehicleManager.h" 
@@ -9,23 +10,25 @@ VehicleManager::VehicleManager(void)
         isVisit_[i] = false;
 }
 
-int VehicleManager::size(void) const
-{
-    return size_;
-}
-
 VehicleManager VehicleManager::copy(void) const
 {
     VehicleManager vm_copy;
+
     vm_copy.size_ = size_;
 
-    for (int i=0; i < kVehicleMax; i++)
+    /* 使ってる分のVehicleだけコピー */
+    for (int i=0; i < size_; i++)
         vm_copy.vehicle_[i] = vehicle_[i].copy();
 
-    for (int i=0; i < kCustomerMax; i++)
-        vm_copy.isVisit_[i] = isVisit_[i];
+    const size_t isVisit_bytes = kCustomerMax * sizeof(bool);
+    memcpy(vm_copy.isVisit_, isVisit_, isVisit_bytes);
 
     return vm_copy;
+}
+
+int VehicleManager::size(void) const
+{
+    return size_;
 }
 
 bool VehicleManager::isVisit(int customer) const
