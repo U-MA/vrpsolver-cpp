@@ -6,8 +6,6 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#define OUT_OF_BOUND -1
-
 class Vehicle
 {
 public:
