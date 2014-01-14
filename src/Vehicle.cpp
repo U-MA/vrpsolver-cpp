@@ -19,8 +19,9 @@ Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;
 
-    size_t route_byte = route_length_ * sizeof(int);
-    memcpy(v_copy.route_, route_, route_byte);
+    /* 使っている部分だけコピー */
+    const size_t route_bytes = route_length_ * sizeof(int);
+    memcpy(v_copy.route_, route_, route_bytes);
 
     v_copy.route_length_ = route_length_;
     v_copy.capacity_     = capacity_;
@@ -33,14 +34,19 @@ int Vehicle::capacity(void) const
     return capacity_;
 }
 
+/* 0はdepotを表すため、範囲外 */
+static bool customerIsInBound(int customer, int customer_end)
+{
+    return (0 < customer && customer < customer_end);
+}
+
 /* customerは０以上顧客数未満 */
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {
-    if (!(0 < customer && customer < vrp->vertnum))
+    if (!customerIsInBound(customer, vrp->vertnum))
         return false;
 
-    route_[route_length_] = customer;
-    route_length_++;
+    route_[route_length_++] = customer;
     capacity_ += vrp->demand[customer];
     return true;
 }
