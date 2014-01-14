@@ -63,7 +63,7 @@ bool VehicleManager::canVisit(const vrp_problem *vrp, int customer)
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
     /* 車体の変更 */
-    if (move == CHANGE)
+    if (move == kChange)
     {
         if (size_ == vrp->numroutes)
         {

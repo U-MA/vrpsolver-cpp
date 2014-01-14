@@ -69,8 +69,8 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
     {
-        child[childSize++].customer_ = VehicleManager::CHANGE; /* 各顧客が訪問可能か調べる */
-        tabu_[VehicleManager::CHANGE] = false;
+        child[childSize++].customer_ = VehicleManager::kChange; /* 各顧客が訪問可能か調べる */
+        tabu_[VehicleManager::kChange] = false;
     }
 
     for (int i=1; i < vrp->vertnum; i++)

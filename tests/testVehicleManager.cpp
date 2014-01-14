@@ -42,7 +42,7 @@ TEST(VehicleManager, computeTotalCostAfterOneVehicleVisit)
 TEST(VehicleManager, computeTotalCostAfterSomeVehicleVisit)
 {
     vm.move(vrp, 1);
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
     vm.move(vrp, 2);
     LONGS_EQUAL(118, vm.computeTotalCost(vrp));
 }
@@ -62,7 +62,7 @@ TEST(VehicleManager, isVisitAllCustomer)
 {
     vm.move(vrp, 1);
     vm.move(vrp, 2);
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
     vm.move(vrp, 3);
     vm.move(vrp, 4);
     CHECK_FALSE(vm.isVisitAll(vrp));
@@ -91,10 +91,10 @@ TEST(VehicleManager, sizeWhenInit)
 
 TEST(VehicleManager, sizeIncrement)
 {
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
     LONGS_EQUAL(2, vm.size());
 
-    CHECK_FALSE(vm.move(vrp, VehicleManager::CHANGE));
+    CHECK_FALSE(vm.move(vrp, VehicleManager::kChange));
     LONGS_EQUAL(2, vm.size());
 }
 
@@ -113,9 +113,9 @@ TEST(VehicleManager, moveFailWhenThereIsNoVehicle)
 {
     vrp->numroutes = 3;
 
-    CHECK_TRUE(vm.move(vrp, VehicleManager::CHANGE));
-    CHECK_TRUE(vm.move(vrp, VehicleManager::CHANGE));
-    CHECK_FALSE(vm.move(vrp, VehicleManager::CHANGE));
+    CHECK_TRUE(vm.move(vrp, VehicleManager::kChange));
+    CHECK_TRUE(vm.move(vrp, VehicleManager::kChange));
+    CHECK_FALSE(vm.move(vrp, VehicleManager::kChange));
 }
 
 TEST(VehicleManager, moveFailWhenVehicleVisitOverCapacity)
@@ -128,7 +128,7 @@ TEST(VehicleManager, moveFailWhenVehicleVisitOverCapacity)
 TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
 {
     vm.move(vrp, 1);
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
 
     CHECK_TRUE(vm.move(vrp, 2));
     CHECK_TRUE(vm.move(vrp, 3));
@@ -157,7 +157,7 @@ TEST(VehicleManager, isFinishFail)
 
 TEST(VehicleManager, isFinishSuccess)
 {
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
     vm.move(vrp, 1);
     vm.move(vrp, 2);
     vm.move(vrp, 4);

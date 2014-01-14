@@ -11,10 +11,7 @@ extern "C"
 class VehicleManager
 {
 public:
-    enum
-    {
-        CHANGE = 0
-    };
+    static const int kChange = 0;
 
     VehicleManager(void);
 

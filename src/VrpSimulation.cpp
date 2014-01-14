@@ -52,7 +52,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         {
             /* 候補がいなければ次の車体へ
              * 但し, moveが失敗するとbreak */
-            if (!vm.move(vrp, VehicleManager::CHANGE))
+            if (!vm.move(vrp, VehicleManager::kChange))
                 break;
         }
         else

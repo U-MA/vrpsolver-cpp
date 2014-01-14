@@ -108,7 +108,7 @@ TEST(Node, expandAfterVehicleVisitOneCustomer)
 TEST(Node, expandWhenLastVehicleRun)
 {
     VehicleManager vm;
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
 
     node.expand(vrp, vm);
     LONGS_EQUAL(5, node.childSize());
@@ -130,7 +130,7 @@ TEST(Node, doNotExpand)
 {
     VehicleManager vm;
 
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
     vm.move(vrp, 1);
     vm.move(vrp, 2);
     vm.move(vrp, 4);
@@ -195,7 +195,7 @@ TEST(Node, finishCheck)
 {
     VehicleManager vm;
 
-    vm.move(vrp, VehicleManager::CHANGE);
+    vm.move(vrp, VehicleManager::kChange);
 
     Node mct;
     /* 21というマジックナンバーは実験によって得たもの */
