@@ -92,11 +92,11 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
 
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
-    int totalCost = 0;
+    int total_cost = 0;
     for (int i=0; i < size_; i++)
-        totalCost += vehicle_[i].computeCost(vrp);
+        total_cost += vehicle_[i].computeCost(vrp);
 
-    return totalCost;
+    return total_cost;
 }
 
 void VehicleManager::print(void) const
