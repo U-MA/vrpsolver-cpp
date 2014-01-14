@@ -58,6 +58,9 @@ bool VehicleManager::isFinish(const vrp_problem *vrp)
     return true;
 }
 
+/* [命名変更希望]
+ * capacity制限についての確認なので、その旨を伝えるような
+ * 関数名が良い */
 bool VehicleManager::canVisit(const vrp_problem *vrp, int customer)
 {
     return (vehicle_[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
@@ -80,7 +83,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         }
     }
 
-    /* 同じ顧客を再び訪問済 */
+    /* 訪問済 */
     if (isVisit_[move-1] == true) return false;
 
     /* capacity制限を超過 */
