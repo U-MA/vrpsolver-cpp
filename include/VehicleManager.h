@@ -35,7 +35,7 @@ private:
     static const int kCustomerMax = 200;
 
     Vehicle vehicle_[kVehicleMax];
-    bool    isVisit_[kCustomerMax];
+    bool    is_visit_[kCustomerMax];
     int     size_; /* 車体の数 */
 };
 
