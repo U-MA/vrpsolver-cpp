@@ -38,7 +38,7 @@ bool VehicleManager::isVisit(int customer) const
 
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
-    int customerSize = vrp->vertnum;
+    const int customerSize = vrp->vertnum;
     for (int i=1; i < customerSize; i++)
         if (!isVisit(i)) return false;
 
