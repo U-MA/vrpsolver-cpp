@@ -34,11 +34,11 @@ public:
     void print(void) const;
    
 private:
-    static const int VEHICLE_MAX  = 20;
-    static const int CUSTOMER_MAX = 200;
+    static const int kVehicleMax  = 20;
+    static const int kCustomerMax = 200;
 
-    Vehicle vehicle_[VEHICLE_MAX];
-    bool    isVisit_[CUSTOMER_MAX];
+    Vehicle vehicle_[kVehicleMax];
+    bool    isVisit_[kCustomerMax];
     int     size_; /* 車体の数 */
 };
 

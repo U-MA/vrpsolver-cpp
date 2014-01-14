@@ -5,7 +5,7 @@
 VehicleManager::VehicleManager(void)
 {
     size_ = 1;
-    for (int i=0; i < CUSTOMER_MAX; i++)
+    for (int i=0; i < kCustomerMax; i++)
         isVisit_[i] = false;
 }
 
@@ -19,10 +19,10 @@ VehicleManager VehicleManager::copy(void) const
     VehicleManager vm_copy;
     vm_copy.size_ = size_;
 
-    for (int i=0; i < VEHICLE_MAX; i++)
+    for (int i=0; i < kVehicleMax; i++)
         vm_copy.vehicle_[i] = vehicle_[i].copy();
 
-    for (int i=0; i < CUSTOMER_MAX; i++)
+    for (int i=0; i < kCustomerMax; i++)
         vm_copy.isVisit_[i] = isVisit_[i];
 
     return vm_copy;
