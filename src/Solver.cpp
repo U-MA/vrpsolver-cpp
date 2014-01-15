@@ -29,9 +29,9 @@ void Solver::setProblem(char *filename)
 {
     vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(vrp, filename);
-    printf("file name       : %s\n", filename);
-
     vrp->numroutes = extractVehicleSizeAndToInt(filename);
+
+    printf("file name       : %s\n", filename);
 }
 
 void Solver::setSeed(long seed)
