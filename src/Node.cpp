@@ -133,13 +133,13 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     VehicleManager vm_copy = vm.copy();
 
     Node *visited[300];
-    int  visitedSize = 0;
+    int  visited_size = 0;
 
     Node *node   = this;
     Node *parent = NULL;
 
     /* 木の根は訪問済み */
-    visited[visitedSize++] = this;
+    visited[visited_size++] = this;
 
     //fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
 
@@ -156,7 +156,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
             parent->addTabu(node->customer());
             return ; /* 探索を破棄 */
         }
-        visited[visitedSize++] = node;
+        visited[visited_size++] = node;
         vm_copy.move(vrp, node->customer());
     }
 
@@ -196,10 +196,10 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         vm_copy.move(vrp, node->customer());
     }
     //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
-    visited[visitedSize++] = node;
+    visited[visited_size++] = node;
 
     /* BACKPROPAGATION */
-    for (int i=0; i < visitedSize; i++)
+    for (int i=0; i < visited_size; i++)
         visited[i]->update(cost);
 }
 
