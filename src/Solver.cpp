@@ -12,20 +12,26 @@ extern "C"
 #include "Solver.h"
 #include "VehicleManager.h"
 
+
+static int extractVehicleSizeAndToInt(char *filename)
+{
+    char *k   = strrchr(filename, 'k');
+    char *dot = strrchr(filename, '.');
+    int  n    = (dot-k) / sizeof(char);
+
+    char numVehicle[3];
+    strncpy(numVehicle, k+1, n);
+    numVehicle[n+1] = '\0';
+    return atoi(numVehicle);
+}
+
 void Solver::setProblem(char *filename)
 {
     vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(vrp, filename);
     printf("file name       : %s\n", filename);
 
-    /* numroutesの設定 */
-    char *k   = strrchr(filename, 'k');
-    char *dot = strrchr(filename, '.');
-    char numVehicle[3];
-    int n = (dot-k)/sizeof(char);
-    strncpy(numVehicle, k+1, n);
-    numVehicle[n+1] = '\0';
-    vrp->numroutes = atoi(numVehicle);
+    vrp->numroutes = extractVehicleSizeAndToInt(filename);
 }
 
 void Solver::setSeed(long seed)
