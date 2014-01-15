@@ -38,6 +38,11 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
+bool VehicleManager::vehicleRemain(const vrp_problem *vrp) const
+{
+    return (size_ < vrp->numroutes);
+}
+
 bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
     for (int i=1; i < vrp->vertnum; i++)
@@ -45,7 +50,10 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
             return false;
 
     /* 次の車体があればfalse */
-    if (size_ < vrp->numroutes)
+    /* if (remainVehicle(vrp))
+     *    return false;
+     * って出来ると良い? */
+    if (vehicleRemain(vrp))
         return false;
 
     return true;
