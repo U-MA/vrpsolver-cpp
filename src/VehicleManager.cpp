@@ -61,6 +61,9 @@ bool VehicleManager::canVisit(const vrp_problem *vrp, int customer)
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
+    /* moveは訪問済 */
+    if (is_visit_[move-1]) return false;
+
     /* 車体の変更 */
     if (move == kChange)
     {
@@ -71,9 +74,6 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         size_++;
         return true;
     }
-
-    /* moveは訪問済 */
-    if (is_visit_[move-1]) return false;
 
     /* capacity制限を超過 */
     if ((vehicle_[size_-1].capacity() + vrp->demand[move]) > vrp->capacity) return false;
