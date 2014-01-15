@@ -16,10 +16,10 @@ public:
     ~Node(void);
 
     /* getter */
-    int customer(void) const;
-    int count(void) const;
-    int childSize(void) const;
-    int value(void) const;
+    int  customer(void) const;
+    int  count(void) const;
+    int  childSize(void) const;
+    int  value(void) const;
     bool tabu(int customer) const;
 
     void setTabu(int customer);
