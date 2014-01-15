@@ -93,7 +93,7 @@ Node *Node::select(void)
         //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
         if (ucb > maxUcb)
         {
-            maxUcb = ucb;
+            maxUcb   = ucb;
             selected = &child_[i];
         }
     }
