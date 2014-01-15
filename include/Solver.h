@@ -4,6 +4,9 @@
 class Solver
 {
 public:
+    Solver(void) : vrp_(NULL), seed_(2013), count_(1000),
+                   simulation_count_(1) {};
+
     void setProblem(char *filename);
     void setSeed(long seed);
     void setMctsIterationCount(int count);
@@ -12,8 +15,6 @@ public:
     void freeProblem(void);
 
 private:
-    void cookMember(void);
-
     vrp_problem *vrp_;
     long        seed_;
     int         count_;

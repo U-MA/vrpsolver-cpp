@@ -49,25 +49,11 @@ void Solver::setSimulationCount(int count)
     this->simulation_count_ = count;
 }
 
-void Solver::cookMember(void)
+void Solver::run(void)
 {
-    if (seed_ == 0)
-        seed_ = 2013;
-
-    if (count_ == 0)
-        count_ = 1000;
-
-    if (simulation_count_ == 0)
-        simulation_count_ = 1;
-
     printf("seed            : %ld\n"  , seed_);
     printf("search count    : %d\n"   , count_);
     printf("simulation count: %d\n\n" , simulation_count_);
-}
-
-void Solver::run(void)
-{
-    cookMember();
 
     VehicleManager vm;
     while (!vm.isVisitAll(vrp_))
@@ -93,10 +79,10 @@ void Solver::run(void)
 
 void Solver::freeProblem(void)
 {
-    if (vrp_->demand != 0)      free(vrp_->demand);
-    if (vrp_->posx != 0)        free(vrp_->posx);
-    if (vrp_->posy != 0)        free(vrp_->posy);
-    if (vrp_->dist.cost != 0)   free(vrp_->dist.cost);
+    if (vrp_->demand      != 0) free(vrp_->demand);
+    if (vrp_->posx        != 0) free(vrp_->posx);
+    if (vrp_->posy        != 0) free(vrp_->posy);
+    if (vrp_->dist.cost   != 0) free(vrp_->dist.cost);
     if (vrp_->dist.coordx != 0) free(vrp_->dist.coordx);
     if (vrp_->dist.coordy != 0) free(vrp_->dist.coordy);
     
