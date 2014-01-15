@@ -37,6 +37,7 @@ public:
     int  next(void) const;
 
 private:
+    void   setChild(int child_customer);
     double computeUcb(int parentCount);
 
     int  customer_;

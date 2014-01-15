@@ -48,9 +48,14 @@ void Node::setTabu(int customer)
     tabu_[customer] = true;
 }
 
+void Node::setChild(int child_customer)
+{
+    child_[childSize_++].customer_ = child_customer;
+    tabu_[child_customer] = false;
+}
+
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 {
-    int childSize = 0;
     child_ = new Node[vrp->vertnum];
     tabu_  = new bool[vrp->vertnum];
     for (int i=0; i < vrp->vertnum; i++)
@@ -58,21 +63,14 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
-    {
-        child_[childSize++].customer_ = VehicleManager::kChange;
-        tabu_[VehicleManager::kChange] = false;
-    }
+        setChild(VehicleManager::kChange);
 
     /* 各顧客が訪問可能か調べる */
     for (int i=1; i < vrp->vertnum; i++)
     {
         if (!vm.isVisit(i) && vm.canVisit(vrp, i))
-        {
-            child_[childSize++].customer_ = i;
-            tabu_[i] = false;
-        }
+            setChild(i);
     }
-    childSize_ = childSize;
 }
 
 double Node::computeUcb(int parentCount)
