@@ -2,12 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern "C"
-{
-#include "vrp_io.h"
-#include "vrp_types.h"
-}
-
 #include "Node.h"
 #include "Solver.h"
 #include "VehicleManager.h"

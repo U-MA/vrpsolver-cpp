@@ -142,18 +142,18 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* nodeは訪問済み */
     visited[visitedSize++] = this;
 
-    fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
+    //fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
 
     /* SELECTION */
     while (!node->isLeaf())
     {
-        fprintf(stderr, "NODE\n");
+        //fprintf(stderr, "NODE\n");
         parent = node;
         node = node->select();
-        fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
+        //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         if (!node->isLeaf() && node->isTabu(vrp))
         {
-            fprintf(stderr, "TABU\n");
+            //fprintf(stderr, "TABU\n");
             parent->setTabu(node->customer());
             return ; /* 探索を破棄 */
         }
@@ -162,7 +162,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         vm_copy.move(vrp, node->customer());
     }
 
-    fprintf(stderr, "LEAF\n");
+    //fprintf(stderr, "LEAF\n");
 
     /* 後の操作で現在のVehiceManaagerの状態を使う必要が
      * あるかもしれないので、ここで記憶しておく
@@ -173,11 +173,11 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     if (!vm_copy.isFinish(vrp))
     {
         /* EXPANSION */
-        fprintf(stderr, "\tEXPAND\n");
+        //fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
         parent = node;
         node = node->select();
-        fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
+        //fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
         //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
     }
@@ -186,19 +186,19 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     int cost = MISS;
     while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == MISS)
     {
-        fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
-        fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
+        //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
+        //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
         parent->setTabu(node->customer());
         vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
         {
-            fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
+            //fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
             return ; /* 探索を破棄 */
         }
         node = parent->select();
         vm_copy.move(vrp, node->customer());
     }
-    fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
+    //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
     visited[visitedSize++] = node;
 
     /* BACKPROPAGATION */
