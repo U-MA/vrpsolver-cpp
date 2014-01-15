@@ -37,6 +37,7 @@ public:
     int  nextMove(void) const;
 
 private:
+    Node*  selectMostVisitedChild(void) const;
     void   setChild(int child_customer);
     double computeUcb(int parent_count);
 

@@ -201,20 +201,24 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         visited[i]->update(cost);
 }
 
-
-int Node::nextMove(void) const
+Node *Node::selectMostVisitedChild(void) const
 {
+    Node *selected = NULL;
     int maxCount = -1;
-    int move     = -1;
     for (int i=0; i < child_size_; i++)
     {
         int count = child_[i].count();
         if (count > maxCount)
         {
             maxCount = count;
-            move     = child_[i].customer();
+            selected = &child_[i];
         }
     }
+    return selected;
+}
 
-    return move;
+int Node::nextMove(void) const
+{
+    Node *selected = selectMostVisitedChild();
+    return selected->customer();
 }
