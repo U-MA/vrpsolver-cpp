@@ -33,7 +33,6 @@ public:
     Node *select(void);
 
     /* for MonteCarloTreeSearch */
-    void search(const vrp_problem *vrp, const VehicleManager& vm);
     void search(const vrp_problem *vrp, const VehicleManager& vm, int count);
     int  next(void) const;
 

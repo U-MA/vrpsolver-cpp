@@ -143,7 +143,7 @@ TEST(Node, nodeExpandWhenNodeSearch)
 {
     VehicleManager vm;
 
-    node.search(vrp, vm);
+    node.search(vrp, vm, 1);
 
     LONGS_EQUAL(6, node.childSize());
 }
@@ -152,14 +152,14 @@ TEST(Node, valueIsAddedWhenNodeSearch)
 {
     VehicleManager vm;
 
-    node.search(vrp, vm);
+    node.search(vrp, vm, 1);
 
     /* searchにより次の手を車体の変更としているためINF */
     LONGS_EQUAL(202, node.value());
 
-    node.search(vrp, vm);
+    node.search(vrp, vm, 1);
 
-    LONGS_EQUAL(MISS+202, node.value());
+    LONGS_EQUAL(373, node.value());
 }
 
 TEST(Node, valueIsAddedWhenNodeSearch2)
@@ -176,7 +176,7 @@ TEST(Node, searchOnce)
 
     VehicleManager vm;
 
-    node.search(vrp, vm);
+    node.search(vrp, vm, 1);
 
     LONGS_EQUAL(1, node.count());
 }
@@ -185,24 +185,10 @@ TEST(Node, searchTwice)
 {
     VehicleManager vm;
 
-    node.search(vrp, vm);
-    node.search(vrp, vm);
+    node.search(vrp, vm, 1);
+    node.search(vrp, vm, 1);
 
     LONGS_EQUAL(2, node.count());
-}
-
-TEST(Node, finishCheck)
-{
-    VehicleManager vm;
-
-    vm.move(vrp, VehicleManager::kChange);
-
-    Node mct;
-    /* 21というマジックナンバーは実験によって得たもの */
-    for (int i=0; i < 21; i++)
-        mct.search(vrp, vm);
-
-    /* このテストでクラッシュしなければテストはパス */
 }
 
 TEST(Node, DoPrunning)
@@ -273,5 +259,5 @@ TEST(Node, error)
 
     Node mct;
     for (int i=0; i < 40; i++)
-        mct.search(vrp, vm);
+        mct.search(vrp, vm, 1);
 }
