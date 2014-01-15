@@ -51,7 +51,7 @@ void Node::setTabu(int customer)
 void Node::setChild(int child_customer)
 {
     child_[childSize_++].customer_ = child_customer;
-    tabu_[child_customer] = false;
+    tabu_[child_customer]          = false;
 }
 
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
