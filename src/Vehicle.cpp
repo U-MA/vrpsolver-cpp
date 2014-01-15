@@ -9,12 +9,6 @@ extern "C"
 }
 
 
-Vehicle::Vehicle(void)
-{
-    route_length_  = 0;
-    capacity_      = 0;
-}
-
 Vehicle Vehicle::copy(void) const
 {
     Vehicle v_copy;
