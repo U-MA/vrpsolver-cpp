@@ -206,7 +206,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 Node *Node::selectMostVisitedChild(void) const
 {
     Node *selected = NULL;
-    int maxCount = -1;
+    int maxCount   = -1;
     for (int i=0; i < child_size_; i++)
     {
         int count = child_[i].count();
