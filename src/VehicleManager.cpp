@@ -38,23 +38,19 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
-bool VehicleManager::vehicleRemain(const vrp_problem *vrp) const
+bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
 {
     return (size_ < vrp->numroutes);
 }
 
 bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
+    /* 訪問可能な顧客が存在 */
     for (int i=1; i < vrp->vertnum; i++)
         if (!isVisit(i) && canVisit(vrp, i))
             return false;
 
-    /* 次の車体があればfalse */
-    /* if (remainVehicle(vrp))
-     *    return false;
-     * って出来ると良い? */
-    if (vehicleRemain(vrp))
-        return false;
+    if (nextVehicleRemain(vrp)) return false;
 
     return true;
 }
