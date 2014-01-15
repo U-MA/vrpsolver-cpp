@@ -12,6 +12,7 @@ extern "C"
 #include "VrpSimulation.h"
 
 
+/*
 Node::Node(void)
 {
     customer_  = 0;
@@ -21,10 +22,11 @@ Node::Node(void)
     child      = NULL;
     tabu_      = NULL;
 }
+*/
 
 Node::~Node(void)
 {
-    delete[] child;
+    delete[] child_;
     delete[] tabu_;
 }
 
@@ -61,7 +63,7 @@ void Node::setTabu(int customer)
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 {
     int childSize = 0;
-    child = new Node[vrp->vertnum];
+    child_ = new Node[vrp->vertnum];
     tabu_ = new bool[vrp->vertnum];
     for (int i=0; i < vrp->vertnum; i++)
         tabu_[i] = true;
@@ -69,7 +71,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
     {
-        child[childSize++].customer_ = VehicleManager::kChange; /* 各顧客が訪問可能か調べる */
+        child_[childSize++].customer_ = VehicleManager::kChange; /* 各顧客が訪問可能か調べる */
         tabu_[VehicleManager::kChange] = false;
     }
 
@@ -77,7 +79,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     {
         if (!vm.isVisit(i) && vm.canVisit(vrp, i))
         {
-            child[childSize++].customer_ = i;
+            child_[childSize++].customer_ = i;
             tabu_[i] = false;
         }
     }
@@ -100,14 +102,14 @@ Node *Node::select(void)
     for (int i=0; i < childSize_; i++)
     {
         /* tabu_に含まれていれば飛ばす */
-        if (tabu_[child[i].customer()]) continue;
+        if (tabu_[child_[i].customer()]) continue;
 
-        double ucb = child[i].computeUcb(count_);
+        double ucb = child_[i].computeUcb(count_);
         //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
         if (ucb > maxUcb)
         {
             maxUcb = ucb;
-            selected = &child[i];
+            selected = &child_[i];
         }
     }
 
@@ -263,11 +265,11 @@ int Node::next(void) const
     int move     = -1;
     for (int i=0; i < childSize_; i++)
     {
-        int count = child[i].count();
+        int count = child_[i].count();
         if (count > maxCount)
         {
             maxCount = count;
-            move     = child[i].customer();
+            move     = child_[i].customer();
         }
     }
 

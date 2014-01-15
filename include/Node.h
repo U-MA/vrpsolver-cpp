@@ -11,7 +11,8 @@ extern "C"
 class Node
 {
 public:
-    Node(void);
+    Node(void) : customer_(0), count_(0), childSize_(0), value_(0),
+                 child_(NULL), tabu_(NULL) {};
     ~Node(void);
 
     /* getter */
@@ -43,7 +44,7 @@ private:
     int  count_;
     int  childSize_;
     int  value_;
-    Node *child;
+    Node *child_;
     bool *tabu_;
 };
 
