@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 
 extern "C"
@@ -20,7 +21,7 @@ static int extractVehicleSizeAndToInt(char *filename)
     return atoi(vehicle_size);
 }
 
-vrp_problem *createVrpFrom(char *infile)
+vrp_problem *createVrpFromFilePath(char *infile)
 {
     vrp_problem *vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(vrp, infile);

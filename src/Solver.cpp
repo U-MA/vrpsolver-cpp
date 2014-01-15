@@ -11,41 +11,16 @@ extern "C"
 #include "Node.h"
 #include "Solver.h"
 #include "VehicleManager.h"
+#include "wrapper_vrp.h"
 
 Solver::~Solver(void)
 {
-    if (vrp_->demand      != 0) free(vrp_->demand);
-    if (vrp_->posx        != 0) free(vrp_->posx);
-    if (vrp_->posy        != 0) free(vrp_->posy);
-    if (vrp_->dist.cost   != 0) free(vrp_->dist.cost);
-    if (vrp_->dist.coordx != 0) free(vrp_->dist.coordx);
-    if (vrp_->dist.coordy != 0) free(vrp_->dist.coordy);
-    
-    free(vrp_);
-}
-
-/* filename中のkに続く数字文字列を取り出し、整数値に変換 */
-static int extractVehicleSizeAndToInt(char *filename)
-{
-    char *k   = strrchr(filename, 'k');
-    char *dot = strrchr(filename, '.');
-    int  n    = (dot-k) / sizeof(char);
-
-    char vehicle_size[3];
-    strncpy(vehicle_size, k+1, n);
-    vehicle_size[n+1] = '\0';
-    return atoi(vehicle_size);
+    destroyVrp(vrp_);
 }
 
 void Solver::setProblem(char *filename)
 {
-    /* callocとかvrp_ioが見えてるのが嫌い
-     * vrp_ = createVrpFrom(filename);
-     * って書けると嬉しい */
-    vrp_ = (vrp_problem *)calloc(1, sizeof(vrp_problem));
-    vrp_io(vrp_, filename);
-    vrp_->numroutes = extractVehicleSizeAndToInt(filename);
-
+    vrp_ = createVrpFromFilePath(filename);
     printf("file name       : %s\n", filename);
 }
 
@@ -64,11 +39,18 @@ void Solver::setSimulationCount(int count)
     this->simulation_count_ = count;
 }
 
-void Solver::run(void)
+void Solver::printRunParameter(void)
 {
     printf("seed            : %ld\n"  , seed_);
     printf("search count    : %d\n"   , count_);
     printf("simulation count: %d\n\n" , simulation_count_);
+}
+
+
+/* モンテカルロ木探索の実行 */
+void Solver::run(void)
+{
+    printRunParameter();
 
     VehicleManager vm;
     while (!vm.isVisitAll(vrp_))
@@ -80,6 +62,7 @@ void Solver::run(void)
 
         int move = mct.next();
 
+        /* 用意している車体数を超えるとbreak */
         if (!vm.move(vrp_, move))
             break;
     }

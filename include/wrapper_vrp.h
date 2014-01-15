@@ -6,7 +6,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
-vrp_problem *createVrpFrom(char *infile);
+vrp_problem *createVrpFromFilePath(char *infile);
 void destroyVrp(vrp_problem *vrp);
 
 #endif /* CPPSOLVER_CPP_WRAPPER_VRP_H */

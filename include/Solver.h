@@ -15,6 +15,8 @@ public:
     void run(void);
 
 private:
+    void printRunParameter(void);
+
     vrp_problem *vrp_;
     long        seed_;
     int         count_;
