@@ -217,7 +217,7 @@ Node *Node::selectMostVisitedChild(void) const
     return selected;
 }
 
-int Node::nextMove(void) const
+int Node::selectNextMove(void) const
 {
     Node *selected = selectMostVisitedChild();
     return selected->customer();
