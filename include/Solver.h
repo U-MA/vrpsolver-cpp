@@ -14,10 +14,10 @@ public:
 private:
     void cookMember(void);
 
-    vrp_problem *vrp;
-    long        seed;
-    int         count;
-    int         simulationCount;
+    vrp_problem *vrp_;
+    long        seed_;
+    int         count_;
+    int         simulation_count_;
 };
 
 #endif /* VRPSOLVER_CPP_SOLVER_H */

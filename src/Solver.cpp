@@ -27,42 +27,42 @@ static int extractVehicleSizeAndToInt(char *filename)
 
 void Solver::setProblem(char *filename)
 {
-    vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
-    vrp_io(vrp, filename);
-    vrp->numroutes = extractVehicleSizeAndToInt(filename);
+    vrp_ = (vrp_problem *)calloc(1, sizeof(vrp_problem));
+    vrp_io(vrp_, filename);
+    vrp_->numroutes = extractVehicleSizeAndToInt(filename);
 
     printf("file name       : %s\n", filename);
 }
 
 void Solver::setSeed(long seed)
 {
-    this->seed = seed;
+    this->seed_ = seed;
 }
 
 void Solver::setMctsIterationCount(int count)
 {
-    this->count = count;
+    this->count_ = count;
 }
 
 void Solver::setSimulationCount(int count)
 {
-    this->simulationCount = count;
+    this->simulation_count_ = count;
 }
 
 void Solver::cookMember(void)
 {
-    if (seed == 0)
-        seed = 2013;
+    if (seed_ == 0)
+        seed_ = 2013;
 
-    if (count == 0)
-        count = 1000;
+    if (count_ == 0)
+        count_ = 1000;
 
-    if (simulationCount == 0)
-        simulationCount = 1;
+    if (simulation_count_ == 0)
+        simulation_count_ = 1;
 
-    printf("seed            : %ld\n"  , seed);
-    printf("search count    : %d\n"   , count);
-    printf("simulation count: %d\n\n" , simulationCount);
+    printf("seed            : %ld\n"  , seed_);
+    printf("search count    : %d\n"   , count_);
+    printf("simulation count: %d\n\n" , simulation_count_);
 }
 
 void Solver::run(void)
@@ -70,22 +70,22 @@ void Solver::run(void)
     cookMember();
 
     VehicleManager vm;
-    while (!vm.isVisitAll(vrp))
+    while (!vm.isVisitAll(vrp_))
     {
         Node mct;
 
-        for (int i=0; i < count; i++)
-            mct.search(vrp, vm, simulationCount);
+        for (int i=0; i < count_; i++)
+            mct.search(vrp_, vm, simulation_count_);
 
         int move = mct.next();
 
-        if (!vm.move(vrp, move))
+        if (!vm.move(vrp_, move))
             break;
     }
 
     int cost = 1e6;
-    if (vm.isVisitAll(vrp))
-        cost = vm.computeTotalCost(vrp);
+    if (vm.isVisitAll(vrp_))
+        cost = vm.computeTotalCost(vrp_);
 
     vm.print();
     printf("[COST] %6d\n", cost);
@@ -93,12 +93,12 @@ void Solver::run(void)
 
 void Solver::freeProblem(void)
 {
-    if (vrp->demand != 0)      free(vrp->demand);
-    if (vrp->posx != 0)        free(vrp->posx);
-    if (vrp->posy != 0)        free(vrp->posy);
-    if (vrp->dist.cost != 0)   free(vrp->dist.cost);
-    if (vrp->dist.coordx != 0) free(vrp->dist.coordx);
-    if (vrp->dist.coordy != 0) free(vrp->dist.coordy);
+    if (vrp_->demand != 0)      free(vrp_->demand);
+    if (vrp_->posx != 0)        free(vrp_->posx);
+    if (vrp_->posy != 0)        free(vrp_->posy);
+    if (vrp_->dist.cost != 0)   free(vrp_->dist.cost);
+    if (vrp_->dist.coordx != 0) free(vrp_->dist.coordx);
+    if (vrp_->dist.coordy != 0) free(vrp_->dist.coordy);
     
-    free(vrp);
+    free(vrp_);
 }
