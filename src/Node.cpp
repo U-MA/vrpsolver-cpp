@@ -43,7 +43,7 @@ bool Node::tabu(int customer) const
     return tabu_[customer];
 }
 
-void Node::setTabu(int customer)
+void Node::addTabu(int customer)
 {
     tabu_[customer] = true;
 }
@@ -53,7 +53,7 @@ void Node::setTabu(int customer)
 void Node::setChild(int child_customer)
 {
     child_[child_size_++].customer_ = child_customer;
-    tabu_[child_customer]           = false;
+    tabu_[child_customer]           = false; /* tabu_リストから外す */
 }
 
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
@@ -61,7 +61,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     child_ = new Node[vrp->vertnum];
     tabu_  = new bool[vrp->vertnum];
     for (int i=0; i < vrp->vertnum; i++)
-        setTabu(i);
+        addTabu(i);
 
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
@@ -153,7 +153,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         if (!node->isLeaf() && node->isTabu(vrp))
         {
             //fprintf(stderr, "TABU\n");
-            parent->setTabu(node->customer());
+            parent->addTabu(node->customer());
             return ; /* 探索を破棄 */
         }
         visited[visitedSize++] = node;
@@ -185,7 +185,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     {
         //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
         //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
-        parent->setTabu(node->customer());
+        parent->addTabu(node->customer());
         vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
         {

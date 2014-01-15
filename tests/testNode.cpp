@@ -209,7 +209,7 @@ TEST(Node, setTabu)
     Node node;
 
     node.expand(vrp, vm);
-    node.setTabu(3);
+    node.addTabu(3);
     CHECK_TRUE(node.tabu(3));
     CHECK_FALSE(node.tabu(1));
 }
@@ -221,7 +221,7 @@ TEST(Node, isTabu)
     Node node;
     node.expand(vrp, vm);
     for (int i=0; i < vrp->vertnum; i++)
-        node.setTabu(i);
+        node.addTabu(i);
     CHECK_TRUE(node.isTabu(vrp));
 }
 
@@ -243,10 +243,10 @@ TEST(Node, isTabuInMiddle)
     Node node;
     node.expand(vrp, vm);
     CHECK_FALSE(node.isTabu(vrp));
-    node.setTabu(0);
-    node.setTabu(1);
-    node.setTabu(3);
-    node.setTabu(5);
+    node.addTabu(0);
+    node.addTabu(1);
+    node.addTabu(3);
+    node.addTabu(5);
     CHECK_TRUE(node.isTabu(vrp));
 }
 

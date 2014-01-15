@@ -22,7 +22,7 @@ public:
     int  value(void)        const;
     bool tabu(int customer) const;
 
-    void setTabu(int customer);
+    void addTabu(int customer);
 
     bool isLeaf(void) const;
     bool isTabu(const vrp_problem *vrp) const;
