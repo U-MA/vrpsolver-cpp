@@ -35,6 +35,7 @@ private:
     static const int kCustomerMax = 200;
 
     bool nextVehicleRemain(const vrp_problem *vrp) const;
+    bool changeVehicle(const vrp_problem *vrp);
 
     Vehicle vehicle_[kVehicleMax];
     bool    is_visit_[kCustomerMax];

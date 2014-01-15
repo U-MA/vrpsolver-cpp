@@ -65,18 +65,21 @@ bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
     return (vehicle_[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
 }
 
+
+bool VehicleManager::changeVehicle(const vrp_problem *vrp)
+{
+    if (!nextVehicleRemain(vrp)) return false;
+
+    size_++;
+    return true;
+}
+
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
-    /* 車体の変更 */
+    /* 抽象度が一致してない
+     * 条件を関数化する方がよいと思う */
     if (move == kChange)
-    {
-        /* 次の車体が無い */
-        if (!nextVehicleRemain(vrp))
-            return false;
-
-        size_++; /* 車体の変更 */
-        return true;
-    }
+        return changeVehicle(vrp);
 
     if (isVisit(move))        return false;
     if (!canVisit(vrp, move)) return false;
