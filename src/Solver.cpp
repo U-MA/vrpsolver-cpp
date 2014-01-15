@@ -12,6 +12,18 @@ extern "C"
 #include "Solver.h"
 #include "VehicleManager.h"
 
+Solver::~Solver(void)
+{
+    if (vrp_->demand      != 0) free(vrp_->demand);
+    if (vrp_->posx        != 0) free(vrp_->posx);
+    if (vrp_->posy        != 0) free(vrp_->posy);
+    if (vrp_->dist.cost   != 0) free(vrp_->dist.cost);
+    if (vrp_->dist.coordx != 0) free(vrp_->dist.coordx);
+    if (vrp_->dist.coordy != 0) free(vrp_->dist.coordy);
+    
+    free(vrp_);
+}
+
 /* filename中のk以下の数字文字列を取り出し、整数値に変換 */
 static int extractVehicleSizeAndToInt(char *filename)
 {
@@ -75,16 +87,4 @@ void Solver::run(void)
 
     vm.print();
     printf("[COST] %6d\n", cost);
-}
-
-void Solver::freeProblem(void)
-{
-    if (vrp_->demand      != 0) free(vrp_->demand);
-    if (vrp_->posx        != 0) free(vrp_->posx);
-    if (vrp_->posy        != 0) free(vrp_->posy);
-    if (vrp_->dist.cost   != 0) free(vrp_->dist.cost);
-    if (vrp_->dist.coordx != 0) free(vrp_->dist.coordx);
-    if (vrp_->dist.coordy != 0) free(vrp_->dist.coordy);
-    
-    free(vrp_);
 }
