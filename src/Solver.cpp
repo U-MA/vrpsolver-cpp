@@ -12,17 +12,17 @@ extern "C"
 #include "Solver.h"
 #include "VehicleManager.h"
 
-
+/* filename中のk以下の数字文字列を取り出し、整数値に変換 */
 static int extractVehicleSizeAndToInt(char *filename)
 {
     char *k   = strrchr(filename, 'k');
     char *dot = strrchr(filename, '.');
     int  n    = (dot-k) / sizeof(char);
 
-    char numVehicle[3];
-    strncpy(numVehicle, k+1, n);
-    numVehicle[n+1] = '\0';
-    return atoi(numVehicle);
+    char vehicle_size[3];
+    strncpy(vehicle_size, k+1, n);
+    vehicle_size[n+1] = '\0';
+    return atoi(vehicle_size);
 }
 
 void Solver::setProblem(char *filename)
