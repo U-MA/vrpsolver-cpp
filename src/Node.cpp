@@ -86,7 +86,7 @@ Node *Node::select(void)
     double maxUcb = -MISS;
     for (int i=0; i < child_size_; i++)
     {
-        /* tabu_に含まれていれば飛ばす */
+        /* tabu_に含まれているものは選択しない */
         if (tabu_[child_[i].customer()]) continue;
 
         double ucb = child_[i].computeUcb(count_);
