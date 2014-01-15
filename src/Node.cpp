@@ -51,7 +51,7 @@ void Node::setTabu(int customer)
 void Node::setChild(int child_customer)
 {
     child_[child_size_++].customer_ = child_customer;
-    tabu_[child_customer]          = false;
+    tabu_[child_customer]           = false;
 }
 
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
@@ -59,7 +59,7 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     child_ = new Node[vrp->vertnum];
     tabu_  = new bool[vrp->vertnum];
     for (int i=0; i < vrp->vertnum; i++)
-        tabu_[i] = true;
+        setTabu(i);
 
     /* 次の車体が存在 */
     if (vm.size() < vrp->numroutes)
@@ -110,10 +110,9 @@ bool Node::isLeaf(void) const
 bool Node::isTabu(const vrp_problem *vrp) const
 {
     for (int i=0; i < vrp->vertnum; i++)
-    {
         if (!tabu_[i])
             return false;
-    }
+
     return true;
 }
 
