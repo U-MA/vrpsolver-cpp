@@ -22,8 +22,8 @@ public:
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
-    bool isFinish(const vrp_problem *vrp);
-    bool canVisit(const vrp_problem *vrp, int customer);
+    bool isFinish(const vrp_problem *vrp) const;
+    bool canVisit(const vrp_problem *vrp, int customer) const;
 
     bool move(const vrp_problem *vrp, int move);
     int  computeTotalCost(const vrp_problem *vrp) const;

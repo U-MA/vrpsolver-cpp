@@ -38,7 +38,7 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
-bool VehicleManager::isFinish(const vrp_problem *vrp)
+bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
     for (int i=1; i < vrp->vertnum; i++)
         if (!isVisit(i) && canVisit(vrp, i))
@@ -56,7 +56,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp)
  * 関数名が良い
  * constraint, restriction, limitation
  * とか使えるかも */
-bool VehicleManager::canVisit(const vrp_problem *vrp, int customer)
+bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
 {
     return (vehicle_[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
 }
