@@ -34,7 +34,7 @@ public:
 
     /* for MonteCarloTreeSearch */
     void search(const vrp_problem *vrp, const VehicleManager& vm, int count);
-    int  next(void) const;
+    int  nextMove(void) const;
 
 private:
     void   setChild(int child_customer);

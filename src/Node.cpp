@@ -82,7 +82,8 @@ double Node::computeUcb(int parent_count)
 
 Node *Node::select(void)
 {
-    double max_ucb   = -MISS;
+    /* MISSっていう値はわかりづらい.INFとかのほうがわかりやすいのでは? */
+    double max_ucb   = - MISS;
     Node   *selected = NULL;
 
     for (int i=0; i < child_size_; i++)
@@ -135,7 +136,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     Node *node   = this;
     Node *parent = NULL;
 
-    /* nodeは訪問済み */
+    /* 木の根は訪問済み */
     visited[visitedSize++] = this;
 
     //fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
@@ -145,7 +146,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     {
         //fprintf(stderr, "NODE\n");
         parent = node;
-        node = node->select();
+        node   = node->select();
         //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         if (!node->isLeaf() && node->isTabu(vrp))
         {
@@ -154,7 +155,6 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
             return ; /* 探索を破棄 */
         }
         visited[visitedSize++] = node;
-        //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
     }
 
@@ -172,9 +172,8 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         //fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
         parent = node;
-        node = node->select();
+        node   = node->select();
         //fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
-        //printf("node->customer() is %d\n", node->customer());
         vm_copy.move(vrp, node->customer());
     }
 
@@ -203,7 +202,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 }
 
 
-int Node::next(void) const
+int Node::nextMove(void) const
 {
     int maxCount = -1;
     int move     = -1;

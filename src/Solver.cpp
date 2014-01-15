@@ -54,7 +54,7 @@ void Solver::run(void)
         for (int i=0; i < count_; i++)
             mct.search(vrp_, vm, simulation_count_);
 
-        int move = mct.next();
+        int move = mct.nextMove();
 
         /* 用意している車体数を超えるとbreak */
         if (!vm.move(vrp_, move))
