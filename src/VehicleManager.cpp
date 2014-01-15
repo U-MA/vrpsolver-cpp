@@ -3,12 +3,14 @@
 
 #include "VehicleManager.h" 
 
+/*
 VehicleManager::VehicleManager(void)
 {
     size_ = 1;
     for (int i=0; i < kCustomerMax; i++)
         is_visit_[i] = false;
 }
+*/
 
 VehicleManager VehicleManager::copy(void) const
 {

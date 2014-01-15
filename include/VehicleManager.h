@@ -13,7 +13,7 @@ class VehicleManager
 public:
     static const int kChange = 0;
 
-    VehicleManager(void);
+    VehicleManager(void) : vehicle_(), is_visit_(), size_(1) {};
 
     VehicleManager copy(void) const;
 
