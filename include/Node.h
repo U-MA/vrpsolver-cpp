@@ -11,7 +11,7 @@ extern "C"
 class Node
 {
 public:
-    Node(void) : customer_(0), count_(0), childSize_(0), value_(0),
+    Node(void) : customer_(0), count_(0), child_size_(0), value_(0),
                  child_(NULL), tabu_(NULL) {};
     ~Node(void);
 
@@ -42,7 +42,7 @@ private:
 
     int  customer_;
     int  count_;
-    int  childSize_;
+    int  child_size_;
     int  value_;
     Node *child_;
     bool *tabu_;

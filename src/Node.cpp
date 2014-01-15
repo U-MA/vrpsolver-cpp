@@ -30,7 +30,7 @@ int Node::count(void) const
 
 int Node::childSize(void) const
 {
-    return childSize_;
+    return child_size_;
 }
 
 int Node::value(void) const
@@ -50,7 +50,7 @@ void Node::setTabu(int customer)
 
 void Node::setChild(int child_customer)
 {
-    child_[childSize_++].customer_ = child_customer;
+    child_[child_size_++].customer_ = child_customer;
     tabu_[child_customer]          = false;
 }
 
@@ -84,7 +84,7 @@ Node *Node::select(void)
 {
     Node *selected = NULL;
     double maxUcb = -MISS;
-    for (int i=0; i < childSize_; i++)
+    for (int i=0; i < child_size_; i++)
     {
         /* tabu_に含まれていれば飛ばす */
         if (tabu_[child_[i].customer()]) continue;
@@ -103,7 +103,7 @@ Node *Node::select(void)
 
 bool Node::isLeaf(void) const
 {
-    return (childSize_ == 0);
+    return (child_size_ == 0);
 }
 
 bool Node::isTabu(const vrp_problem *vrp) const
@@ -207,7 +207,7 @@ int Node::next(void) const
 {
     int maxCount = -1;
     int move     = -1;
-    for (int i=0; i < childSize_; i++)
+    for (int i=0; i < child_size_; i++)
     {
         int count = child_[i].count();
         if (count > maxCount)
