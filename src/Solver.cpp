@@ -24,7 +24,7 @@ Solver::~Solver(void)
     free(vrp_);
 }
 
-/* filename中のk以下の数字文字列を取り出し、整数値に変換 */
+/* filename中のkに続く数字文字列を取り出し、整数値に変換 */
 static int extractVehicleSizeAndToInt(char *filename)
 {
     char *k   = strrchr(filename, 'k');
