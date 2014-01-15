@@ -71,11 +71,11 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
             setChild(i);
 }
 
-double Node::computeUcb(int parentCount)
+double Node::computeUcb(int parent_count)
 {
     double ucb = 1e6 + (rand() % (int)1e6);
     if (count_ != 0)
-        ucb = - value_ / count_ + 1.0 * sqrt(log((double)parentCount+1)) / count_;
+        ucb = - value_ / count_ + 1.0 * sqrt(log((double)parent_count+1)) / count_;
 
     return ucb;
 }

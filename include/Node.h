@@ -38,7 +38,7 @@ public:
 
 private:
     void   setChild(int child_customer);
-    double computeUcb(int parentCount);
+    double computeUcb(int parent_count);
 
     int  customer_;
     int  count_;
