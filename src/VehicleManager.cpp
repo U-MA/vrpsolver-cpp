@@ -64,11 +64,9 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     /* 車体の変更 */
     if (move == kChange)
     {
+        /* 次の車体が無い */
         if (size_ == vrp->numroutes)
-        {
-            /* 次の車体が無い */
             return false;
-        }
 
         size_++;
         return true;
