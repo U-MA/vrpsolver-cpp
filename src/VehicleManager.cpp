@@ -74,7 +74,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         if (!nextVehicleRemain(vrp))
             return false;
 
-        size_++;
+        size_++; /* 車体の変更 */
         return true;
     }
 
@@ -82,7 +82,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     if (is_visit_[move-1]) return false;
 
     /* capacity制限を超過 */
-    if ((vehicle_[size_-1].capacity() + vrp->demand[move]) > vrp->capacity) return false;
+    if (!canVisit(vrp, move)) return false;
 
     vehicle_[size_-1].visit(vrp, move);
     return (is_visit_[move-1] = true);
