@@ -12,18 +12,6 @@ extern "C"
 #include "VrpSimulation.h"
 
 
-/*
-Node::Node(void)
-{
-    customer_  = 0;
-    count_     = 0;
-    childSize_ = 0;
-    value_     = 0;
-    child      = NULL;
-    tabu_      = NULL;
-}
-*/
-
 Node::~Node(void)
 {
     delete[] child_;
