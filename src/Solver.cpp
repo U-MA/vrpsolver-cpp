@@ -39,6 +39,9 @@ static int extractVehicleSizeAndToInt(char *filename)
 
 void Solver::setProblem(char *filename)
 {
+    /* callocとかvrp_ioが見えてるのが嫌い
+     * vrp_ = createVrpFrom(filename);
+     * って書けると嬉しい */
     vrp_ = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(vrp_, filename);
     vrp_->numroutes = extractVehicleSizeAndToInt(filename);
