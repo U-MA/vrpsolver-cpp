@@ -69,11 +69,9 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
             /* 次の車体が無い */
             return false;
         }
-        else
-        {
-            size_++;
-            return true;
-        }
+
+        size_++;
+        return true;
     }
 
     /* 訪問済 */
