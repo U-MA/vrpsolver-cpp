@@ -82,8 +82,9 @@ double Node::computeUcb(int parent_count)
 
 Node *Node::select(void)
 {
-    Node *selected = NULL;
-    double max_ucb = -MISS;
+    double max_ucb   = -MISS;
+    Node   *selected = NULL;
+
     for (int i=0; i < child_size_; i++)
     {
         /* tabu_に含まれているものは選択しない */
@@ -93,7 +94,7 @@ Node *Node::select(void)
         //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
         if (ucb > max_ucb)
         {
-            max_ucb   = ucb;
+            max_ucb  = ucb;
             selected = &child_[i];
         }
     }
