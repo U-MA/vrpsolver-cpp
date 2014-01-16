@@ -9,10 +9,9 @@ extern "C"
 #include "VehicleManager.h"
 
 
-#define INF 1e6
-
 namespace VrpSimulation
 {
+    static const int kInfinity = 1e6;
     int sequentialCws(const vrp_problem *vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount);

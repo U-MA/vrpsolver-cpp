@@ -44,5 +44,5 @@ TEST(Simulation, sequentialRandomSimulationWithLoop)
 TEST(Simulation, sequentialRandomSimulationIsMiss)
 {
     vm.move(vrp, VehicleManager::kChange);
-    LONGS_EQUAL(INF, VrpSimulation::sequentialRandomSimulation(vrp, vm, 20));
+    LONGS_EQUAL(VrpSimulation::kInfinity, VrpSimulation::sequentialRandomSimulation(vrp, vm, 20));
 }
