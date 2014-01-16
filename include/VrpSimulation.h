@@ -9,7 +9,7 @@ extern "C"
 #include "VehicleManager.h"
 
 
-#define MISS 1e6
+#define INF 1e6
 
 namespace VrpSimulation
 {

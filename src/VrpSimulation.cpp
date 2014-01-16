@@ -63,7 +63,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         }
     }
 
-    int cost = MISS;
+    int cost = INF;
     if (vm.isVisitAll(vrp))
         cost = vm.computeTotalCost(vrp);
 
@@ -72,7 +72,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount)
 {
-    int minCost = MISS;
+    int minCost = INF;
     for (int i=0; i < loopCount; i++)
     {
         VehicleManager vm_copy = vm.copy();

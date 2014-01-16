@@ -199,7 +199,7 @@ TEST(Node, DoPrunning)
     for (int i=0; i < 100; i++)
         mct.search(vrp, vm, 1);
 
-    CHECK(mct.value() < MISS);
+    CHECK(mct.value() < INF);
 }
 
 TEST(Node, setTabu)

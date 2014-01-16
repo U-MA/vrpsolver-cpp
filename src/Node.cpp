@@ -85,7 +85,7 @@ double Node::computeUcb(int parent_count)
 Node *Node::select(void)
 {
     /* MISSっていう値はわかりづらい.INFとかのほうがわかりやすいのでは? */
-    double max_ucb   = - MISS;
+    double max_ucb   = - INF;
     Node   *selected = NULL;
 
     for (int i=0; i < child_size_; i++)
@@ -180,8 +180,8 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     }
 
     /* SIMULATION */
-    int cost = MISS;
-    while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == MISS)
+    int cost = INF;
+    while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == INF)
     {
         //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
         //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
