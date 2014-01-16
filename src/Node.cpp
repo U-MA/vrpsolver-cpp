@@ -82,9 +82,9 @@ double Node::computeUcb(int parent_count)
     return ucb;
 }
 
+/* selectMaxUcbChildとかどう? */
 Node *Node::select(void)
 {
-    /* MISSっていう値はわかりづらい.INFとかのほうがわかりやすいのでは? */
     double max_ucb   = - VrpSimulation::kInfinity;
     Node   *selected = NULL;
 
