@@ -1,6 +1,11 @@
 #ifndef VRPSOLVER_CPP_DEVICEVRP_H
 #define VRPSOLVER_CPP_DEVICEVRP_H
 
+extern "C"
+{
+#include "vrp_types.h"
+}
+
 vrp_problem *createVrpOnDevice(void);
 void deleteVrpOnDevice(vrp_problem *device_vrp);
 
