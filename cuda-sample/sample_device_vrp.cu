@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
     vrp_problem *device_vrp = createVrpOnDevice();
 
-    deleteVrpOnDeice(device_vrp);
+    deleteVrpOnDevice(device_vrp);
 
     return 0;
 }
