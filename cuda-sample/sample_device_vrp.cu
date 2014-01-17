@@ -25,6 +25,10 @@ void copyCorrectly(void)
     {
         printf("copyCorrectly is fail\n");
     }
+    else
+    {
+        printf("copyCorrectly is success\n");
+    }
 
     deleteVrpOnDevice(device_vrp);
 }
