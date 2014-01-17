@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "../include/device_vrp.h"
 
 /* device上のvrpデータを作成して解放する */
