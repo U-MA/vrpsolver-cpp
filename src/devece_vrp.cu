@@ -14,8 +14,14 @@ vrp_problem *createVrpOnDevice(void)
 
 void deleteVrpOnDevice(vrp_problem *device_vrp)
 {
-    cudaFree(device_vrp->demand);
-    cudaFree(device_vrp->dist.cost);
+    int *device_ptr = NULL;
+
+    cudaMemcpy(&device_ptr, &device_vrp->demand, sizeof(int *));
+    cudaFree(device_ptr);
+
+    cudaMemcpy(&device_ptr, &device_vrp->dist.cost, sizeof(int *));
+    cudaFree(device_ptr);
+
     cudaFree(device_vrp);
 }
 
