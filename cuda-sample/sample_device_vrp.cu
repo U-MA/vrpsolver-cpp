@@ -7,9 +7,21 @@ void createAndDelete(void)
     deleteVrpOnDevice(device_vrp);
 }
 
+void copyCorrectly(void)
+{
+    vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
+    host_vrp->vertnum = 100;
+
+    vrp_problem *device_vrp = createVrpOnDevice();
+    copyVrpHostToDevice(device_vrp, host_vrp);
+
+    deleteVrpOnDevice(device_vrp);
+}
+
 int main(int argc, char **argv)
 {
     createAndDelete();
+    copyCorrectly();
 
     return 0;
 }
