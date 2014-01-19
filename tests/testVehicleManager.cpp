@@ -136,20 +136,6 @@ TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
     CHECK_FALSE(vm.move(vrp, 5));
 }
 
-TEST(VehicleManager, canVisit)
-{
-    CHECK_TRUE(vm.checkCapacityConstraint(vrp, 1));
-}
-
-TEST(VehicleManager, CanNotVisit)
-{
-    vm.move(vrp, 1);
-    vm.move(vrp, 2);
-    vm.move(vrp, 4);
-
-    CHECK_FALSE(vm.checkCapacityConstraint(vrp, 3));
-}
-
 TEST(VehicleManager, isFinishFail)
 {
     CHECK_FALSE(vm.isFinish(vrp));

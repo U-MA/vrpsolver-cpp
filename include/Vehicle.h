@@ -16,6 +16,7 @@ public:
     /* getter */
     int  capacity(void) const;
 
+    bool isOverCapacity(const vrp_problem *vrp, int customer) const;
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
 

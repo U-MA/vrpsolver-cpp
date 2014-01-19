@@ -34,6 +34,11 @@ static bool customerIsInBound(int customer, int customer_end)
     return (0 < customer && customer < customer_end);
 }
 
+bool Vehicle::isOverCapacity(const vrp_problem *vrp, int customer) const
+{
+    return (capacity_ + vrp->demand[customer] > vrp->capacity);
+}
+
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {
     if (!customerIsInBound(customer, vrp->vertnum))
