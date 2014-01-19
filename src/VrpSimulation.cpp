@@ -7,37 +7,46 @@ extern "C"
 
 #include "VrpSimulation.h"
 
-static void electCandidates(const vrp_problem *vrp, VehicleManager &vm, int *candidates, int *candidate_size)
+class Candidates
+{
+public:
+    Candidates(void) : candidate_(), candidate_size_(0) {};
+    void correct(const vrp_problem *vrp, VehicleManager &vm);
+    int  select(void);
+
+private:
+    int candidate_[200];
+    int candidate_size_;
+};
+
+void Candidates::correct(const vrp_problem *vrp, VehicleManager &vm)
 {
     for (int i=1; i < vrp->vertnum; i++)
     {
         if (!vm.isVisit(i) && vm.canVisit(vrp, i))
-            candidates[(*candidate_size)++] = i;
+            candidate_[candidate_size_++] = i;
     }
+}
+
+int Candidates::select(void)
+{
+    if (candidate_size_ == 0)
+        return VehicleManager::kChange;
+    else
+        return candidate_[rand() % candidate_size_];
 }
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
     while (!vm.isVisitAll(vrp))
     {
-        int candidates[200], candidatesSize = 0;
+        Candidates candidates;
 
-        /* 次に選ばれる顧客の候補を調べる */
-        electCandidates(vrp, vm, candidates, &candidatesSize);
+        candidates.correct(vrp, vm);
+        int next_move = candidates.select();
 
-        if (candidatesSize == 0)
-        {
-            /* 候補がいなければ次の車体へ
-             * 但し, moveが失敗するとbreak */
-            if (!vm.move(vrp, VehicleManager::kChange))
-                break;
-        }
-        else
-        {
-            /* 候補の中から無作為に一つ選び、その動作を行う */
-            int nextCustomer = candidates[rand() % candidatesSize];
-            vm.move(vrp, nextCustomer);
-        }
+        if (!vm.move(vrp, next_move))
+            break;
     }
 
     int cost = kInfinity;
