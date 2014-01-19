@@ -75,12 +75,12 @@ bool VehicleManager::changeVehicle(const vrp_problem *vrp)
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
-    /* 抽象度が一致してない
-     * 条件を関数化する方がよいと思う */
-    if (move == kChange)
+    bool is_change = (move == kChange);
+    if (is_change)
         return changeVehicle(vrp);
 
-    if (!canVisit(vrp, move)) return false;
+    if (!canVisit(vrp, move))
+        return false;
 
     vehicle_[vehicle_size_-1].visit(vrp, move);
     return (is_visit_[move-1] = true);
