@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "VehicleManager.h"
 
 __global__
