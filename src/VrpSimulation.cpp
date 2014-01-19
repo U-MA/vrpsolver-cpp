@@ -36,6 +36,7 @@ int Candidates::select(void)
         return candidate_[rand() % candidate_size_];
 }
 
+
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
     while (!vm.isVisitAll(vrp))
@@ -46,14 +47,10 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         int next_move = candidates.select();
 
         if (!vm.move(vrp, next_move))
-            break;
+            return kInfinity;
     }
 
-    int cost = kInfinity;
-    if (vm.isVisitAll(vrp))
-        cost = vm.computeTotalCost(vrp);
-
-    return cost;
+    return vm.computeTotalCost(vrp);
 }
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount)
