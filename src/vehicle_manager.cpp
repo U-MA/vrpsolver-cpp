@@ -7,10 +7,10 @@ VehicleManager VehicleManager::copy(void) const
 {
     VehicleManager vm_copy;
 
-    vm_copy.size_ = size_;
+    vm_copy.vehicle_size_ = vehicle_size_;
 
     /* 使ってる分のVehicleだけコピー */
-    for (int i=0; i < size_; i++)
+    for (int i=0; i < vehicle_size_; i++)
         vm_copy.vehicle_[i] = vehicle_[i].copy();
 
     const size_t is_visit_bytes = kCustomerMax * sizeof(bool);
@@ -21,7 +21,7 @@ VehicleManager VehicleManager::copy(void) const
 
 int VehicleManager::size(void) const
 {
-    return size_;
+    return vehicle_size_;
 }
 
 bool VehicleManager::isVisit(int customer) const
@@ -40,7 +40,7 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 
 bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
 {
-    return (size_ < vrp->numroutes);
+    return (vehicle_size_ < vrp->numroutes);
 }
 
 bool VehicleManager::isFinish(const vrp_problem *vrp) const
@@ -62,7 +62,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
  * とか使えるかも */
 bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
 {
-    return (vehicle_[size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
+    return (vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
 }
 
 
@@ -70,7 +70,7 @@ bool VehicleManager::changeVehicle(const vrp_problem *vrp)
 {
     if (!nextVehicleRemain(vrp)) return false;
 
-    size_++;
+    vehicle_size_++;
     return true;
 }
 
@@ -84,14 +84,14 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     if (isVisit(move))        return false;
     if (!canVisit(vrp, move)) return false;
 
-    vehicle_[size_-1].visit(vrp, move);
+    vehicle_[vehicle_size_-1].visit(vrp, move);
     return (is_visit_[move-1] = true);
 }
 
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {
     int total_cost = 0;
-    for (int i=0; i < size_; i++)
+    for (int i=0; i < vehicle_size_; i++)
         total_cost += vehicle_[i].computeCost(vrp);
 
     return total_cost;
@@ -99,7 +99,7 @@ int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 
 void VehicleManager::print(void) const
 {
-    for (int i=0; i < size_; i++)
+    for (int i=0; i < vehicle_size_; i++)
     {
         printf("vehicle %2d", i);
         vehicle_[i].print();

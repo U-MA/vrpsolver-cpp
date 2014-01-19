@@ -13,7 +13,7 @@ class VehicleManager
 public:
     static const int kChange = 0;
 
-    VehicleManager(void) : vehicle_(), is_visit_(), size_(1) {};
+    VehicleManager(void) : vehicle_(), vehicle_size_(1), is_visit_() {};
 
     VehicleManager copy(void) const;
 
@@ -22,6 +22,7 @@ public:
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
+
     bool isFinish(const vrp_problem *vrp) const;
     bool canVisit(const vrp_problem *vrp, int customer) const;
     bool nextVehicleRemain(const vrp_problem *vrp) const;
@@ -38,8 +39,8 @@ private:
     bool changeVehicle(const vrp_problem *vrp);
 
     Vehicle vehicle_[kVehicleMax];
+    int     vehicle_size_;
     bool    is_visit_[kCustomerMax];
-    int     size_; /* 車体の数 */
 };
 
 #endif /* VRPSOLVER_CPP_VEHICLE_MANAGER_H */
