@@ -161,10 +161,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 
     //fprintf(stderr, "LEAF\n");
 
-    /* 後の操作で現在のVehiceManaagerの状態を使う必要が
-     * あるかもしれないので、ここで記憶しておく
-     * 囲碁将棋の「待った」から来ている */
-    VehicleManager matta = vm_copy.copy();
+    VehicleManager parent_vm = vm_copy.copy();
 
     /* nodeが全探索木の葉でなければexpandする*/
     if (!vm_copy.isFinish(vrp))
@@ -186,7 +183,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
         //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
         parent->addTabu(node->customer());
-        vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
+        vm_copy = parent_vm.copy(); /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
         {
             //fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
