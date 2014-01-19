@@ -48,8 +48,7 @@ int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (route_length_ == 0) return 0;
 
-    int i;
-    int cost = vrp->dist.cost[INDEX(0, route_[0])];
+    int i, cost = vrp->dist.cost[INDEX(0, route_[0])];
     for (i=1; i < route_length_; i++)
     {
         cost += vrp->dist.cost[INDEX(route_[i-1], route_[i])];
