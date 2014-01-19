@@ -4,7 +4,7 @@
 
 #include "VrpProblems.h"
 
-#include "Solver.h"
+#include "solver.h"
 
 TEST_GROUP(Solver)
 {

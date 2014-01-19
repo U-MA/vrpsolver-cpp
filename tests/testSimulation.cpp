@@ -8,14 +8,14 @@ extern "C"
 
 #include "VrpProblems.h"
 
-#include "SavingsList.h"
-#include "VrpSimulation.h"
-#include "VehicleManager.h"
+#include "simulator.h"
+#include "vehicle_manager.h"
 
 TEST_GROUP(Simulation)
 {
     vrp_problem    *vrp;
     VehicleManager vm;
+    Simulator simulator;
     void setup()
     {
         srand(2013);
@@ -33,16 +33,16 @@ TEST_GROUP(Simulation)
 
 TEST(Simulation, sequenatialRandomSimulation)
 {
-    LONGS_EQUAL(206, VrpSimulation::sequentialRandomSimulation(vrp, vm));
+    LONGS_EQUAL(206, simulator.sequentialRandomSimulation(vrp, vm));
 }
 
 TEST(Simulation, sequentialRandomSimulationWithLoop)
 {
-    LONGS_EQUAL(171, VrpSimulation::sequentialRandomSimulation(vrp, vm, 1000));
+    LONGS_EQUAL(171, simulator.sequentialRandomSimulation(vrp, vm, 1000));
 }
 
 TEST(Simulation, sequentialRandomSimulationIsMiss)
 {
     vm.move(vrp, VehicleManager::kChange);
-    LONGS_EQUAL(VrpSimulation::kInfinity, VrpSimulation::sequentialRandomSimulation(vrp, vm, 20));
+    LONGS_EQUAL(1e6, simulator.sequentialRandomSimulation(vrp, vm, 20));
 }

@@ -8,7 +8,7 @@ extern "C"
 
 #include "VrpProblems.h"
 
-#include "VehicleManager.h"
+#include "vehicle_manager.h"
 
 TEST_GROUP(VehicleManager)
 {

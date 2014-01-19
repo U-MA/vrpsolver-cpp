@@ -1,12 +1,12 @@
-objs/./src/Solver.o: src/Solver.cpp \
+objs/./src/solver.o: src/solver.cpp \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
  cpputest-3.5/include/CppUTest/CppUTestConfig.h \
  cpputest-3.5/include/CppUTest/StandardCLibrary.h \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorMallocMacros.h \
- include/Node.h symphony/vrp_types.h symphony/sym_proto.h \
+ include/node.h symphony/vrp_types.h symphony/sym_proto.h \
  symphony/vrp_common_types.h symphony/vrp_cg_params.h \
- symphony/vrp_lp_params.h include/VehicleManager.h include/Vehicle.h \
- include/Solver.h include/VehicleManager.h include/wrapper_vrp.h
+ symphony/vrp_lp_params.h include/vehicle_manager.h include/vehicle.h \
+ include/solver.h include/vehicle_manager.h include/wrapper_vrp.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
@@ -16,7 +16,7 @@ cpputest-3.5/include/CppUTest/StandardCLibrary.h:
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorMallocMacros.h:
 
-include/Node.h:
+include/node.h:
 
 symphony/vrp_types.h:
 
@@ -28,12 +28,12 @@ symphony/vrp_cg_params.h:
 
 symphony/vrp_lp_params.h:
 
-include/VehicleManager.h:
+include/vehicle_manager.h:
 
-include/Vehicle.h:
+include/vehicle.h:
 
-include/Solver.h:
+include/solver.h:
 
-include/VehicleManager.h:
+include/vehicle_manager.h:
 
 include/wrapper_vrp.h:

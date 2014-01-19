@@ -6,7 +6,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "VehicleManager.h"
+#include "vehicle_manager.h"
 
 class Node
 {
@@ -30,7 +30,7 @@ public:
     void update(int value);
 
     /* privateにしたいがテストのためpublicにしている */
-    Node *select(void);
+    Node *selectMaxUcbChild(void);
 
     /* for MonteCarloTreeSearch */
     void search(const vrp_problem *vrp, const VehicleManager& vm, int count);

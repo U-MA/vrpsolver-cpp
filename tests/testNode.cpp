@@ -8,9 +8,9 @@ extern "C"
 
 #include "VrpProblems.h"
 
-#include "Node.h"
-#include "VehicleManager.h"
-#include "VrpSimulation.h"
+#include "node.h"
+#include "vehicle_manager.h"
+#include "simulator.h"
 
 
 TEST_GROUP(Node)
@@ -57,30 +57,30 @@ TEST(Node, createChild)
 
 TEST(Node, returnNullWhenNodeSelectBeforeExpand)
 {
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     POINTERS_EQUAL(NULL, selected);
 }
 
 TEST(Node, selectChild)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     LONGS_EQUAL(1, selected->customer());
 }
 
 TEST(Node, selectChildWithMaxUcb)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     selected->update(100);
-    selected = node.select();
+    selected = node.selectMaxUcbChild();
     LONGS_EQUAL(0, selected->customer());
 }
 
 TEST(Node, update)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
 
     selected->update(100);
     LONGS_EQUAL(1, selected->count());
@@ -199,7 +199,7 @@ TEST(Node, DoPrunning)
     for (int i=0; i < 100; i++)
         mct.search(vrp, vm, 1);
 
-    CHECK(mct.value() < VrpSimulation::kInfinity);
+    CHECK(mct.value() < 1e6);
 }
 
 TEST(Node, setTabu)

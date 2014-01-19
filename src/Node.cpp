@@ -7,9 +7,9 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "Node.h"
-#include "VehicleManager.h"
-#include "VrpSimulation.h"
+#include "node.h"
+#include "vehicle_manager.h"
+#include "simulator.h"
 
 
 Node::~Node(void)
@@ -63,7 +63,6 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     for (int i=0; i < vrp->vertnum; i++)
         addTabu(i);
 
-    /* 次の車体が存在 */
     if (vm.nextVehicleRemain(vrp))
         setChild(VehicleManager::kChange);
 
@@ -82,23 +81,23 @@ double Node::computeUcb(int parent_count)
     return ucb;
 }
 
-/* selectMaxUcbChildとかどう? */
-Node *Node::select(void)
+Node *Node::selectMaxUcbChild(void)
 {
-    double max_ucb   = - VrpSimulation::kInfinity;
+    double max_ucb   = - 1e6;
     Node   *selected = NULL;
 
     for (int i=0; i < child_size_; i++)
     {
-        /* tabu_に含まれているものは選択しない */
-        if (tabu_[child_[i].customer()]) continue;
+        Node *child        = &child_[i];
+        bool child_is_tabu = tabu_[child->customer()];
 
-        double ucb = child_[i].computeUcb(count_);
-        //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
+        if (child_is_tabu) continue;
+
+        double ucb = child->computeUcb(count_);
         if (ucb > max_ucb)
         {
             max_ucb  = ucb;
-            selected = &child_[i];
+            selected = child;
         }
     }
 
@@ -135,67 +134,51 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     Node *visited[300];
     int  visited_size = 0;
 
-    Node *node   = this;
     Node *parent = NULL;
+    Node *node   = this;
 
     /* 木の根は訪問済み */
     visited[visited_size++] = this;
 
-    //fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
-
     /* SELECTION */
     while (!node->isLeaf())
     {
-        //fprintf(stderr, "NODE\n");
-        parent = node;
-        node   = node->select();
-        //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
-        if (!node->isLeaf() && node->isTabu(vrp))
+        if (node->isTabu(vrp))
         {
-            //fprintf(stderr, "TABU\n");
             parent->addTabu(node->customer());
             return ; /* 探索を破棄 */
         }
+        parent = node;
+        node   = node->selectMaxUcbChild();
         visited[visited_size++] = node;
         vm_copy.move(vrp, node->customer());
     }
 
-    //fprintf(stderr, "LEAF\n");
-
-    /* 後の操作で現在のVehiceManaagerの状態を使う必要が
-     * あるかもしれないので、ここで記憶しておく
-     * 囲碁将棋の「待った」から来ている */
-    VehicleManager matta = vm_copy.copy();
+    VehicleManager parent_vm = vm_copy.copy();
 
     /* nodeが全探索木の葉でなければexpandする*/
     if (!vm_copy.isFinish(vrp))
     {
         /* EXPANSION */
-        //fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
         parent = node;
-        node   = node->select();
-        //fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
+        node   = node->selectMaxUcbChild();
         vm_copy.move(vrp, node->customer());
     }
 
     /* SIMULATION */
-    int cost = VrpSimulation::kInfinity;
-    while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == VrpSimulation::kInfinity)
+    int cost = 1e6;
+    Simulator simulator;
+    while ((cost = simulator.sequentialRandomSimulation(vrp, vm_copy, count)) == 1e6)
     {
-        //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
-        //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
         parent->addTabu(node->customer());
-        vm_copy = matta.copy(); /* VehicleManagerを直前の状態に移す */
+        vm_copy = parent_vm.copy(); /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
-        {
-            //fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
             return ; /* 探索を破棄 */
-        }
-        node = parent->select();
+
+        node = parent->selectMaxUcbChild();
         vm_copy.move(vrp, node->customer());
     }
-    //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
     visited[visited_size++] = node;
 
     /* BACKPROPAGATION */
