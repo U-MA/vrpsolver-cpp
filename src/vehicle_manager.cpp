@@ -47,7 +47,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
     /* 訪問可能な顧客が存在 */
     for (int i=1; i < vrp->vertnum; i++)
-        if (!isVisit(i) && canVisit(vrp, i))
+        if (!isVisit(i) && checkCapacityConstraint(vrp, i))
             return false;
 
     if (nextVehicleRemain(vrp)) return false;
@@ -55,12 +55,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
     return true;
 }
 
-/* [命名変更希望]
- * capacity制限についての確認なので、その旨を伝えるような
- * 関数名が良い
- * constraint, restriction, limitation
- * とか使えるかも */
-bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
+bool VehicleManager::checkCapacityConstraint(const vrp_problem *vrp, int customer) const
 {
     return (vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <= vrp->capacity);
 }
@@ -82,7 +77,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         return changeVehicle(vrp);
 
     if (isVisit(move))        return false;
-    if (!canVisit(vrp, move)) return false;
+    if (!checkCapacityConstraint(vrp, move)) return false;
 
     vehicle_[vehicle_size_-1].visit(vrp, move);
     return (is_visit_[move-1] = true);

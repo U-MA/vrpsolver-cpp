@@ -24,7 +24,7 @@ public:
     bool isVisitAll(const vrp_problem *vrp) const;
 
     bool isFinish(const vrp_problem *vrp) const;
-    bool canVisit(const vrp_problem *vrp, int customer) const;
+    bool checkCapacityConstraint(const vrp_problem *vrp, int customer) const;
     bool nextVehicleRemain(const vrp_problem *vrp) const;
 
     bool move(const vrp_problem *vrp, int move);
