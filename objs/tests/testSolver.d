@@ -17,7 +17,7 @@ objs/tests/testSolver.o: tests/testSolver.cpp \
  tests/VrpProblems.h symphony/vrp_io.h symphony/sym_proto.h \
  symphony/vrp_types.h symphony/vrp_common_types.h \
  symphony/vrp_cg_params.h symphony/vrp_lp_params.h symphony/vrp_types.h \
- include/Solver.h
+ include/solver.h
 
 cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h:
 
@@ -65,4 +65,4 @@ symphony/vrp_lp_params.h:
 
 symphony/vrp_types.h:
 
-include/Solver.h:
+include/solver.h:

@@ -6,7 +6,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "Vehicle.h"
+#include "vehicle.h"
 
 class VehicleManager
 {
