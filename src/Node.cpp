@@ -134,8 +134,8 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     Node *visited[300];
     int  visited_size = 0;
 
-    Node *node   = this;
     Node *parent = NULL;
+    Node *node   = this;
 
     /* 木の根は訪問済み */
     visited[visited_size++] = this;
