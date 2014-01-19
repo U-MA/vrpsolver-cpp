@@ -4,9 +4,9 @@ __global__
 void check(int expect, VehicleManager *device_vm, bool *err)
 {
     if (expect == device_vm->size())
-        err = false;
+        *err = false;
     else
-        err = true;
+        *err = true;
 }
 
 
