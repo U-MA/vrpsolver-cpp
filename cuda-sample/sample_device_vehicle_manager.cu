@@ -34,3 +34,30 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+/* こうしたいっていうCUDAプログラム
+ * thrustの使い方は適当 */
+void expect(void)
+{
+    VehicleManager host_vm;
+    VehicleManager *device_vms;
+
+    size_t array_size   = 20;
+    size_t device_bytes = array_size * sizeof(VehicleManager);
+    cudaMalloc((void **)&device_vms, device_bytes);
+
+    for (int i=0; i < array_size; i++)
+        cudaMemcpy(&device_vms[i], &host_vm, sizeof(VehicleManager),
+                   cudaMemcpyHostToDevice);
+
+    thrust::device_vector<int> device_costs(array_size);
+
+    randomSimulation<<<array_size, vrp->vertnum>>>(device_vrp, device_vms, device_costs);
+    thrust::reduce(device_costs.begin(), device_costs.end(), (int) 0, thrust::min_element<int>());
+
+    thrust::host_vector<int> cost;
+
+    cost = device_costs[0];
+
+    printf("cost %d\n", cost);
+}
