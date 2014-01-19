@@ -37,7 +37,7 @@ int Candidates::select(void)
 }
 
 
-int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
+int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
     while (!vm.isVisitAll(vrp))
     {
@@ -53,7 +53,8 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
     return vm.computeTotalCost(vrp);
 }
 
-int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount)
+int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm,
+                                          int loopCount)
 {
     int minCost = kInfinity;
     for (int i=0; i < loopCount; i++)

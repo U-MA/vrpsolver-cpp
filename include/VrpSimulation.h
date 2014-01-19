@@ -9,12 +9,15 @@ extern "C"
 #include "VehicleManager.h"
 
 
-namespace VrpSimulation
+class Simulator
 {
-    static const int kInfinity = 1e6;
-    int sequentialCws(const vrp_problem *vrp, VehicleManager& vm);
+public:
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm);
-    int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm, int loopCount);
-}
+    int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm,
+                                   int loopCount);
+
+private:
+    static const int kInfinity = 1e6;
+};
 
 #endif /* VRPSOLVER_CPP_SIMULATION_H */

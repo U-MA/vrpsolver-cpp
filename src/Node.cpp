@@ -85,7 +85,7 @@ double Node::computeUcb(int parent_count)
 /* selectMaxUcbChildとかどう? */
 Node *Node::select(void)
 {
-    double max_ucb   = - VrpSimulation::kInfinity;
+    double max_ucb   = - 1e6;
     Node   *selected = NULL;
 
     for (int i=0; i < child_size_; i++)
@@ -180,8 +180,9 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     }
 
     /* SIMULATION */
-    int cost = VrpSimulation::kInfinity;
-    while ((cost = VrpSimulation::sequentialRandomSimulation(vrp, vm_copy, count)) == VrpSimulation::kInfinity)
+    int cost = 1e6;
+    Simulator simulator;
+    while ((cost = simulator.sequentialRandomSimulation(vrp, vm_copy, count)) == 1e6)
     {
         //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
         //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
