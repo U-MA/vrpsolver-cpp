@@ -19,7 +19,7 @@ VehicleManager VehicleManager::copy(void) const
     return vm_copy;
 }
 
-int VehicleManager::size(void) const
+int VehicleManager::vehicle_size(void) const
 {
     return vehicle_size_;
 }

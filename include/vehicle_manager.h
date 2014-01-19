@@ -18,7 +18,7 @@ public:
     VehicleManager copy(void) const;
 
     /* getter */
-    int  size(void) const;
+    int  vehicle_size(void) const;
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;

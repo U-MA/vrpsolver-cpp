@@ -86,16 +86,16 @@ TEST(VehicleManager, isNotVisit)
 
 TEST(VehicleManager, sizeWhenInit)
 {
-    LONGS_EQUAL(1, vm.size());
+    LONGS_EQUAL(1, vm.vehicle_size());
 }
 
 TEST(VehicleManager, sizeIncrement)
 {
     vm.move(vrp, VehicleManager::kChange);
-    LONGS_EQUAL(2, vm.size());
+    LONGS_EQUAL(2, vm.vehicle_size());
 
     CHECK_FALSE(vm.move(vrp, VehicleManager::kChange));
-    LONGS_EQUAL(2, vm.size());
+    LONGS_EQUAL(2, vm.vehicle_size());
 }
 
 TEST(VehicleManager, moveTrue)
