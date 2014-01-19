@@ -18,6 +18,9 @@ public:
     VehicleManager copy(void) const;
 
     /* getter */
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     int  size(void) const;
 
     bool isVisit(int customer) const;
