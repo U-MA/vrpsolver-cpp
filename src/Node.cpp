@@ -140,26 +140,19 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* 木の根は訪問済み */
     visited[visited_size++] = this;
 
-    //fprintf(stderr, "\nMONTE CARLO TREE ROOT address %p IS ", node);
-
     /* SELECTION */
     while (!node->isLeaf())
     {
         if (node->isTabu(vrp))
         {
-            //fprintf(stderr, "TABU\n");
             parent->addTabu(node->customer());
             return ; /* 探索を破棄 */
         }
-        //fprintf(stderr, "NODE\n");
         parent = node;
         node   = node->selectMaxUcbChild();
-        //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         visited[visited_size++] = node;
         vm_copy.move(vrp, node->customer());
     }
-
-    //fprintf(stderr, "LEAF\n");
 
     VehicleManager parent_vm = vm_copy.copy();
 
@@ -167,11 +160,9 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     if (!vm_copy.isFinish(vrp))
     {
         /* EXPANSION */
-        //fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
         parent = node;
         node   = node->selectMaxUcbChild();
-        //fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
         vm_copy.move(vrp, node->customer());
     }
 
@@ -180,19 +171,14 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     Simulator simulator;
     while ((cost = simulator.sequentialRandomSimulation(vrp, vm_copy, count)) == 1e6)
     {
-        //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
-        //fprintf(stderr, "\t\t\tSO, NODE address %p ADD CUSTOMER %d TO TABU\n", parent, node->customer());
         parent->addTabu(node->customer());
         vm_copy = parent_vm.copy(); /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
-        {
-            //fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
             return ; /* 探索を破棄 */
-        }
+
         node = parent->selectMaxUcbChild();
         vm_copy.move(vrp, node->customer());
     }
-    //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);
     visited[visited_size++] = node;
 
     /* BACKPROPAGATION */
