@@ -56,7 +56,6 @@ bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
 
 bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
-    /* 訪問可能な顧客が存在 */
     for (int i=1; i < vrp->vertnum; i++)
         if (canVisit(vrp, i))
             return false;
