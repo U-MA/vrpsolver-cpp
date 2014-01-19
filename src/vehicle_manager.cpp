@@ -29,6 +29,11 @@ bool VehicleManager::isVisit(int customer) const
     return is_visit_[customer-1];
 }
 
+bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
+{
+    return (!isVisit(customer) && checkCapacityConstraint(vrp, customer));
+}
+
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     const int customer_size = vrp->vertnum-1;
