@@ -7,9 +7,9 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "Node.h"
-#include "VehicleManager.h"
-#include "VrpSimulation.h"
+#include "node.h"
+#include "vehicle_manager.h"
+#include "simulator.h"
 
 
 Node::~Node(void)

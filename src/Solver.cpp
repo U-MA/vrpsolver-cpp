@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "Node.h"
-#include "Solver.h"
-#include "VehicleManager.h"
+#include "node.h"
+#include "solver.h"
+#include "vehicle_manager.h"
 #include "wrapper_vrp.h"
 
 Solver::~Solver(void)

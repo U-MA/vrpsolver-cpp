@@ -5,7 +5,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "VrpSimulation.h"
+#include "simulator.h"
 
 class Candidates
 {

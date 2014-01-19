@@ -8,9 +8,9 @@ extern "C"
 
 #include "VrpProblems.h"
 
-#include "Node.h"
-#include "VehicleManager.h"
-#include "VrpSimulation.h"
+#include "node.h"
+#include "vehicle_manager.h"
+#include "simulator.h"
 
 
 TEST_GROUP(Node)

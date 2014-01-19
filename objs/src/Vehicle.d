@@ -1,4 +1,4 @@
-objs/./src/Vehicle.o: src/Vehicle.cpp \
+objs/./src/vehicle.o: src/vehicle.cpp \
  cpputest-3.5/include/CppUTest/MemoryLeakDetectorNewMacros.h \
  cpputest-3.5/include/CppUTest/CppUTestConfig.h \
  cpputest-3.5/include/CppUTest/StandardCLibrary.h \
