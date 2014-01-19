@@ -81,23 +81,23 @@ double Node::computeUcb(int parent_count)
     return ucb;
 }
 
-/* selectMaxUcbChildとかどう? */
-Node *Node::select(void)
+Node *Node::selectMaxUcbChild(void)
 {
     double max_ucb   = - 1e6;
     Node   *selected = NULL;
 
     for (int i=0; i < child_size_; i++)
     {
-        /* tabu_に含まれているものは選択しない */
-        if (tabu_[child_[i].customer()]) continue;
+        Node *child        = &child_[i];
+        bool child_is_tabu = tabu_[child->customer()];
 
-        double ucb = child_[i].computeUcb(count_);
-        //fprintf(stderr, "child[%d].computeUcb(%d) is %lg and child[%d].count() is %d\n", i, count_, ucb, i, child[i].count());
+        if (child_is_tabu) continue;
+
+        double ucb = child->computeUcb(count_);
         if (ucb > max_ucb)
         {
             max_ucb  = ucb;
-            selected = &child_[i];
+            selected = child;
         }
     }
 
@@ -147,7 +147,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     {
         //fprintf(stderr, "NODE\n");
         parent = node;
-        node   = node->select();
+        node   = node->selectMaxUcbChild();
         //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         if (!node->isLeaf() && node->isTabu(vrp))
         {
@@ -173,7 +173,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         //fprintf(stderr, "\tEXPAND\n");
         node->expand(vrp, vm_copy);
         parent = node;
-        node   = node->select();
+        node   = node->selectMaxUcbChild();
         //fprintf(stderr, "\t\tSELECTED NODE address %p HAVE CUSTOMER %d\n", node, node->customer());
         vm_copy.move(vrp, node->customer());
     }
@@ -192,7 +192,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
             //fprintf(stderr, "\t\t\tPARENT NODE address %p IS TABU\n", parent);
             return ; /* 探索を破棄 */
         }
-        node = parent->select();
+        node = parent->selectMaxUcbChild();
         vm_copy.move(vrp, node->customer());
     }
     //fprintf(stderr, "\t\t[SIMULATION RESULT] %d\n", cost);

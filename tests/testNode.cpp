@@ -57,30 +57,30 @@ TEST(Node, createChild)
 
 TEST(Node, returnNullWhenNodeSelectBeforeExpand)
 {
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     POINTERS_EQUAL(NULL, selected);
 }
 
 TEST(Node, selectChild)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     LONGS_EQUAL(1, selected->customer());
 }
 
 TEST(Node, selectChildWithMaxUcb)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
     selected->update(100);
-    selected = node.select();
+    selected = node.selectMaxUcbChild();
     LONGS_EQUAL(0, selected->customer());
 }
 
 TEST(Node, update)
 {
     node.expand(vrp, vm);
-    Node *selected = node.select();
+    Node *selected = node.selectMaxUcbChild();
 
     selected->update(100);
     LONGS_EQUAL(1, selected->count());
