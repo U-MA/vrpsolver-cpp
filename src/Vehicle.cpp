@@ -34,7 +34,6 @@ static bool customerIsInBound(int customer, int customer_end)
     return (0 < customer && customer < customer_end);
 }
 
-/* customerは０以上顧客数未満 */
 bool Vehicle::visit(const vrp_problem *vrp, int customer)
 {
     if (!customerIsInBound(customer, vrp->vertnum))
