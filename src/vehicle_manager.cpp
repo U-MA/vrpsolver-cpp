@@ -52,7 +52,7 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
     /* 訪問可能な顧客が存在 */
     for (int i=1; i < vrp->vertnum; i++)
-        if (!isVisit(i) && checkCapacityConstraint(vrp, i))
+        if (canVisit(vrp, i))
             return false;
 
     if (nextVehicleRemain(vrp)) return false;
