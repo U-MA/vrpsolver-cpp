@@ -7,6 +7,15 @@ extern "C"
 
 #include "VrpSimulation.h"
 
+static void electCandidates(const vrp_problem *vrp, VehicleManager &vm, int *candidates, int *candidate_size)
+{
+    for (int i=1; i < vrp->vertnum; i++)
+    {
+        if (!vm.isVisit(i) && vm.canVisit(vrp, i))
+            candidates[(*candidate_size)++] = i;
+    }
+}
+
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
     while (!vm.isVisitAll(vrp))
@@ -14,11 +23,7 @@ int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleMan
         int candidates[200], candidatesSize = 0;
 
         /* 次に選ばれる顧客の候補を調べる */
-        for (int i=1; i < vrp->vertnum; i++)
-        {
-            if (!vm.isVisit(i) && vm.canVisit(vrp, i))
-                candidates[candidatesSize++] = i;
-        }
+        electCandidates(vrp, vm, candidates, &candidatesSize);
 
         if (candidatesSize == 0)
         {

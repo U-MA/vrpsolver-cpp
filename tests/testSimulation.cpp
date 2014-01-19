@@ -8,7 +8,6 @@ extern "C"
 
 #include "VrpProblems.h"
 
-#include "SavingsList.h"
 #include "VrpSimulation.h"
 #include "VehicleManager.h"
 
