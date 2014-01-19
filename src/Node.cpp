@@ -63,7 +63,6 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     for (int i=0; i < vrp->vertnum; i++)
         addTabu(i);
 
-    /* 次の車体が存在 */
     if (vm.nextVehicleRemain(vrp))
         setChild(VehicleManager::kChange);
 
