@@ -75,8 +75,8 @@ bool VehicleManager::changeVehicle(const vrp_problem *vrp)
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
-    bool is_change = (move == kChange);
-    if (is_change)
+    bool is_change_vehicle = (move == kChange);
+    if (is_change_vehicle)
         return changeVehicle(vrp);
 
     if (!canVisit(vrp, move))
