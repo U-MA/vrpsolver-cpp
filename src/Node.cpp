@@ -145,16 +145,16 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* SELECTION */
     while (!node->isLeaf())
     {
-        //fprintf(stderr, "NODE\n");
-        parent = node;
-        node   = node->selectMaxUcbChild();
-        //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
-        if (!node->isLeaf() && node->isTabu(vrp))
+        if (node->isTabu(vrp))
         {
             //fprintf(stderr, "TABU\n");
             parent->addTabu(node->customer());
             return ; /* 探索を破棄 */
         }
+        //fprintf(stderr, "NODE\n");
+        parent = node;
+        node   = node->selectMaxUcbChild();
+        //fprintf(stderr, "\tNODE address %p (HAVE CUSTOMER %d) IS ", node, node->customer());
         visited[visited_size++] = node;
         vm_copy.move(vrp, node->customer());
     }
