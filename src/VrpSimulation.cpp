@@ -5,35 +5,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
-#include "SavingsList.h"
 #include "VrpSimulation.h"
-
-int VrpSimulation::sequentialCws(const vrp_problem *vrp, VehicleManager& vm)
-{
-    SavingsList savingsList(vrp);
-
-    while (savingsList.getSize() != 0)
-    {
-        if (true)
-        {
-            /* どちらの顧客も訪問していない */
-        }
-        else if (false)
-        {
-            /* firstのみがいずれかの車体のルートに含まれている */
-        }
-        else if (false)
-        {
-            /* secondのみがいずれかの車体のルートに含まれている */
-        }
-        else
-        {
-            /* どちらの顧客も異なる車体のルートに含まれている */
-        }
-    }
-
-    return vm.computeTotalCost(vrp);
-}
 
 int VrpSimulation::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm)
 {
