@@ -11,7 +11,7 @@ VehicleManager VehicleManager::copy(void) const
 
     /* 使ってる分のVehicleだけコピー */
     for (int i=0; i < vehicle_size_; i++)
-        vm_copy.vehicle_[i] = vehicle_[i].copy();
+        vm_copy.vehicle_[i] = vehicle_[i];
 
     const size_t is_visit_bytes = kCustomerMax * sizeof(bool);
     memcpy(vm_copy.is_visit_, is_visit_, is_visit_bytes);

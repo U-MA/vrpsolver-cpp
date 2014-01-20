@@ -129,7 +129,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
 {
     /* 引数として渡されるvmは変更しない
      * そのため変更させるための変数を作成 */
-    VehicleManager vm_copy = vm.copy();
+    VehicleManager vm_copy = vm;
 
     Node *visited[300];
     int  visited_size = 0;
@@ -154,7 +154,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
         vm_copy.move(vrp, node->customer());
     }
 
-    VehicleManager parent_vm = vm_copy.copy();
+    VehicleManager parent_vm = vm_copy;
 
     /* nodeが全探索木の葉でなければexpandする*/
     if (!vm_copy.isFinish(vrp))
@@ -172,7 +172,7 @@ void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
     while ((cost = simulator.sequentialRandomSimulation(vrp, vm_copy, count)) == 1e6)
     {
         parent->addTabu(node->customer());
-        vm_copy = parent_vm.copy(); /* VehicleManagerを直前の状態に移す */
+        vm_copy = parent_vm; /* VehicleManagerを直前の状態に移す */
         if (parent->isTabu(vrp))
             return ; /* 探索を破棄 */
 

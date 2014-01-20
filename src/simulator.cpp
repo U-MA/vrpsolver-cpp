@@ -59,7 +59,7 @@ int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager
     int minCost = kInfinity;
     for (int i=0; i < loopCount; i++)
     {
-        VehicleManager vm_copy = vm.copy();
+        VehicleManager vm_copy = vm;
         int cost = sequentialRandomSimulation(vrp, vm_copy);
         if (cost < minCost)
             minCost = cost;
