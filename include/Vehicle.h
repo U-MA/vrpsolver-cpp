@@ -11,8 +11,6 @@ class Vehicle
 public:
     Vehicle(void) : route_(), route_length_(0), capacity_(0) {};
 
-    Vehicle copy(void) const;
-
     /* getter */
     int  capacity(void) const;
 

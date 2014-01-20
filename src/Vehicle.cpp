@@ -9,20 +9,6 @@ extern "C"
 }
 
 
-Vehicle Vehicle::copy(void) const
-{
-    Vehicle v_copy;
-
-    /* 使っている部分だけコピー */
-    const size_t route_bytes = route_length_ * sizeof(int);
-    memcpy(v_copy.route_, route_, route_bytes);
-
-    v_copy.route_length_ = route_length_;
-    v_copy.capacity_     = capacity_;
-
-    return v_copy;
-}
-
 int Vehicle::capacity(void) const
 {
     return capacity_;

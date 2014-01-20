@@ -61,17 +61,3 @@ TEST(Vehicle, computeCost)
     v.visit(vrp, 2);
     LONGS_EQUAL(65, v.computeCost(vrp));
 }
-
-TEST(Vehicle, copy)
-{
-    v.visit(vrp, 1);
-    Vehicle copy = v.copy();
-    LONGS_EQUAL(v.capacity(), copy.capacity());
-}
-
-/* テスト方法がわからないので保留 */
-/*
-TEST(Vehicle, visitOverMaxSize)
-{
-}
-*/
