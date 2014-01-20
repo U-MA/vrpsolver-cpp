@@ -15,8 +15,6 @@ public:
 
     VehicleManager(void) : vehicle_(), vehicle_size_(1), is_visit_() {};
 
-    VehicleManager copy(void) const;
-
     /* getter */
     int  vehicle_size(void) const;
 

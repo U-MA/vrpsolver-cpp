@@ -3,22 +3,6 @@
 
 #include "vehicle_manager.h" 
 
-VehicleManager VehicleManager::copy(void) const
-{
-    VehicleManager vm_copy;
-
-    vm_copy.vehicle_size_ = vehicle_size_;
-
-    /* 使ってる分のVehicleだけコピー */
-    for (int i=0; i < vehicle_size_; i++)
-        vm_copy.vehicle_[i] = vehicle_[i];
-
-    const size_t is_visit_bytes = kCustomerMax * sizeof(bool);
-    memcpy(vm_copy.is_visit_, is_visit_, is_visit_bytes);
-
-    return vm_copy;
-}
-
 int VehicleManager::vehicle_size(void) const
 {
     return vehicle_size_;
