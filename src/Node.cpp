@@ -66,7 +66,6 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     if (vm.nextVehicleRemain(vrp))
         setChild(VehicleManager::kChange);
 
-    /* 各顧客が訪問可能か調べる */
     for (int i=1; i < vrp->vertnum; i++)
         if (vm.canVisit(vrp, i))
             setChild(i);
