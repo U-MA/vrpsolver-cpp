@@ -50,7 +50,7 @@ void Node::addTabu(int customer)
 
 /* childに値をセットする以上のことをしているので
  * 関数名を変えた方がいいかも */
-void Node::setChild(int child_customer)
+void Node::setChildAndRemoveTabu(int child_customer)
 {
     child_[child_size_++].customer_ = child_customer;
     tabu_[child_customer]           = false; /* tabu_リストから外す */
@@ -64,11 +64,11 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
         addTabu(i);
 
     if (vm.nextVehicleRemain(vrp))
-        setChild(VehicleManager::kChange);
+        setChildAndRemoveTabu(VehicleManager::kChange);
 
     for (int i=1; i < vrp->vertnum; i++)
         if (vm.canVisit(vrp, i))
-            setChild(i);
+            setChildAndRemoveTabu(i);
 }
 
 double Node::computeUcb(int parent_count)

@@ -38,7 +38,7 @@ public:
 
 private:
     Node*  selectMostVisitedChild(void) const;
-    void   setChild(int child_customer);
+    void   setChildAndRemoveTabu(int child_customer);
     double computeUcb(int parent_count);
 
     int  customer_;
