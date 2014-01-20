@@ -56,15 +56,13 @@ void Solver::run(void)
 
         int move = mct.selectNextMove();
 
-        /* 用意している車体数を超えるとbreak */
         if (!vm.move(vrp_, move))
-            break;
+        {
+            printf("Solver::run() fail\n");
+            return;
+        }
     }
 
-    int cost = 1e6;
-    if (vm.isVisitAll(vrp_))
-        cost = vm.computeTotalCost(vrp_);
-
     vm.print();
-    printf("[COST] %6d\n", cost);
+    printf("[COST] %6d\n", vm.computeTotalCost(vrp_));
 }
