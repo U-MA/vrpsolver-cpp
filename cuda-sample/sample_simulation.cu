@@ -11,17 +11,24 @@ extern "C"
 }
 
 #include "device_simulation.h"
-#include "vehice_manager.h"
+#include "vehicle_manager.h"
 
+
+__global__
+void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
+		      thrust::device_vector<int> device_costs)
+{
+        printf("randomSimulation\n");
+}
 
 
 int main(int argc, char **argv)
 {
-    char *infile[200];
+    char infile[200];
     strcpy(infile, "Vrp-All/E/E-n13-k4.vrp");
     
     vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
-    vrp_io(vrp, infile);
+    vrp_io(host_vrp, infile);
 
     vrp_problem *device_vrp = NULL;
     cudaMalloc((void **)&device_vrp, sizeof(vrp_problem));

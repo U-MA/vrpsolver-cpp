@@ -8,3 +8,10 @@ errlog.txt
 
 lib/
 objs/
+
+*.exe
+*.exp
+*.lib
+
+*~
+*.bat
