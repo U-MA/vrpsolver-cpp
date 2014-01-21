@@ -4,6 +4,8 @@
 #include <thrust/functional.h>
 #include <thrust/reduce.h>
 
+#include "Random123/philox.h"
+
 extern "C"
 {
 #include "vrp_io.h"
@@ -16,7 +18,7 @@ extern "C"
 
 __global__
 void testTransfer(vrp_problem *device_vrp, VehicleManager *device_vms,
-		      thrust::device_vector<int> device_costs)
+		      int *device_costs)
 {
     if (threadIdx.x + blockIdx.x == 0)
     {
@@ -46,25 +48,76 @@ void testTransfer(vrp_problem *device_vrp, VehicleManager *device_vms,
                device_vms[0].computeTotalCost(device_vrp));
         printf("\tdevice_vms[99]'s cost    %d\n",
                device_vms[99].computeTotalCost(device_vrp));
+
+        device_vms[0].move(device_vrp, VehicleManager::kChange);
+        device_vms[0].print();
     }
 }
 
 __global__
-void randomSimulation(vrp_problem *vrp, VehicleManager *device_vms,
-                      thrust::device_vector<int> device_costs)
+void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
+                      int *device_costs)
 {
-    __shared__ int *candidates;
-    __shared__ int candidate_size;
+    extern __shared__ int candidates[];
+    __shared__ int  candidate_size;
+    __shared__ bool isFail;
 
     int bid      = blockIdx.x;
     int customer = threadIdx.x;
 
-    while (device_vms[bid].isFinish(device_vrp))
+    philox4x32_key_t key = {{ blockIdx.x, 0xdeadbeef }};
+    philox4x32_ctr_t ctr = {{ 0, 0xf00dcafe, 0xdeadbeef, 0xbeeff00d }};
+    
+    if (threadIdx.x == 0) isFail = false;
+    __syncthreads();
+
+    while (isFail || !device_vms[bid].isFinish(device_vrp))
     {
+        if (threadIdx.x == 0) candidate_size = 0;
+        __syncthreads();
+
+        /* Œó•âŽÒ‚Ì‘I’è */
+        if ((0 < customer) && (customer <= device_vrp->vertnum) && !device_vms[bid].isVisit(customer) &&
+            device_vms[bid].canVisit(device_vrp, customer))
+        {
+            int old = atomicAdd(&candidate_size, 1);
+            candidates[old] = customer;
+        }
+        __syncthreads();
+
+        if (threadIdx.x == 0)
+        {
+            if (candidate_size == 0)
+            {
+                if (!device_vms[bid].move(device_vrp, VehicleManager::kChange))
+                    isFail = true;
+            }
+            else
+            {
+                union
+                {
+                    philox4x32_ctr_t c;
+                    int4 i;
+                } u;
+                ctr.v[0]++;
+
+                u.c = philox4x32(ctr, key);
+                int selected = candidates[u.c[0] % candidate_size];
+                device_vms[bid].move(device_vrp, selected);
+            }
+            candidate_size = 0;
+        }
+        __syncthreads();
+    }
+
+    if (threadIdx.x == 0)
+    {
+        if (device_vms[bid].isVisitAll(device_vrp))
+            device_costs[bid] = device_vms[bid].computeTotalCost(device_vrp);
+        else
+            device_costs[bid] = 100000;
     }
 }
-
-
 
 int main(int argc, char **argv)
 {
@@ -73,6 +126,7 @@ int main(int argc, char **argv)
     
     vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(host_vrp, infile);
+    host_vrp->numroutes = 4;
 
     vrp_problem *device_vrp = NULL;
     cudaMalloc((void **)&device_vrp, sizeof(vrp_problem));
@@ -100,14 +154,18 @@ int main(int argc, char **argv)
     VehicleManager host_vm;
     VehicleManager *device_vms;
 
-    cudaMalloc((void **)&device_vms, 100 * sizeof(VehicleManager));
-    for (int i=0; i < 100; i++)
+    int parallel_size = 100;
+    cudaMalloc((void **)&device_vms, parallel_size * sizeof(VehicleManager));
+    for (int i=0; i < parallel_size; i++)
         cudaMemcpy(&device_vms[i], &host_vm, sizeof(VehicleManager),
                    cudaMemcpyHostToDevice);
 
-    thrust::device_vector<int> device_vector(100);
+    thrust::device_vector<int> device_vector(parallel_size);
+    int *device_costs = thrust::raw_pointer_cast(device_vector.data());
 
-    testTransfer<<<100, host_vrp->vertnum>>>(device_vrp, device_vms, device_vector);
+    size_t shared_bytes = host_vrp->vertnum * sizeof(int);
+    randomSimulation<<<parallel_size,host_vrp->vertnum,shared_bytes>>>(device_vrp, device_vms, device_costs);
+    cudaDeviceSynchronize();
 
     int min = thrust::reduce(device_vector.begin(), device_vector.end(), (int) 1e6,
                              thrust::minimum<int>());

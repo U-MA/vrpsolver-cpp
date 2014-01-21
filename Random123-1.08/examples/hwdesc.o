@@ -1,0 +1,14 @@
+
+HKEY_LOCAL_MACHINE\Hardware\Description\System\CentralProcessor\0
+    Component Information    REG_BINARY    00000000000000000000000000000000
+    Identifier    REG_SZ    Intel64 Family 6 Model 23 Stepping 6
+    Configuration Data    REG_FULL_RESOURCE_DESCRIPTOR    FFFFFFFFFFFFFFFF0000000000000000
+    ProcessorNameString    REG_SZ    Intel(R) Core(TM)2 Duo CPU     E7300  @ 2.66GHz
+    VendorIdentifier    REG_SZ    GenuineIntel
+    FeatureSet    REG_DWORD    0x211b3ffe
+    ~MHz    REG_DWORD    0xa6a
+    Update Signature    REG_BINARY    000000000C060000
+    Update Status    REG_DWORD    0x6
+    Previous Update Signature    REG_BINARY    000000000C060000
+    Platform ID    REG_DWORD    0x1
+
