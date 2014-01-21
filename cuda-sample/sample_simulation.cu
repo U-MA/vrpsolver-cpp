@@ -15,11 +15,55 @@ extern "C"
 
 
 __global__
-void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
+void testTransfer(vrp_problem *device_vrp, VehicleManager *device_vms,
 		      thrust::device_vector<int> device_costs)
 {
-        printf("randomSimulation\n");
+    if (threadIdx.x + blockIdx.x == 0)
+    {
+        printf("CHECK device_vrp MEMBER\n");
+	    printf("\tdevice_vrp->vertnum      %d\n",
+               device_vrp->vertnum);
+        printf("\tdevice_vrp->demand[0]    %d\n"
+               "\tdevice_vrp->demand[3]    %d\n",
+               device_vrp->demand[0], device_vrp->demand[3]);
+        printf("\tdevice_vrp->dist.cost[0] %d\n",
+               device_vrp->dist.cost[0]);
+
+        printf("CHECK device_vms\n");
+        printf("\tdevice_vms[0].size()     %d\n",
+               device_vms[0].size());
+        printf("\tdevice_vms[99].siz()     %d\n",
+               device_vms[99].size());
+        printf("\tdevice_vms[0]'s cost     %d\n",
+               device_vms[0].computeTotalCost(device_vrp));
+        printf("\tdevice_vms[99]'s cost    %d\n",
+               device_vms[99].computeTotalCost(device_vrp));
+
+        printf("\tdevice_vms[0] move customer 1\n");
+        device_vms[0].move(device_vrp, 1);
+
+        printf("\tdevice_vms[0]'s cost     %d\n",
+               device_vms[0].computeTotalCost(device_vrp));
+        printf("\tdevice_vms[99]'s cost    %d\n",
+               device_vms[99].computeTotalCost(device_vrp));
+    }
 }
+
+__global__
+void randomSimulation(vrp_problem *vrp, VehicleManager *device_vms,
+                      thrust::device_vector<int> device_costs)
+{
+    __shared__ int *candidates;
+    __shared__ int candidate_size;
+
+    int bid      = blockIdx.x;
+    int customer = threadIdx.x;
+
+    while (device_vms[bid].isFinish(device_vrp))
+    {
+    }
+}
+
 
 
 int main(int argc, char **argv)
@@ -63,7 +107,7 @@ int main(int argc, char **argv)
 
     thrust::device_vector<int> device_vector(100);
 
-    randomSimulation<<<100, host_vrp->vertnum>>>(device_vrp, device_vms, device_vector);
+    testTransfer<<<100, host_vrp->vertnum>>>(device_vrp, device_vms, device_vector);
 
     int min = thrust::reduce(device_vector.begin(), device_vector.end(), (int) 1e6,
                              thrust::minimum<int>());

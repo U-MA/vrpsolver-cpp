@@ -23,21 +23,53 @@ public:
 #endif
     int  size(void) const;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool isVisit(int customer) const;
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool isVisitAll(const vrp_problem *vrp) const;
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool isFinish(const vrp_problem *vrp) const;
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool canVisit(const vrp_problem *vrp, int customer) const;
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool nextVehicleRemain(const vrp_problem *vrp) const;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool move(const vrp_problem *vrp, int move);
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     int  computeTotalCost(const vrp_problem *vrp) const;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     void print(void) const;
    
 private:
     static const int kVehicleMax  = 20;
     static const int kCustomerMax = 200;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool changeVehicle(const vrp_problem *vrp);
 
     Vehicle vehicle_[kVehicleMax];

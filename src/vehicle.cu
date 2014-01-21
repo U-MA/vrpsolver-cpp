@@ -29,6 +29,7 @@ int Vehicle::capacity(void) const
 }
 
 /* 0はdepotを表すため、範囲外 */
+__host__ __device__
 static bool customerIsInBound(int customer, int customer_end)
 {
     return (0 < customer && customer < customer_end);
@@ -45,17 +46,25 @@ bool Vehicle::visit(const vrp_problem *vrp, int customer)
     return true;
 }
 
+__host__ __device__
+static int INDEX_CU(int v0, int v1)
+{
+    return( (v1) > (v0) ? ((int)(v1))*((v1)-1)/2+(v0) :
+                          ((int)(v0))*((v0)-1)/2+(v1));
+}
+
+
 int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (route_length_ == 0) return 0;
 
     int i;
-    int cost = vrp->dist.cost[INDEX(0, route_[0])];
+    int cost = vrp->dist.cost[INDEX_CU(0, route_[0])];
     for (i=1; i < route_length_; i++)
     {
-        cost += vrp->dist.cost[INDEX(route_[i-1], route_[i])];
+        cost += vrp->dist.cost[INDEX_CU(route_[i-1], route_[i])];
     }
-    cost += vrp->dist.cost[INDEX(route_[i-1], 0)];
+    cost += vrp->dist.cost[INDEX_CU(route_[i-1], 0)];
 
     return cost;
 }

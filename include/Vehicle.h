@@ -14,11 +14,24 @@ public:
     Vehicle copy(void) const;
 
     /* getter */
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     int  capacity(void) const;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool visit(const vrp_problem *vrp, int customer);
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     int  computeCost(const vrp_problem *vrp) const;
 
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     void print(void) const;
 
 private:
