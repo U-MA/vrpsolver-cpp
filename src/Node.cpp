@@ -48,8 +48,6 @@ void Node::addTabu(int customer)
     tabu_[customer] = true;
 }
 
-/* childに値をセットする以上のことをしているので
- * 関数名を変えた方がいいかも */
 void Node::setChildAndRemoveTabu(int child_customer)
 {
     child_[child_size_++].customer_ = child_customer;
