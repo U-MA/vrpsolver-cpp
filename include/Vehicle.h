@@ -15,7 +15,10 @@ public:
     int  capacity(void) const;
 
     /* 現在、容量を超えているように見えるので
-     * 命名を変更すべき */
+     * 命名を変更すべき
+     * 例としては
+     * isOverCapacityIfVisitCustomer
+     * とか */
     bool isOverCapacity(const vrp_problem *vrp, int customer) const;
     bool visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
