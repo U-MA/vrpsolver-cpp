@@ -28,6 +28,11 @@ int Vehicle::capacity(void) const
     return capacity_;
 }
 
+bool Vehicle::isOverCapacity(const vrp_problem *vrp, int customer) const
+{
+    return (capacity_ + vrp->demand[customer] > vrp->capacity);
+}
+
 /* 0はdepotを表すため、範囲外 */
 __host__ __device__
 static bool customerIsInBound(int customer, int customer_end)

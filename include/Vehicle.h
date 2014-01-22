@@ -22,6 +22,11 @@ public:
 #ifdef __CUDACC__
     __host__ __device__
 #endif
+    bool isOverCapacity(const vrp_problem *vrp, int customer) const;
+
+#ifdef __CUDACC__
+    __host__ __device__
+#endif
     bool visit(const vrp_problem *vrp, int customer);
 
 #ifdef __CUDACC__
