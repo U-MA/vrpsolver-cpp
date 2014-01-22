@@ -21,6 +21,8 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
 
+    /* canVisitという関数名だけを見ると、この役割は
+     * Vehicleな気がする */
     bool canVisit(const vrp_problem *vrp, int customer) const;
     bool nextVehicleRemain(const vrp_problem *vrp) const;
     /* isVisitAll()と役割がかぶっている気がする
