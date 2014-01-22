@@ -85,6 +85,7 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
         }
         __syncthreads();
 
+        /* Œó•âÒ‚ğˆêl‘I‚Ô */
         if (threadIdx.x == 0)
         {
             if (candidate_size == 0)
