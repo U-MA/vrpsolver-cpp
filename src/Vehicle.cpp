@@ -15,6 +15,7 @@ int Vehicle::capacity(void) const
 }
 
 /* 0はdepotを表すため、範囲外 */
+/* 生の数字でdepotを表しているため,説明変数等で表したい */
 static bool customerIsInBound(int customer, int customer_end)
 {
     return (0 < customer && customer < customer_end);
