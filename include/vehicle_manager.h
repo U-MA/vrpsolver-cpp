@@ -23,6 +23,8 @@ public:
 
     bool canVisit(const vrp_problem *vrp, int customer) const;
     bool nextVehicleRemain(const vrp_problem *vrp) const;
+    /* isVisitAll()と役割がかぶっている気がする
+     * そのためこれは必要ないのでは? */
     bool isFinish(const vrp_problem *vrp) const;
 
     bool move(const vrp_problem *vrp, int move);
