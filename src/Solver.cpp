@@ -54,9 +54,7 @@ void Solver::run(void)
         for (int i=0; i < count_; i++)
             mct.search(vrp_, vm, simulation_count_);
 
-        int move = mct.selectNextMove();
-
-        if (!vm.move(vrp_, move))
+        if (!vm.move(vrp_, mct.selectNextMove()))
         {
             printf("Solver::run() fail\n");
             return;
