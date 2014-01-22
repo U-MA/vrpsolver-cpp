@@ -54,6 +54,12 @@ void testTransfer(vrp_problem *device_vrp, VehicleManager *device_vms,
     }
 }
 
+__device__
+bool isValidCustomer(int customer, int customer_size)
+{
+    return (0 < customer) && (customer <= customer_size);
+}
+
 __global__
 void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
                       int *device_costs)
@@ -77,7 +83,7 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
         __syncthreads();
 
         /* Œó•âŽÒ‚Ì‘I’è */
-        if ((0 < customer) && (customer <= device_vrp->vertnum) && !device_vms[bid].isVisit(customer) &&
+        if (isValidCustomer(customer, device_vrp->vertnum-1) && !device_vms[bid].isVisit(customer) &&
             device_vms[bid].canVisit(device_vrp, customer))
         {
             int old = atomicAdd(&candidate_size, 1);
