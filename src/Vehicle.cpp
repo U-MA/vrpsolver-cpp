@@ -14,11 +14,6 @@ int Vehicle::capacity(void) const
     return capacity_;
 }
 
-bool Vehicle::isOverCapacity(const vrp_problem *vrp, int customer) const
-{
-    return (capacity_ + vrp->demand[customer] > vrp->capacity);
-}
-
 void Vehicle::visit(const vrp_problem *vrp, int customer)
 {
     route_[route_length_++] = customer;

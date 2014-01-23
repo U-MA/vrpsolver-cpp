@@ -19,7 +19,6 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 
 bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
 {
-    //return !vehicle_[vehicle_size_-1].isOverCapacity(vrp, customer);
     if (vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <=
         vrp->capacity)
         return true;
