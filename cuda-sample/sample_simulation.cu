@@ -68,8 +68,8 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
     __shared__ int  candidate_size;
     __shared__ bool isFail;
 
-    int bid      = blockIdx.x;
-    int customer = threadIdx.x;
+    const int bid      = blockIdx.x;
+    const int customer = threadIdx.x;
 
     philox4x32_key_t key = {{ blockIdx.x, 0xdeadbeef }};
     philox4x32_ctr_t ctr = {{ 0, 0xf00dcafe, 0xdeadbeef, 0xbeeff00d }};
