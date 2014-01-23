@@ -180,5 +180,7 @@ int main(int argc, char **argv)
 
     std::cout << "min cost " << min << std::endl;
 
+    /* do not cudaFree */
+
     return 0;
 }
