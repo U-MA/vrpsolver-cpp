@@ -23,7 +23,7 @@ void Candidates::collect(const vrp_problem *vrp, VehicleManager &vm)
 {
     for (int i=1; i < vrp->vertnum; i++)
     {
-        if (vm.canVisit(vrp, i))
+        if (!vm.isVisit(i) && vm.canVisit(vrp, i))
             candidate_[candidate_size_++] = i;
     }
 }
