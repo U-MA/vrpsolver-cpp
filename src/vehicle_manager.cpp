@@ -44,19 +44,24 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
     return true;
 }
 
-bool VehicleManager::changeVehicle(const vrp_problem *vrp)
+void VehicleManager::changeVehicle(void)
 {
-    if (!nextVehicleRemain(vrp)) return false;
-
     vehicle_size_++;
-    return true;
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
     bool is_change_vehicle = (move == kChange);
     if (is_change_vehicle)
-        return changeVehicle(vrp);
+    {
+        if (!nextVehicleRemain(vrp))
+            return false;
+        else
+        {
+            changeVehicle();
+            return true;
+        }
+    }
 
     if (!canVisit(vrp, move))
         return false;

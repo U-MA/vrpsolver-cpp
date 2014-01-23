@@ -28,7 +28,7 @@ public:
     bool isFinish(const vrp_problem *vrp) const;
 
     bool nextVehicleRemain(const vrp_problem *vrp) const;
-    bool changeVehicle(const vrp_problem *vrp);
+    void changeVehicle(void);
 
     bool move(const vrp_problem *vrp, int move);
     int  computeTotalCost(const vrp_problem *vrp) const;

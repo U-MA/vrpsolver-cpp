@@ -56,7 +56,7 @@ void Solver::run(void)
 
         int next_move = mct.selectNextMove();
         if (next_move == VehicleManager::kChange)
-            vm.changeVehicle(vrp_);
+            vm.changeVehicle();
         else
             vm.move(vrp_, next_move);
     }
