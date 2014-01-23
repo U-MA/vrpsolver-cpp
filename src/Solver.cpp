@@ -56,14 +56,7 @@ void Solver::run(void)
 
         int next_move = mct.selectNextMove();
         if (next_move == VehicleManager::kChange)
-        {
-            if (!vm.changeVehicle(vrp_))
-            {
-                printf("next vehicle is not remained\n");
-                printf("Solver::run() fail\n");
-                return ;
-            }
-        }
+            vm.changeVehicle(vrp_);
         else
             vm.move(vrp_, next_move);
     }
