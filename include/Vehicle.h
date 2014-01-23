@@ -11,7 +11,6 @@ class Vehicle
 public:
     Vehicle(void) : route_(), route_length_(0), capacity_(0) {};
 
-    /* getter */
     int  capacity(void) const;
 
     /* 現在、容量を超えているように見えるので
