@@ -20,7 +20,7 @@ public:
      * isOverCapacityIfVisitCustomer
      * とか */
     bool isOverCapacity(const vrp_problem *vrp, int customer) const;
-    bool visit(const vrp_problem *vrp, int customer);
+    void visit(const vrp_problem *vrp, int customer);
     int  computeCost(const vrp_problem *vrp) const;
 
     void print(void) const;
