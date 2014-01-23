@@ -52,7 +52,7 @@ void Solver::run(void)
         Node mct;
 
         for (int i=0; i < count_; i++)
-            mct.search(vrp_, vm, simulation_count_);
+            mct.build(vrp_, vm, simulation_count_);
 
         if (!vm.move(vrp_, mct.selectNextMove()))
         {

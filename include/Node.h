@@ -33,7 +33,7 @@ public:
     Node *selectMaxUcbChild(void);
 
     /* for MonteCarloTreeSearch */
-    void search(const vrp_problem *vrp, const VehicleManager& vm, int count);
+    void build(const vrp_problem *vrp, const VehicleManager& vm, int count);
     int  selectNextMove(void) const;
 
 private:

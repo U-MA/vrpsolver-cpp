@@ -122,7 +122,7 @@ void Node::update(int value)
 }
 
 
-void Node::search(const vrp_problem *vrp, const VehicleManager& vm, int count)
+void Node::build(const vrp_problem *vrp, const VehicleManager& vm, int count)
 {
     /* 引数として渡されるvmは変更しない
      * そのため変更させるための変数を作成 */
