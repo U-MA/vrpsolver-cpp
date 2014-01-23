@@ -11,15 +11,15 @@ class Candidates
 {
 public:
     Candidates(void) : candidate_(), candidate_size_(0) {};
-    void correct(const vrp_problem *vrp, VehicleManager &vm);
-    int  select(void);
+    void collect(const vrp_problem *vrp, VehicleManager &vm);
+    int  elect(void);
 
 private:
     int candidate_[200];
     int candidate_size_;
 };
 
-void Candidates::correct(const vrp_problem *vrp, VehicleManager &vm)
+void Candidates::collect(const vrp_problem *vrp, VehicleManager &vm)
 {
     for (int i=1; i < vrp->vertnum; i++)
     {
@@ -28,7 +28,7 @@ void Candidates::correct(const vrp_problem *vrp, VehicleManager &vm)
     }
 }
 
-int Candidates::select(void)
+int Candidates::elect(void)
 {
     if (candidate_size_ == 0)
         return VehicleManager::kChange;
@@ -43,8 +43,8 @@ int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager
     {
         Candidates candidates;
 
-        candidates.correct(vrp, vm);
-        int next_move = candidates.select();
+        candidates.collect(vrp, vm);
+        int next_move = candidates.elect();
 
         if (!vm.move(vrp, next_move))
             return kInfinity;
