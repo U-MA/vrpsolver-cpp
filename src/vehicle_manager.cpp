@@ -3,11 +3,6 @@
 
 #include "vehicle_manager.h" 
 
-int VehicleManager::vehicle_size(void) const
-{
-    return vehicle_size_;
-}
-
 bool VehicleManager::isVisit(int customer) const
 {
     return is_visit_[customer-1];
@@ -42,11 +37,6 @@ bool VehicleManager::isFinish(const vrp_problem *vrp) const
     if (nextVehicleRemain(vrp)) return false;
 
     return true;
-}
-
-void VehicleManager::changeVehicle(void)
-{
-    vehicle_size_++;
 }
 
 bool VehicleManager::move(const vrp_problem *vrp, int move)

@@ -15,8 +15,9 @@ public:
 
     VehicleManager(void) : vehicle_(), vehicle_size_(1), is_visit_() {};
 
-    /* getter */
-    int  vehicle_size(void) const;
+    /* ACCESSOR */
+    int  vehicle_size(void) const { return vehicle_size_; }
+    void changeVehicle(void) { vehicle_size_++; }
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
@@ -28,7 +29,6 @@ public:
     bool isFinish(const vrp_problem *vrp) const;
 
     bool nextVehicleRemain(const vrp_problem *vrp) const;
-    void changeVehicle(void);
 
     bool move(const vrp_problem *vrp, int move);
     int  computeTotalCost(const vrp_problem *vrp) const;
