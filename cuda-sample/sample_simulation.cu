@@ -74,14 +74,15 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
     philox4x32_key_t key = {{ blockIdx.x, 0xdeadbeef }};
     philox4x32_ctr_t ctr = {{ 0, 0xf00dcafe, 0xdeadbeef, 0xbeeff00d }};
     
-    if (threadIdx.x == 0) isFail = false;
+    if (threadIdx.x == 0)
+    {
+        isFail = false;
+        candidate_size = 0;
+    }
     __syncthreads();
 
     while (isFail || !device_vms[bid].isFinish(device_vrp))
     {
-        if (threadIdx.x == 0) candidate_size = 0;
-        __syncthreads();
-
         /* Œó•âŽÒ‚Ì‘I’è */
         if (isValidCustomer(customer, device_vrp->vertnum-1) && !device_vms[bid].isVisit(customer) &&
             device_vms[bid].canVisit(device_vrp, customer))
