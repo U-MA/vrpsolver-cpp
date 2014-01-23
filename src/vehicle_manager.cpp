@@ -46,11 +46,9 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     {
         if (!nextVehicleRemain(vrp))
             return false;
-        else
-        {
-            changeVehicle();
-            return true;
-        }
+
+        changeVehicle();
+        return true;
     }
 
     if (!canVisit(vrp, move))
