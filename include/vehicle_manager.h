@@ -22,21 +22,29 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
 
-    /* canVisitという関数名だけを見ると、この役割は
-     * Vehicleな気がする */
-    bool canVisit(const vrp_problem *vrp, int customer) const;
-
-    /* isVisitAll()と役割がかぶっている気がする
-     * そのためこれは必要ないのでは? */
-    bool isFinish(const vrp_problem *vrp) const;
-
-    bool nextVehicleRemain(const vrp_problem *vrp) const;
-
-    bool move(const vrp_problem *vrp, int move);
+    /* VehicleManagerが管理している車体のコストの和を返す */
     int  computeTotalCost(const vrp_problem *vrp) const;
 
+    /* VehicleManagerが管理している車体のルートを出力 */
     void print(void) const;
-   
+
+    /* ==============================================================*/
+    /*                        しっくりこない                         */
+    /* ==============================================================*/
+
+    /* 現在走行している車体はcustomerを訪問出来るか */
+    bool canVisit(const vrp_problem *vrp, int customer) const;
+
+    /* もうVehicleManagerは何も出来ないかどうか
+     * 次に訪れる顧客もおらず、次に使う車体も無い */
+    bool isFinish(const vrp_problem *vrp) const;
+
+    /* 次の車体があるかどうか */
+    bool nextVehicleRemain(const vrp_problem *vrp) const;
+
+    /* VehicleMangerが次の手としてmoveを行う */
+    bool move(const vrp_problem *vrp, int move);
+
 private:
     static const int kVehicleMax  = 20;
     static const int kCustomerMax = 200;
