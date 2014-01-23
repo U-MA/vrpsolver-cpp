@@ -54,11 +54,18 @@ void Solver::run(void)
         for (int i=0; i < count_; i++)
             mct.build(vrp_, vm, simulation_count_);
 
-        if (!vm.move(vrp_, mct.selectNextMove()))
+        int next_move = mct.selectNextMove();
+        if (next_move == VehicleManager::kChange)
         {
-            printf("Solver::run() fail\n");
-            return;
+            if (!vm.changeVehicle(vrp_))
+            {
+                printf("next vehicle is not remained\n");
+                printf("Solver::run() fail\n");
+                return ;
+            }
         }
+        else
+            vm.move(vrp_, next_move);
     }
 
     vm.print();

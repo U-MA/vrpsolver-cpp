@@ -28,6 +28,7 @@ public:
     /* isVisitAll()と役割がかぶっている気がする
      * そのためこれは必要ないのでは? */
     bool isFinish(const vrp_problem *vrp) const;
+    bool changeVehicle(const vrp_problem *vrp);
 
     bool move(const vrp_problem *vrp, int move);
     int  computeTotalCost(const vrp_problem *vrp) const;
@@ -38,7 +39,6 @@ private:
     static const int kVehicleMax  = 20;
     static const int kCustomerMax = 200;
 
-    bool changeVehicle(const vrp_problem *vrp);
 
     Vehicle vehicle_[kVehicleMax];
     int     vehicle_size_;
