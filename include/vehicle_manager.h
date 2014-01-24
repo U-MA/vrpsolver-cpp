@@ -26,7 +26,7 @@ public:
     bool isMovable(const vrp_problem *vrp) const;
 
     /* 現在走行している車体はcustomerを訪問出来るか */
-    bool isInCapacityConstraint(const vrp_problem *vrp, int customer) const;
+    bool canVisitCustomer(const vrp_problem *vrp, int customer) const;
 
     /* 次の車体があるかどうか */
     bool nextVehicleRemain(const vrp_problem *vrp) const;
