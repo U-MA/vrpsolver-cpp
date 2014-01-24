@@ -28,17 +28,6 @@ bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
     return (vehicle_size_ < vrp->numroutes);
 }
 
-bool VehicleManager::isFinish(const vrp_problem *vrp) const
-{
-    for (int i=1; i < vrp->vertnum; i++)
-        if (!isVisit(i) && isInCapacityConstraint(vrp, i))
-            return false;
-
-    if (nextVehicleRemain(vrp)) return false;
-
-    return true;
-}
-
 bool VehicleManager::move(const vrp_problem *vrp, int move)
 {
     bool is_change_vehicle = (move == kChange);
@@ -57,6 +46,18 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
     vehicle_[vehicle_size_-1].visit(vrp, move);
     return (is_visit_[move-1] = true);
 }
+
+bool VehicleManager::canMove(const vrp_problem *vrp) const
+{
+    for (int i=1; i < vrp->vertnum; i++)
+        if (!isVisit(i) && isInCapacityConstraint(vrp, i))
+            return true;
+
+    if (nextVehicleRemain(vrp)) return true;
+
+    return false;
+}
+
 
 int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
 {

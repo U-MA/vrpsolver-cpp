@@ -28,22 +28,15 @@ public:
     /* VehicleManagerが管理している車体のルートを出力 */
     void print(void) const;
 
-    /* ==============================================================*/
-    /*                        しっくりこない                         */
-    /* ==============================================================*/
-
     /* 現在走行している車体はcustomerを訪問出来るか */
     bool isInCapacityConstraint(const vrp_problem *vrp, int customer) const;
-
-    /* もうVehicleManagerは何も出来ないかどうか
-     * 次に訪れる顧客もおらず、次に使う車体も無い */
-    bool isFinish(const vrp_problem *vrp) const;
 
     /* 次の車体があるかどうか */
     bool nextVehicleRemain(const vrp_problem *vrp) const;
 
     /* VehicleMangerが次の手としてmoveを行う */
     bool move(const vrp_problem *vrp, int move);
+    bool canMove(const vrp_problem *vrp) const;
 
 private:
     static const int kVehicleMax  = 20;

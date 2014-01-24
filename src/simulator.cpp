@@ -44,8 +44,11 @@ int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager
         candidates.collect(vrp, vm);
         int next_move = candidates.elect();
 
-        if (!vm.move(vrp, next_move))
+        if (next_move == VehicleManager::kChange &&
+            !vm.nextVehicleRemain(vrp))
             return kInfinity;
+
+        vm.move(vrp, next_move);
     }
 
     return vm.computeTotalCost(vrp);
