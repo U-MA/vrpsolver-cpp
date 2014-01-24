@@ -33,7 +33,7 @@ public:
     /* ==============================================================*/
 
     /* 現在走行している車体はcustomerを訪問出来るか */
-    bool canVisit(const vrp_problem *vrp, int customer) const;
+    bool isInCapacityConstraint(const vrp_problem *vrp, int customer) const;
 
     /* もうVehicleManagerは何も出来ないかどうか
      * 次に訪れる顧客もおらず、次に使う車体も無い */

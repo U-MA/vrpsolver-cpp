@@ -17,7 +17,7 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
-bool VehicleManager::canVisit(const vrp_problem *vrp, int customer) const
+bool VehicleManager::isInCapacityConstraint(const vrp_problem *vrp, int customer) const
 {
     return vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <=
            vrp->capacity;
@@ -31,7 +31,7 @@ bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
 bool VehicleManager::isFinish(const vrp_problem *vrp) const
 {
     for (int i=1; i < vrp->vertnum; i++)
-        if (!isVisit(i) && canVisit(vrp, i))
+        if (!isVisit(i) && isInCapacityConstraint(vrp, i))
             return false;
 
     if (nextVehicleRemain(vrp)) return false;
@@ -51,7 +51,7 @@ bool VehicleManager::move(const vrp_problem *vrp, int move)
         return true;
     }
 
-    if (isVisit(move) || !canVisit(vrp, move))
+    if (isVisit(move) || !isInCapacityConstraint(vrp, move))
         return false;
 
     vehicle_[vehicle_size_-1].visit(vrp, move);
