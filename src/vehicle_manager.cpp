@@ -40,7 +40,7 @@ void VehicleManager::move(const vrp_problem *vrp, int move)
     }
 }
 
-bool VehicleManager::canMove(const vrp_problem *vrp) const
+bool VehicleManager::isMovable(const vrp_problem *vrp) const
 {
     for (int i=1; i < vrp->vertnum; i++)
         if (!isVisit(i) && isInCapacityConstraint(vrp, i))

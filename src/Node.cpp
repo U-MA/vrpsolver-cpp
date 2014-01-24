@@ -154,7 +154,7 @@ void Node::build(const vrp_problem *vrp, const VehicleManager& vm, int count)
     VehicleManager parent_vm = vm_copy;
 
     /* nodeが全探索木の葉でなければexpandする*/
-    if (vm_copy.canMove(vrp))
+    if (vm_copy.isMovable(vrp))
     {
         /* EXPANSION */
         node->expand(vrp, vm_copy);

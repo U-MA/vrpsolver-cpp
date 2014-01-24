@@ -22,11 +22,8 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
 
-    /* VehicleManagerが管理している車体のコストの和を返す */
-    int  computeTotalCost(const vrp_problem *vrp) const;
-
-    /* VehicleManagerが管理している車体のルートを出力 */
-    void print(void) const;
+    /* 次の手があるかどうか */
+    bool isMovable(const vrp_problem *vrp) const;
 
     /* 現在走行している車体はcustomerを訪問出来るか */
     bool isInCapacityConstraint(const vrp_problem *vrp, int customer) const;
@@ -36,7 +33,12 @@ public:
 
     /* VehicleMangerが次の手としてmoveを行う */
     void move(const vrp_problem *vrp, int move);
-    bool canMove(const vrp_problem *vrp) const;
+
+    /* VehicleManagerが管理している車体のコストの和を返す */
+    int  computeTotalCost(const vrp_problem *vrp) const;
+
+    /* VehicleManagerが管理している車体のルートを出力 */
+    void print(void) const;
 
 private:
     static const int kVehicleMax  = 20;

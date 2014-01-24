@@ -97,7 +97,7 @@ TEST(VehicleManager, sizeIncrement)
 
 TEST(VehicleManager, canMoveFail)
 {
-    CHECK_TRUE(vm.canMove(vrp));
+    CHECK_TRUE(vm.isMovable(vrp));
 }
 
 TEST(VehicleManager, canMoveSuccess)
@@ -107,5 +107,5 @@ TEST(VehicleManager, canMoveSuccess)
     vm.move(vrp, 2);
     vm.move(vrp, 4);
 
-    CHECK_FALSE(vm.canMove(vrp));
+    CHECK_FALSE(vm.isMovable(vrp));
 }
