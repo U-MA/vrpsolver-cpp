@@ -93,47 +93,6 @@ TEST(VehicleManager, sizeIncrement)
 {
     vm.move(vrp, VehicleManager::kChange);
     LONGS_EQUAL(2, vm.vehicle_size());
-
-    CHECK_FALSE(vm.move(vrp, VehicleManager::kChange));
-    LONGS_EQUAL(2, vm.vehicle_size());
-}
-
-TEST(VehicleManager, moveTrue)
-{
-    CHECK_TRUE(vm.move(vrp, 1));
-}
-
-TEST(VehicleManager, moveFailWhenSameCustomerVisit)
-{
-    vm.move(vrp, 1);
-    CHECK_FALSE(vm.move(vrp, 1));
-}
-
-TEST(VehicleManager, moveFailWhenThereIsNoVehicle)
-{
-    vrp->numroutes = 3;
-
-    CHECK_TRUE(vm.move(vrp, VehicleManager::kChange));
-    CHECK_TRUE(vm.move(vrp, VehicleManager::kChange));
-    CHECK_FALSE(vm.move(vrp, VehicleManager::kChange));
-}
-
-TEST(VehicleManager, moveFailWhenVehicleVisitOverCapacity)
-{
-    vm.move(vrp, 1);
-    vm.move(vrp, 2);
-    CHECK_FALSE(vm.move(vrp, 3));
-}
-
-TEST(VehicleManager, moveFailWhenSecondVehicleVisitOverCapacity)
-{
-    vm.move(vrp, 1);
-    vm.move(vrp, VehicleManager::kChange);
-
-    CHECK_TRUE(vm.move(vrp, 2));
-    CHECK_TRUE(vm.move(vrp, 3));
-    CHECK_TRUE(vm.move(vrp, 4));
-    CHECK_FALSE(vm.move(vrp, 5));
 }
 
 TEST(VehicleManager, canMoveFail)

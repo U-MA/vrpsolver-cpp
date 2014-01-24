@@ -35,7 +35,7 @@ public:
     bool nextVehicleRemain(const vrp_problem *vrp) const;
 
     /* VehicleMangerが次の手としてmoveを行う */
-    bool move(const vrp_problem *vrp, int move);
+    void move(const vrp_problem *vrp, int move);
     bool canMove(const vrp_problem *vrp) const;
 
 private:

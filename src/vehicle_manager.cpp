@@ -28,23 +28,16 @@ bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
     return (vehicle_size_ < vrp->numroutes);
 }
 
-bool VehicleManager::move(const vrp_problem *vrp, int move)
+void VehicleManager::move(const vrp_problem *vrp, int move)
 {
     bool is_change_vehicle = (move == kChange);
     if (is_change_vehicle)
-    {
-        if (!nextVehicleRemain(vrp))
-            return false;
-
         changeVehicle();
-        return true;
+    else
+    {
+        vehicle_[vehicle_size_-1].visit(vrp, move);
+        is_visit_[move-1] = true;
     }
-
-    if (isVisit(move) || !isInCapacityConstraint(vrp, move))
-        return false;
-
-    vehicle_[vehicle_size_-1].visit(vrp, move);
-    return (is_visit_[move-1] = true);
 }
 
 bool VehicleManager::canMove(const vrp_problem *vrp) const
