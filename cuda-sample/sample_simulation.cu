@@ -130,12 +130,17 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
 int main(int argc, char **argv)
 {
     char infile[200];
-    strcpy(infile, "Vrp-All/E/E-n13-k4.vrp");
+    strcpy(infile, "Vrp-All/E/E-n101-k14.vrp");
     
     vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(host_vrp, infile);
-    host_vrp->numroutes = 4;
+    host_vrp->numroutes = 14;
 
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    cudaEventRecord(start, 0);
     vrp_problem *device_vrp = NULL;
     cudaMalloc((void **)&device_vrp, sizeof(vrp_problem));
 
@@ -162,7 +167,7 @@ int main(int argc, char **argv)
     VehicleManager host_vm;
     VehicleManager *device_vms;
 
-    int parallel_size = 100;
+    int parallel_size = 2048;
     cudaMalloc((void **)&device_vms, parallel_size * sizeof(VehicleManager));
     for (int i=0; i < parallel_size; i++)
         cudaMemcpy(&device_vms[i], &host_vm, sizeof(VehicleManager),
@@ -178,7 +183,13 @@ int main(int argc, char **argv)
     int min = thrust::reduce(device_vector.begin(), device_vector.end(), (int) 1e6,
                              thrust::minimum<int>());
 
+    cudaEventRecord(stop, 0);
+    cudaEventSynchronize(stop);
+
     std::cout << "min cost " << min << std::endl;
+    float elapsed_time_ms = .0f;
+    cudaEventElapsedTime(&elapsed_time_ms, start, stop);
+    std::cout << "time: " << elapsed_time_ms << "ms ( " << elapsed_time_ms / 1000 << "sec )" << std::endl;
 
     /* todo cudaFree */
 
