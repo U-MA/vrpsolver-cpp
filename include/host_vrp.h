@@ -1,12 +1,6 @@
 #ifndef VRPSOLVER_CPP_HOST_VRP_H
 #define VRPSOLVER_CPP_HOST_VRP_H
 
-extern "C"
-{
-#include "vrp_macros.h"
-#include "vrp_types.h"
-}
-
 #include "base_vrp.h"
 
 class HostVrp : public BaseVrp
