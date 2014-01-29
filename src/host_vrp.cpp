@@ -1,10 +1,11 @@
-#include "string.h"
-#include "host_vrp.h"
+#include <string.h>
 
 extern "C"
 {
 #include "vrp_io.h"
 }
+
+#include "host_vrp.h"
 
 HostVrp::HostVrp(void)
 {

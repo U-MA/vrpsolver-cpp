@@ -9,7 +9,7 @@ extern "C"
 
 #include "base_vrp.h"
 
-class HostVrp : BaseVrp
+class HostVrp : public BaseVrp
 {
 public:
     HostVrp(void);
