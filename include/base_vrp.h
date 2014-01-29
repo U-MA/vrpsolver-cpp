@@ -9,8 +9,9 @@ extern "C"
 
 class BaseVrp
 {
-    BaseVrp(void) : vrp_(NULL) {}
-    ~BaseVrp(void);
+public:
+    BaseVrp(void) : vrp_(NULL) {};
+    virtual ~BaseVrp(void) {};
 
     int customer_size(void) const  { return vrp_->vertnum-1; }
     int vehicle_size(void) const   { return vrp_->numroutes; }
@@ -18,7 +19,7 @@ class BaseVrp
     int cost(int v0, int v1) const { return vrp_->dist.cost[INDEX(v0, v1)]; }
     int demand(int v) const        { return vrp_->demand[v]; }
 
-private:
+protected:
     vrp_problem *vrp_;
 };
 

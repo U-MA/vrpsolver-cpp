@@ -7,7 +7,9 @@ extern "C"
 #include "vrp_types.h"
 }
 
-class HostVrp
+#include "base_vrp.h"
+
+class HostVrp : BaseVrp
 {
 public:
     HostVrp(void);
@@ -21,9 +23,6 @@ public:
     int capacity(void)       const { return vrp_->capacity;  }
     int cost(int v1, int v2) const { return vrp_->dist.cost[INDEX(v1, v2)]; }
     int demand(int v) const        { return vrp_->demand[v]; }
-
-private:
-    vrp_problem *vrp_;
 };
 
 #endif /* VRPSOLVER_CPP_HOST_VRP_H */
