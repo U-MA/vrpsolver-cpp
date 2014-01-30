@@ -6,11 +6,11 @@ class BaseVrp
 public:
     virtual ~BaseVrp(void) {};
 
-    int customer_size(void)  const = 0;
-    int vehicle_size(void)   const = 0;
-    int capacity(void)       const = 0;
-    int cost(int v0, int v1) const = 0;
-    int demand(int v)        const = 0;
+    virtual int customer_size(void)  const = 0;
+    virtual int vehicle_size(void)   const = 0;
+    virtual int capacity(void)       const = 0;
+    virtual int cost(int v0, int v1) const = 0;
+    virtual int demand(int v)        const = 0;
 };
 
 #endif /* VRPSOLVER_CPP_BASE_VRP_H */
