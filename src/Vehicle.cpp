@@ -14,6 +14,7 @@ int Vehicle::capacity(void) const
     return capacity_;
 }
 
+/* DEPRECATED */
 void Vehicle::visit(const vrp_problem *vrp, int customer)
 {
     route_[route_length_++] = customer;
@@ -26,6 +27,7 @@ void Vehicle::visit(const BaseVrp& vrp, int customer)
     capacity_ += vrp.demand(customer);
 }
 
+/* DEPRECATED */
 int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (route_length_ == 0) return 0;
