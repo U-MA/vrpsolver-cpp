@@ -15,9 +15,10 @@ public:
 
     int  capacity(void) const;
 
-    void visit(const vrp_problem *vrp, int customer);
+    void visit(const vrp_problem *vrp, int customer); /* DEPRECATED */
     void visit(const BaseVrp& vrp, int customer);
-    int  computeCost(const vrp_problem *vrp) const;
+    int  computeCost(const vrp_problem *vrp) const;   /* DEPRECATED */
+    int  computeCost(const BaseVrp& vrp) const;
 
     void print(void) const;
 

@@ -21,3 +21,10 @@ TEST(VehicleWithHostVrp, visit)
     v.visit(host_vrp, 12);
     LONGS_EQUAL(2300, v.capacity());
 }
+
+TEST(VehicleWithHostVrp, computeCost)
+{
+    Vehicle v;
+    v.visit(host_vrp, 1);
+    LONGS_EQUAL(18, v.computeCost(host_vrp));
+}
