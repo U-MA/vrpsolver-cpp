@@ -17,6 +17,15 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
     return true;
 }
 
+bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
+{
+    const int customer_size = vrp.customer_size();
+    for (int i=1; i <= customer_size; i++)
+        if (!isVisit(i)) return false;
+
+    return true;
+}
+
 bool VehicleManager::canVisitCustomer(const vrp_problem *vrp, int customer) const
 {
     return vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <=

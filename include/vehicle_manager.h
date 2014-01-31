@@ -6,6 +6,7 @@ extern "C"
 #include "vrp_types.h"
 }
 
+#include "base_vrp.h"
 #include "vehicle.h"
 
 class VehicleManager
@@ -21,6 +22,7 @@ public:
 
     bool isVisit(int customer) const;
     bool isVisitAll(const vrp_problem *vrp) const;
+    bool isVisitAll(const BaseVrp& vrp) const;
 
     bool isMovable(const vrp_problem *vrp) const;
     bool canVisitCustomer(const vrp_problem *vrp, int customer) const;
