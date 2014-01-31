@@ -19,7 +19,6 @@ TEST(VehicleManagerWithHostVrp, isNotVisitAll)
     CHECK_FALSE(vm.isVisitAll(host_vrp));
 }
 
-/*
 TEST(VehicleManagerWithHostVrp, isVisitAll)
 {
     VehicleManager vm;
@@ -41,7 +40,6 @@ TEST(VehicleManagerWithHostVrp, isVisitAll)
 
     CHECK_TRUE(vm.isVisitAll(host_vrp));
 }
-*/
 
 TEST(VehicleManagerWithHostVrp, move)
 {
