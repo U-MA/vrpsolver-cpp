@@ -30,6 +30,7 @@ public:
     bool nextVehicleRemain(const vrp_problem *vrp) const;
 
     void move(const vrp_problem *vrp, int move);
+    void move(const BaseVrp& vrp, int customer);
 
     int  computeTotalCost(const vrp_problem *vrp) const;
     void print(void) const;

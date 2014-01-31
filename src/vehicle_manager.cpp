@@ -49,6 +49,19 @@ void VehicleManager::move(const vrp_problem *vrp, int move)
     }
 }
 
+void VehicleManager::move(const BaseVrp& vrp, int customer)
+{
+    /* move内でchangeVehicle()しているが将来取り除く */
+    bool is_change_vehicle = (customer == kChange);
+    if (is_change_vehicle)
+        changeVehicle();
+    else
+    {
+        vehicle_[vehicle_size_-1].visit(vrp, customer);
+        is_visit_[customer-1] = true;
+    }
+}
+
 bool VehicleManager::isMovable(const vrp_problem *vrp) const
 {
     for (int i=1; i < vrp->vertnum; i++)

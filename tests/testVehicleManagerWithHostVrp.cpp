@@ -13,8 +13,39 @@ TEST_GROUP(VehicleManagerWithHostVrp)
     }
 };
 
-TEST(VehicleManagerWithHostVrp, isVisitAll)
+TEST(VehicleManagerWithHostVrp, isNotVisitAll)
 {
     VehicleManager vm;
     CHECK_FALSE(vm.isVisitAll(host_vrp));
 }
+
+TEST(VehicleManagerWithHostVrp, move)
+{
+    VehicleManager vm;
+    vm.move(host_vrp, 1);
+    CHECK_TRUE(vm.isVisit(1));
+}
+
+/*
+TEST(VehicleManagerWithHostVrp, isVisitAll)
+{
+    VehicleManager vm;
+    vm.move(host_vrp, 1);
+    vm.changeVehicle();
+    vm.move(host_vrp, 8);
+    vm.move(host_vrp, 5);
+    vm.move(host_vrp, 3);
+    vm.changeVehicle();
+    vm.move(host_vrp, 9);
+    vm.move(host_vrp, 12);
+    vm.move(host_vrp, 10);
+    vm.move(host_vrp, 6);
+    vm.changeVehicle();
+    vm.move(host_vrp, 11);
+    vm.move(host_vrp, 4);
+    vm.move(host_vrp, 7);
+    vm.move(host_vrp, 2);
+
+    CHECK_TRUE(vm.isVisitAll(host_vrp));
+}
+*/
