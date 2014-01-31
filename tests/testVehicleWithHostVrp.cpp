@@ -18,4 +18,6 @@ TEST(VehicleWithHostVrp, visit)
     Vehicle v;
     v.visit(host_vrp, 1);
     LONGS_EQUAL(1200, v.capacity());
+    v.visit(host_vrp, 12);
+    LONGS_EQUAL(2300, v.capacity());
 }
