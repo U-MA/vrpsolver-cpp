@@ -6,6 +6,7 @@
 TEST_GROUP(VehicleManagerWithHostVrp)
 {
     HostVrp host_vrp;
+    VehicleManager vm;
 
     void setup()
     {
@@ -15,16 +16,7 @@ TEST_GROUP(VehicleManagerWithHostVrp)
 
 TEST(VehicleManagerWithHostVrp, isNotVisitAll)
 {
-    VehicleManager vm;
     CHECK_FALSE(vm.isVisitAll(host_vrp));
-}
-
-TEST(VehicleManagerWithHostVrp, move)
-{
-    VehicleManager vm;
-    vm.move(host_vrp, 1);
-    CHECK_TRUE(vm.isVisit(1));
-    LONGS_EQUAL(18, vm.computeTotalCost(host_vrp));
 }
 
 /*
@@ -50,3 +42,11 @@ TEST(VehicleManagerWithHostVrp, isVisitAll)
     CHECK_TRUE(vm.isVisitAll(host_vrp));
 }
 */
+
+TEST(VehicleManagerWithHostVrp, move)
+{
+    vm.move(host_vrp, 1);
+    CHECK_TRUE(vm.isVisit(1));
+    LONGS_EQUAL(18, vm.computeTotalCost(host_vrp));
+}
+
