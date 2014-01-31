@@ -47,3 +47,7 @@ TEST(VehicleManagerWithHostVrp, move)
     LONGS_EQUAL(18, vm.computeTotalCost(host_vrp));
 }
 
+TEST(VehicleManagerWithHostVrp, nextVehicleRemain)
+{
+    CHECK_TRUE(vm.nextVehicleRemain(host_vrp));
+}

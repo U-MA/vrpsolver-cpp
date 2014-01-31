@@ -37,6 +37,11 @@ bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const
     return (vehicle_size_ < vrp->numroutes);
 }
 
+bool VehicleManager::nextVehicleRemain(const BaseVrp& vrp) const
+{
+    return (vehicle_size_ < vrp.vehicle_size());
+}
+
 void VehicleManager::move(const vrp_problem *vrp, int move)
 {
     bool is_change_vehicle = (move == kChange);
