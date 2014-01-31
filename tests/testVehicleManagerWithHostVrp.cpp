@@ -21,7 +21,6 @@ TEST(VehicleManagerWithHostVrp, isNotVisitAll)
 
 TEST(VehicleManagerWithHostVrp, isVisitAll)
 {
-    VehicleManager vm;
     vm.move(host_vrp, 1);
     vm.changeVehicle();
     vm.move(host_vrp, 8);
