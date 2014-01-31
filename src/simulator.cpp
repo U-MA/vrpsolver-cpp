@@ -12,6 +12,7 @@ class Candidates
 public:
     Candidates(void) : candidate_(), candidate_size_(0) {};
     void collect(const vrp_problem *vrp, VehicleManager &vm);
+    void collect(const BaseVrp& vrp, VehicleManager& vm);
     int  elect(void);
 
 private:
@@ -25,6 +26,15 @@ void Candidates::collect(const vrp_problem *vrp, VehicleManager &vm)
         if (!vm.isVisit(i) && vm.canVisitCustomer(vrp, i))
             candidate_[candidate_size_++] = i;
 }
+
+void Candidates::collect(const BaseVrp& vrp, VehicleManager& vm)
+{
+    const int vertnum = vrp.customer_size() + 1;
+    for (int i=1; i < vertnum; i++)
+        if (!vm.isVisit(i) && vm.canVisitCustomer(vrp, i))
+            candidate_[candidate_size_++] = i;
+}
+
 
 int Candidates::elect(void)
 {
@@ -55,6 +65,39 @@ int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager
 }
 
 int Simulator::sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm,
+                                          int loopCount)
+{
+    int minCost = kInfinity;
+    for (int i=0; i < loopCount; i++)
+    {
+        VehicleManager vm_copy = vm;
+        int cost = sequentialRandomSimulation(vrp, vm_copy);
+        if (cost < minCost)
+            minCost = cost;
+    }
+    return minCost;
+}
+
+int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm)
+{
+    while (!vm.isVisitAll(vrp))
+    {
+        Candidates candidates;
+
+        candidates.collect(vrp, vm);
+        int next_move = candidates.elect();
+
+        if (next_move == VehicleManager::kChange &&
+            !vm.nextVehicleRemain(vrp))
+            return kInfinity;
+
+        vm.move(vrp, next_move);
+    }
+
+    return vm.computeTotalCost(vrp);
+}
+
+int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm,
                                           int loopCount)
 {
     int minCost = kInfinity;
