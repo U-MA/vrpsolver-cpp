@@ -54,6 +54,7 @@ void Node::setChildAndRemoveTabu(int child_customer)
     tabu_[child_customer]           = false; /* tabu_リストから外す */
 }
 
+/* DEPRECATED */
 void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
 {
     child_ = new Node[vrp->vertnum];
@@ -67,7 +68,24 @@ void Node::expand(const vrp_problem *vrp, VehicleManager& vm)
     for (int i=1; i < vrp->vertnum; i++)
         if (!vm.isVisit(i) && vm.canVisitCustomer(vrp, i))
             setChildAndRemoveTabu(i);
+} /* DEPRECATED */
+
+void Node::expand(const BaseVrp& vrp, const VehicleManager& vm)
+{
+    const int vertnum = vrp.customer_size()+1;
+    child_ = new Node[vertnum];
+    tabu_  = new bool[vertnum];
+    for (int i=0; i < vertnum; i++)
+        addTabu(i);
+
+    if (vm.nextVehicleRemain(vrp))
+        setChildAndRemoveTabu(VehicleManager::kChange);
+
+    for (int i=1; i < vertnum; i++)
+        if (!vm.isVisit(i) && vm.canVisitCustomer(vrp, i))
+            setChildAndRemoveTabu(i);
 }
+
 
 double Node::computeUcb(int parent_count)
 {
@@ -106,9 +124,20 @@ bool Node::isLeaf(void) const
     return (child_size_ == 0);
 }
 
+/* DEPRECATED */
 bool Node::isTabu(const vrp_problem *vrp) const
 {
     for (int i=0; i < vrp->vertnum; i++)
+        if (!tabu_[i])
+            return false;
+
+    return true;
+} /* DEPRECATED */
+
+bool Node::isTabu(const BaseVrp& vrp) const
+{
+    const int vertnum = vrp.customer_size()+1;
+    for (int i=0; i < vertnum; i++)
         if (!tabu_[i])
             return false;
 
@@ -121,7 +150,7 @@ void Node::update(int value)
     value_ += value;
 }
 
-
+/* DEPRECATED */
 void Node::build(const vrp_problem *vrp, const VehicleManager& vm, int count)
 {
     /* 引数として渡されるvmは変更しない
@@ -182,6 +211,69 @@ void Node::build(const vrp_problem *vrp, const VehicleManager& vm, int count)
     /* BACKPROPAGATION */
     for (int i=0; i < visited_size; i++)
         visited[i]->update(cost);
+} /* DEPRECATED */
+
+void Node::build(const BaseVrp& vrp, const VehicleManager& vm, int count)
+{
+    /* 引数として渡されるvmは変更しない
+     * そのため変更させるための変数を作成 */
+    VehicleManager vm_copy = vm;
+
+    Node *visited[300];
+    int  visited_size = 0;
+
+    Node *parent = NULL;
+    Node *node   = this;
+
+    /* 木の根は訪問済み */
+    visited[visited_size++] = this;
+
+    /* SELECTION */
+    while (!node->isLeaf())
+    {
+        if (node->isTabu(vrp))
+        {
+            parent->addTabu(node->customer());
+            return ; /* 探索を破棄 */
+        }
+        parent = node;
+        node   = node->selectMaxUcbChild();
+        visited[visited_size++] = node;
+        vm_copy.move(vrp, node->customer());
+    }
+
+    VehicleManager parent_vm = vm_copy;
+
+    /* nodeが全探索木の葉でなければexpandする*/
+    /* if (!vehicleManagerIsTerminal(vm_copy, vrp)) */
+    if (vm_copy.isMovable(vrp))
+    {
+        /* EXPANSION */
+        node->expand(vrp, vm_copy);
+        parent = node;
+        node   = node->selectMaxUcbChild();
+        vm_copy.move(vrp, node->customer());
+    }
+
+    /* SIMULATION */
+    int cost = 1e6;
+    Simulator simulator;
+    while ((cost = simulator.sequentialRandomSimulation(vrp, vm_copy, count)) == 1e6)
+    {
+        parent->addTabu(node->customer());
+        vm_copy = parent_vm; /* VehicleManagerを直前の状態に移す */
+        if (parent->isTabu(vrp))
+            return ; /* 探索を破棄 */
+
+        node = parent->selectMaxUcbChild();
+        vm_copy.move(vrp, node->customer());
+    }
+    visited[visited_size++] = node;
+
+    /* BACKPROPAGATION */
+    for (int i=0; i < visited_size; i++)
+        visited[i]->update(cost);
+
 }
 
 Node *Node::selectMostVisitedChild(void) const
