@@ -33,6 +33,7 @@ public:
     void move(const BaseVrp& vrp, int customer);
 
     int  computeTotalCost(const vrp_problem *vrp) const;
+    int  computeTotalCost(const BaseVrp& vrp) const;
     void print(void) const;
 
 private:

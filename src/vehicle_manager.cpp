@@ -83,6 +83,15 @@ int VehicleManager::computeTotalCost(const vrp_problem *vrp) const
     return total_cost;
 }
 
+int VehicleManager::computeTotalCost(const BaseVrp& vrp) const
+{
+    int total_cost = 0;
+    for (int i=0; i < vehicle_size_; i++)
+        total_cost += vehicle_[i].computeCost(vrp);
+
+    return total_cost;
+}
+
 void VehicleManager::print(void) const
 {
     for (int i=0; i < vehicle_size_; i++)

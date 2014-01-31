@@ -24,6 +24,7 @@ TEST(VehicleManagerWithHostVrp, move)
     VehicleManager vm;
     vm.move(host_vrp, 1);
     CHECK_TRUE(vm.isVisit(1));
+    LONGS_EQUAL(18, vm.computeTotalCost(host_vrp));
 }
 
 /*
