@@ -20,6 +20,12 @@ void Vehicle::visit(const vrp_problem *vrp, int customer)
     capacity_ += vrp->demand[customer];
 }
 
+void Vehicle::visit(const BaseVrp& vrp, int customer)
+{
+    route_[route_length_++] = customer;
+    capacity_ += vrp.demand(customer);
+}
+
 int Vehicle::computeCost(const vrp_problem *vrp) const
 {
     if (route_length_ == 0) return 0;
