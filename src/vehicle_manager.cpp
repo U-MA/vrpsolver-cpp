@@ -8,6 +8,7 @@ bool VehicleManager::isVisit(int customer) const
     return is_visit_[customer-1];
 }
 
+/* DEPRECATED */
 bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
 {
     const int customer_size = vrp->vertnum-1;
@@ -15,7 +16,7 @@ bool VehicleManager::isVisitAll(const vrp_problem *vrp) const
         if (!isVisit(i)) return false;
 
     return true;
-}
+} /* DEPRECATED */
 
 bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
 {
@@ -26,10 +27,17 @@ bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
     return true;
 }
 
+/* DEPRECATED */
 bool VehicleManager::canVisitCustomer(const vrp_problem *vrp, int customer) const
 {
     return vehicle_[vehicle_size_-1].capacity() + vrp->demand[customer] <=
            vrp->capacity;
+} /* DEPRECATED */
+
+bool VehicleManager::canVisitCustomer(const BaseVrp& vrp, int customer) const
+{
+    return vehicle_[vehicle_size_-1].capacity() + vrp.demand(customer) <=
+           vrp.capacity();
 }
 
 bool VehicleManager::nextVehicleRemain(const vrp_problem *vrp) const

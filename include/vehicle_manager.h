@@ -33,6 +33,9 @@ public:
     bool isVisit(int customer) const;
     bool isVisitAll(const BaseVrp& vrp) const;
 
+    bool isMovable(const BaseVrp& vrp) const;
+    bool canVisitCustomer(const BaseVrp& vrp, int customer) const;
+
     bool nextVehicleRemain(const BaseVrp& vrp) const;
 
     void move(const BaseVrp& vrp, int customer);
