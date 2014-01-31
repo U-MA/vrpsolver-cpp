@@ -14,6 +14,7 @@ extern "C"
 
 #include "device_simulation.h"
 #include "vehicle_manager.h"
+#include "simulator.h"
 
 
 __global__
@@ -135,6 +136,17 @@ int main(int argc, char **argv)
     vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(host_vrp, infile);
     host_vrp->numroutes = 14;
+
+    VehicleManager vm;
+    int min_cpu = 100000;
+    clock_t start_cpu, end_cpu;
+
+    Simulator s;
+    start_cpu = clock();
+    min_cpu = s.sequentialRandomSimulation(host_vrp, vm, 2048);
+    end_cpu   = clock();
+    std::cout << "min cost(CPU) " << min_cpu << std::endl;
+    std::cout << "time(CPU)     " << (double)(end_cpu - start_cpu) / CLOCKS_PER_SEC << "sec" << std::endl;
 
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
