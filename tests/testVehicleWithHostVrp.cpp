@@ -27,4 +27,6 @@ TEST(VehicleWithHostVrp, computeCost)
     Vehicle v;
     v.visit(host_vrp, 1);
     LONGS_EQUAL(18, v.computeCost(host_vrp));
+    v.visit(host_vrp, 12);
+    LONGS_EQUAL(47, v.computeCost(host_vrp));
 }
