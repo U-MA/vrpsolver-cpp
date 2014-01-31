@@ -13,9 +13,13 @@ extern "C"
 class Simulator
 {
 public:
+    /* DEPRECATED */
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const vrp_problem *vrp, VehicleManager& vm,
                                    int loopCount);
+    /* DEPRECATED */
+
+
     int sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm);
     int sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm,
                                    int loopCount);
