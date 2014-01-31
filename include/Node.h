@@ -1,6 +1,8 @@
 #ifndef VRPSOLVER_CPP_NODE_H
 #define VRPSOLVER_CPP_NODE_H
 
+#include <cstdlib>
+
 extern "C"
 {
 #include "vrp_types.h"
