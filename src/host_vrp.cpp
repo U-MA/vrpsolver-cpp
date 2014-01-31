@@ -1,4 +1,5 @@
-#include <string.h>
+#include <cstring>
+#include <cstdlib>
 
 extern "C"
 {
@@ -49,4 +50,10 @@ void HostVrp::Create(const char *file_path)
 {
     vrp_io(vrp_, file_path);
     vrp_->numroutes = extractVehicleSizeAndToInt(file_path);
+}
+
+const char *HostVrp::name(void) const
+{
+    const char *aName = vrp_->name;
+    return aName;
 }

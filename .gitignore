@@ -1,10 +1,18 @@
+# MAC OS X
 *.DS_Store
 
+# exec file
 VrpSolver-cpp_tests
+*.out
 
+# vrp problem file
 Vrp-All/
 
+# error
 errlog.txt
 
 lib/
 objs/
+
+# .sh
+*.sh

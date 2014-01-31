@@ -18,6 +18,7 @@ public:
 
     void Create(const char *file_path);
 
+    const char* name(void)        const;
     int customer_size(void)  const { return vrp_->vertnum-1; }
     int vehicle_size(void)   const { return vrp_->numroutes; }
     int capacity(void)       const { return vrp_->capacity; }
