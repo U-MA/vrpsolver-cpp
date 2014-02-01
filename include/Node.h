@@ -3,11 +3,6 @@
 
 #include <cstdlib>
 
-extern "C"
-{
-#include "vrp_types.h"
-}
-
 #include "base_vrp.h"
 #include "vehicle_manager.h"
 
