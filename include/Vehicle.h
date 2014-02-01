@@ -1,11 +1,6 @@
 #ifndef VRPSOLVER_CPP_VEHICLE_H
 #define VRPSOLVER_CPP_VEHICLE_H
 
-extern "C"
-{
-#include "vrp_types.h"
-}
-
 #include "base_vrp.h"
 
 class Vehicle
@@ -15,9 +10,7 @@ public:
 
     int  capacity(void) const;
 
-    void visit(const vrp_problem *vrp, int customer); /* DEPRECATED */
     void visit(const BaseVrp& vrp, int customer);
-    int  computeCost(const vrp_problem *vrp) const;   /* DEPRECATED */
     int  computeCost(const BaseVrp& vrp) const;
 
     void print(void) const;

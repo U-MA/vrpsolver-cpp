@@ -28,9 +28,7 @@ public:
     void addTabu(int customer);
 
     bool isLeaf(void) const;
-    bool isTabu(const vrp_problem *vrp) const; /* DEPRECATED */
     bool isTabu(const BaseVrp& vrp) const;
-    void expand(const vrp_problem *vrp, VehicleManager& vm); /* DEPRECATED */
     void expand(const BaseVrp& vrp, const VehicleManager& vm);
     void update(int value);
 
@@ -38,7 +36,6 @@ public:
     Node *selectMaxUcbChild(void);
 
     /* for MonteCarloTreeSearch */
-    void build(const vrp_problem *vrp, const VehicleManager& vm, int count); /* DEPRECATED */
     void build(const BaseVrp& vrp, const VehicleManager& vm, int count);
     int  selectNextMove(void) const;
 

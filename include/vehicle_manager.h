@@ -1,11 +1,6 @@
 #ifndef VRPSOLVER_CPP_VEHICLE_MANAGER_H
 #define VRPSOLVER_CPP_VEHICLE_MANAGER_H
 
-extern "C"
-{
-#include "vrp_types.h"
-}
-
 #include "base_vrp.h"
 #include "vehicle.h"
 
@@ -15,17 +10,6 @@ public:
     static const int kChange = 0;
 
     VehicleManager(void) : vehicle_(), vehicle_size_(1), is_visit_() {};
-
-
-    /* DEPRECATED */
-    bool isVisitAll(const vrp_problem *vrp) const;
-    bool isMovable(const vrp_problem *vrp) const;
-    bool canVisitCustomer(const vrp_problem *vrp, int customer) const;
-    bool nextVehicleRemain(const vrp_problem *vrp) const;
-    void move(const vrp_problem *vrp, int move);
-    int  computeTotalCost(const vrp_problem *vrp) const;
-    /* DEPRECATED */
-
 
     int  vehicle_size(void) const { return vehicle_size_; }
     void changeVehicle(void) { vehicle_size_++; }
