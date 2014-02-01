@@ -1,11 +1,6 @@
 #ifndef VRPSOLVER_CPP_SIMULATION_H
 #define VRPSOLVER_CPP_SIMULATION_H
 
-extern "C"
-{
-#include "vrp_types.h"
-}
-
 #include "base_vrp.h"
 #include "vehicle_manager.h"
 
