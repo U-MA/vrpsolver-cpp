@@ -34,3 +34,23 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+/*
+int main(int argc, char **argv)
+{
+    MCTS mcts;
+
+    mcts.Create("../Vrp-All/E/E-n13-k4.vrp");
+    mcts.SetIterationCount(1000);
+    mcts.SetSimulationCount(100);
+
+    clock_t start, stop;
+    start = clock();
+    int cost = mcts.run();
+    stop  = clock();
+    std::cout << "[COST] " << cost << std::endl;
+    std::cout << "[TIME] " << (stop - start) / CLOCKS_PER_SEC << std::endl;
+
+    return 0;
+}
+*/
