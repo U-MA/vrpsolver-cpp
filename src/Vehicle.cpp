@@ -3,12 +3,6 @@
 
 #include "Vehicle.h"
 
-extern "C"
-{
-#include "vrp_macros.h"
-}
-
-
 int Vehicle::capacity(void) const
 {
     return capacity_;
