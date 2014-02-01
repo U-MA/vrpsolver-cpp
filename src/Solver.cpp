@@ -7,14 +7,9 @@
 #include "vehicle_manager.h"
 #include "wrapper_vrp.h"
 
-Solver::~Solver(void)
+void Solver::setProblem(const char *filename)
 {
-    destroyVrp(vrp_);
-}
-
-void Solver::setProblem(char *filename)
-{
-    vrp_ = createVrpFromFilePath(filename);
+    vrp_.Create(filename);
     printf("file name       : %s\n", filename);
 }
 
