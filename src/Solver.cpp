@@ -5,7 +5,6 @@
 #include "node.h"
 #include "solver.h"
 #include "vehicle_manager.h"
-#include "wrapper_vrp.h"
 
 void Solver::setProblem(const char *filename)
 {
