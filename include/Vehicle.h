@@ -8,7 +8,7 @@ class Vehicle
 public:
     Vehicle(void) : route_(), route_length_(0), capacity_(0) {};
 
-    int  capacity(void) const;
+    int  capacity(void) const { return capacity_; }
 
     void visit(const BaseVrp& vrp, int customer);
     int  computeCost(const BaseVrp& vrp) const;

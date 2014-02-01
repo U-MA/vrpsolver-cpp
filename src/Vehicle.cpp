@@ -3,11 +3,6 @@
 
 #include "Vehicle.h"
 
-int Vehicle::capacity(void) const
-{
-    return capacity_;
-}
-
 void Vehicle::visit(const BaseVrp& vrp, int customer)
 {
     route_[route_length_++] = customer;
