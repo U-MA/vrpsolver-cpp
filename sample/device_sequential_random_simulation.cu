@@ -1,14 +1,14 @@
 /*
- * ちゃんと使えるかを意図したファイル
- *
- * 将来の使い方とは異なることがあり得る.というか変える.
+ * CUDAを使ったシミュレーションの期待
  */
+
+
 
 #include <iostream>
 #include <cstdlib>
 
 #include "host_vrp.h"
-#include "simulator.h"
+#include "device_vrp.h"
 
 using namespace std;
 
@@ -21,11 +21,11 @@ int main(int argc, char **argv)
     }
 
     HostVrp host_vrp("../Vrp-All/E/E-n13-k4.vrp");
-    VehicleManager vm;
+    HostVehicleManager host_vm;
 
-    Simulator simulator;
+    DeviceSimulator device_simulator;
     int simulation_count = atoi(argv[1]);
-    int cost = simulator.sequentialRandomSimulation(host_vrp, vm, simulation_count);
+    int cost = device_simulator.SequentialRandom(host_vrp, device_vrp, 2048);
 
     cout << "NAME: " << host_vrp.name() << endl;
     cout << "SIMULATION COUNT: " << simulation_count << endl;
