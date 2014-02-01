@@ -14,11 +14,11 @@ public:
     ~Node(void);
 
     /* getter */
-    int  customer(void)     const;
-    int  count(void)        const;
-    int  childSize(void)    const;
-    int  value(void)        const;
-    bool tabu(int customer) const;
+    int  customer(void)     const { return customer_; }
+    int  count(void)        const { return count_; }
+    int  childSize(void)    const { return child_size_; }
+    int  value(void)        const { return value_; }
+    bool tabu(int customer) const { return tabu_[customer]; }
 
     void addTabu(int customer);
 

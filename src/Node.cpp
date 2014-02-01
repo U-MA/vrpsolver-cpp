@@ -18,31 +18,6 @@ Node::~Node(void)
     delete[] tabu_;
 }
 
-int Node::customer(void) const
-{
-    return customer_;
-}
-
-int Node::count(void) const
-{
-    return count_;
-}
-
-int Node::childSize(void) const
-{
-    return child_size_;
-}
-
-int Node::value(void) const
-{
-    return value_;
-}
-
-bool Node::tabu(int customer) const
-{
-    return tabu_[customer];
-}
-
 void Node::addTabu(int customer)
 {
     tabu_[customer] = true;
