@@ -130,8 +130,14 @@ void randomSimulation(vrp_problem *device_vrp, VehicleManager *device_vms,
 
 int main(int argc, char **argv)
 {
+    if (argc != 2)
+    {
+        std::cout << "usage: " << argv[0] << " <vrp_file>" << std::endl;
+        std::exit(1);
+    }
+
     char infile[200];
-    strcpy(infile, "Vrp-All/E/E-n101-k14.vrp");
+    strcpy(infile, argv[1]);
     
     vrp_problem *host_vrp = (vrp_problem *)calloc(1, sizeof(vrp_problem));
     vrp_io(host_vrp, infile);
