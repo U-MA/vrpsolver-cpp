@@ -136,6 +136,8 @@ int main(int argc, char **argv)
         std::exit(1);
     }
 
+	std::cout << "NAME: " << argv[1] << std::endl;
+
     char infile[200];
     strcpy(infile, argv[1]);
     
