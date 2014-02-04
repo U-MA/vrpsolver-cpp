@@ -1,3 +1,7 @@
+#include <thrust/device_vector.h>
+#include <thrust/functional.h>
+#include <thrust/reduce.h>
+
 #include "device_simulator.h"
 #include "device_vrp.h"
 
