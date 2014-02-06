@@ -23,7 +23,7 @@ DeviceSimulator::Run(const HostVrp& host_vrp, const VehicleManager& vm, int coun
     thrust::device_vector<int> device_costs(count);
 
     VehicleManager *device_vms_ptr = thrust::raw_pointer_cast(device_vms);
-    int *device_costs_ptr = thrust::raw_pointer_cast(device_costs);
+    int *device_costs_ptr          = thrust::raw_pointer_cast(device_costs);
 
     const int vertnum = host_vrp->customer_size()+1;
     simulation_kernel<<<count, vertnum, vertnum*sizeof(int)>>>(
