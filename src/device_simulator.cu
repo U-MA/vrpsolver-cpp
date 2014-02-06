@@ -10,6 +10,7 @@ __global__
 void simulation_kernel(DeviceVrp *, VehicleManager *, int *);
 
 
+/* 引数のVehicleManagerはホスト上に配置されている */
 DeviceSimulator::Run(const HostVrp& host_vrp, const VehicleManager& vm, int count)
 {
     DeviceVrp device_vrp(host_vrp);
