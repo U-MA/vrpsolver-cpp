@@ -18,6 +18,9 @@ public:
     int capacity(void)       const { return vrp_->capacity; }
     int cost(int v0, int v1) const { return vrp_->dist.cost[INDEX(v0, v1)]; }
     int demand(int v)        const { return vrp_->demand[v]; }
+
+private:
+    vrp_problem *vrp_;
 };
 
 #endif /* VRPSOLVER_CPP_DEVICE_VRP_H */
