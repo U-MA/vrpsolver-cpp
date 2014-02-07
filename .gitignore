@@ -18,3 +18,10 @@ objs/
 *.sh
 
 a.out*
+
+*~
+
+*.exe
+*.exp
+*.lib
+*.bat
