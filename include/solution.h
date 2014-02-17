@@ -7,8 +7,7 @@
 class Solution
 {
 public:
-    Solution(const BaseVrp& vrp);
-    ~Solution();
+    Solution(const BaseVrp& vrp) {}
 
     Vehicle *current_vehicle() const { return current_vehicle_; }
 
