@@ -19,29 +19,33 @@ TEST_GROUP(Solution)
     {
         delete solution;
     }
+
+    void VisitAllCustomer(const BaseVrp& vrp, Solution *solution)
+    {
+        solution->current_vehicle()->visit(vrp, 1);
+
+        solution->ChangeVehicle();
+        solution->current_vehicle()->visit(vrp, 8);
+        solution->current_vehicle()->visit(vrp, 5);
+        solution->current_vehicle()->visit(vrp, 3);
+
+        solution->ChangeVehicle();
+        solution->current_vehicle()->visit(vrp, 9);
+        solution->current_vehicle()->visit(vrp, 12);
+        solution->current_vehicle()->visit(vrp, 10);
+        solution->current_vehicle()->visit(vrp, 6);
+
+        solution->ChangeVehicle();
+        solution->current_vehicle()->visit(vrp, 11);
+        solution->current_vehicle()->visit(vrp, 4);
+        solution->current_vehicle()->visit(vrp, 7);
+        solution->current_vehicle()->visit(vrp, 2);
+    }
 };
 
 TEST(Solution, IsFinish)
 {
-    solution->current_vehicle()->visit(vrp, 1);
-
-    solution->ChangeVehicle();
-    solution->current_vehicle()->visit(vrp, 8);
-    solution->current_vehicle()->visit(vrp, 5);
-    solution->current_vehicle()->visit(vrp, 3);
-
-    solution->ChangeVehicle();
-    solution->current_vehicle()->visit(vrp, 9);
-    solution->current_vehicle()->visit(vrp, 12);
-    solution->current_vehicle()->visit(vrp, 10);
-    solution->current_vehicle()->visit(vrp, 6);
-
-    solution->ChangeVehicle();
-    solution->current_vehicle()->visit(vrp, 11);
-    solution->current_vehicle()->visit(vrp, 4);
-    solution->current_vehicle()->visit(vrp, 7);
-    solution->current_vehicle()->visit(vrp, 2);
-
+    VisitAllCustomer(vrp, solution);
     CHECK_TRUE(solution->IsFinish());
 }
 
