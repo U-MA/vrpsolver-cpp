@@ -43,6 +43,12 @@ TEST_GROUP(Solution)
     }
 };
 
+TEST(Solution, IsFeasible)
+{
+    VisitAllCustomer(vrp, solution);
+    CHECK_TRUE(solution->IsFeasible());
+}
+
 TEST(Solution, IsNotFeasibleWhenCreate)
 {
     CHECK_FALSE(solution->IsFeasible());
