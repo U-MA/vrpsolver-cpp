@@ -43,6 +43,14 @@ bool Solution::IsFinish() const
     return true;
 }
 
+bool Solution::IsVisit(int customer_id) const
+{
+    for (int i=0; i <= current_vehicle_id_; i++)
+        if (vehicles_[i].is_visit(customer_id))
+            return true;
+    return false;
+}
+
 int Solution::ComputeTotalCost(const BaseVrp& vrp) const
 {
     int total_cost = 0;

@@ -84,3 +84,9 @@ TEST(Solution, ComputeTotalCost)
     VisitAllCustomer(vrp, solution);
     LONGS_EQUAL(247, solution->ComputeTotalCost(vrp));
 }
+
+TEST(Solution, IsVisit)
+{
+    solution->current_vehicle()->visit(vrp, 2);
+    CHECK_TRUE(solution->IsVisit(2));
+}
