@@ -69,18 +69,53 @@ int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm
     return minCost;
 }
 
-/*
-unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, const Solution solution,
-                                                   int count)
+unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution& solution)
+{
+    Vehicle *current_vehicle = solution.current_vehicle();
+    int candidates[200], candidate_size;
+    while (!solution.IsFinish())
+    {
+        candidate_size = 0;
+
+        /* 次に訪問する顧客の候補を求める */
+        for (int i=1; i <= vrp.customer_size(); i++)
+        {
+            if (!solution.IsVisit(i) &&
+                current_vehicle->capacity() + vrp.demand(i) <= vrp.capacity())
+            {
+                candidates[candidate_size++] = i;
+            }
+        }
+
+        if (candidate_size == 0)
+        {
+            solution.ChangeVehicle();
+            current_vehicle = solution.current_vehicle();
+        }
+        else
+        {
+            int customer = candidates[rand() % candidate_size];
+            current_vehicle->visit(vrp, customer);
+        }
+    }
+
+    if (solution.IsFeasible())
+        return solution.ComputeTotalCost(vrp);
+    else
+        return kInfinity;
+}
+
+unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, const Solution& solution,
+                                                   unsigned int count)
 {
     unsigned int min_cost = kInfinity;
-    for (int i=0; i < count; i++)
+    for (unsigned int i=0; i < count; i++)
     {
-        Solution solution_copy = solution;
-        int cost = sequentialRandomSimulation(vrp, solution_copy);
+        Solution solution_copy(vrp);
+        solution.Copy(solution_copy);
+        unsigned int cost = sequentialRandomSimulation(vrp, solution_copy);
         if (cost < min_cost)
             min_cost = cost;
     }
     return min_cost;
 }
-*/
