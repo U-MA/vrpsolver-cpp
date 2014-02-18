@@ -2,7 +2,6 @@
 
 #include "host_vrp.h"
 #include "solution.h"
-#include "vehicle.h"
 
 TEST_GROUP(Solution)
 {
