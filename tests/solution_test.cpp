@@ -6,12 +6,16 @@
 
 TEST_GROUP(Solution)
 {
+    HostVrp vrp;
+
+    void setup()
+    {
+        vrp.Create("./Vrp-All/E/E-n13-k4.vrp");
+    }
 };
 
-/* まだ実装していない関数があるためコメントアウト
 TEST(Solution, IsFinish)
 {
-    HostVrp vrp("./Vrp-All/E/E-n13-k4.vrp");
     Solution solution(vrp);
 
     solution.current_vehicle()->visit(vrp, 1);
@@ -35,11 +39,9 @@ TEST(Solution, IsFinish)
 
     CHECK_TRUE(solution.IsFinish());
 }
-*/
 
 TEST(Solution, IsNotFinishWhenCreate)
 {
-    HostVrp vrp;
     Solution solution(vrp);
     CHECK_FALSE(solution.IsFinish());
 }

@@ -7,6 +7,7 @@ void Vehicle::visit(const BaseVrp& vrp, int customer)
 {
     route_[route_length_++] = customer;
     capacity_ += vrp.demand(customer);
+    is_visit_[customer-1] = true;
 }
 
 int Vehicle::computeCost(const BaseVrp& vrp) const
