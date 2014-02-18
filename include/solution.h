@@ -31,7 +31,7 @@ public:
 
 
     /* 全てのvehicleのコストを返す */
-    int ComputeTotalCost() const;
+    int ComputeTotalCost(const BaseVrp& vrp) const;
 
 private:
     Vehicle vehicles_[20];

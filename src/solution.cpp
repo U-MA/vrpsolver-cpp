@@ -31,3 +31,12 @@ bool Solution::IsFinish() const
     }
     return true;
 }
+
+int Solution::ComputeTotalCost(const BaseVrp& vrp) const
+{
+    int total_cost = 0;
+    for (int i=0; i <= current_vehicle_id_; i++)
+        total_cost += vehicles_[i].computeCost(vrp);
+    return total_cost;
+}
+

@@ -72,3 +72,9 @@ TEST(Solution, IsNotFinishWhenCreate)
 {
     CHECK_FALSE(solution->IsFinish());
 }
+
+TEST(Solution, ComputeTotalCost)
+{
+    VisitAllCustomer(vrp, solution);
+    LONGS_EQUAL(247, solution->ComputeTotalCost(vrp));
+}
