@@ -13,6 +13,8 @@ public:
                                    customer_size_(vrp.customer_size()),
                                    vehicle_size_(vrp.vehicle_size()) {}
 
+    void Copy(Solution& solution_copy) const;
+
     Vehicle *current_vehicle() const { return current_vehicle_; }
 
     /* 現在走行しているvehicleを変更 */

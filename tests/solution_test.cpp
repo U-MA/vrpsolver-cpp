@@ -42,6 +42,13 @@ TEST_GROUP(Solution)
     }
 };
 
+TEST(Solution, Copy)
+{
+    Solution solution_copy(vrp);
+    solution->Copy(solution_copy);
+    CHECK(solution_copy.current_vehicle() != solution->current_vehicle());
+}
+
 TEST(Solution, IsFeasible)
 {
     VisitAllCustomer(vrp, solution);
