@@ -54,7 +54,7 @@ TEST(Solution, IsNotFeasibleWhenCreate)
     CHECK_FALSE(solution->IsFeasible());
 }
 
-TEST(Solution, IsFinish)
+TEST(Solution, IsFinishWhenAllCustomerAreVisited)
 {
     VisitAllCustomer(vrp, solution);
     CHECK_TRUE(solution->IsFinish());
