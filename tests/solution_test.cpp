@@ -60,6 +60,14 @@ TEST(Solution, IsFinishWhenAllCustomerAreVisited)
     CHECK_TRUE(solution->IsFinish());
 }
 
+TEST(Solution, IsFinishWhenVehicleIsOver)
+{
+    for (int i=0; i < 5; i++)
+        solution->ChangeVehicle();
+
+    CHECK_TRUE(solution->IsFinish());
+}
+
 TEST(Solution, IsNotFinishWhenCreate)
 {
     CHECK_FALSE(solution->IsFinish());
