@@ -31,7 +31,6 @@ public:
     /* customer_idを訪問していればtrue */
     bool IsVisit(int customer_id) const;
 
-
     /* 全てのvehicleのコストを返す */
     int ComputeTotalCost(const BaseVrp& vrp) const;
 
