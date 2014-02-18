@@ -34,7 +34,9 @@ public:
     int ComputeTotalCost(const BaseVrp& vrp) const;
 
 private:
-    Vehicle vehicles_[20];
+    static const int kMaxVehicleSize = 20;
+
+    Vehicle vehicles_[kMaxVehicleSize];
     Vehicle *current_vehicle_;
     int current_vehicle_id_;
     int customer_size_;
