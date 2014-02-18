@@ -8,9 +8,9 @@ void Solution::Copy(Solution& solution_copy) const
         solution_copy.vehicles_[i] = vehicles_[i];
 
     solution_copy.current_vehicle_id_ = current_vehicle_id_;
-    solution_copy.current_vehicle_ = &solution_copy.vehicles_[current_vehicle_id_];
-    solution_copy.customer_size_ = customer_size_;
-    solution_copy.vehicle_size_ = vehicle_size_;
+    solution_copy.current_vehicle_    = &solution_copy.vehicles_[current_vehicle_id_];
+    solution_copy.customer_size_      = customer_size_;
+    solution_copy.vehicle_size_       = vehicle_size_;
 }
 
 void Solution::ChangeVehicle()
