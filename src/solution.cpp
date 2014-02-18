@@ -9,7 +9,7 @@ void Solution::ChangeVehicle()
 
 bool Solution::IsFeasible() const
 {
-    return true;
+    return false;
 }
 
 bool Solution::IsFinish() const
