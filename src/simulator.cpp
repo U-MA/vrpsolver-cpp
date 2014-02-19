@@ -73,6 +73,7 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution&
 {
     Vehicle *current_vehicle = solution.CurrentVehicle();
     int candidates[200], candidate_size;
+
     while (!solution.IsFinish())
     {
         candidate_size = 0;
@@ -80,6 +81,7 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution&
         /* 次に訪問する顧客の候補を求める */
         for (int i=1; i <= vrp.customer_size(); i++)
         {
+            /* 訪問可能であれば候補に追加 */
             if (!solution.IsVisit(i) &&
                 current_vehicle->capacity() + vrp.demand(i) <= vrp.capacity())
             {
@@ -89,11 +91,13 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution&
 
         if (candidate_size == 0)
         {
+            /* 候補がいなければ次の車両へ */
             solution.ChangeVehicle();
             current_vehicle = solution.CurrentVehicle();
         }
         else
         {
+            /* 候補の中から無作為に１人選ぶ */
             int customer = candidates[rand() % candidate_size];
             current_vehicle->visit(vrp, customer);
         }
