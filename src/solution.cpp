@@ -13,6 +13,11 @@ void Solution::Copy(Solution& solution_copy) const
     solution_copy.vehicle_size_       = vehicle_size_;
 }
 
+Vehicle *Solution::CurrentVehicle()
+{
+    return &vehicles_[current_vehicle_id_];
+}
+
 void Solution::ChangeVehicle()
 {
     current_vehicle_ = &vehicles_[++current_vehicle_id_];

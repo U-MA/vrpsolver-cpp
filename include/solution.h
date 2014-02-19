@@ -15,7 +15,7 @@ public:
 
     void Copy(Solution& solution_copy) const;
 
-    Vehicle *current_vehicle() const { return current_vehicle_; }
+    Vehicle *CurrentVehicle();
 
     /* 現在走行しているvehicleを変更 */
     void ChangeVehicle();

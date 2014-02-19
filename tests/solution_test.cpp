@@ -21,24 +21,24 @@ TEST_GROUP(Solution)
 
     void VisitAllCustomer(const BaseVrp& vrp, Solution *solution)
     {
-        solution->current_vehicle()->visit(vrp, 1);
+        solution->CurrentVehicle()->visit(vrp, 1);
 
         solution->ChangeVehicle();
-        solution->current_vehicle()->visit(vrp, 8);
-        solution->current_vehicle()->visit(vrp, 5);
-        solution->current_vehicle()->visit(vrp, 3);
+        solution->CurrentVehicle()->visit(vrp, 8);
+        solution->CurrentVehicle()->visit(vrp, 5);
+        solution->CurrentVehicle()->visit(vrp, 3);
 
         solution->ChangeVehicle();
-        solution->current_vehicle()->visit(vrp, 9);
-        solution->current_vehicle()->visit(vrp, 12);
-        solution->current_vehicle()->visit(vrp, 10);
-        solution->current_vehicle()->visit(vrp, 6);
+        solution->CurrentVehicle()->visit(vrp, 9);
+        solution->CurrentVehicle()->visit(vrp, 12);
+        solution->CurrentVehicle()->visit(vrp, 10);
+        solution->CurrentVehicle()->visit(vrp, 6);
 
         solution->ChangeVehicle();
-        solution->current_vehicle()->visit(vrp, 11);
-        solution->current_vehicle()->visit(vrp, 4);
-        solution->current_vehicle()->visit(vrp, 7);
-        solution->current_vehicle()->visit(vrp, 2);
+        solution->CurrentVehicle()->visit(vrp, 11);
+        solution->CurrentVehicle()->visit(vrp, 4);
+        solution->CurrentVehicle()->visit(vrp, 7);
+        solution->CurrentVehicle()->visit(vrp, 2);
     }
 };
 
@@ -46,7 +46,7 @@ TEST(Solution, Copy)
 {
     Solution solution_copy(vrp);
     solution->Copy(solution_copy);
-    CHECK(solution_copy.current_vehicle() != solution->current_vehicle());
+    CHECK(solution_copy.CurrentVehicle() != solution->CurrentVehicle());
 }
 
 TEST(Solution, IsFeasible)
@@ -87,6 +87,6 @@ TEST(Solution, ComputeTotalCost)
 
 TEST(Solution, IsVisit)
 {
-    solution->current_vehicle()->visit(vrp, 2);
+    solution->CurrentVehicle()->visit(vrp, 2);
     CHECK_TRUE(solution->IsVisit(2));
 }

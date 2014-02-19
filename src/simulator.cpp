@@ -71,7 +71,7 @@ int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, VehicleManager& vm
 
 unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution& solution)
 {
-    Vehicle *current_vehicle = solution.current_vehicle();
+    Vehicle *current_vehicle = solution.CurrentVehicle();
     int candidates[200], candidate_size;
     while (!solution.IsFinish())
     {
@@ -90,7 +90,7 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution&
         if (candidate_size == 0)
         {
             solution.ChangeVehicle();
-            current_vehicle = solution.current_vehicle();
+            current_vehicle = solution.CurrentVehicle();
         }
         else
         {
