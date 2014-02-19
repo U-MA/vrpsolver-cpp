@@ -15,6 +15,7 @@ public:
 
     void Copy(Solution& solution_copy) const;
 
+    /* 現在走行している車両を取得 */
     Vehicle *CurrentVehicle();
 
     /* 現在走行しているvehicleを変更 */
