@@ -8,7 +8,6 @@ class Solution
 {
 public:
     Solution(const BaseVrp& vrp) : vehicles_(),
-                                   current_vehicle_(&vehicles_[0]),
                                    current_vehicle_id_(0),
                                    customer_size_(vrp.customer_size()),
                                    vehicle_size_(vrp.vehicle_size()) {}
@@ -39,7 +38,6 @@ private:
     static const int kMaxVehicleSize = 20;
 
     Vehicle vehicles_[kMaxVehicleSize];
-    Vehicle *current_vehicle_;
     int current_vehicle_id_;
     int customer_size_;
     int vehicle_size_;
