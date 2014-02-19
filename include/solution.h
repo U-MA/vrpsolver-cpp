@@ -7,6 +7,11 @@
 class Solution
 {
 public:
+    Solution() : vehicles_(),
+                 current_vehicle_id_(0),
+                 customer_size_(0),
+                 vehicle_size_(0) {}
+
     Solution(const BaseVrp& vrp) : vehicles_(),
                                    current_vehicle_id_(0),
                                    customer_size_(vrp.customer_size()),
