@@ -115,7 +115,7 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, const Sol
     unsigned int min_cost = kInfinity;
     for (unsigned int i=0; i < count; i++)
     {
-        Solution solution_copy(vrp);
+        Solution solution_copy;
         solution.Copy(solution_copy);
         unsigned int cost = sequentialRandomSimulation(vrp, solution_copy);
         if (cost < min_cost)
