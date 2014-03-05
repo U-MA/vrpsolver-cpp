@@ -10,8 +10,8 @@ TEST(MctNode, Initialize)
 {
     MctNode node(1);
     LONGS_EQUAL(0, node.Count());
-    LONGS_EQUAL(0, node.Value());
     LONGS_EQUAL(1, node.CustomerId());
+    LONGS_EQUAL(0, node.Value());
 }
 
 TEST(MctNode, ConstractWithMinusCustomerId)
