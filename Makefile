@@ -12,6 +12,7 @@ TEST_TARGET = \
 #--- Inputs ----#
 PROJECT_HOME_DIR = .
 CPPUTEST_HOME = cpputest-3.5
+CC = gcc
 CPP_PLATFORM = Gcc
 
 SRC_DIRS = \
@@ -32,5 +33,6 @@ CPPUTEST_WARNINGFLAGS += -Wall -Werror -Wswitch-default -Wswitch-enum
 
 CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMactos.h
 
+LDFLAGS = -lstdc++
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
