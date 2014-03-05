@@ -25,11 +25,11 @@ public:
 
     unsigned int CustomerId() const { return customer_id_; }
 
-    virtual int Value() const { return value_; }
+    virtual long Value() const { return value_; }
 
     virtual bool IsLeaf() const;
     virtual void Expand(const BaseVrp& vrp, const Solution& solution);
-    virtual void Update(int value);
+    virtual void Update(long value);
 
 private:
     static const int kMaxChildSize = 120;
@@ -38,7 +38,7 @@ private:
     unsigned int child_size_;
     unsigned int count_;
     unsigned int customer_id_;
-    int value_;
+    long value_;
 };
 
 #endif /* VRPSOLVER_CPP_MCT_NODE_H */

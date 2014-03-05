@@ -9,7 +9,7 @@ void MctNode::Expand(const BaseVrp& vrp, const Solution& solution)
 {
 }
 
-void MctNode::Update(int value)
+void MctNode::Update(long value)
 {
     count_++;
     value_ += value;
