@@ -6,6 +6,12 @@
 class MctNode : public BaseNode
 {
 public:
+    MctNode() : child_(),
+                child_size_(),
+                count_(0),
+                customer_id_(),
+                value_(0) {}
+
     ~MctNode() {}
 
     MctNode* Child(int child_id) const { return child_[child_id]; }
