@@ -6,10 +6,10 @@
 class MctNode : public BaseNode
 {
 public:
-    MctNode() : child_(),
+    MctNode(int customer_id) : child_(),
                 child_size_(),
                 count_(0),
-                customer_id_(),
+                customer_id_(customer_id),
                 value_(0) {}
 
     ~MctNode() {}
