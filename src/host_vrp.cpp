@@ -18,7 +18,7 @@ static int extractVehicleSizeAndToInt(const char *filename)
 {
     char *k   = strrchr(filename, 'k');
     char *dot = strrchr(filename, '.');
-    int  n    = (dot-k) / sizeof(char);
+    long n    = (dot-k) / sizeof(char);
 
     char vehicle_size[3];
     strncpy(vehicle_size, k+1, n);
