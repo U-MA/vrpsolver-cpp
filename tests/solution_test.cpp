@@ -19,7 +19,7 @@ TEST_GROUP(Solution)
         delete solution;
     }
 
-    void VisitAllCustomer(const BaseVrp& vrp, Solution *solution)
+    void VisitAllCustomer()
     {
         solution->CurrentVehicle()->visit(vrp, 1);
 
@@ -51,7 +51,7 @@ TEST(Solution, Copy)
 
 TEST(Solution, IsFeasible)
 {
-    VisitAllCustomer(vrp, solution);
+    VisitAllCustomer();
     CHECK_TRUE(solution->IsFeasible());
 }
 
@@ -62,7 +62,7 @@ TEST(Solution, IsNotFeasibleWhenCreate)
 
 TEST(Solution, IsFinishWhenAllCustomerAreVisited)
 {
-    VisitAllCustomer(vrp, solution);
+    VisitAllCustomer();
     CHECK_TRUE(solution->IsFinish());
 }
 
@@ -81,7 +81,7 @@ TEST(Solution, IsNotFinishWhenCreate)
 
 TEST(Solution, ComputeTotalCost)
 {
-    VisitAllCustomer(vrp, solution);
+    VisitAllCustomer();
     LONGS_EQUAL(247, solution->ComputeTotalCost(vrp));
 }
 
