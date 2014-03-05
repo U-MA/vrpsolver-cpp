@@ -9,7 +9,6 @@ class BaseNode
 public:
     virtual ~BaseNode() {}
 
-    virtual BaseNode* Child(int child_id) const =0;
     virtual unsigned int ChildSize() const = 0;
     virtual unsigned int Count() const = 0;
     virtual int Value() const = 0;
