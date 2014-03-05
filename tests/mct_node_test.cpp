@@ -13,3 +13,9 @@ TEST(MctNode, Initialize)
     LONGS_EQUAL(0, node.Value());
     LONGS_EQUAL(1, node.CustomerId());
 }
+
+TEST(MctNode, ConstractWithMinusCustomerId)
+{
+    MctNode node(-1);
+    LONGS_EQUAL(0, node.CustomerId());
+}

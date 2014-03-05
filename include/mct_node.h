@@ -10,7 +10,10 @@ public:
                 child_size_(),
                 count_(0),
                 customer_id_(customer_id),
-                value_(0) {}
+                value_(0)
+    {
+        if (customer_id < 0) customer_id_ = 0;
+    }
 
     ~MctNode() {}
 
