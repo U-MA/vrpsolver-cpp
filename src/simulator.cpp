@@ -123,3 +123,8 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, const Sol
     }
     return min_cost;
 }
+
+unsigned int Simulator::random(const BaseVrp& vrp, Solution& solution)
+{
+    return 10000000;
+}
