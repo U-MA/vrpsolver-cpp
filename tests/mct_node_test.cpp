@@ -6,7 +6,7 @@ TEST_GROUP(MctNode)
 {
 };
 
-TEST(MctNode, getCount)
+TEST(MctNode, CountIs0AfterConstract)
 {
     MctNode node;
     LONGS_EQUAL(0, node.Count());
