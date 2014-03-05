@@ -9,10 +9,10 @@ class BaseNode
 public:
     virtual ~BaseNode() {}
 
-    virtual int CustomerId() const = 0;
-    virtual int Count()      const = 0;
-    virtual int ChildSize()  const = 0;
-    virtual int Value()      const = 0;
+    virtual BaseNode* Child(int child_id) const =0;
+    virtual unsigned int ChildSize() const = 0;
+    virtual unsigned int Count() const = 0;
+    virtual int Value() const = 0;
 
     virtual bool IsLeaf() const = 0;
     virtual void Expand(const BaseVrp& vrp, const Solution& solution) = 0;
