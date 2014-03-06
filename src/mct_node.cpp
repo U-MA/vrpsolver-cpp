@@ -16,7 +16,7 @@ MctNode* MctNode::Child(unsigned int child_id) const
 
 bool MctNode::IsLeaf() const
 {
-    return false;
+    return (child_size_ == 0);
 }
 
 void MctNode::Update(long value)

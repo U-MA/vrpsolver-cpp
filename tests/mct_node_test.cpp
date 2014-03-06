@@ -52,3 +52,16 @@ TEST(MctNode, CanNotGetOutOfChild)
     POINTERS_EQUAL(NULL, node.Child(0));
     POINTERS_EQUAL(NULL, node.Child(-1));
 }
+
+TEST(MctNode, IsLeaf)
+{
+    MctNode node(1);
+    CHECK_TRUE(node.IsLeaf());
+}
+
+TEST(MctNode, IsNotLeaf)
+{
+    MctNode node(1);
+    node.CreateChild(1);
+    CHECK_FALSE(node.IsLeaf());
+}
