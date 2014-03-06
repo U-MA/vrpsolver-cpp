@@ -29,6 +29,7 @@ MctNode *Selector::Ucb(MctNode& root, std::vector<MctNode *>& visited, double co
             }
         }
         node = node->Child(next);
+        visited.push_back(node);
     }
     return node;
 }

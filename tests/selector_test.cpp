@@ -22,6 +22,8 @@ TEST(Selector, ucb_selector_2)
     root.CreateChild(0);
 
     POINTERS_EQUAL(root.Child(0), Selector::Ucb(root, visited));
+    POINTERS_EQUAL(&root, visited[0]);
+    POINTERS_EQUAL(root.Child(0), visited[1]);
 }
 
 TEST(Selector, ucb_selector_3)
