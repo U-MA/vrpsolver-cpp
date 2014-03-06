@@ -13,6 +13,7 @@ TEST(Selector, ucb_selector)
     MctNode root(0);
 
     POINTERS_EQUAL(&root, Selector::Ucb(root, visited));
+    POINTERS_EQUAL(&root, visited[0]);
 }
 
 TEST(Selector, ucb_selector_2)
