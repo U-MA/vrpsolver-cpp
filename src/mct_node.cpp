@@ -11,6 +11,9 @@ MctNode* MctNode::Child(unsigned int child_id) const
     if (child_id < 0 || child_id > kMaxChildSize)
         return NULL;
 
+    if (child_id >= child_size_)
+        return NULL;
+
     return child_[child_id];
 }
 
