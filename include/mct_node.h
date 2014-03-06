@@ -19,18 +19,18 @@ public:
 
     MctNode* Child(unsigned int child_id) const;
 
-    virtual unsigned int ChildSize() const { return child_size_; }
+    unsigned int ChildSize() const { return child_size_; }
 
-    virtual unsigned int Count() const { return count_; }
+    unsigned int Count() const { return count_; }
 
     unsigned int CustomerId() const { return customer_id_; }
 
-    virtual long Value() const { return value_; }
+    long Value() const { return value_; }
 
     void CreateChild(unsigned int customer_id);
-    virtual bool IsLeaf() const;
-    virtual void Expand(const BaseVrp& vrp, const Solution& solution);
-    virtual void Update(long value);
+    bool IsLeaf() const;
+    void Expand(const BaseVrp& vrp, const Solution& solution);
+    void Update(long value);
 
 private:
     static const int kMaxChildSize = 120;
