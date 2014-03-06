@@ -19,10 +19,6 @@ bool MctNode::IsLeaf() const
     return false;
 }
 
-void MctNode::Expand(const BaseVrp& vrp, const Solution& solution)
-{
-}
-
 void MctNode::Update(long value)
 {
     count_++;

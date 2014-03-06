@@ -29,7 +29,6 @@ public:
 
     void CreateChild(unsigned int customer_id);
     bool IsLeaf() const;
-    void Expand(const BaseVrp& vrp, const Solution& solution);
     void Update(long value);
 
 private:

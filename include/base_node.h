@@ -14,7 +14,6 @@ public:
     virtual long Value() const = 0;
 
     virtual bool IsLeaf() const = 0;
-    virtual void Expand(const BaseVrp& vrp, const Solution& solution) = 0;
     virtual void Update(long value) = 0;
 };
 
