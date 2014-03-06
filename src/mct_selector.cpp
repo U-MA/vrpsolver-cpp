@@ -4,6 +4,10 @@
 
 MctNode *Selector::Ucb(MctNode& root, std::vector<MctNode *>& visited)
 {
-    if (root.IsLeaf()) return &root;
-    return NULL;
+    MctNode *node = &root;
+    while (!node->IsLeaf())
+    {
+        node = node->Child(0);
+    }
+    return node;
 }
