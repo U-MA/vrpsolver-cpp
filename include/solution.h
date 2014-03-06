@@ -41,6 +41,9 @@ public:
     /* 全てのvehicleのコストを返す */
     int ComputeTotalCost(const BaseVrp& vrp) const;
 
+    /* 配送ルートを出力 */
+    void Print() const;
+
 private:
     static const int kMaxVehicleSize = 20;
 

@@ -63,3 +63,8 @@ int Solution::ComputeTotalCost(const BaseVrp& vrp) const
     return total_cost;
 }
 
+void Solution::Print() const
+{
+    for (int i=0; i <= current_vehicle_id_; i++)
+        vehicles_[i].print();
+}
