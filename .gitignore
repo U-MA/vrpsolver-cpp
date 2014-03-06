@@ -3,6 +3,7 @@
 
 # exec file
 VrpSolver-cpp_tests
+VrpSolver-cpp-accept_tests
 *.out
 
 # vrp problem file
