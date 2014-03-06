@@ -38,4 +38,6 @@ TEST(Selector, ucb_selector_3)
     root.Child(1)->Update(100);
 
     POINTERS_EQUAL(root.Child(1), Selector::Ucb(root, visited));
+    POINTERS_EQUAL(&root, visited[0]);
+    POINTERS_EQUAL(root.Child(1), visited[1]);
 }
