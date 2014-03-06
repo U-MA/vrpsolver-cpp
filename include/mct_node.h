@@ -15,7 +15,7 @@ public:
         if (customer_id < 0) customer_id_ = 0;
     }
 
-    ~MctNode() {}
+    ~MctNode();
 
     MctNode* Child(int child_id) const { return child_[child_id]; }
 
@@ -27,6 +27,7 @@ public:
 
     virtual long Value() const { return value_; }
 
+    void CreateChild(int customer_id);
     virtual bool IsLeaf() const;
     virtual void Expand(const BaseVrp& vrp, const Solution& solution);
     virtual void Update(long value);

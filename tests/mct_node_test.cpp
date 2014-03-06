@@ -38,3 +38,10 @@ TEST(MctNode, UpdateOverFlow)
     CHECK_FALSE(node.Update(1));
 }
 */
+
+TEST(MctNode, CreateAChild)
+{
+    MctNode node(1);
+    node.CreateChild(1);
+    LONGS_EQUAL(1, node.Child(0)->CustomerId());
+}
