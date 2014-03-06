@@ -5,18 +5,22 @@
 #include "mct_selector.h"
 
 
-MctNode *Selector::Ucb(MctNode& root, std::vector<MctNode *>& visited)
+static double CalcUcb(MctNode *parent, MctNode *child, double coef)
+{
+    return ((double)child->Value() / child->Count()) +
+           coef * sqrt(log(parent->Count()) / child->Count());
+}
+
+MctNode *Selector::Ucb(MctNode& root, std::vector<MctNode *>& visited, double coef)
 {
     MctNode *node = &root;
     while (!node->IsLeaf())
     {
         unsigned int next = 0;
+        double max_ucb = .0;
         for (unsigned int i=0; i < node->ChildSize(); i++)
         {
-            double ucb, max_ucb = .0;
-            MctNode *child = node->Child(i);
-            ucb = (double)child->Value() / child->Count() +
-                  100.0 * sqrt(log(node->Count()) / child->Count());
+            double ucb = CalcUcb(node, node->Child(i), coef);
             if (ucb > max_ucb)
             {
                 max_ucb = ucb;
