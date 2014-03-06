@@ -45,3 +45,10 @@ TEST(MctNode, CreateAChild)
     node.CreateChild(1);
     LONGS_EQUAL(1, node.Child(0)->CustomerId());
 }
+
+TEST(MctNode, CanNotGetOutOfChild)
+{
+    MctNode node(1);
+    POINTERS_EQUAL(NULL, node.Child(0));
+    POINTERS_EQUAL(NULL, node.Child(-1));
+}

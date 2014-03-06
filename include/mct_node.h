@@ -17,7 +17,7 @@ public:
 
     ~MctNode();
 
-    MctNode* Child(int child_id) const { return child_[child_id]; }
+    MctNode* Child(unsigned int child_id) const;
 
     virtual unsigned int ChildSize() const { return child_size_; }
 
@@ -27,7 +27,7 @@ public:
 
     virtual long Value() const { return value_; }
 
-    void CreateChild(int customer_id);
+    void CreateChild(unsigned int customer_id);
     virtual bool IsLeaf() const;
     virtual void Expand(const BaseVrp& vrp, const Solution& solution);
     virtual void Update(long value);
