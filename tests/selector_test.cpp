@@ -59,3 +59,15 @@ TEST(Selector, ucb_selector_4)
     POINTERS_EQUAL(child, visited[1]);
     POINTERS_EQUAL(child->Child(0), visited[2]);
 }
+
+TEST(Selector, AChildIsSelectedButAnotherIsNotSelected)
+{
+    MctNode root(0);
+    root.CreateChild(0);
+    root.CreateChild(1);
+
+    root.Child(0)->Update(10);
+    root.Update(10);
+
+    POINTERS_EQUAL(root.Child(1), Selector::Ucb(root, visited));
+}

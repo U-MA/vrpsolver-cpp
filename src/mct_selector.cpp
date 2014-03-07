@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -7,6 +8,9 @@
 
 static double CalcUcb(MctNode *parent, MctNode *child, double coef)
 {
+    if (child->Count() == 0)
+        return 100000 + (rand() % 100000);
+
     return ((double)child->Value() / child->Count()) +
            coef * sqrt(log(parent->Count()) / child->Count());
 }
