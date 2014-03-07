@@ -60,6 +60,15 @@ TEST(Solution, IsNotFeasibleWhenCreate)
     CHECK_FALSE(solution->IsFeasible());
 }
 
+TEST(Solution, IsNotFeasibleWhenAllVehicleIsOnlyRun)
+{
+    solution->ChangeVehicle();
+    solution->ChangeVehicle();
+    solution->ChangeVehicle();
+    solution->ChangeVehicle();
+    CHECK_FALSE(solution->IsFeasible());
+}
+
 TEST(Solution, IsFinishWhenAllCustomerAreVisited)
 {
     VisitAllCustomer();
