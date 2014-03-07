@@ -10,6 +10,11 @@ using namespace std;
 TEST_GROUP(SelectorAcceptance)
 {
     vector<MctNode *> visited;
+
+    void setup()
+    {
+        srand(0);
+    }
 };
 
 TEST(SelectorAcceptance, Myself)
