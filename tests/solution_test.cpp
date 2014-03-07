@@ -90,3 +90,8 @@ TEST(Solution, IsVisit)
     solution->CurrentVehicle()->visit(vrp, 2);
     CHECK_TRUE(solution->IsVisit(2));
 }
+
+TEST(Solution, FirstVehicleIs0)
+{
+    LONGS_EQUAL(0, solution->CurrentVehicleId());
+}

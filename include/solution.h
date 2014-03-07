@@ -24,6 +24,13 @@ public:
      * いい設計とは思えないが、このままでいく */
     Vehicle *CurrentVehicle();
 
+    /* 現在走行している車両の番号を取得
+     * 最初の番号は0 */
+    unsigned int CurrentVehicleId() const
+    {
+        return current_vehicle_id_;
+    }
+
     /* 現在走行しているvehicleを変更 */
     void ChangeVehicle();
 
