@@ -18,12 +18,12 @@ TEST(Mcts, E_n13_k4)
 {
     HostVrp host_vrp("Vrp-All/E/E-n13-k4.vrp");
     Solution solution(host_vrp);
-    const unsigned int threshold = 1;
+    const unsigned int threshold = 4;
 
     while (!solution.IsFinish())
     {
         MctNode root(0);
-        for (int i=0; i < 10; i++)
+        for (int i=0; i < 1000; i++)
         {
             std::vector<MctNode*> visited;
             // Selection
