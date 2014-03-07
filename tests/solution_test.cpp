@@ -95,3 +95,9 @@ TEST(Solution, FirstVehicleIs0)
 {
     LONGS_EQUAL(0, solution->CurrentVehicleId());
 }
+
+TEST(Solution, SecontVehicleIs1)
+{
+    solution->ChangeVehicle();
+    LONGS_EQUAL(1, solution->CurrentVehicleId());
+}
