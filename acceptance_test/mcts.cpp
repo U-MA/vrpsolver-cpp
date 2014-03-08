@@ -12,6 +12,10 @@ using namespace std;
 
 TEST_GROUP(Mcts)
 {
+    void setup()
+    {
+        srand(2013);
+    }
 };
 
 TEST(Mcts, E_n13_k4)
