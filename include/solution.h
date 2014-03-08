@@ -46,7 +46,7 @@ public:
     bool IsVisit(int customer_id) const;
 
     /* 全てのvehicleのコストを返す */
-    int ComputeTotalCost(const BaseVrp& vrp) const;
+    unsigned int ComputeTotalCost(const BaseVrp& vrp) const;
 
     /* 配送ルートを出力 */
     void Print() const;
@@ -55,9 +55,9 @@ private:
     static const int kMaxVehicleSize = 20;
 
     Vehicle vehicles_[kMaxVehicleSize];
-    int current_vehicle_id_;
-    int customer_size_;
-    int vehicle_size_;
+    unsigned int current_vehicle_id_;
+    unsigned int customer_size_;
+    unsigned int vehicle_size_;
 };
 
 #endif /* VRPSOLVER_CPP_SOLUTION_H */
