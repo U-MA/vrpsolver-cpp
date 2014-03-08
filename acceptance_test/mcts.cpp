@@ -32,59 +32,43 @@ TEST(Mcts, E_n13_k4)
         for (int i=0; i < 1000; i++)
         {
             std::vector<MctNode*> visited;
+
             // Selection
-            cout << "SELECTION@" << &root << endl;
             MctNode *node = Selector::Ucb(root, visited);
 
             Solution solution_copy;
             solution.Copy(solution_copy);
 
             for (unsigned int i=1; i < visited.size(); i++)
-            {
-                int move = visited[i]->CustomerId();
-                cout << "MOVE: " << move << endl;
-                SolutionHelper::Transition(solution_copy, host_vrp, move);
-            }
+                SolutionHelper::Transition(solution_copy, host_vrp, visited[i]->CustomerId());
 
             // Expansion
             if (!solution_copy.IsFinish() && (node->Count() >= threshold))
             {
-                cout << "EXPANSION@" << node << "(MOVE " << node->CustomerId() << ")" << endl;
                 for (unsigned int j=0; j <= host_vrp.CustomerSize(); j++)
                 {
                     if (!solution_copy.IsVisit(j) &&
                         (solution_copy.CurrentVehicle()->Capacity() + host_vrp.Demand(j) <= host_vrp.Capacity()))
-                    {
-                        cout << "CUSTOMER " << j << " EXPAND" << endl;
                         node->CreateChild(j);
-                    }
                 }
                 if (solution_copy.CurrentVehicleId()+1 < host_vrp.VehicleSize())
-                {
-                    cout << "NEXT VEHICLE EXPAND" << endl;
                     node->CreateChild(0);
-                }
+
                 visited.pop_back();
                 node = Selector::Ucb(*node, visited);
 
                 int move = (*visited.rbegin())->CustomerId();
-                cout << "MOVE: " << move << endl;
                 SolutionHelper::Transition(solution_copy, host_vrp, move);
             }
 
             // Simulation
             Simulator simulator;
-            cout << "SIMULATION" << endl;
             unsigned int cost = simulator.sequentialRandomSimulation(host_vrp, solution_copy);
-            solution_copy.Print();
-            cout << "COST " << cost << endl;
             int tmp_cost = (int)cost;
 
             // Backpropagation
             for (unsigned int i=0; i < visited.size(); i++)
-            {
                 visited[i]->Update(-tmp_cost);
-            }
         }
 
         long max_value = -10000000;
@@ -97,7 +81,6 @@ TEST(Mcts, E_n13_k4)
                 next = root.Child(i);
             }
         }
-        cout << "NEXT MOVE IS " << next->CustomerId() << endl;
         SolutionHelper::Transition(solution, host_vrp, next->CustomerId());
     }
 
@@ -107,6 +90,6 @@ TEST(Mcts, E_n13_k4)
     else
         cost = 10000;
 
-    std::cout << "cost:" << cost << std::endl;
+    std::cout << "COST:" << cost << std::endl;
     CHECK(cost < 10000);
 }
