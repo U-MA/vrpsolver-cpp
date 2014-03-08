@@ -31,7 +31,7 @@ void Node::setChildAndRemoveTabu(int child_customer)
 
 void Node::expand(const BaseVrp& vrp, const VehicleManager& vm)
 {
-    const int vertnum = vrp.customer_size()+1;
+    const int vertnum = vrp.CustomerSize()+1;
     child_ = new Node[vertnum];
     tabu_  = new bool[vertnum];
     for (int i=0; i < vertnum; i++)
@@ -85,7 +85,7 @@ bool Node::isLeaf(void) const
 
 bool Node::isTabu(const BaseVrp& vrp) const
 {
-    const int vertnum = vrp.customer_size()+1;
+    const int vertnum = vrp.CustomerSize()+1;
     for (int i=0; i < vertnum; i++)
         if (!tabu_[i])
             return false;

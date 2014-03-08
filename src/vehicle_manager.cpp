@@ -10,7 +10,7 @@ bool VehicleManager::isVisit(int customer) const
 
 bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
 {
-    const int customer_size = vrp.customer_size();
+    const int customer_size = vrp.CustomerSize();
     for (int i=1; i <= customer_size; i++)
         if (!isVisit(i)) return false;
 
@@ -19,13 +19,13 @@ bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
 
 bool VehicleManager::canVisitCustomer(const BaseVrp& vrp, int customer) const
 {
-    return vehicle_[vehicle_size_-1].Capacity() + (unsigned)vrp.demand(customer) <=
-           (unsigned)vrp.capacity();
+    return vehicle_[vehicle_size_-1].Capacity() + vrp.Demand(customer) <=
+           vrp.Capacity();
 }
 
 bool VehicleManager::nextVehicleRemain(const BaseVrp& vrp) const
 {
-    return (vehicle_size_ < vrp.vehicle_size());
+    return ((unsigned)vehicle_size_ < vrp.VehicleSize());
 }
 
 void VehicleManager::move(const BaseVrp& vrp, int customer)
@@ -43,7 +43,7 @@ void VehicleManager::move(const BaseVrp& vrp, int customer)
 
 bool VehicleManager::isMovable(const BaseVrp& vrp) const
 {
-    int vertnum = vrp.customer_size() + 1;
+    int vertnum = vrp.CustomerSize() + 1;
     for (int i=1; i < vertnum; i++)
         if (!isVisit(i) && canVisitCustomer(vrp, i))
             return true;

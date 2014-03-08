@@ -6,7 +6,7 @@
 void Vehicle::Visit(const BaseVrp& vrp, int customer)
 {
     route_[route_length_++] = customer;
-    capacity_ += vrp.demand(customer);
+    capacity_ += vrp.Demand(customer);
     is_visit_[customer-1] = true;
 }
 
@@ -15,10 +15,10 @@ unsigned int Vehicle::ComputeCost(const BaseVrp& vrp) const
     if (route_length_ == 0) return 0;
 
     const int depot = 0;
-    int i, cost = vrp.cost(depot, route_[0]);
+    int i, cost = vrp.Cost(depot, route_[0]);
     for (i=1; i < route_length_; i++)
-        cost += vrp.cost(route_[i-1], route_[i]);
-    cost += vrp.cost(route_[i-1], depot);
+        cost += vrp.Cost(route_[i-1], route_[i]);
+    cost += vrp.Cost(route_[i-1], depot);
 
     return cost;
 }

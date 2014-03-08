@@ -8,7 +8,7 @@ extern "C"
 
 #include "host_vrp.h"
 
-HostVrp::HostVrp(void)
+HostVrp::HostVrp()
 {
     vrp_ = (vrp_problem *)calloc(1, sizeof(vrp_problem));
 }
@@ -33,7 +33,7 @@ HostVrp::HostVrp(const char *file_path)
     vrp_->numroutes = extractVehicleSizeAndToInt(file_path);
 }
 
-HostVrp::~HostVrp(void)
+HostVrp::~HostVrp()
 {
     if (vrp_->demand      != 0) free(vrp_->demand);
     if (vrp_->posx        != 0) free(vrp_->posx);
@@ -52,7 +52,7 @@ void HostVrp::Create(const char *file_path)
     vrp_->numroutes = extractVehicleSizeAndToInt(file_path);
 }
 
-const char *HostVrp::name(void) const
+const char *HostVrp::Name() const
 {
     const char *aName = vrp_->name;
     return aName;

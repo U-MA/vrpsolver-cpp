@@ -21,7 +21,7 @@ private:
 
 void Candidates::collect(const BaseVrp& vrp, VehicleManager& vm)
 {
-    const int vertnum = vrp.customer_size() + 1;
+    const int vertnum = vrp.CustomerSize() + 1;
     for (int i=1; i < vertnum; i++)
         if (!vm.isVisit(i) && vm.canVisitCustomer(vrp, i))
             candidate_[candidate_size_++] = i;
@@ -79,11 +79,11 @@ unsigned int Simulator::sequentialRandomSimulation(const BaseVrp& vrp, Solution&
         candidate_size = 0;
 
         /* 次に訪問する顧客の候補を求める */
-        for (int i=1; i <= vrp.customer_size(); i++)
+        for (unsigned int i=1; i <= vrp.CustomerSize(); i++)
         {
             /* 訪問可能であれば候補に追加 */
             if (!solution.IsVisit(i) &&
-                current_vehicle->Capacity() + (unsigned)vrp.demand(i) <= (unsigned)vrp.capacity())
+                current_vehicle->Capacity() + vrp.Demand(i) <= vrp.Capacity())
             {
                 candidates[candidate_size++] = i;
             }

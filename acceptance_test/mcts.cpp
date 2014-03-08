@@ -51,16 +51,16 @@ TEST(Mcts, E_n13_k4)
             if (!solution_copy.IsFinish() && (node->Count() >= threshold))
             {
                 cout << "EXPANSION@" << node << "(MOVE " << node->CustomerId() << ")" << endl;
-                for (int j=0; j <= host_vrp.customer_size(); j++)
+                for (unsigned int j=0; j <= host_vrp.CustomerSize(); j++)
                 {
                     if (!solution_copy.IsVisit(j) &&
-                        (solution_copy.CurrentVehicle()->Capacity() + (unsigned)host_vrp.demand(j) <= (unsigned)host_vrp.capacity()))
+                        (solution_copy.CurrentVehicle()->Capacity() + host_vrp.Demand(j) <= host_vrp.Capacity()))
                     {
                         cout << "CUSTOMER " << j << " EXPAND" << endl;
                         node->CreateChild(j);
                     }
                 }
-                if (solution_copy.CurrentVehicleId()+1 < (unsigned int)host_vrp.vehicle_size())
+                if (solution_copy.CurrentVehicleId()+1 < host_vrp.VehicleSize())
                 {
                     cout << "NEXT VEHICLE EXPAND" << endl;
                     node->CreateChild(0);

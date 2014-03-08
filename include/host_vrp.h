@@ -12,18 +12,18 @@ extern "C"
 class HostVrp : public BaseVrp
 {
 public:
-    HostVrp(void);
+    HostVrp();
     HostVrp(const char *file_path);
-    ~HostVrp(void);
+    ~HostVrp();
 
     void Create(const char *file_path);
 
-    const char* name(void)        const;
-    int customer_size(void)  const { return vrp_->vertnum-1; }
-    int vehicle_size(void)   const { return vrp_->numroutes; }
-    int capacity(void)       const { return vrp_->capacity; }
-    int cost(int v0, int v1) const { return vrp_->dist.cost[INDEX(v0, v1)]; }
-    int demand(int v)        const { return vrp_->demand[v]; }
+    const char* Name()        const;
+    unsigned int CustomerSize()  const { return vrp_->vertnum-1; }
+    unsigned int VehicleSize()   const { return vrp_->numroutes; }
+    unsigned int Capacity()       const { return vrp_->capacity; }
+    unsigned int Cost(int v0, int v1) const { return vrp_->dist.cost[INDEX(v0, v1)]; }
+    unsigned int Demand(int v)        const { return vrp_->demand[v]; }
 
 private:
     vrp_problem *vrp_;
