@@ -28,7 +28,7 @@ bool Solution::IsFeasible() const
     {
         for (int j=0; j <= current_vehicle_id_; j++)
         {
-            if (vehicles_[j].is_visit(i))
+            if (vehicles_[j].IsVisit(i))
                 break;
             if (j == current_vehicle_id_)
                 return false;
@@ -48,7 +48,7 @@ bool Solution::IsFinish() const
     {
         for (int j=0; j <= current_vehicle_id_; j++)
         {
-            if (vehicles_[j].is_visit(i))
+            if (vehicles_[j].IsVisit(i))
                 break;
             if (j == current_vehicle_id_)
                 return false;
@@ -60,7 +60,7 @@ bool Solution::IsFinish() const
 bool Solution::IsVisit(int customer_id) const
 {
     for (int i=0; i <= current_vehicle_id_; i++)
-        if (vehicles_[i].is_visit(customer_id))
+        if (vehicles_[i].IsVisit(customer_id))
             return true;
     return false;
 }
@@ -69,12 +69,12 @@ int Solution::ComputeTotalCost(const BaseVrp& vrp) const
 {
     int total_cost = 0;
     for (int i=0; i <= current_vehicle_id_; i++)
-        total_cost += vehicles_[i].computeCost(vrp);
+        total_cost += vehicles_[i].ComputeCost(vrp);
     return total_cost;
 }
 
 void Solution::Print() const
 {
     for (int i=0; i <= current_vehicle_id_; i++)
-        vehicles_[i].print();
+        vehicles_[i].Print();
 }

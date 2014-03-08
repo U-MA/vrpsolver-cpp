@@ -19,8 +19,8 @@ bool VehicleManager::isVisitAll(const BaseVrp& vrp) const
 
 bool VehicleManager::canVisitCustomer(const BaseVrp& vrp, int customer) const
 {
-    return vehicle_[vehicle_size_-1].capacity() + vrp.demand(customer) <=
-           vrp.capacity();
+    return vehicle_[vehicle_size_-1].Capacity() + (unsigned)vrp.demand(customer) <=
+           (unsigned)vrp.capacity();
 }
 
 bool VehicleManager::nextVehicleRemain(const BaseVrp& vrp) const
@@ -36,7 +36,7 @@ void VehicleManager::move(const BaseVrp& vrp, int customer)
         changeVehicle();
     else
     {
-        vehicle_[vehicle_size_-1].visit(vrp, customer);
+        vehicle_[vehicle_size_-1].Visit(vrp, customer);
         is_visit_[customer-1] = true;
     }
 }
@@ -57,7 +57,7 @@ int VehicleManager::computeTotalCost(const BaseVrp& vrp) const
 {
     int total_cost = 0;
     for (int i=0; i < vehicle_size_; i++)
-        total_cost += vehicle_[i].computeCost(vrp);
+        total_cost += vehicle_[i].ComputeCost(vrp);
 
     return total_cost;
 }
@@ -67,6 +67,6 @@ void VehicleManager::print(void) const
     for (int i=0; i < vehicle_size_; i++)
     {
         printf("vehicle %2d", i);
-        vehicle_[i].print();
+        vehicle_[i].Print();
     }
 }

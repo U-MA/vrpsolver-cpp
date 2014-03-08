@@ -16,17 +16,17 @@ TEST_GROUP(VehicleWithHostVrp)
 TEST(VehicleWithHostVrp, visit)
 {
     Vehicle v;
-    v.visit(host_vrp, 1);
-    LONGS_EQUAL(1200, v.capacity());
-    v.visit(host_vrp, 12);
-    LONGS_EQUAL(2300, v.capacity());
+    v.Visit(host_vrp, 1);
+    LONGS_EQUAL(1200, v.Capacity());
+    v.Visit(host_vrp, 12);
+    LONGS_EQUAL(2300, v.Capacity());
 }
 
 TEST(VehicleWithHostVrp, computeCost)
 {
     Vehicle v;
-    v.visit(host_vrp, 1);
-    LONGS_EQUAL(18, v.computeCost(host_vrp));
-    v.visit(host_vrp, 12);
-    LONGS_EQUAL(47, v.computeCost(host_vrp));
+    v.Visit(host_vrp, 1);
+    LONGS_EQUAL(18, v.ComputeCost(host_vrp));
+    v.Visit(host_vrp, 12);
+    LONGS_EQUAL(47, v.ComputeCost(host_vrp));
 }

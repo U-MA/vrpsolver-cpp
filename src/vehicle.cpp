@@ -3,14 +3,14 @@
 
 #include "Vehicle.h"
 
-void Vehicle::visit(const BaseVrp& vrp, int customer)
+void Vehicle::Visit(const BaseVrp& vrp, int customer)
 {
     route_[route_length_++] = customer;
     capacity_ += vrp.demand(customer);
     is_visit_[customer-1] = true;
 }
 
-int Vehicle::computeCost(const BaseVrp& vrp) const
+unsigned int Vehicle::ComputeCost(const BaseVrp& vrp) const
 {
     if (route_length_ == 0) return 0;
 
@@ -23,7 +23,7 @@ int Vehicle::computeCost(const BaseVrp& vrp) const
     return cost;
 }
 
-void Vehicle::print(void) const
+void Vehicle::Print() const
 {
     printf("[%6d] ", capacity_);
     for (int i=0; i < route_length_; i++)

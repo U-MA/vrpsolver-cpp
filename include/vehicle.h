@@ -12,13 +12,13 @@ public:
             is_visit_[i] = false;
     };
 
-    int  capacity(void) const { return capacity_; }
-    bool is_visit(int customer_id) const { return is_visit_[customer_id-1]; }
+    unsigned int Capacity() const { return capacity_; }
+    bool IsVisit(int customer_id) const { return is_visit_[customer_id-1]; }
 
-    void visit(const BaseVrp& vrp, int customer);
-    int  computeCost(const BaseVrp& vrp) const;
+    void Visit(const BaseVrp& vrp, int customer);
+    unsigned int ComputeCost(const BaseVrp& vrp) const;
 
-    void print(void) const;
+    void Print() const;
 
 private:
     static const int kMaxSize = 130;

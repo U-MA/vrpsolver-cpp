@@ -21,24 +21,24 @@ TEST_GROUP(Solution)
 
     void VisitAllCustomer()
     {
-        solution->CurrentVehicle()->visit(vrp, 1);
+        solution->CurrentVehicle()->Visit(vrp, 1);
 
         solution->ChangeVehicle();
-        solution->CurrentVehicle()->visit(vrp, 8);
-        solution->CurrentVehicle()->visit(vrp, 5);
-        solution->CurrentVehicle()->visit(vrp, 3);
+        solution->CurrentVehicle()->Visit(vrp, 8);
+        solution->CurrentVehicle()->Visit(vrp, 5);
+        solution->CurrentVehicle()->Visit(vrp, 3);
 
         solution->ChangeVehicle();
-        solution->CurrentVehicle()->visit(vrp, 9);
-        solution->CurrentVehicle()->visit(vrp, 12);
-        solution->CurrentVehicle()->visit(vrp, 10);
-        solution->CurrentVehicle()->visit(vrp, 6);
+        solution->CurrentVehicle()->Visit(vrp, 9);
+        solution->CurrentVehicle()->Visit(vrp, 12);
+        solution->CurrentVehicle()->Visit(vrp, 10);
+        solution->CurrentVehicle()->Visit(vrp, 6);
 
         solution->ChangeVehicle();
-        solution->CurrentVehicle()->visit(vrp, 11);
-        solution->CurrentVehicle()->visit(vrp, 4);
-        solution->CurrentVehicle()->visit(vrp, 7);
-        solution->CurrentVehicle()->visit(vrp, 2);
+        solution->CurrentVehicle()->Visit(vrp, 11);
+        solution->CurrentVehicle()->Visit(vrp, 4);
+        solution->CurrentVehicle()->Visit(vrp, 7);
+        solution->CurrentVehicle()->Visit(vrp, 2);
     }
 };
 
@@ -96,7 +96,7 @@ TEST(Solution, ComputeTotalCost)
 
 TEST(Solution, IsVisit)
 {
-    solution->CurrentVehicle()->visit(vrp, 2);
+    solution->CurrentVehicle()->Visit(vrp, 2);
     CHECK_TRUE(solution->IsVisit(2));
 }
 
