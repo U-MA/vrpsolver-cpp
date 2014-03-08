@@ -42,7 +42,7 @@ TEST(Mcts, E_n13_k4)
                 int move = visited[i]->CustomerId();
                 cout << "MOVE: " << move << endl;
                 if (move != 0)
-                    solution_copy.CurrentVehicle()->visit(host_vrp, move);
+                    solution_copy.CurrentVehicle()->Visit(host_vrp, move);
                 else
                     solution_copy.ChangeVehicle();
             }
@@ -54,7 +54,7 @@ TEST(Mcts, E_n13_k4)
                 for (int j=0; j <= host_vrp.customer_size(); j++)
                 {
                     if (!solution_copy.IsVisit(j) &&
-                        (solution_copy.CurrentVehicle()->capacity() + host_vrp.demand(j) <= host_vrp.capacity()))
+                        (solution_copy.CurrentVehicle()->Capacity() + (unsigned)host_vrp.demand(j) <= (unsigned)host_vrp.capacity()))
                     {
                         cout << "CUSTOMER " << j << " EXPAND" << endl;
                         node->CreateChild(j);
@@ -71,7 +71,7 @@ TEST(Mcts, E_n13_k4)
                 int move = (*visited.rbegin())->CustomerId();
                 cout << "MOVE: " << move << endl;
                 if (move != 0)
-                    solution_copy.CurrentVehicle()->visit(host_vrp, move);
+                    solution_copy.CurrentVehicle()->Visit(host_vrp, move);
                 else
                     solution_copy.ChangeVehicle();
 
@@ -104,7 +104,7 @@ TEST(Mcts, E_n13_k4)
         }
         cout << "NEXT MOVE IS " << next->CustomerId() << endl;
         if (next->CustomerId() != 0)
-            solution.CurrentVehicle()->visit(host_vrp, next->CustomerId());
+            solution.CurrentVehicle()->Visit(host_vrp, next->CustomerId());
         else
             solution.ChangeVehicle();
     }
