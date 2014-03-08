@@ -7,6 +7,8 @@
 #include "mct_node.h"
 #include "mct_selector.h"
 #include "simulator.h"
+#include "solution.h"
+#include "solution_helper.h"
 
 using namespace std;
 
@@ -41,10 +43,7 @@ TEST(Mcts, E_n13_k4)
             {
                 int move = visited[i]->CustomerId();
                 cout << "MOVE: " << move << endl;
-                if (move != 0)
-                    solution_copy.CurrentVehicle()->Visit(host_vrp, move);
-                else
-                    solution_copy.ChangeVehicle();
+                SolutionHelper::Transition(solution_copy, host_vrp, move);
             }
 
             // Expansion
@@ -70,11 +69,7 @@ TEST(Mcts, E_n13_k4)
 
                 int move = (*visited.rbegin())->CustomerId();
                 cout << "MOVE: " << move << endl;
-                if (move != 0)
-                    solution_copy.CurrentVehicle()->Visit(host_vrp, move);
-                else
-                    solution_copy.ChangeVehicle();
-
+                SolutionHelper::Transition(solution_copy, host_vrp, move);
             }
 
             // Simulation
@@ -103,10 +98,7 @@ TEST(Mcts, E_n13_k4)
             }
         }
         cout << "NEXT MOVE IS " << next->CustomerId() << endl;
-        if (next->CustomerId() != 0)
-            solution.CurrentVehicle()->Visit(host_vrp, next->CustomerId());
-        else
-            solution.ChangeVehicle();
+        SolutionHelper::Transition(solution, host_vrp, next->CustomerId());
     }
 
     int cost;
