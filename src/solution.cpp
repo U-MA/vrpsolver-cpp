@@ -40,21 +40,16 @@ bool Solution::IsFeasible() const
 bool Solution::IsFinish() const
 {
     /* 用意されている車両を使いきった */
+    /*
     if (current_vehicle_id_ >= vehicle_size_)
         return true;
+        */
 
     /* 全ての顧客を訪問したかの確認 */
-    for (unsigned int i=1; i <= customer_size_; i++)
-    {
-        for (unsigned int j=0; j <= current_vehicle_id_; j++)
-        {
-            if (vehicles_[j].IsVisit(i))
-                break;
-            if (j == current_vehicle_id_)
-                return false;
-        }
-    }
-    return true;
+    /*
+    return IsFeasible();
+    */
+    return IsFeasible() || (current_vehicle_id_ >= vehicle_size_);
 }
 
 bool Solution::IsVisit(int customer_id) const

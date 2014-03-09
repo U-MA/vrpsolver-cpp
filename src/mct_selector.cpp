@@ -22,7 +22,7 @@ MctNode *Selector::Ucb(MctNode& root, std::vector<MctNode *>& visited, double co
     while (!node->IsLeaf())
     {
         unsigned int next = 0;
-        double max_ucb = .0;
+        double max_ucb = -10000000;
         for (unsigned int i=0; i < node->ChildSize(); i++)
         {
             double ucb = CalcUcb(node, node->Child(i), coef);
