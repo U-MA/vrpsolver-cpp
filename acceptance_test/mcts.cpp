@@ -72,13 +72,14 @@ TEST(Mcts, E_n13_k4)
                 visited[i]->Update(-tmp_cost);
         }
 
-        unsigned int max_count = 0;
+        double max_ave_value = -1000000;
         MctNode *next = NULL;
         for (unsigned int i=0; i < root.ChildSize(); i++)
         {
-            if (root.Child(i)->Count() > max_count)
+            double ave_value = (double)root.Child(i)->Value() / root.Child(i)->Count();
+            if (ave_value > max_ave_value)
             {
-                max_count = root.Child(i)->Count();
+                max_ave_value = ave_value;
                 next = root.Child(i);
             }
         }
@@ -146,13 +147,14 @@ TEST(Mcts, E_n51_k5)
                 visited[j]->Update(-tmp_cost);
         }
 
-        unsigned int max_count = 0;
+        double max_ave_value = -1000000;
         MctNode *next = NULL;
         for (unsigned int i=0; i < root.ChildSize(); i++)
         {
-            if (root.Child(i)->Count() > max_count)
+            double ave_value = (double)root.Child(i)->Value() / root.Child(i)->Count();
+            if (ave_value > max_ave_value)
             {
-                max_count = root.Child(i)->Count();
+                max_ave_value = ave_value;
                 next = root.Child(i);
             }
         }
